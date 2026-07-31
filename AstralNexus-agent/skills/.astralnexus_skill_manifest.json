@@ -1,0 +1,389 @@
+{
+  "version": 1,
+  "fingerprint": [
+    {
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\ai-native-development\\SKILL.md",
+      "mtime_ns": 1784780461518250300,
+      "size": 725
+    },
+    {
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\backend-testing\\SKILL.md",
+      "mtime_ns": 1784780458158427900,
+      "size": 767
+    },
+    {
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\database-migration\\SKILL.md",
+      "mtime_ns": 1784780459859408400,
+      "size": 843
+    },
+    {
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\event-operations\\SKILL.md",
+      "mtime_ns": 1784781276375218200,
+      "size": 751
+    },
+    {
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\extracting-pdf-text\\SKILL.md",
+      "mtime_ns": 1784780453187446500,
+      "size": 716
+    },
+    {
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\find-skills\\SKILL.md",
+      "mtime_ns": 1784780247721855600,
+      "size": 5471
+    },
+    {
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\incident-responder\\SKILL.md",
+      "mtime_ns": 1784780454867064900,
+      "size": 930
+    },
+    {
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\market-product-strategy\\SKILL.md",
+      "mtime_ns": 1784781273008100700,
+      "size": 690
+    },
+    {
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\patent-analysis\\SKILL.md",
+      "mtime_ns": 1784781271302962600,
+      "size": 713
+    },
+    {
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\rag-retrieval\\SKILL.md",
+      "mtime_ns": 1784780451500542300,
+      "size": 869
+    },
+    {
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\scientific-research\\SKILL.md",
+      "mtime_ns": 1784781269627461400,
+      "size": 762
+    },
+    {
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\software-backend\\SKILL.md",
+      "mtime_ns": 1784780456514632200,
+      "size": 798
+    },
+    {
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\supply-chain-planning\\SKILL.md",
+      "mtime_ns": 1784781274686168200,
+      "size": 679
+    },
+    {
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\travel-device-coordination\\SKILL.md",
+      "mtime_ns": 1784781278048547200,
+      "size": 768
+    }
+  ],
+  "entries": [
+    {
+      "name": "ai-native-development",
+      "description": "Design tool-using AI systems with RAG, vector search, agent workflows, observability, and latency-quality controls.",
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\ai-native-development\\SKILL.md",
+      "skill_dir": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\ai-native-development",
+      "category": "general",
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "metadata": "",
+      "frontmatter": {
+        "name": "ai-native-development",
+        "description": "Design tool-using AI systems with RAG, vector search, agent workflows, observability, and latency-quality controls.",
+        "platforms": [
+          "windows",
+          "linux",
+          "macos"
+        ],
+        "metadata": ""
+      }
+    },
+    {
+      "name": "backend-testing",
+      "description": "Test backend APIs, databases, authentication, business logic, integrations, and deployment contracts with isolated evidence.",
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\backend-testing\\SKILL.md",
+      "skill_dir": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\backend-testing",
+      "category": "general",
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "metadata": "",
+      "frontmatter": {
+        "name": "backend-testing",
+        "description": "Test backend APIs, databases, authentication, business logic, integrations, and deployment contracts with isolated evidence.",
+        "platforms": [
+          "windows",
+          "linux",
+          "macos"
+        ],
+        "metadata": ""
+      }
+    },
+    {
+      "name": "database-migration",
+      "description": "Plan safe database schema and dialect migrations with compatibility, rollback, idempotency, indexes, transactions, and real validation.",
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\database-migration\\SKILL.md",
+      "skill_dir": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\database-migration",
+      "category": "general",
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "metadata": "",
+      "frontmatter": {
+        "name": "database-migration",
+        "description": "Plan safe database schema and dialect migrations with compatibility, rollback, idempotency, indexes, transactions, and real validation.",
+        "platforms": [
+          "windows",
+          "linux",
+          "macos"
+        ],
+        "metadata": ""
+      }
+    },
+    {
+      "name": "event-operations",
+      "description": "Plan and operate large events with agenda, venue, guests, registration, logistics, staffing, production, safety, live monitoring, and review.",
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\event-operations\\SKILL.md",
+      "skill_dir": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\event-operations",
+      "category": "general",
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "metadata": "",
+      "frontmatter": {
+        "name": "event-operations",
+        "description": "Plan and operate large events with agenda, venue, guests, registration, logistics, staffing, production, safety, live monitoring, and review.",
+        "platforms": [
+          "windows",
+          "linux",
+          "macos"
+        ],
+        "metadata": ""
+      }
+    },
+    {
+      "name": "extracting-pdf-text",
+      "description": "Choose and verify PDF extraction and OCR workflows for text, tables, scans, and complex layouts.",
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\extracting-pdf-text\\SKILL.md",
+      "skill_dir": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\extracting-pdf-text",
+      "category": "general",
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "metadata": "",
+      "frontmatter": {
+        "name": "extracting-pdf-text",
+        "description": "Choose and verify PDF extraction and OCR workflows for text, tables, scans, and complex layouts.",
+        "platforms": [
+          "windows",
+          "linux",
+          "macos"
+        ],
+        "metadata": ""
+      }
+    },
+    {
+      "name": "find-skills",
+      "description": "Helps users discover and install agent skills when they ask questions like \"how do I do X\", \"find a skill for X\", \"is there a skill that can...\", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill.",
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\find-skills\\SKILL.md",
+      "skill_dir": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\find-skills",
+      "category": "general",
+      "platforms": [],
+      "metadata": {},
+      "frontmatter": {
+        "name": "find-skills",
+        "description": "Helps users discover and install agent skills when they ask questions like \"how do I do X\", \"find a skill for X\", \"is there a skill that can...\", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill."
+      }
+    },
+    {
+      "name": "incident-responder",
+      "description": "Investigate production incidents using logs, metrics, changes, dependencies, low-risk verification, mitigation, recovery, and postmortem evidence.",
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\incident-responder\\SKILL.md",
+      "skill_dir": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\incident-responder",
+      "category": "general",
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "metadata": "",
+      "frontmatter": {
+        "name": "incident-responder",
+        "description": "Investigate production incidents using logs, metrics, changes, dependencies, low-risk verification, mitigation, recovery, and postmortem evidence.",
+        "platforms": [
+          "windows",
+          "linux",
+          "macos"
+        ],
+        "metadata": ""
+      }
+    },
+    {
+      "name": "market-product-strategy",
+      "description": "Turn multi-source market, customer, competitor, pricing, and product evidence into prioritized product decisions and scenarios.",
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\market-product-strategy\\SKILL.md",
+      "skill_dir": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\market-product-strategy",
+      "category": "general",
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "metadata": "",
+      "frontmatter": {
+        "name": "market-product-strategy",
+        "description": "Turn multi-source market, customer, competitor, pricing, and product evidence into prioritized product decisions and scenarios.",
+        "platforms": [
+          "windows",
+          "linux",
+          "macos"
+        ],
+        "metadata": ""
+      }
+    },
+    {
+      "name": "patent-analysis",
+      "description": "Analyze prior art and draft patent materials with feature mapping, claim support, terminology consistency, and enablement checks.",
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\patent-analysis\\SKILL.md",
+      "skill_dir": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\patent-analysis",
+      "category": "general",
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "metadata": "",
+      "frontmatter": {
+        "name": "patent-analysis",
+        "description": "Analyze prior art and draft patent materials with feature mapping, claim support, terminology consistency, and enablement checks.",
+        "platforms": [
+          "windows",
+          "linux",
+          "macos"
+        ],
+        "metadata": ""
+      }
+    },
+    {
+      "name": "rag-retrieval",
+      "description": "Design and evaluate production RAG pipelines with parsing, chunking, hybrid retrieval, reranking, citations, and multimodal context.",
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\rag-retrieval\\SKILL.md",
+      "skill_dir": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\rag-retrieval",
+      "category": "general",
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "metadata": "",
+      "frontmatter": {
+        "name": "rag-retrieval",
+        "description": "Design and evaluate production RAG pipelines with parsing, chunking, hybrid retrieval, reranking, citations, and multimodal context.",
+        "platforms": [
+          "windows",
+          "linux",
+          "macos"
+        ],
+        "metadata": ""
+      }
+    },
+    {
+      "name": "scientific-research",
+      "description": "Conduct evidence-backed literature analysis, hypothesis generation, baseline reproduction, minimal experiments, and falsifiable evaluation.",
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\scientific-research\\SKILL.md",
+      "skill_dir": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\scientific-research",
+      "category": "general",
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "metadata": "",
+      "frontmatter": {
+        "name": "scientific-research",
+        "description": "Conduct evidence-backed literature analysis, hypothesis generation, baseline reproduction, minimal experiments, and falsifiable evaluation.",
+        "platforms": [
+          "windows",
+          "linux",
+          "macos"
+        ],
+        "metadata": ""
+      }
+    },
+    {
+      "name": "software-backend",
+      "description": "Build and review production backend systems with explicit API, data, authorization, observability, testing, and deployment contracts.",
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\software-backend\\SKILL.md",
+      "skill_dir": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\software-backend",
+      "category": "general",
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "metadata": "",
+      "frontmatter": {
+        "name": "software-backend",
+        "description": "Build and review production backend systems with explicit API, data, authorization, observability, testing, and deployment contracts.",
+        "platforms": [
+          "windows",
+          "linux",
+          "macos"
+        ],
+        "metadata": ""
+      }
+    },
+    {
+      "name": "supply-chain-planning",
+      "description": "Build constrained supply, production, inventory, and logistics plans with scenarios, sensitivity analysis, and exception replanning.",
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\supply-chain-planning\\SKILL.md",
+      "skill_dir": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\supply-chain-planning",
+      "category": "general",
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "metadata": "",
+      "frontmatter": {
+        "name": "supply-chain-planning",
+        "description": "Build constrained supply, production, inventory, and logistics plans with scenarios, sensitivity analysis, and exception replanning.",
+        "platforms": [
+          "windows",
+          "linux",
+          "macos"
+        ],
+        "metadata": ""
+      }
+    },
+    {
+      "name": "travel-device-coordination",
+      "description": "Prepare multi-device business travel by organizing schedules, documents, sensitive data placement, connectivity, power, offline materials, and risks.",
+      "path": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\travel-device-coordination\\SKILL.md",
+      "skill_dir": "C:\\Users\\Finitude\\Documents\\方寸实习\\天枢_AstralNexus项目\\01_源码\\AstralNexus\\skills\\travel-device-coordination",
+      "category": "general",
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "metadata": "",
+      "frontmatter": {
+        "name": "travel-device-coordination",
+        "description": "Prepare multi-device business travel by organizing schedules, documents, sensitive data placement, connectivity, power, offline materials, and risks.",
+        "platforms": [
+          "windows",
+          "linux",
+          "macos"
+        ],
+        "metadata": ""
+      }
+    }
+  ]
+}

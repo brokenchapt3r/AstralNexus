@@ -1,0 +1,25 @@
+# Cloud Only Configuration Example
+
+resources:
+  cloud:
+    privacy: low
+    cost: high
+    latency: variable
+    capabilities:
+      - planning
+      - long_context
+      - hard_reasoning
+      - research
+      - complex_analysis
+
+models:
+  cloud:
+    default: "gpt-4"
+    alternatives:
+      - "claude-3-opus"
+      - "gemini-pro"
+
+scheduling:
+  strategy: "performance_first"
+  resource_failover_enabled: true
+  max_retries: 5

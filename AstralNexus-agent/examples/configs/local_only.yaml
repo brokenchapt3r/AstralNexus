@@ -1,0 +1,22 @@
+# Local Only Configuration Example
+
+resources:
+  local:
+    privacy: high
+    cost: low
+    latency: low
+    capabilities: 
+      - file_operations
+      - terminal_access
+      - light_reasoning
+      - code_execution
+      - test_running
+
+models:
+  local:
+    default: "codellama/CodeLlama-7b-Instruct-hf"
+
+scheduling:
+  strategy: "privacy_first"
+  resource_failover_enabled: false
+  max_retries: 3

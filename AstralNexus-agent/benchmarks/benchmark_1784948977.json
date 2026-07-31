@@ -1,0 +1,142 @@
+[
+  {
+    "name": "construct_10_nodes",
+    "value": 0.21440000273287296,
+    "unit": "ms"
+  },
+  {
+    "name": "construct_50_nodes",
+    "value": 0.7074000022839755,
+    "unit": "ms"
+  },
+  {
+    "name": "construct_100_nodes",
+    "value": 1.0499000054551288,
+    "unit": "ms"
+  },
+  {
+    "name": "construct_200_nodes",
+    "value": 2.7067000046372414,
+    "unit": "ms"
+  },
+  {
+    "name": "route_10_messages",
+    "value": 0.10969999129883945,
+    "unit": "ms"
+  },
+  {
+    "name": "transmitted_10",
+    "value": 1,
+    "unit": "count"
+  },
+  {
+    "name": "dropped_10",
+    "value": 9,
+    "unit": "count"
+  },
+  {
+    "name": "route_50_messages",
+    "value": 0.2145999897038564,
+    "unit": "ms"
+  },
+  {
+    "name": "transmitted_50",
+    "value": 2,
+    "unit": "count"
+  },
+  {
+    "name": "dropped_50",
+    "value": 48,
+    "unit": "count"
+  },
+  {
+    "name": "route_100_messages",
+    "value": 0.5257000011624768,
+    "unit": "ms"
+  },
+  {
+    "name": "transmitted_100",
+    "value": 4,
+    "unit": "count"
+  },
+  {
+    "name": "dropped_100",
+    "value": 96,
+    "unit": "count"
+  },
+  {
+    "name": "route_500_messages",
+    "value": 11.541400002897717,
+    "unit": "ms"
+  },
+  {
+    "name": "transmitted_500",
+    "value": 41,
+    "unit": "count"
+  },
+  {
+    "name": "dropped_500",
+    "value": 459,
+    "unit": "count"
+  },
+  {
+    "name": "compress_20_messages",
+    "value": 0.000200001522898674,
+    "unit": "ms (below threshold)"
+  },
+  {
+    "name": "compression_ratio_20",
+    "value": 100.0,
+    "unit": "% (no compression)"
+  },
+  {
+    "name": "compress_50_messages",
+    "value": 0.17899999511428177,
+    "unit": "ms"
+  },
+  {
+    "name": "compression_ratio_50",
+    "value": 61.48796498905909,
+    "unit": "%"
+  },
+  {
+    "name": "compress_100_messages",
+    "value": 0.3490999952191487,
+    "unit": "ms"
+  },
+  {
+    "name": "compression_ratio_100",
+    "value": 30.1522506619594,
+    "unit": "%"
+  },
+  {
+    "name": "write_10_checkpoints",
+    "value": 141.43719999992754,
+    "unit": "ms"
+  },
+  {
+    "name": "read_10_checkpoints",
+    "value": 5.344500008504838,
+    "unit": "ms"
+  },
+  {
+    "name": "write_50_checkpoints",
+    "value": 726.3250000105472,
+    "unit": "ms"
+  },
+  {
+    "name": "read_50_checkpoints",
+    "value": 21.021699998527765,
+    "unit": "ms"
+  },
+  {
+    "name": "write_100_checkpoints",
+    "value": 1474.4123999989824,
+    "unit": "ms"
+  },
+  {
+    "name": "read_100_checkpoints",
+    "value": 40.37319999770261,
+    "unit": "ms"
+  }
+]

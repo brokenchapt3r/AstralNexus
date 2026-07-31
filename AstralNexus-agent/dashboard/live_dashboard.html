@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天枢 · 动态群体智能控制台</title>
+  <style>
+    :root {
+      --bg:#090e14; --surface:#101821; --surface2:#141f2b; --line:#263648;
+      --text:#d9e5f2; --muted:#8295aa; --cyan:#4dd3ff; --green:#65dfa1;
+      --amber:#ffc75a; --red:#ff6f7d; --violet:#b494ff; --blue:#79a9ff;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font:13px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace; }
+    button,input { font:inherit; letter-spacing:0; }
+    .app { height:100vh; min-height:760px; display:grid; grid-template-rows:auto auto minmax(0,1fr) minmax(190px,26vh); overflow:hidden; }
+    header { min-height:56px; padding:10px 16px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:12px; min-width:0; }
+    h1 { margin:0; color:var(--cyan); font-size:18px; white-space:nowrap; }
+    .connection,.run-state { padding:3px 8px; border:1px solid var(--line); color:var(--muted); border-radius:5px; white-space:nowrap; }
+    .connection.ok,.run-state.running { color:var(--green); border-color:#28704f; }
+    .connection.bad,.run-state.failed { color:var(--red); border-color:#7c3340; }
+    #run-dir { color:var(--muted); min-width:0; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .metrics { display:grid; grid-template-columns:repeat(7,minmax(105px,1fr)); border-bottom:1px solid var(--line); background:#0d141d; }
+    .metric { padding:8px 12px; border-right:1px solid var(--line); min-width:0; }
+    .metric:last-child { border-right:0; }
+    .metric-label { display:block; color:var(--muted); font-size:11px; white-space:nowrap; }
+    .metric-value { display:block; color:var(--text); font-size:16px; margin-top:2px; overflow:hidden; text-overflow:ellipsis; }
+    main { min-height:0; display:grid; grid-template-columns:minmax(0,1fr) minmax(360px,420px); gap:10px; padding:10px; }
+    .panel { border:1px solid var(--line); background:var(--surface); border-radius:6px; min-height:0; overflow:hidden; }
+    .panel-head { min-height:42px; padding:8px 11px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; gap:10px; color:var(--muted); }
+    .graph-panel { display:grid; grid-template-rows:auto auto minmax(0,1fr); }
+    .view-tabs { display:flex; gap:2px; }
+    .view-tab { border:0; border-bottom:2px solid transparent; background:transparent; color:var(--muted); padding:5px 9px; cursor:pointer; }
+    .view-tab:hover { color:var(--text); }
+    .view-tab.active { color:var(--cyan); border-bottom-color:var(--cyan); }
+    .task-graph-modes { display:flex; align-items:center; gap:0; margin-left:8px; padding-left:8px; border-left:1px solid var(--line); }
+    .graph-mode { border:1px solid var(--line); background:#0d1620; color:var(--muted); padding:4px 8px; cursor:pointer; }
+    .graph-mode:first-child { border-radius:4px 0 0 4px; }
+    .graph-mode:last-child { border-radius:0 4px 4px 0; }
+    .graph-mode.active { color:var(--cyan); border-color:#367b96; background:#112733; }
+    .wave { min-height:68px; border-bottom:1px solid var(--line); padding:8px 11px; display:grid; grid-template-columns:150px minmax(0,1fr); gap:12px; align-items:center; }
+    .wave-title b { color:var(--cyan); font-size:15px; }
+    .wave-title small { display:block; color:var(--muted); }
+    .wave-members { display:flex; gap:6px; overflow:auto; padding-bottom:2px; }
+    .wave-chip { flex:0 0 auto; border-left:3px solid var(--cyan); background:#132230; padding:5px 8px; min-width:110px; max-width:230px; }
+    .wave-chip b,.wave-chip span { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .wave-chip span { color:var(--muted); font-size:11px; }
+    .graph-scroll { min-height:0; overflow:hidden; background:#0c131b; cursor:grab; touch-action:none; }
+    .graph-scroll.dragging { cursor:grabbing; }
+    #graph { display:block; width:100%; height:100%; min-width:900px; min-height:620px; user-select:none; }
+    .graph-head-actions { display:flex; align-items:center; gap:7px; min-width:0; }
+    .zoom-control { border:1px solid var(--line); border-radius:4px; background:#0d1620; color:var(--muted); padding:3px 7px; cursor:pointer; }
+    .zoom-control:hover { color:var(--cyan); border-color:#367b96; }
+    #zoom-level { color:var(--muted); min-width:42px; text-align:right; }
+    .edge { fill:none; stroke:#526a82; stroke-width:1.4; opacity:.8; }
+    .edge.evidence_route,.edge.structured_message { stroke:var(--violet); stroke-dasharray:5 3; }
+    .edge.task_admission,.edge.governed_admission { stroke:var(--cyan); stroke-dasharray:7 4; opacity:.65; }
+    .edge.requirement_intake,.edge.task_contract { stroke:var(--violet); stroke-width:1.8; stroke-dasharray:6 3; }
+    .edge.planning_requested,.edge.patch_proposed,.edge.patch_submitted,.edge.patch_applied { stroke:var(--cyan); stroke-width:1.8; stroke-dasharray:7 4; }
+    .edge.executed_by { stroke:var(--green); stroke-width:2; }
+    .node { cursor:pointer; }
+    .node rect { fill:#172331; stroke:#617991; stroke-width:1.5; }
+    .node text { fill:var(--text); font-size:11px; pointer-events:none; }
+    .level-label { fill:var(--muted); font-size:11px; letter-spacing:.04em; }
+    .node .secondary { fill:var(--muted); font-size:10px; }
+    .node.running rect { fill:#153945; stroke:var(--cyan); animation:pulse 1.5s infinite; }
+    .node.completed rect,.node.passed rect { stroke:var(--green); }
+    .node.failed rect { fill:#3d222a; stroke:var(--red); }
+    .node.verifying rect,.node.repair_pending rect { stroke:var(--amber); }
+    .node.selected rect { stroke:#fff; stroke-width:2.5; }
+    .node.role-researcher rect { fill:#182c43; stroke:var(--blue); }
+    .node.role-coder rect { fill:#17372f; stroke:var(--green); }
+    .node.role-verifier rect,.node.role-reviewer rect { fill:#3b321b; stroke:var(--amber); }
+    .node.role-planner rect,.node.role-governor rect { fill:#2d2540; stroke:var(--violet); }
+    .node.role-global_governor rect { fill:#25324a; stroke:var(--cyan); }
+    .node.role-user_intent rect { fill:#223143; stroke:#d5e5f5; stroke-dasharray:5 3; }
+    .node.role-task_contract rect { fill:#17313a; stroke:#62d6c5; stroke-dasharray:7 3; }
+    .node.plane-control rect { stroke-width:2.2; }
+    .plane-label { fill:var(--cyan); font-size:11px; font-weight:700; }
+    .plane-divider { stroke:#355069; stroke-width:1; stroke-dasharray:7 5; }
+    .node.role-recovery_agent rect { fill:#42242b; stroke:var(--red); }
+    @keyframes pulse { 50% { filter:drop-shadow(0 0 6px #4dd3ff); } }
+    .side { display:grid; grid-template-rows:minmax(0,1fr) minmax(260px,1fr); gap:10px; min-height:0; }
+    .detail { height:calc(100% - 42px); overflow:auto; padding:11px; }
+    .detail h2 { margin:0 0 8px; color:var(--cyan); font-size:14px; overflow-wrap:anywhere; }
+    .label { color:var(--muted); margin-top:10px; }
+    .activity-live { border-left:3px solid var(--cyan); background:#0d1924; padding:8px 10px; margin-top:5px; }
+    details { margin-top:5px; border:1px solid #24384a; padding:7px 9px; }
+    summary { color:var(--cyan); cursor:pointer; }
+    pre { margin:3px 0; white-space:pre-wrap; overflow-wrap:anywhere; word-break:break-word; max-width:100%; color:#cfe0ef; }
+    .events { min-height:0; }
+    #event-log { height:calc(100% - 42px); overflow:auto; padding:7px 11px; }
+    .event-line { display:grid; grid-template-columns:140px 62px minmax(0,1fr); gap:8px; border-bottom:1px solid #1c2937; padding:5px 0; min-width:0; }
+    .event-line > * { min-width:0; overflow-wrap:anywhere; word-break:break-word; }
+    .event-line b { color:var(--cyan); } .event-line .ref { color:var(--amber); }
+    .empty { color:var(--muted); padding:10px; }
+    .runtime-brief { margin:0 10px 10px; display:grid; grid-template-rows:auto minmax(0,1fr); }
+    .runtime-brief-body { min-height:0; display:grid; grid-template-columns:minmax(300px,.8fr) minmax(0,1.8fr); }
+    .brief-summary { padding:10px 12px; border-right:1px solid var(--line); overflow:auto; }
+    .brief-summary h3 { margin:0 0 6px; color:var(--cyan); font-size:14px; }
+    .brief-stats { display:grid; grid-template-columns:repeat(4,minmax(70px,1fr)); gap:6px; margin:8px 0; }
+    .brief-stat { background:#0b141d; border-left:2px solid var(--cyan); padding:5px 7px; }
+    .brief-stat b,.brief-stat span { display:block; }
+    .brief-stat span { color:var(--muted); font-size:10px; }
+    #runtime-event-list { min-height:0; overflow:auto; padding:6px 10px; }
+    .runtime-event { margin:0 0 5px; background:#0d1620; border:1px solid #24384a; padding:0; }
+    .runtime-event summary { display:flex; gap:8px; align-items:center; padding:6px 8px; list-style:none; }
+    .runtime-event summary::-webkit-details-marker { display:none; }
+    .runtime-event summary::before { content:'▸'; color:var(--cyan); }
+    .runtime-event[open] summary::before { content:'▾'; }
+    .runtime-event .event-title { color:var(--cyan); font-weight:700; }
+    .runtime-event .event-ref { color:var(--amber); }
+    .runtime-event .event-summary { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--text); }
+    .runtime-event-content { border-top:1px solid var(--line); padding:7px 9px; }
+    @media (max-width:1100px) {
+      .metrics { grid-template-columns:repeat(4,1fr); }
+      .metric:nth-child(4) { border-right:0; }
+    }
+    @media (max-width:820px) {
+      .app { height:auto; min-height:100vh; grid-template-rows:auto auto auto auto; overflow:visible; }
+      .metrics { grid-template-columns:repeat(2,1fr); }
+      main { grid-template-columns:1fr; grid-template-rows:650px 760px; }
+      .wave { grid-template-columns:1fr; }
+      .event-line { grid-template-columns:1fr; }
+      .runtime-brief-body { grid-template-columns:1fr; }
+      .brief-summary { border-right:0; border-bottom:1px solid var(--line); }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>天枢 / AstralNexus · Swarm Control</h1>
+    <span id="connection" class="connection">连接中</span>
+    <span id="run-status" class="run-state">初始化</span>
+    <span id="run-dir" title="">-</span>
+  </header>
+  <section class="metrics">
+    <div class="metric"><span class="metric-label">Agent Population</span><strong id="m-agents" class="metric-value">0</strong></div>
+    <div class="metric"><span class="metric-label">Active Agents</span><strong id="m-active" class="metric-value">0</strong></div>
+    <div class="metric"><span class="metric-label">Parallel Wave</span><strong id="m-parallel" class="metric-value">0</strong></div>
+    <div class="metric"><span class="metric-label">Communication</span><strong id="m-comm" class="metric-value">0</strong></div>
+    <div class="metric"><span class="metric-label">Recovery</span><strong id="m-recovery" class="metric-value">0</strong></div>
+    <div class="metric"><span class="metric-label">Token Saving</span><strong id="m-saving" class="metric-value">0%</strong></div>
+    <div class="metric"><span class="metric-label">Success Rate</span><strong id="m-success" class="metric-value">0%</strong></div>
+  </section>
+  <main>
+    <section class="panel graph-panel">
+      <div class="panel-head">
+        <div class="view-tabs" role="tablist">
+          <button class="view-tab active" data-view="task">Task DAG</button>
+          <button class="view-tab" data-view="agent">Agent Topology</button>
+          <button class="view-tab" data-view="resource">Resource View</button>
+          <button class="view-tab" data-view="timeline">Execution Timeline</button>
+          <span id="task-graph-modes" class="task-graph-modes">
+            <button class="graph-mode active" data-graph-mode="authorization">任务签发图</button>
+            <button class="graph-mode" data-graph-mode="data">数据流向图</button>
+          </span>
+        </div>
+        <div class="graph-head-actions"><span id="graph-state">等待事件</span><span id="zoom-level">100%</span><button id="zoom-reset" class="zoom-control" type="button" title="恢复完整图视野">适配</button></div>
+      </div>
+      <div class="wave">
+        <div class="wave-title"><b id="wave-title">Ready-Wave -</b><small id="wave-summary">等待 Governor 调度</small></div>
+        <div id="wave-members" class="wave-members"></div>
+      </div>
+      <div class="graph-scroll"><svg id="graph" viewBox="0 0 1100 620" preserveAspectRatio="xMidYMid meet"></svg></div>
+    </section>
+    <aside class="side">
+      <section class="panel">
+        <div class="panel-head"><span>选中对象详情</span><span id="detail-status">-</span></div>
+        <div id="detail" class="detail">选择图中对象查看任务要求与实时执行输出。</div>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><span>实时控制面事件</span><span>Agent · Wave · Communication · Recovery</span></div>
+        <div id="event-log"></div>
+      </section>
+    </aside>
+  </main>
+  <section class="panel runtime-brief">
+    <div class="panel-head"><span>阶段性工作汇报</span><span>公开执行摘要 · 不含模型私有思维链</span></div>
+    <div class="runtime-brief-body">
+      <div id="runtime-brief-summary" class="brief-summary"><span class="empty">等待 Runtime 事件</span></div>
+      <div id="runtime-event-list"><span class="empty">Planner、Worker、工具与交付物事件将在这里持续显示。</span></div>
+    </div>
+  </section>
+</div>
+<script>
+let state={nodes:[],edges:[],events:[],runtime_events:[],runtime_brief:{},execution_timeline:[],artifact_flow:[],current_wave:[],metrics:{},agent_population:{agents:[]},communication_topology:{edges:[]},resource_state:{resources:[]},wave:{}};
+let view='task', taskGraphMode='authorization', selected=null, detailData=null, syncTimer=null;
+let graphViewport={scale:1,x:0,y:0};
+let graphDrag=null;
+const stableOrder=[], liveOutputs={};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pretty=v=>typeof v==='string'?v:JSON.stringify(v??'',null,2);
+function parseJson(value){if(typeof value!=='string')return value;try{return JSON.parse(value);}catch(_){return value;}}
+function formatEmbeddedActions(text){return String(text||'').replace(/```(?:json)?\s*([\s\S]*?)```/gi,(_,body)=>{const value=parseJson(body.trim());if(!value||typeof value!=='object')return body.trim();const actions=value.next_actions||value.actions;if(!Array.isArray(actions))return body.trim();return `后续动作：\n${actions.map((a,i)=>`\n${i+1}. ${a.goal||a.title||'继续处理'}${a.role?`（${a.role}）`:''}${a.reason?`\n   原因：${a.reason}`:''}`).join('')}`;});}
+function userFacingOutput(item){
+  let value=item?.full_output??item?.output??item?.summary??'';
+  value=parseJson(value);
+  if(value&&typeof value==='object'&&String(item?.role||'').toLowerCase()==='planner'){
+    const recovered=item?.planning_view||{};
+    const plan=value.planning_summary||recovered||{};
+    const nodes=Array.isArray(value.planned_nodes)?value.planned_nodes:(recovered.planned_nodes||[]);
+    const lines=[recovered.summary||value.summary||value.content||'规划已完成'];
+    if(plan.execution_strategy) lines.push(`\n执行策略\n${plan.execution_strategy}`);
+    const explanation=value.planning_explanation||recovered.planning_explanation;
+    if(explanation) lines.push(`\n规划说明\n${explanation}`);
+    if(nodes.length) lines.push(`\n任务分解\n${nodes.map((n,i)=>`${i+1}. ${n.node_id||''} · ${n.role||'dynamic'}\n   ${n.goal||''}${(n.dependencies||[]).length?`\n   前置依赖：${n.dependencies.join('、')}`:'\n   可直接进入 Ready-Wave'}`).join('\n')}`);
+    return lines.join('\n').trim();
+  }
+  if(String(item?.role||'').toLowerCase()==='planner'&&item?.planning_view){
+    const plan=item.planning_view, nodes=plan.planned_nodes||[];
+    const history=Array.isArray(plan.planning_history)?plan.planning_history:[];
+    const rounds=history.length?`\n规划演化\n${history.map(h=>`第 ${h.round} 轮 · ${h.kind==='initial_plan'?'初始规划':'动态重规划'}\n${h.planning_explanation||'已根据执行反馈调整任务图'}${(h.added||[]).length?`\n新增/调整：${h.added.join('、')}`:''}`).join('\n\n')}`:'';
+    return [plan.summary,`\n执行策略\n${plan.execution_strategy||''}`,`\n规划说明\n${plan.planning_explanation||''}`,nodes.length?`\n任务分解\n${nodes.map((n,i)=>`${i+1}. ${n.node_id} · ${n.role}\n   ${n.goal}${(n.dependencies||[]).length?`\n   前置依赖：${n.dependencies.join('、')}`:'\n   可直接进入 Ready-Wave'}`).join('\n')}`:'',rounds].join('\n').trim();
+  }
+  if(value&&typeof value==='object') value=value.content??value.text??value.answer??value.result??value.summary??'';
+  return formatEmbeddedActions(String(value||'').trim())||'暂无可展示的执行输出';
+}
+function inputProvenance(item){
+  const sources=Array.isArray(item?.input_sources)?item.input_sources:[];
+  const lines=[];
+  if(sources.length) lines.push(...sources.map(source=>{
+    const relation=String(source.relation||'dependency');
+    const label=relation==='task_admission'?'原始任务':relation==='governed_admission'?'规划契约':relation==='task_contract'?'任务契约':'业务产物输入';
+    return `${label}：${source.node_id||'未知'} · ${source.role||'unknown'}${source.summary?`\n${source.summary}`:''}`;
+  }));
+  else if(!item?.is_input) lines.push('业务产物输入：无；当前节点按已审批的任务契约启动');
+  return lines.join('\n');
+}
+function governanceChain(item){
+  const chain=item?.governance_chain;
+  if(!chain||typeof chain!=='object')return '暂无结构化治理责任链';
+  return [
+    `节点新增申请：${chain.requested_by||'Planner'}`,
+    `补图提交调用：${chain.submitted_by||'Orchestrator.plan_task_decomposition'}`,
+    `审批决定：${chain.approved_by||'GlobalGovernor'}`,
+    `任务图写入：${chain.applied_by||'GlobalGovernor.apply_task_graph_patch'}`,
+    `调度与匹配：${chain.scheduled_by||'Orchestrator/Router'}`,
+    `任务执行：${chain.executed_by||'等待 Worker 实例'}`,
+  ].join('\n');
+}
+function requirementLineage(item){
+  const lineage=item?.requirement_lineage;
+  if(!lineage||typeof lineage!=='object')return '暂无结构化需求谱系';
+  const sources=Array.isArray(lineage.source_requirements)?lineage.source_requirements:[];
+  return [
+    `原始需求节点：${lineage.user_intent_node||'U-001'}`,
+    sources.length?`直接需求依据：\n${sources.map((value,index)=>`${index+1}. ${value}`).join('\n')}`:'',
+    `规划转换节点：${lineage.planner_node||'P-001'}`,
+    lineage.planning_explanation?`总体拆分说明：\n${lineage.planning_explanation}`:'',
+    lineage.derivation?`当前节点形成原因：\n${lineage.derivation}`:'',
+    lineage.derived_requirement?`形成的任务契约：\n${lineage.derived_requirement}`:'',
+  ].filter(Boolean).join('\n\n');
+}
+function friendlyToolArguments(value){
+  if(!value||typeof value!=='object'||!Object.keys(value).length)return '';
+  const preferred=value.path||value.url||value.query||value.command||value.cmd||value.code;
+  if(preferred)return String(preferred).slice(0,1200);
+  return pretty(value).slice(0,1200);
+}
+function toolActivity(item){
+  const tools=Array.isArray(item?.tool_activity)?item.tool_activity:[];
+  if(!tools.length)return '尚未调用工具';
+  return tools.map((tool,index)=>{
+    const status=tool.status==='success'||tool.status==='completed'?'成功':tool.status==='running'?'执行中':tool.status==='error'?'失败':tool.status||'未知';
+    const lines=[`${index+1}. ${tool.name||'tool'} · ${status} · 第 ${Number(tool.tool_round||0)+1} 轮`];
+    const args=friendlyToolArguments(tool.arguments); if(args)lines.push(`调用内容：${args}`);
+    if(tool.reason)lines.push(`调用原因：${tool.reason}`);
+    if(tool.path)lines.push(`产物：${tool.path}`);
+    if(tool.stdout)lines.push(`工具结果：${tool.stdout}`);
+    if(tool.error)lines.push(`错误：${tool.error}`);
+    return lines.join('\n');
+  }).join('\n\n');
+}
+function activityText(item){
+  const current=item?.current_activity||{};
+  if(!current.label)return '等待新的运行时活动';
+  const when=current.recorded_at?new Date(current.recorded_at).toLocaleTimeString():'--:--:--';
+  return `${current.label}\n活动类型：${current.type||'unknown'}${current.tool?`\n当前工具：${current.tool}`:''}\n开始时间：${when}`;
+}
+function activityHistory(item){
+  const values=Array.isArray(item?.activity_history)?item.activity_history:[];
+  if(!values.length)return '暂无活动轨迹';
+  return values.slice(-30).map(value=>`${value.recorded_at?new Date(value.recorded_at).toLocaleTimeString():'--:--:--'}  ${value.label||value.type}${value.tool?` · ${value.tool}`:''}`).join('\n');
+}
+function stageReports(item){
+  const values=Array.isArray(item?.stage_reports)?item.stage_reports:[];
+  if(!values.length){
+    return item?.public_reasoning
+      ? `公开执行依据\n${item.public_reasoning}`
+      : '尚无公开阶段性汇报';
+  }
+  return values.slice(-30).map((value,index)=>{
+    const when=value.recorded_at?new Date(value.recorded_at).toLocaleTimeString():'--:--:--';
+    const lines=[`${index+1}. ${when} · ${value.title||value.event_type||'阶段更新'}`];
+    if(value.summary)lines.push(`进展：${value.summary}`);
+    if(value.rationale)lines.push(`执行依据：${value.rationale}`);
+    if(value.status)lines.push(`状态：${value.status}`);
+    return lines.join('\n');
+  }).join('\n\n');
+}
+function runStatusLabel(value){
+  const status=String(value||'unknown').toLowerCase();
+  return ({created:'等待启动',running:'正在工作',completed:'验收完成',failed:'验收失败',cancelled:'已取消'})[status]||value||'未知';
+}
+function recoveryText(item){
+  const value=item?.recovery_context||{};
+  if(!Object.keys(value).length)return '';
+  return [
+    value.failed_node?`失败节点：${value.failed_node}`:'',
+    value.failure_stage?`失败阶段：${value.failure_stage}`:'',
+    value.failure_type?`失败类型：${value.failure_type}`:'',
+    value.failure_reason?`失败原因：${value.failure_reason}`:'',
+    value.triggered_by?`触发者：${value.triggered_by}`:'',
+    value.verdict?`验证结论：${value.verdict}`:'',
+    value.recovery_action?`恢复动作：${value.recovery_action}`:'',
+  ].filter(Boolean).join('\n');
+}
+function artifactText(item){
+  const values=(state.artifact_flow||[]).filter(value=>value.node_id===item?.id);
+  return values.length?values.map((value,index)=>`${index+1}. ${value.path}`).join('\n'):'尚无已登记交付物';
+}
+const safeClass=s=>String(s||'unknown').toLowerCase().replace(/[^a-z0-9_]+/g,'_');
+const percent=v=>`${Math.round(Number(v||0)*100)}%`;
+function dataForView(){
+  if(view==='timeline'){
+    const values=(state.execution_timeline||[]).slice(-40);
+    return {nodes:values.map(item=>({...item,status:'completed',role:'timeline',kind:'timeline',label:item.label,subtitle:`${item.recorded_at?new Date(item.recorded_at).toLocaleTimeString():''} · ${item.node_id||item.agent_id||'control'}`})),edges:values.slice(1).map((item,index)=>({source:values[index].id,target:item.id,kind:'timeline'})),title:'执行时间线'};
+  }
+  if(view==='agent'){
+    const nodes=(state.agent_population?.agents||[]).map(a=>({...a,label:`${a.id} · ${a.role}`,subtitle:`${a.current_task||'未分配'} · ${a.resource_tier||'unknown'}`,kind:a.role}));
+    return {nodes,edges:state.communication_topology?.edges||[],title:'Agent 实例'};
+  }
+  if(view==='resource'){
+    const resources=(state.resource_state?.resources||[]).map(r=>({...r,label:r.id,subtitle:`${r.tier} · ${r.model||'default'}`,kind:`resource_${r.tier}`}));
+    const agents=(state.agent_population?.agents||[]).filter(a=>resources.some(r=>(r.agents||[]).includes(a.id))).map(a=>({...a,label:`${a.id} · ${a.role}`,subtitle:a.current_task||'未分配',kind:a.role}));
+    const edges=[]; resources.forEach(r=>(r.agents||[]).forEach(a=>edges.push({source:r.id,target:a,kind:'allocation'})));
+    return {nodes:[...resources,...agents],edges,title:'资源与 Worker'};
+  }
+  const graph=(taskGraphMode==='data'?state.data_flow_graph:state.task_authorization_graph)||state.task_graph||{nodes:state.nodes||[],edges:state.edges||[]};
+  return {nodes:(graph.nodes||[]).map(n=>({...n,label:`${n.id} · ${n.role||'unknown'}`,subtitle:n.current_activity?.label||n.goal||'',kind:n.role,plane:n.plane||(['user_intent','planner','governor'].includes(String(n.role||'').toLowerCase())?'control':'execution')})),edges:graph.edges||[],title:taskGraphMode==='data'?'执行数据流向图':'任务签发图'};
+}
+function render(){
+  const metrics=state.metrics||{};
+  $('task-graph-modes').style.display=view==='task'?'flex':'none';
+  $('run-dir').textContent=state.run_dir||'-'; $('run-dir').title=state.run_dir||'';
+  $('run-status').textContent=runStatusLabel(state.run_status); $('run-status').className=`run-state ${safeClass(state.run_status)}`;
+  $('m-agents').textContent=metrics.agent_count||0; $('m-active').textContent=metrics.active_agents||0;
+  $('m-parallel').textContent=metrics.parallel_tasks||0; $('m-comm').textContent=metrics.communication_messages||0;
+  $('m-recovery').textContent=metrics.recovery_count||0; $('m-saving').textContent=percent(metrics.token_saving_ratio);
+  $('m-success').textContent=percent(metrics.success_rate);
+  const wave=state.wave||{}; $('wave-title').textContent=`Ready-Wave ${wave.id??'-'}`;
+  $('wave-summary').textContent=`宽度 ${wave.width||0} · ${wave.status||'waiting'} · 峰值并行 ${metrics.peak_parallelism||0}`;
+  $('wave-members').innerHTML=(wave.node_ids||[]).map((id,i)=>`<div class="wave-chip"><b>${esc(id)}</b><span>${esc((wave.roles||[])[i]||'动态角色')}</span></div>`).join('')||'<span class="empty">当前没有已准入的并行节点</span>';
+  const data=dataForView();
+  renderGraph(data);
+  const events=Array.isArray(state.runtime_events)?state.runtime_events:[];
+  $('event-log').innerHTML=events.slice(-100).reverse().map(e=>{const narrative=e.rationale||e.summary||'';return `<div class="event-line"><b>${esc(e.title||e.event_type||'运行事件')}</b><span class="ref">${esc(e.node_id||e.actor||'control')}</span><span>${esc(narrative)}</span></div>`;}).join('')||'<span class="empty">等待公开控制面事件。</span>';
+  renderRuntimeBrief();
+  if(selected) renderSelectedDetail();
+}
+function renderRuntimeBrief(){
+  const brief=state.runtime_brief||{}, work=Array.isArray(brief.current_work)?brief.current_work:[];
+  $('runtime-brief-summary').innerHTML=`<h3>${esc(brief.phase||'等待运行')}</h3><div>${esc(brief.summary||'尚无阶段摘要')}</div><div class="brief-stats"><div class="brief-stat"><b>${Number(brief.total_nodes||0)}</b><span>总节点</span></div><div class="brief-stat"><b>${Number(brief.successful_nodes||0)}</b><span>成功</span></div><div class="brief-stat"><b>${Number(brief.failed_nodes||0)}</b><span>失败</span></div><div class="brief-stat"><b>${Number(brief.recovery_count||0)}</b><span>恢复</span></div></div>${work.length?`<div class="label">正在工作</div><pre>${esc(work.map(item=>`${item.id} · ${item.role}\n${item.action}`).join('\n\n'))}</pre>`:''}<div class="label">接下来</div><pre>${esc(brief.next_step||'等待控制面决策')}</pre><div class="label">输出目录</div><pre>${esc(brief.output_dir||state.run_dir||'-')}</pre>`;
+  const items=Array.isArray(state.runtime_events)?state.runtime_events:[];
+  $('runtime-event-list').innerHTML=items.slice(-100).reverse().map((event,index)=>{const details=event.details===undefined||event.details===null?'':pretty(event.details);return `<details class="runtime-event" ${index===0?'open':''}><summary><span class="event-title">${esc(event.title||event.event_type)}</span><span class="event-ref">${esc(event.node_id||event.actor||'control')}</span><span class="event-summary">${esc(event.summary||'')}</span></summary><div class="runtime-event-content"><div>${esc(event.summary||'')}</div>${event.rationale?`<div class="label">决策依据</div><pre>${esc(event.rationale)}</pre>`:''}${details?`<div class="label">执行记录</div><pre>${esc(details)}</pre>`:''}<div class="label">时间</div><span>${esc(event.recorded_at||'')}</span></div></details>`;}).join('')||'<span class="empty">等待公开运行事件。</span>';
+}
+function renderGraph(data){
+  const svg=$('graph'), nodeW=250, nodeH=104, gapY=88;
+  const pos={}, levels=new Map();
+  if(view==='task'){
+    const incoming=new Map(data.nodes.map(n=>[n.id,0])), outgoing=new Map(data.nodes.map(n=>[n.id,[]]));
+    data.edges.forEach(e=>{const from=e.source||e.from, to=e.target||e.to;if(incoming.has(to)&&outgoing.has(from)){incoming.set(to,incoming.get(to)+1);outgoing.get(from).push(to);}});
+    const roots=data.nodes.filter(n=>incoming.get(n.id)===0);
+    const preferredRoot=roots.find(n=>String(n.role||n.kind||'').toLowerCase()==='user_intent'||/^U-?001$/i.test(n.id))||roots.find(n=>/planner|governor/i.test(String(n.role||n.kind||''))||/^[PT]-?001$/i.test(n.id));
+    const queue=[];
+    if(preferredRoot) queue.push([preferredRoot.id,0]);
+    roots.filter(n=>n.id!==preferredRoot?.id).forEach(n=>queue.push([n.id,preferredRoot?1:0]));
+    if(!queue.length&&data.nodes.length) queue.push([data.nodes[0].id,0]);
+    const seen=new Set();
+    while(queue.length){const [id,level]=queue.shift();if(seen.has(id))continue;seen.add(id);if(!levels.has(level))levels.set(level,[]);levels.get(level).push(id);for(const next of outgoing.get(id)||[])queue.push([next,level+1]);}
+    const maxLevel=Math.max(-1,...levels.keys());
+    data.nodes.filter(n=>!seen.has(n.id)).forEach(n=>{const level=maxLevel+1;if(!levels.has(level))levels.set(level,[]);levels.get(level).push(n.id);});
+  }else if(view==='timeline'){
+    data.nodes.forEach((n,index)=>levels.set(index,[n.id]));
+  }else{
+    const cols=Math.max(1,Math.min(4,Math.ceil(Math.sqrt(data.nodes.length||1))));
+    data.nodes.forEach((n,i)=>{const level=Math.floor(i/cols);if(!levels.has(level))levels.set(level,[]);levels.get(level).push(n.id);});
+  }
+  const maxCount=Math.max(1,...[...levels.values()].map(items=>items.length));
+  const width=Math.max(1100,maxCount*(nodeW+48)+48), height=Math.max(620,levels.size*(nodeH+gapY)+80);
+  svg.setAttribute('viewBox',`0 0 ${width} ${height}`);
+  data.nodes.forEach(n=>{if(!stableOrder.includes(n.id))stableOrder.push(n.id);});
+  for(const ids of levels.values()) ids.sort((a,b)=>stableOrder.indexOf(a)-stableOrder.indexOf(b));
+  for(const [level,ids] of levels){const step=width/(ids.length+1);ids.forEach((id,index)=>{pos[id]={x:step*(index+1),y:90+level*(nodeH+gapY)};});}
+  const wrap=(value,max=20,limit=3)=>{const chars=[...String(value||'')],lines=[];while(chars.length&&lines.length<limit)lines.push(chars.splice(0,max).join(''));if(chars.length&&lines.length)lines[lines.length-1]=lines[lines.length-1].slice(0,max-1)+'…';return lines;};
+  const defs='<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#637b93"/></marker></defs>';
+  let html='';
+  if(view==='task') {
+    let executionLabelDrawn=false;
+    for(const [level,ids] of levels){
+      const members=ids.map(id=>data.nodes.find(n=>n.id===id)).filter(Boolean);
+      const isControl=members.length>0&&members.every(n=>n.plane==='control');
+      const y=90+level*(nodeH+gapY)-nodeH/2-12;
+      if(isControl) html+=`<text class="plane-label" x="14" y="${y}">控制平面 · ${level===0?'用户意图':'规划决策'}</text>`;
+      else {
+        if(!executionLabelDrawn){html+=`<line class="plane-divider" x1="12" y1="${y-18}" x2="${width-12}" y2="${y-18}"/><text class="plane-label" x="14" y="${y}">执行平面 · 动态异构 Worker</text>`;executionLabelDrawn=true;}
+        else html+=`<text class="level-label" x="14" y="${y}">执行层级 ${level+1}</text>`;
+      }
+    }
+  }
+  data.edges.forEach(e=>{const a=pos[e.source||e.from],b=pos[e.target||e.to];if(a&&b){const mid=(a.y+nodeH/2+b.y-nodeH/2)/2;html+=`<path class="edge ${safeClass(e.kind)}" marker-end="url(#arrow)" d="M ${a.x} ${a.y+nodeH/2} V ${mid} H ${b.x} V ${b.y-nodeH/2}"><title>${esc(e.reason||e.kind||'route')}</title></path>`;}});
+  data.nodes.forEach(n=>{const p=pos[n.id],title=wrap(n.label||n.id,22,1),sub=wrap(n.subtitle||'',22,3);let text=`<text x="${p.x}" y="${p.y-24}" text-anchor="middle">${esc(title[0]||n.id)}</text>`;sub.forEach((line,i)=>text+=`<text class="secondary" x="${p.x}" y="${p.y-3+i*15}" text-anchor="middle">${esc(line)}</text>`);html+=`<g class="node ${safeClass(n.status)} role-${safeClass(n.kind)} plane-${safeClass(n.plane||'execution')} ${selected===n.id?'selected':''}" data-id="${esc(n.id)}"><title>${esc(n.subtitle||n.id)}</title><rect x="${p.x-nodeW/2}" y="${p.y-nodeH/2}" width="${nodeW}" height="${nodeH}" rx="6"/>${text}</g>`;});
+  svg.innerHTML=defs+`<g id="graph-scene" transform="translate(${graphViewport.x} ${graphViewport.y}) scale(${graphViewport.scale})">${html}</g>`;
+  svg.querySelectorAll('.node').forEach(n=>n.onclick=()=>selectEntity(n.dataset.id));
+  updateZoomIndicator();
+  const terminal=['completed','failed','cancelled'].includes(String(state.run_status||'').toLowerCase());
+  const activity=terminal?runStatusLabel(state.run_status):(state.metrics?.active_agents||0)>0?'群体协作中':'等待控制面调度';
+  $('graph-state').textContent=`${data.title} · ${activity}`;
+}
+function graphPoint(event){
+  const svg=$('graph'), point=svg.createSVGPoint();
+  point.x=event.clientX; point.y=event.clientY;
+  const matrix=svg.getScreenCTM();
+  return matrix?point.matrixTransform(matrix.inverse()):{x:0,y:0};
+}
+function applyGraphTransform(){
+  const scene=$('graph').querySelector('#graph-scene');
+  if(scene)scene.setAttribute('transform',`translate(${graphViewport.x} ${graphViewport.y}) scale(${graphViewport.scale})`);
+  updateZoomIndicator();
+}
+function updateZoomIndicator(){$('zoom-level').textContent=`${Math.round(graphViewport.scale*100)}%`;}
+function resetGraphViewport(){graphViewport={scale:1,x:0,y:0};applyGraphTransform();}
+function installGraphNavigation(){
+  const svg=$('graph'), container=document.querySelector('.graph-scroll');
+  svg.addEventListener('wheel',event=>{
+    event.preventDefault();
+    const point=graphPoint(event), oldScale=graphViewport.scale;
+    const factor=Math.exp(-event.deltaY*0.0015);
+    const nextScale=Math.max(.3,Math.min(3.5,oldScale*factor));
+    if(Math.abs(nextScale-oldScale)<.0001)return;
+    const worldX=(point.x-graphViewport.x)/oldScale, worldY=(point.y-graphViewport.y)/oldScale;
+    graphViewport.x=point.x-worldX*nextScale;
+    graphViewport.y=point.y-worldY*nextScale;
+    graphViewport.scale=nextScale;
+    applyGraphTransform();
+  },{passive:false});
+  svg.addEventListener('pointerdown',event=>{
+    if(event.button!==0||event.target.closest('.node'))return;
+    const point=graphPoint(event);
+    graphDrag={pointerId:event.pointerId,startX:point.x,startY:point.y,originX:graphViewport.x,originY:graphViewport.y};
+    svg.setPointerCapture(event.pointerId); container.classList.add('dragging');
+  });
+  svg.addEventListener('pointermove',event=>{
+    if(!graphDrag||graphDrag.pointerId!==event.pointerId)return;
+    const point=graphPoint(event);
+    graphViewport.x=graphDrag.originX+point.x-graphDrag.startX;
+    graphViewport.y=graphDrag.originY+point.y-graphDrag.startY;
+    applyGraphTransform();
+  });
+  const finish=event=>{
+    if(!graphDrag||graphDrag.pointerId!==event.pointerId)return;
+    graphDrag=null; container.classList.remove('dragging');
+    if(svg.hasPointerCapture(event.pointerId))svg.releasePointerCapture(event.pointerId);
+  };
+  svg.addEventListener('pointerup',finish); svg.addEventListener('pointercancel',finish);
+  svg.addEventListener('dblclick',event=>{if(!event.target.closest('.node'))resetGraphViewport();});
+  $('zoom-reset').onclick=resetGraphViewport;
+}
+async function selectEntity(id){
+  selected=id; detailData=null;
+  if(view==='task'){try{const response=await fetch('/api/node/'+encodeURIComponent(id));detailData=await response.json();}catch(error){detailData={error:String(error)}}}
+  render();
+}
+function renderSelectedDetail(){
+  if(!selected)return;
+  const id=selected;
+  const data=dataForView(), projected=data.nodes.find(n=>n.id===id)||{id};
+  const item=detailData?.id?{...detailData,...projected,full_output:detailData.full_output}:projected;
+  $('detail-status').textContent=item.status||'-';
+  if(view==='task') {if(item.entity_type==='runtime_agent'){$('detail').innerHTML=`<h2>${esc(item.agent_instance||id)} · ${esc(item.role||'worker')}</h2><div class="label">执行责任</div><pre>执行任务：${esc(item.current_task||'')}\n状态：${esc(item.status||'')}\n模型：${esc(item.selected_model||'')}\n资源：${esc(item.resource_tier||'')}</pre>`;return;}if(item.entity_type==='control_executor'){$('detail').innerHTML=`<h2>O-001 · Orchestrator</h2><div class="label">执行职责</div><pre>接收 Planner 生成的 TaskGraphPatch\n调用 GlobalGovernor 的唯一写图边界\n驱动 Router 调度和 Worker 生命周期</pre>`;return;}if(item.entity_type==='control_authority'){$('detail').innerHTML=`<h2>G-001 · GlobalGovernor</h2><div class="label">控制职责</div><pre>接收 Orchestrator 提交的 TaskGraphPatch\n执行合法性、重复节点与 DAG 环校验\n审批后原子写入正式 TaskGraph</pre>`;return;}if(item.entity_type==='task_contract'){$('detail').innerHTML=`<h2>${esc(id)} · 任务契约</h2><div class="label">签发责任</div><pre>审批：${esc(item.approved_by||'GlobalGovernor')}\n写入：${esc(item.applied_by||'')}\n目标节点：${esc(item.target_task||'')}</pre><div class="label">派生后的任务要求</div><pre>${esc(item.goal||'')}</pre><div class="label">需求来源</div><pre>${esc((item.source_requirements||[]).join('\n')||'用户原始任务')}</pre><div class="label">公开派生说明</div><pre>${esc(item.derivation||'')}</pre><div class="label">能力 / 约束 / 验收标准</div><pre>${esc(pretty({required_capabilities:item.required_capabilities||[],constraints:item.constraints||[],acceptance_criteria:item.acceptance_criteria||[]}))}</pre>`;return;}const terminal=['completed','failed','cancelled'].includes(String(item.status||'').toLowerCase());const streamed=terminal?'':(liveOutputs[id]||item.output||'');const output=streamed?formatEmbeddedActions(streamed):userFacingOutput(item);const inputLabel=item.is_input?'用户输入':'任务要求';const provenance=inputProvenance(item);const lineage=requirementLineage(item);const governance=governanceChain(item);const tools=toolActivity(item);const recovery=recoveryText(item);const reports=stageReports(item);const actor=item.is_input?'<div class="label">输入主体</div><pre>用户</pre>':`<div class="label">执行主体</div><pre>Agent 实例：${esc(item.agent_instance||'尚未实例化')}\n角色：${esc(item.role||'unknown')}\nPrompt 来源：${esc(item.prompt_source||'User Intent + Governor Contract')}</pre>`;$('detail').innerHTML=`<h2>${esc(id)} · ${esc(item.role||'unknown')}</h2>${actor}<div class="label">${inputLabel}</div><details ${item.is_input?'open':''}><summary>查看完整内容</summary><pre>${esc(item.goal||'')}</pre></details>${item.is_input?'':`<div class="label">阶段性汇报 / 公开执行依据</div><pre>${esc(reports)}</pre><div class="label">节点治理责任链</div><pre>${esc(governance)}</pre><div class="label">需求演变谱系</div><pre>${esc(lineage)}</pre><div class="label">直接输入关系</div><pre>${esc(provenance)}</pre><div class="label">当前动作</div><pre class="activity-live">${esc(activityText(item))}</pre><details><summary>Agent 活动轨迹</summary><pre>${esc(activityHistory(item))}</pre></details><div class="label">工具执行</div><pre>${esc(tools)}</pre>${recovery?`<div class="label">故障与恢复闭环</div><pre>${esc(recovery)}</pre>`:''}<div class="label">Artifact 流转</div><pre>${esc(artifactText(item))}</pre>`}<div class="label">${item.is_input?'接收状态':'执行输出'}</div><pre>${esc(output)}</pre>`;}
+  else if(view==='agent') $('detail').innerHTML=`<h2>${esc(id)} · ${esc(item.role||'unknown')}</h2><div class="label">生命周期 / 当前任务</div><pre>${esc(item.status)}\n${esc(item.current_task||'')}</pre><div class="label">能力与工具</div><pre>${esc(pretty(item.capabilities||[]))}\n${esc(pretty(item.tools||[]))}</pre><div class="label">模型 / 资源</div><pre>${esc(item.model||'')}\n${esc(item.resource_tier||'')} · ${esc(item.resource_id||'')}</pre><div class="label">Governor 依据</div><pre>${esc(pretty(item.reason_codes||[]))}</pre>`;
+  else if(view==='timeline') $('detail').innerHTML=`<h2>${esc(item.label||id)}</h2><div class="label">发生时间</div><pre>${esc(item.recorded_at||'')}</pre><div class="label">关联对象</div><pre>节点：${esc(item.node_id||'control')}\nAgent：${esc(item.agent_id||'-')}\n事件：${esc(item.event_type||'')}</pre>`;
+  else $('detail').innerHTML=`<h2>${esc(id)}</h2><div class="label">资源层级 / 模型</div><pre>${esc(item.tier||'')}\n${esc(item.model||'')}</pre><div class="label">承载 Agent</div><pre>${esc(pretty(item.agents||[]))}</pre><div class="label">关联任务</div><pre>${esc(pretty(item.tasks||[]))}</pre>`;
+}
+async function sync(){
+  try{const response=await fetch('/api/snapshot');state=await response.json();render();}
+  catch(error){$('connection').textContent='服务不可用';$('connection').className='connection bad';}
+}
+function scheduleSync(){clearTimeout(syncTimer);syncTimer=setTimeout(sync,100);}
+function connect(){
+  const es=new EventSource('/events');
+  es.onopen=()=>{$('connection').textContent='实时连接';$('connection').className='connection ok';};
+  es.onerror=()=>{$('connection').textContent='重连中';$('connection').className='connection bad';};
+  es.addEventListener('trace',event=>{try{const data=JSON.parse(event.data);const payload=data.payload||data;const nodeId=payload.node_id||payload.target_node_id||payload.task_id;if(data.event_type==='dashboard.snapshot'){state=payload||state;render();}else if(data.event_type==='llm.text.delta'){const delta=payload.text||payload.delta||payload.content||'';if(nodeId&&delta){liveOutputs[nodeId]=(liveOutputs[nodeId]||'')+String(delta);if(selected===nodeId)render();}}else if(['node.completed','node.failed','task.execution.completed','task.execution.error'].includes(data.event_type)&&selected===nodeId){sync().then(()=>selectEntity(nodeId));}else scheduleSync();}catch(_){}});
+}
+document.querySelectorAll('.view-tab').forEach(tab=>tab.onclick=()=>{view=tab.dataset.view;selected=null;resetGraphViewport();document.querySelectorAll('.view-tab').forEach(x=>x.classList.toggle('active',x===tab));render();});
+document.querySelectorAll('.graph-mode').forEach(button=>button.onclick=()=>{taskGraphMode=button.dataset.graphMode;selected=null;detailData=null;resetGraphViewport();document.querySelectorAll('.graph-mode').forEach(item=>item.classList.toggle('active',item===button));render();});
+installGraphNavigation(); sync(); connect(); setInterval(sync,5000);
+</script>
+</body>
+</html>

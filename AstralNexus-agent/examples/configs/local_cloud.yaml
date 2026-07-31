@@ -1,0 +1,37 @@
+# Local and Cloud Configuration Example
+
+resources:
+  local:
+    privacy: high
+    cost: low
+    latency: low
+    capabilities: 
+      - file_operations
+      - terminal_access
+      - light_reasoning
+      - code_execution
+      - test_running
+  cloud:
+    privacy: low
+    cost: high
+    latency: medium
+    capabilities:
+      - planning
+      - long_context
+      - hard_reasoning
+      - research
+      - complex_analysis
+
+models:
+  local:
+    default: "codellama/CodeLlama-7b-Instruct-hf"
+  cloud:
+    default: "gpt-4"
+    alternatives:
+      - "claude-3-opus"
+      - "gemini-pro"
+
+scheduling:
+  strategy: "cost_effective"
+  resource_failover_enabled: true
+  max_retries: 3

@@ -1,0 +1,12 @@
+# AstralNexus requirements
+
+# Core dependencies
+numpy>=1.24.0,<2
+# sqlite3 is part of Python's standard library and must not be installed via pip.
+
+# For CLI interface
+rich>=13.0.0,<14
+
+# For web dashboard (optional)
+flask>=2.3.0,<3
+Werkzeug>=2.3.0,<3
