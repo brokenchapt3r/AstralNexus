@@ -30,7 +30,6 @@ setup(
     name="AstralNexus",
     version=version_match.group(1),
     author="AstralNexus Team",
-    author_email="team@astralnexus.ai",
     description="面向超长程复杂任务的动态异构群体智能协同推理引擎",
     long_description=long_description,
     long_description_content_type="text/markdown",

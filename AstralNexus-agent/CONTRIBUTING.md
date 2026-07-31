@@ -145,10 +145,3 @@ python -m pytest tests/
 5. 保持包容和开放的态度
 
 违反行为准则的行为将不会被容忍。
-
-## 联系方式
-
-如有任何问题或建议，请通过以下方式联系我们：
-
-- 在 GitHub 上提交 issue
-- 发送邮件至 [team@astralnexus.ai](mailto:team@astralnexus.ai)

@@ -131,24 +131,3 @@ AstralNexus/
 1. 在 `AstralNexus/tools/` 目录下创建新工具文件
 2. 实现工具功能
 3. 在相应的角色定义中添加工具到 `default_tools` 列表
-
-## 贡献
-
-欢迎贡献代码、报告问题或提出改进建议。请遵循以下步骤：
-
-1. Fork 仓库
-2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启 Pull Request
-
-## 许可证
-
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解更多详情。
-
-## 联系我们
-
-如有任何问题或建议，请通过以下方式联系我们：
-
-- 提交 Issue
-- 发送邮件至 [team@astralnexus.ai](mailto:team@astralnexus.ai)
