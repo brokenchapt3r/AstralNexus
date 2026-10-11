@@ -1,0 +1,20 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-cost/skills/cost-estimation/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-cost/skills/cost-estimation/SKILL.md",
+  "name": "microsoft:cost-estimation",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "17f6d77d27ede847ce910183a232d4fdcd999a7501d9a5a13391e51a91231f16",
+    "references/pricing-estimate.md": "c131747ddb5475509e9876c4eb85b032969a6c9cb8207d2c871e211b02b33a36",
+    "references/tool-fallback.md": "d3f550ed2dea93b0bf0fdcaf74dc9989a5dc048a84fd45d1b139f1fe626ad979",
+    "references/cost-forecast/error-handling.md": "1bb1c37a17b0577a945195632bfea246479cf36d5186d820a33b11b71e775ce9",
+    "references/cost-forecast/examples.md": "74c9c6cfac6e1effd6d97178db11e7f3997c4d4937016bd74c4a0f38da2bbc55",
+    "references/cost-forecast/guardrails.md": "6d6c0d430ad574977352046d97098b8049221fec3dd17737256da6faa1c2bc3d",
+    "references/cost-forecast/request-body-schema.md": "fa6a06296891546a1e383124d197856e0e94c21c9e345ee9d193839ae186baa6",
+    "references/cost-forecast/workflow.md": "9557255263fe0a54a05070b7c5f424ceb1ba856d977b87a1c7950c2b2515a3d8",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

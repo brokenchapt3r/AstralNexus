@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/nextflow/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/nextflow/SKILL.md",
+  "name": "scientific:nextflow",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "daa37795b3fe13ebf1c980acafb8401c4d1d7749dae013acc948f76c50c7379c",
+    "references/configuration.md": "33eb19fe062ee61ac3158691f4f5ef04b440e6a2213e383534055ceaf0bd25de",
+    "references/containers.md": "30d9d91854539e76624a5535770072f9f14fc6fc2a7d80e74b0cdca9dc5a125b",
+    "references/developing.md": "37f34c046f8381c02bc14df57bfc7e5d3344d9c980cd33871fed941c4aade05c",
+    "references/language.md": "0a50f71afc1baa1494ab71a265044f40d5afcae7cddda223476c268e488b88c0",
+    "references/nf-core-tools.md": "8fb3cad8d9c4912dd09fdeced3d455f242b32a7bf59fba17b7a7e52d967ad133",
+    "references/running-pipelines.md": "4051abf017bc4e058bfe631e1cbee6b79ed354ecfd96d3ab7843dc1c7aa19a01",
+    "references/testing.md": "0f209c70205105db021771b45c0740458294d1c39cf1b19ec3598664272601ba",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

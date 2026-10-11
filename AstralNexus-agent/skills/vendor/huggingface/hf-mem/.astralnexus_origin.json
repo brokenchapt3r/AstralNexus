@@ -1,0 +1,13 @@
+{
+  "repo": "huggingface/skills",
+  "commit": "ca0325bb20b2d0a1b2efa893670c4c72f79e707b",
+  "source_path": "skills/hf-mem/SKILL.md",
+  "source_url": "https://github.com/huggingface/skills/blob/ca0325bb20b2d0a1b2efa893670c4c72f79e707b/skills/hf-mem/SKILL.md",
+  "name": "huggingface:hf-mem",
+  "namespace": "huggingface",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "ee99f9d97e084aa61a80eaec4e6de2265341e71256d918d48fb87a2ac01ce99f",
+    "UPSTREAM-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}

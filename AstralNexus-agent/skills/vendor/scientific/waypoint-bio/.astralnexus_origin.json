@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/waypoint-bio/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/waypoint-bio/SKILL.md",
+  "name": "scientific:waypoint-bio",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "132d1f33d5d99bd6288a4cb432b277fcbc0f8bc4315e333dcecb840e7adc87a5",
+    "references/cli-reference.md": "bb6f673ea630f2254258a7a7ce9130529b98c7307e1e3296fd5e30682f639d18",
+    "references/compass-benchmark.md": "b6fe09ffd0c650894fb794ee2dbd9104d7b24a7f9dc384a69c3bfbc3f10d3d47",
+    "references/data-preparation.md": "af09e87aec1f5269ee40611bceedfcaf86c4135088eff11409d864b414f5e80b",
+    "references/python-api.md": "d057e7508b90fb00d0fea7c8d0a882f536e78c4f47c6181848f131fc28338cff",
+    "references/upstream-review.md": "0886fd5b03d73588fa486d127b01b59370898bbc83406c4103640e333ee7e331",
+    "scripts/profiler_to_waypoint.py": "e51ffcc65199c9e48d441f48d56c49b88a4c0af2593e34d8d973691787665875",
+    "scripts/vocab_coverage.py": "6c4f0aca02eeb6363008f527345f2b7e718edd5367f32ca9a5386239eae3fb22",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

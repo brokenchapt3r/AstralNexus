@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/matchms/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/matchms/SKILL.md",
+  "name": "scientific:matchms",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "1bde0e20f69f99dfa44800b9e908b0f90aa1256cfdb1d88a36ed0b8064c447ec",
+    "references/filtering.md": "4a327d00e01e7c328cdf91d7d6946da2801a963ddc1925ede7704daa328f6f38",
+    "references/importing_exporting.md": "e5e47079b69fa634cbb6ef2577632f0f33f02ed22831c5111aa83d138a8f5c46",
+    "references/migration.md": "3ea36ad24b3ed974f3b7dedab54110ff6217073de4e19751721f2c082856b6ea",
+    "references/similarity.md": "87977b3c6864f6389959c8b86bf817d5edbf70c50a4f0dbca43db5a0a865c825",
+    "references/sources.md": "e04c65fe7cddb83e5048a4fe0cd760ac55138ac040120a2b6452a6725fee466a",
+    "references/workflows.md": "c58e570c35c0395f45fdc418640acc64ee9200de59cc11b9b29c6d9c76f6835c",
+    "scripts/library_search.py": "b48c1a0cb08df70e7007eb6af390ec0a3f6c3a33d64283a3602675b1094e8d2e",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

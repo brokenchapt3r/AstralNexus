@@ -1,0 +1,27 @@
+{
+  "repo": "trailofbits/skills",
+  "commit": "82fe8226252622fa807643bdca1710901198553a",
+  "source_path": "plugins/agentic-actions-auditor/skills/agentic-actions-auditor/SKILL.md",
+  "source_url": "https://github.com/trailofbits/skills/blob/82fe8226252622fa807643bdca1710901198553a/plugins/agentic-actions-auditor/skills/agentic-actions-auditor/SKILL.md",
+  "name": "trailofbits:agentic-actions-auditor",
+  "namespace": "trailofbits",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "b2bdb88d559bc37e6c2c8314e28e7a2eb47e7cdd9da51e77da347d3517326dc0",
+    "agents/openai.yaml": "e0e73b657e0414fc844cf000fb3a930e7c801db193a16d19620f764538100072",
+    "assets/trail-of-bits-mark.svg": "4bf74c789b38dcf6ad762c136b6832363d27ae19fbaa9a18ec18d66ecce6ca05",
+    "references/action-profiles.md": "bbfaf6abe69b57e6289948340aa649482378b53f752a25cba92e7d4a740c4324",
+    "references/cross-file-resolution.md": "b7d0d31fa24f1b987953ef0c11dc22ad48e81675b34de65c65ff79a74a3e6084",
+    "references/foundations.md": "722ee7ea1dc06af8fa8cbb6cacb62f3c7c70139c8ed402752dd12c851a195d0e",
+    "references/vector-a-env-var-intermediary.md": "7903992f54409760aae64ddb45bb3c26032223443f746ac6e3d8fd281bda877d",
+    "references/vector-b-direct-expression-injection.md": "be6e5baff68d6770665ce6c7b7995c92dfdec3866b96ea21330c94b340499631",
+    "references/vector-c-cli-data-fetch.md": "f11d2333f2b3800215311047c0b0ad35a1020c79dbb77614ff66a8c1fef16252",
+    "references/vector-d-pr-target-checkout.md": "fc029037bb219aed5e130708eb4911ad235e47f1394e2155b5e40175ddb2d187",
+    "references/vector-e-error-log-injection.md": "2c93623d96f49c4ab70bc2dd92e111b2cfca68ff70aaf579efd86812b0df15a9",
+    "references/vector-f-subshell-expansion.md": "d6ede1d6a7769e1b75faed3dfeba7d212e0115fb9ddb09d39145bf65d062ba7f",
+    "references/vector-g-eval-of-ai-output.md": "b9a47a41dd1470cc469cc030cd6cd6059b35741c78ba9f494c1d18b2fd65b686",
+    "references/vector-h-dangerous-sandbox-configs.md": "892cb478d91c2e155b4084c5cf707bea5045bb4e2a11c7a5a1131b6212690b86",
+    "references/vector-i-wildcard-allowlists.md": "68a4cd774ad829e535a8ec15ee492caefbae8e46f115f345b7f2bf2fecf88f86",
+    "UPSTREAM-LICENSE": "7abe19ec9bb73b36141b999b861d24ad855e808bafe0f81e84cce28556f6c297"
+  }
+}

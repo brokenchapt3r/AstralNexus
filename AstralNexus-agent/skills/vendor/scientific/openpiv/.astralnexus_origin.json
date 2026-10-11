@@ -1,0 +1,18 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/openpiv/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/openpiv/SKILL.md",
+  "name": "scientific:openpiv",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "dc9aeeb18ef4b4832b9405c342ce40abbb09bc8162e35f2c659dd5814b07369a",
+    "references/advanced_algorithms.md": "7adc06f74595c55dd7b4eb39b729722e8f984017a5da332141dbf0546aaf61cb",
+    "scripts/analyze.py": "3661a3ab5102900f25454c8454ae0ed613c86ce51880e065682b234d2c5d1b19",
+    "scripts/runner.py": "5e246f535d5e6f8b083dcfa1a326b1a5e1d3173e7ff6438700ac2a3bf11f9a17",
+    "scripts/run_example.py": "2bb4fe062d428d2e46e6c5f0e53a074e5625308408bc8ce355e44dc6add94e6c",
+    "scripts/__init__.py": "5970d09bdec018a3082147b88d1d7d013a6836b92581f07bc8a6933a20a31ad6",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-dotnet/skills/azure-mgmt-apicenter-dotnet/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-dotnet/skills/azure-mgmt-apicenter-dotnet/SKILL.md",
+  "name": "microsoft:azure-mgmt-apicenter-dotnet",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "e902c513aee8662f55c2d3d36b6e38da6dc174198942858e95980c2173635b06",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

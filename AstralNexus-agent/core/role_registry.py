@@ -1,11 +1,17 @@
 from __future__ import annotations
 
-from AstralNexus.core.agent_registry import AgentRole, get_agent_registry
+from AstralNexus.core.agent_registry import AgentRole, AgentRegistry, get_agent_registry
 
 
-def initialize_role_registry() -> None:
+def initialize_role_registry(target: AgentRegistry | None = None) -> None:
     """Initialize the role registry with predefined roles."""
-    registry = get_agent_registry()
+    registry = target or get_agent_registry()
+    preserve = target is not None
+
+    def register_factory(name, factory):
+        if not preserve or registry.get_role_factory(name) is None:
+            registry.register_role_factory(name, factory)
+
     
     # Define the core roles for the AstralNexus system
     roles = [
@@ -28,7 +34,7 @@ def initialize_role_registry() -> None:
         AgentRole(
             name="coder",
             description="编码员，负责代码修改、脚本编写和修复实现",
-            default_tools=["file_read", "file_write", "terminal_exec", "search_files", "python_exec", "pytest_run", "skills_list", "skill_view"],
+            default_tools=["file_read", "file_write", "terminal_exec", "search_files", "python_exec", "pytest_run", "skills_list", "skill_view", "lsp_query", "runtime_plugins"],
             capabilities=["programming", "code_modification", "scripting", "debugging"],
             input_contract="功能需求、代码规范、测试要求、修改范围",
             output_contract="修改后的代码、新增测试、执行日志、验证结果"
@@ -109,7 +115,8 @@ def initialize_role_registry() -> None:
     
     # Register all roles
     for role in roles:
-        registry.register_role(role)
+        if not preserve or registry.get_role(role.name) is None:
+            registry.register_role(role)
 
     # Register production role factories so the orchestrator does not depend on
     # class-name fallback imports during heterogeneous role execution.
@@ -143,7 +150,7 @@ def initialize_role_registry() -> None:
         "skill_curator": SkillCurator,
     }
     for role_name, factory in factories.items():
-        registry.register_role_factory(role_name, factory)
+        register_factory(role_name, factory)
 
     # Capability ontology aliases map Governor profile names to executable
     # factories. They do not create an alternate execution path.

@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/alphagenome/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/alphagenome/SKILL.md",
+  "name": "scientific:alphagenome",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "b133d2a9ff99652b439e0a6f00f93bad49f388be207f7e0241837e001a964947",
+    "references/atlas.md": "f5758ec1925d6706f3df4548bfd1fc70c0892181c020f45212c336cba255d269",
+    "references/interpretation.md": "3a4f86b6746f1a8239d7c175e4b40f382e95f4ec1b167ed59f4b43ca6e39ac0d",
+    "references/model-api.md": "081add87e6da4045adb6526d9bc92cbadc817588a7502edea5532d7a4d5d2dfc",
+    "scripts/atlas_link.py": "2545ad4816fb996900bbf47268c085571a1e3091af45c32ddbf6ed428fe3b89c",
+    "scripts/atlas_query.py": "7c19884f9dd7b7115916d56d036d152efded82432f57fcea3941e34a17bf6015",
+    "scripts/score_variants.py": "aa2e199f7982180c672bea81db1d72ddc68c7b8c06ce3bdf4b13f63ed56ec5b7",
+    "scripts/_common.py": "46fc7074233e36c4cb341294480ce2481ced5f6cd06677847522499b3cd2e7f1",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

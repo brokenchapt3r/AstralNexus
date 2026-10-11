@@ -1,0 +1,14 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-java/skills/azure-ai-formrecognizer-java/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-java/skills/azure-ai-formrecognizer-java/SKILL.md",
+  "name": "microsoft:azure-ai-formrecognizer-java",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "7fbec12baeb4ccefe06786137317afb1bc7cf310362f0a38085d1ff9858b129b",
+    "references/examples.md": "d9c623293d850194146e7d40b79502da7f80c2b2180ea701681fbf60267c9780",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

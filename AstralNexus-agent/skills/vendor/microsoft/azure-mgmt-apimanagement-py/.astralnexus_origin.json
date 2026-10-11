@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-mgmt-apimanagement-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-mgmt-apimanagement-py/SKILL.md",
+  "name": "microsoft:azure-mgmt-apimanagement-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "f81c64f9313e75483ab37a657556eb9a9dfaa5c82d733e96bab7289ab78c4860",
+    "references/capabilities.md": "a9d5292f4694da03c73c616e92e8612752e60a08ac4a7a51a107470147e60176",
+    "references/non-hero-scenarios.md": "28f7560d4545c143cf2b76f5fad27b6d2b90d9095c6582140595a1dca0e85953",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

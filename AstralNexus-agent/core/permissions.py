@@ -96,7 +96,7 @@ class PermissionSet:
     
     def to_dict(self) -> Dict[str, List[str]]:
         """Convert to dictionary representation."""
-        result = {}
+        result: dict[str, list[str]] = {}
         for perm in self.permissions:
             cat_name = perm.category.name
             if cat_name not in result:
@@ -111,14 +111,14 @@ class PermissionSet:
         
         Returns permissions that exist in both sets (with matching scopes).
         """
-        result = set()
+        result: set[Permission] = set()
         
         # Group by category
-        self_by_cat = {}
+        self_by_cat: dict[PermissionCategory, list[Permission]] = {}
         for p in self.permissions:
             self_by_cat.setdefault(p.category, []).append(p)
         
-        other_by_cat = {}
+        other_by_cat: dict[PermissionCategory, list[Permission]] = {}
         for p in other.permissions:
             other_by_cat.setdefault(p.category, []).append(p)
         

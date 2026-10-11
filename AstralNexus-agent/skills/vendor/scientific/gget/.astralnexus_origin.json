@@ -1,0 +1,21 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/gget/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/gget/SKILL.md",
+  "name": "scientific:gget",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "55027a94be8dde013fd17e563ba20ccba92b7131c29c21e9c83e54fbce2b348a",
+    "references/common_workflows.md": "125d01874c0577e29b50ca9fb43bcf995ed0816662b11fb20941948cfbe58400",
+    "references/database_info.md": "01ddea3b3b404dbaf3af96300d6f1ca506bc2a1fcee5604bb5bb679d5824e0b5",
+    "references/module_catalog.md": "853ea6b9252d952908913e23d9b76b0b3af19eedde5b7617f72aa993b7cc2833",
+    "references/module_reference.md": "2c40d6bdab786e316a15eee7fbd82ebd90f4b2f34ff8aab1e5575f39ee3cf38d",
+    "references/workflows.md": "5e3909d8d58acbdde98b449e1649c21b8c28446fa39d11e2d8c88fada4259bd9",
+    "scripts/batch_sequence_analysis.py": "faccfffc861a5fd2b391933341e4f5c6dcaf98b71818c050d0b93412f4449100",
+    "scripts/enrichment_pipeline.py": "9acb953ce9ae90c8b470135b382107fdd01ab35f1323ee877b4f8a3bd71dcbb3",
+    "scripts/gene_analysis.py": "b72b3371deee1298381811acd1166f5b2e25ff0e1423d1133c7f8f355cdcbfce",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

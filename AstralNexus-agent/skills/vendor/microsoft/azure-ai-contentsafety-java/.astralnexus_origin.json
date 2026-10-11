@@ -1,0 +1,14 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-java/skills/azure-ai-contentsafety-java/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-java/skills/azure-ai-contentsafety-java/SKILL.md",
+  "name": "microsoft:azure-ai-contentsafety-java",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "43822acf1e76afe9daaa6ecdba222cfe8dee0cce0c4ffc3405cad38991e1a0a5",
+    "references/examples.md": "98828606485185a9bbf7f103743f7515d979af8d1d51ac74d217c486b5235bd8",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

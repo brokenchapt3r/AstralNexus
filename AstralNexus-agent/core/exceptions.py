@@ -174,6 +174,11 @@ class RealLLMRequiredError(CoreError):
     recovery_hint = "check LLM API credentials, network connectivity, and model availability"
 
 
+class PlanningRejectedError(RealLLMRequiredError):
+    """Bounded graph proposals failed admission; not a transport/host crash."""
+    recovery_hint = "inspect the rejected proposal and frozen requirements"
+
+
 # ---------------------------------------------------------------------------
 # Storage layer  (SQLite, artifacts, trace)
 # ---------------------------------------------------------------------------

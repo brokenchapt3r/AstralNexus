@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-storage-blob-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-storage-blob-py/SKILL.md",
+  "name": "microsoft:azure-storage-blob-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "036cde228f87b9e6aacbd3ec317bd504cb5639e04aec81f1b3ef631a9b240622",
+    "references/capabilities.md": "5f07b3f4925a40b16c7f5aaa4ad7e61524142a72a7d88de4031773297d67b942",
+    "references/non-hero-scenarios.md": "b0ad5f98350ef38460ebda48b5ae2299b24a7b93dec149610ee5b10911533db6",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

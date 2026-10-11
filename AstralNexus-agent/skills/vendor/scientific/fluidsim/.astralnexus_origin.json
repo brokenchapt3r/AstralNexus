@@ -1,0 +1,29 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/fluidsim/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/fluidsim/SKILL.md",
+  "name": "scientific:fluidsim",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "7784bbf33615014f5965ff1db3d11bcc42e1bc4bb1f18f26208c62892b66df28",
+    "references/advanced_features.md": "95190bbe71a3b45ecf4fd7925e249c7f3386a298c0f77d191b95a0a5a0534b76",
+    "references/installation.md": "b8fa4dec90e43dfa3ce3daadb7800c927af739a2df4f945028352aac710088f7",
+    "references/output_analysis.md": "6df3b6344818410b3ae059fd593f7935d57f77f4c344b151dce3ce5881c91d1c",
+    "references/parameters.md": "caae7e4024af2042145a4aa2bab18da53f4b2498dcdfcc121ecd71e25032024f",
+    "references/simulation_workflow.md": "61ee56f8d1e86be9eee8b89f656948344a82f1cbf07d9f97471574c78e1b5655",
+    "references/solvers.md": "05aa4b8b4c030ad017528636464af43b221762329638b5d409026458c97ef7d9",
+    "scripts/budget_summary.py": "92c081fae97e377540cb6c11e1a3a633550d609d716c5cc90c97fd551cbdef2b",
+    "scripts/grid_resource_estimator.py": "dae8e7777996bb64799be2d2c258a1da31e69ba9fdf975c53db4ad72467498e0",
+    "scripts/output_inventory.py": "b57238d1a3d02c0a440676642b562f79a8e9338559b228d14d7f40b5d7517194",
+    "scripts/restart_compatibility.py": "6f2900fd08cf047ab0fb80d970eb033c3855695afb0e56176efbf7d5772d7d1f",
+    "scripts/simulation_dry_run.py": "3bab7bf15e0037caa5c3758c54c00eecb860ba1444c6210460600669e62fd561",
+    "scripts/solver_config_validator.py": "afd7f5d9581fee0229bfb3ad167e57fe6fe407b16fe404ab60bef4aed51cec4b",
+    "scripts/_common.py": "b705a7bba218497a655bf8d1bbfe7d7ee97e09f5bf70be1564718a9835e35293",
+    "scripts/_profiles.py": "256cb706ee57ff93db7404258fb1ff3a20377a7f375be2d1e05c507d07e44590",
+    "scripts/_schema.py": "2a8a382b366c803bfc0dcf2fe6859f95a2033566e2e68ed66bb18511b45b21e4",
+    "scripts/__init__.py": "93b33cb86288cb882ac5876c2cc1db9bae72fc96296abc75c7ecfab97a052989",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

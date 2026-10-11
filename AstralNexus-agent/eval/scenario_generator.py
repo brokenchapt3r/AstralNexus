@@ -231,10 +231,10 @@ def generate_seed_scenario(
     # returns only the user-goal root; the first child wave must come from the
     # real LLM planner and Governor, not from this fixture.
     if node_count == 0:
-        root = graph.get_node("root")
+        dynamic_root = graph.get_node("root")
         dynamic_graph = TaskGraph()
-        if root:
-            dynamic_graph.add_node(root)
+        if dynamic_root:
+            dynamic_graph.add_node(dynamic_root)
         return dynamic_graph
 
     if node_count is not None and node_count > len(graph.nodes):

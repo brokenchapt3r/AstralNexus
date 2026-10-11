@@ -1,0 +1,19 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/microsoft-365-agents-toolkit/skills/ui-widget-developer/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/microsoft-365-agents-toolkit/skills/ui-widget-developer/SKILL.md",
+  "name": "microsoft:ui-widget-developer",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "b24d0babae9e85054d30765abca0043a2c310ba7dc980d1da258c39b87f8cd12",
+    "references/best-practices.md": "55052ef7af9f9dbcaabc0d832b8d575420ee6c9c02a5308c7af0159fa801c789",
+    "references/copilot-widget-protocol.md": "ba98e93fca2f5108feb3900f9671a11d6d1d819d7a735ddd6141ff86e5ca550d",
+    "references/devtunnels.md": "a9c37a430376b98614f017ea54c33661f423da5d5d72cac6648ade23d13608e9",
+    "references/mcp-server-pattern.md": "6abc4ea0c2eadf4936de5762f8209e42a52c990caad9ffa1d4d17489c89332ca",
+    "references/plugin-schema.md": "eaba081c775a4f60915ef1c3e00115e6d8f6be550875c6529afcfa9ea3bba063",
+    "references/widget-patterns.md": "28540f36dba480fd67c10df35575a8384d24bd68e7f748d5cb098e0d30c20804",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

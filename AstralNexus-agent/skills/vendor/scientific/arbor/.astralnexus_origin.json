@@ -1,0 +1,18 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/arbor/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/arbor/SKILL.md",
+  "name": "scientific:arbor",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "aae219831d92984eb6584831f77509cb8650a3986e8c42474aaa4d118ce080a6",
+    "references/arbor-upstream.md": "dd9d477f57b0d64d6d7f722af53c2083cb0b30f8032162400203135b0bd701c8",
+    "references/executor-brief.md": "eb84693b720cf6755cdf588975b41f225c472ddbad0be4428e823be590c5dc4f",
+    "references/htr-methodology.md": "9cc02ce21b7ae3ef3ae49fd1f3542a608c0700e1b2dcaa01ea6ed443f10d3f92",
+    "references/report-template.md": "9075875e03c82dba2c6a7357476c8f096312e896975c09755f1259fddd2c711a",
+    "scripts/tree.py": "100045de01ba20c5fa60785701444a000f57499b6dbe2715cabef6d76d6b8c1d",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

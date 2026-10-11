@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-dotnet/skills/azure-search-documents-dotnet/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-dotnet/skills/azure-search-documents-dotnet/SKILL.md",
+  "name": "microsoft:azure-search-documents-dotnet",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "16933eb5a595834dfe70c40c0b60b20aac61e6ace1c68a741a61858ccd543cd9",
+    "references/semantic-search.md": "8882a77659dd555deff032bc8e2f409aaa4e07ad236d162e2f0428a0ce477eb3",
+    "references/vector-search.md": "af610dd33fc413deabd187d5bdfa57d9e0596e2de99d152693b731edeb0c9685",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

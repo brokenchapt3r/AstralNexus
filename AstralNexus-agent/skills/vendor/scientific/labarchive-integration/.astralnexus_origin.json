@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/labarchive-integration/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/labarchive-integration/SKILL.md",
+  "name": "scientific:labarchive-integration",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "dcc452099ec0c4db3bf7aa0417bfeb70b14d249650be316b67f4f495461d1c0a",
+    "references/api_reference.md": "7aeaa4726aa7dbe0a8195ec09f09d0294813d48dff43a43bd09575a91f00d21c",
+    "references/authentication_guide.md": "d3973a022aa0979fd4da876b5bcd10875c925dce0a67123062bb4dba7a295c39",
+    "references/integrations.md": "25214f7a5e7c33b92e08997876122c751e70133adfde468741fbc842b00ef3c7",
+    "references/sources.md": "c1077feba4ac9057ce8bc17caf0eb2c716ccfbde66b7d26b36ffa947265650b9",
+    "scripts/entry_operations.py": "5bc0ebbe779d10b53198b420dff7a6f1d366cbc92ef5d1882601b8e93f9f2f5a",
+    "scripts/notebook_operations.py": "b3c3c12202a844ffe221c0b426ef3e3b89a00c25adba62d7b4b9df48d1f40a57",
+    "scripts/setup_config.py": "56bed2ebc09f12457aa1b69e982d030994af45cc059fe03426fcdd38acf34143",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

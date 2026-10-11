@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/hugging-science/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/hugging-science/SKILL.md",
+  "name": "scientific:hugging-science",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "cff6c7e67d7f1925f008e11f5d0428f08391c35f4294d2c4c70350667b2decb2",
+    "references/flagship-resources.md": "3b2e42fb7af90e92554aa88eade9afc1b4190312b342bec4915dc876d49f1836",
+    "references/review.md": "e4383907e1d880be44c508984d9b378606f2f8689afa804c2f6b7bd959c3133d",
+    "references/topics-and-slugs.md": "c6375179c67acecba4db95a4cb69f6eac20dd5a61ab3faf4f2ecc3d373d9c3b7",
+    "references/using-datasets.md": "4046c5f6329c765e53cb79b0f248ecf88aaa3ff6516af983dd0bfd2fc84122d9",
+    "references/using-models.md": "8bbfcc3cd37bce24e047a2110a41af434720d423eb9f17edda246af522b1746a",
+    "references/using-spaces.md": "f2dfdea6f7b219f662793ecfb1ad4712687074227fda3872dda3e6f6c1ada3ed",
+    "scripts/fetch_catalog.py": "da01cdc6d8b2d1684c134430ac687bd906a3d5e86d5568af847d9b49813b7273",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

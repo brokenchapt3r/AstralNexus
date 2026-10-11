@@ -1,0 +1,13 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-typescript/skills/azure-web-pubsub-ts/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-typescript/skills/azure-web-pubsub-ts/SKILL.md",
+  "name": "microsoft:azure-web-pubsub-ts",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "e422b13b05cb0b17c35c49d75f307127dbe1cc65735f07556d46daee82f0bdc5",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

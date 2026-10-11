@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "scope": "AstralNexus task node and host turn; not DeerFlow metadata API",
+  "valid_status_values": [
+    "proposed",
+    "admitted",
+    "waiting_dependencies",
+    "ready",
+    "running",
+    "result_submitted",
+    "verifying",
+    "completed",
+    "repair_pending",
+    "cancelled",
+    "failed",
+    "superseded",
+    "blocked"
+  ],
+  "turn_terminal_status_values": [
+    "completed",
+    "cancelled",
+    "interrupted",
+    "failed"
+  ],
+  "valid_stop_reason_values": [
+    "host_exception",
+    "host_shutdown",
+    "orphan_recovered",
+    "user_cancelled",
+    "worker_disconnected",
+    "worker_failed"
+  ]
+}

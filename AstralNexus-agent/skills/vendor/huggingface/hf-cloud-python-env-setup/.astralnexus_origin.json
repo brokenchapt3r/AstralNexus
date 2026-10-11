@@ -1,0 +1,16 @@
+{
+  "repo": "huggingface/skills",
+  "commit": "ca0325bb20b2d0a1b2efa893670c4c72f79e707b",
+  "source_path": "skills/hf-cloud-python-env-setup/SKILL.md",
+  "source_url": "https://github.com/huggingface/skills/blob/ca0325bb20b2d0a1b2efa893670c4c72f79e707b/skills/hf-cloud-python-env-setup/SKILL.md",
+  "name": "huggingface:hf-cloud-python-env-setup",
+  "namespace": "huggingface",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "requirements.txt": "61b04600d76456637412f3c6abf2f18250fed32399031d46985d17164e8ad617",
+    "SKILL.md": "c5d108b134dc5237ec63fbbb3200717853f2c5281ab33b7a2f1576b46a4d0fe8",
+    "scripts/check_versions.py": "60e5c0cdd8443d2be1e09adb2cd0b02bef19c68748535793e1e632ac7c53ca48",
+    "scripts/setup_env.py": "2656f04db77e1f755e5b14ee44f925606be5a42bc4bfe353c5eb7989b0d9f682",
+    "UPSTREAM-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}

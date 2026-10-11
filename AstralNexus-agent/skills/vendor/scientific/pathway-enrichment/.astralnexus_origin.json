@@ -1,0 +1,18 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/pathway-enrichment/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/pathway-enrichment/SKILL.md",
+  "name": "scientific:pathway-enrichment",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "82783d8ba63b6b03646492ee75afcdf591903a213decf7e7c9d844eb517acd78",
+    "references/databases-and-gene-sets.md": "bd9dc1b2df10a2eb8794bdbe2ade248b8987ddf200a8e90b19235af8f20fd414",
+    "references/gseapy.md": "0305a6c545c2aa5e1ac655d8a39f99e437f02a29f5f23f9786e5cf3ab98959fa",
+    "references/interpretation.md": "d1356ee0f94c4e64191c7436c641c01592e323be1e55f4c037957b7b833d4f73",
+    "references/verified-api.md": "911a352451ec52066f044f8eac671ad8aa6a4e8b09d455918bea790b26d882bb",
+    "scripts/run_enrichment.py": "973a06c03e9d1df49423ca0744f7c5be5185ec9decc7de8ccbb72d0f2ac6bc06",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

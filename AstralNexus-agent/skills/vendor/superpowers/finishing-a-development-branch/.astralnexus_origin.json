@@ -1,0 +1,13 @@
+{
+  "repo": "obra/superpowers",
+  "commit": "8ca22dba9a94f28898bbce59f2537ff4d87c747d",
+  "source_path": "skills/finishing-a-development-branch/SKILL.md",
+  "source_url": "https://github.com/obra/superpowers/blob/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/finishing-a-development-branch/SKILL.md",
+  "name": "superpowers:finishing-a-development-branch",
+  "namespace": "superpowers",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "8db5a922b242dd4e1bf824cb91c13b3e8d8e8a86d6ceaf7f0774eb9cce909d65",
+    "UPSTREAM-LICENSE": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400"
+  }
+}

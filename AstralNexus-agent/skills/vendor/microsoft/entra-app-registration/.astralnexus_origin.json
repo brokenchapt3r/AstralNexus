@@ -1,0 +1,29 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/entra-app-registration/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/entra-app-registration/SKILL.md",
+  "name": "microsoft:entra-app-registration",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "8f8e7b7429b04c3150c7393997d6ccd433defd497ad22a7e43979cc43e309c32",
+    "references/api-permissions.md": "e9ac672e8bdd4e689e4bdb11a272d125e3a4008ff95dd16c3285175753a80e68",
+    "references/auth-best-practices.md": "34f6fe88e2b5819c1a0f24aa3930a060d9504fee68ea4b363f0912a78daa5396",
+    "references/BICEP-EXAMPLE.bicep": "b76bd3a16f66f91597e37ec547f15bbe6e3f544865f788ebd98f5284567f7ef9",
+    "references/cli-commands.md": "c6c7881bcd6c9710fd71f54413077109f455cd2a1ba0d233652410f72f56ad24",
+    "references/console-app-example.md": "f4eef7238d9e3c5f09de4c49c7fc47da398a9d4ef6876cd29b3c1efa0a41eee4",
+    "references/first-app-registration.md": "4db5c564eb3d61468f39d05c98e0e91940cb8912aeb25023b2cf09d8176a84ed",
+    "references/oauth-flows.md": "24e7f2d19c39ef1f6a1b20de86f6ab901195eb66bde3785d9e2798165990b0c7",
+    "references/troubleshooting.md": "47527e8b887a83f89d6de6e25f12faa49a12f3b6e269063743eb11f0678857f3",
+    "references/sdk/azure-identity-dotnet.md": "57aa33fc39d9e57bb7ca03d7de04efc064406237a52dc11b3ab4c7eb58240771",
+    "references/sdk/azure-identity-java.md": "56a0255fb7c54c371d29df6e282b46668f0abbe0d46370ccc75d643883d29ccb",
+    "references/sdk/azure-identity-py.md": "2b2413f9398bef770085a6db2bbf042d3be4569345f8b7da9286107517ac2528",
+    "references/sdk/azure-identity-rust.md": "59d1d971670247bba0f403d6a308403ca7c8541597dc5b802385eb74fb5949bc",
+    "references/sdk/azure-identity-ts.md": "cbda94a98c58bb7a95d4fff9dffdbe7890cf59ac4f418dd307e3589b24090e73",
+    "references/sdk/azure-keyvault-py.md": "27f350103a537eeeadf57e88dc6159283313d1e01c803d2f547f4bc4047035bc",
+    "references/sdk/azure-keyvault-secrets-ts.md": "1245bf5652e351813290fee3e6d244b16aeba20f7c91ac62163a39743c4edccf",
+    "references/sdk/microsoft-azure-webjobs-extensions-authentication-events-dotnet.md": "33c98b6d5014a5ce4b99aad1aee231687e5771cf9691169888d0efd4c48e7ade",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

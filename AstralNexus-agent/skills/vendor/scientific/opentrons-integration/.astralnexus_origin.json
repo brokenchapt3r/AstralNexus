@@ -1,0 +1,28 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/opentrons-integration/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/opentrons-integration/SKILL.md",
+  "name": "scientific:opentrons-integration",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "requirements-flex.txt": "3662419994f7633377dbcfb12b7c99093ad80159b398a8cd805b44aa0b7dded0",
+    "requirements-ot2.txt": "95b907a29f0a2307bafb7849429e2e551fd484b846a43681d909c397e1e5d95d",
+    "SKILL.md": "3600fece96f89e7cedc23d13e48ce7eb25a90698d7ae3d8bae65035d89f392ff",
+    "references/api_reference.md": "b9eb6f69448aac21280873001f7d1987025788f73bb094e8d146fa2e84fb717a",
+    "references/liquid_handling.md": "43ecc24ca569f1d838187fe2b429afa5efa8385a0dcdf4efd147f87033ef6390",
+    "references/migration-api-2-19-to-2-29.md": "e86cb298aa962abfe837ef15d91ff28854814a57b8d56d3eefbee810a0038df0",
+    "references/modules_and_deck.md": "1f591afa878fc53690c30de9a74ad0193b785b46b6160c92c8d22404bdf39c47",
+    "references/protocol_authoring.md": "c4df26ea1df2f6262b5cccab1aba48582cc87c16c8ac7c5462678f2c40aaca7d",
+    "references/sources.md": "473c62c41d48f3dd05b23ab74b151828f30c1cb02b33d8dd7953feee62af60d4",
+    "references/validation_and_operations.md": "fd10cf66e300b9f75dd0114e9224aeb211a6672ae057fa0c82654482933e5eb3",
+    "scripts/absorbance_reader_template.py": "2a88d00fdbccbcc35c1a17c6dc72bbf56321e308abc0c915759ea41fea0f9284",
+    "scripts/basic_protocol_template.py": "f95d2488c28180f3427d426bb7a8b0de80661070328813f2a3dc7af8c44ff5ce",
+    "scripts/ot2_basic_protocol_template.py": "9514eb6d4ab0a737cea93a8a0c0b8990c1a9d8fcd7d1f9f8ef250a35d65a126f",
+    "scripts/pcr_setup_template.py": "bd1a6a55cf687a11baea88381b6be028391105917d7c5aa299abe3bf42c645bd",
+    "scripts/runtime_parameters_template.py": "0deec847b4f355400a5ed149f42f85bed703932486ee71ee12d18419fd860ae7",
+    "scripts/serial_dilution_template.py": "b86d6a752f3d33f44a7b3b508d6729fa8234774554a037abd9d9fd0737d22586",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

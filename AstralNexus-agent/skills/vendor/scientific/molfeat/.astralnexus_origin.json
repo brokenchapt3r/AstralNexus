@@ -1,0 +1,17 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/molfeat/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/molfeat/SKILL.md",
+  "name": "scientific:molfeat",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "6bc3c336b58c8c7214042c5679cd793e655c15e703fa5d5ac34e09250d11df5e",
+    "references/api_reference.md": "079989fb679122c2d1962ee5266e2d36af0ee510e8ac9cf9d5208106e1e2fcf1",
+    "references/available_featurizers.md": "d7ada0b18bbdcfcd5d3a241048e05ea09a6e46f2772b99243024460ce35dced6",
+    "references/choosing_a_featurizer.md": "611573acb4603040a2c9f39c87dd616fb606e348c57917806d03b400fc595f30",
+    "references/examples.md": "e8623e34848b985bc1dccb46470a62cd28fd664ab821cb2a97b3d6203f477e43",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

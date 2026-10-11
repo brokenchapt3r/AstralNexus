@@ -1,0 +1,25 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/azure-reliability/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/azure-reliability/SKILL.md",
+  "name": "microsoft:azure-reliability",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "a70f0a799c8f3cf805ada741e82af31a149b57cb1e2388d7805036492cdceb71",
+    "references/configure-health-probes.md": "76cbd211b7787625ea07502972c2214fe80e12262997880017bcc13bf2b13f62",
+    "references/configure-multi-region.md": "b68152b061e021402a5862ca7d3de2364bb9a30c00a586c67c68c4a0b16b5ddc",
+    "references/configure-storage.md": "e2e4c1ec09593e2e7bc1bfdab69404a361424ef1507348e1ead0efb88d0fad60",
+    "references/configure-zone-redundancy.md": "e07930ab95e876dce61e013fa55abd62ec7e292056ac62e6cda6e68910f54f4f",
+    "references/health-probe-checks.md": "7a84e9d5120e51b5c10d74d21421b5224dcbea95bfd7ae38bd0966deff971b61",
+    "references/iac-patching-bicep.md": "96d86b9dc0f0bbf4a9b012e7f97bf36dbd6358b942f96c6cb9f217f0d3447f49",
+    "references/iac-patching-terraform.md": "e9ad7a612fe483d9bcd0298907487b5a8756bc6e7faeee0cca1ed58d45cbfe72",
+    "references/multi-region-checks.md": "b5f3700d0e40e464675d4f482a06a8046986aa61018d21d28af7eafbc9e3988d",
+    "references/storage-redundancy-checks.md": "2ef140db5d9e29958aa572c8bb90556d12ffc2da96881c2130c36c420bac5536",
+    "references/zone-redundancy-checks.md": "6a328177624859e845e87cec80f3fb59e434b3f077f7232669d5c795cd4310c7",
+    "references/services/app-service/reliability.md": "91f1ecd1c07826ed684a5361bcae60bca5fde4b818c4dae04ef965b8aee37077",
+    "references/services/functions/reliability.md": "95527035e16b597bc0e78e85b74f7e85de1a253fad76066b1d2fdbfc7cfbb5f8",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

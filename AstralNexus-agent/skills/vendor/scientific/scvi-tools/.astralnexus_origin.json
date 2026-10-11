@@ -1,0 +1,21 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/scvi-tools/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/scvi-tools/SKILL.md",
+  "name": "scientific:scvi-tools",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "b22633470d40ddaf31451fbbf811941fc89c3174c404ca359f25378691267e73",
+    "references/differential-expression.md": "9dc04bb8ff13d54e3eb0ae8c040346b9d7b0f39d60d378573c01f9e8b38c0022",
+    "references/models-atac-seq.md": "ce60d208321a6a5a8d88a3b487b7bc675a8f4d77e1a35cb9b5bfa176d0aa066f",
+    "references/models-multimodal.md": "a7a7a49311f06c9bef9bc88376ea4c28fe82512bf472e68abba44767f9868a16",
+    "references/models-scrna-seq.md": "9c266357e7c96eeeaa4a69ca231081f8223f719d31fe2d28b30c8f27af022120",
+    "references/models-spatial.md": "b89125cb6b1ba2ffeeef6d7581fc4b3ac20b589a98336b5edba55e0a8c293bdc",
+    "references/models-specialized.md": "ccfb14775e32cecfadbbe40af3ea401bbfefbe9dcfb18f91fd47aadcf41238e2",
+    "references/theoretical-foundations.md": "db2fd946f940cbdc5656dbc3a451b180c8fb02ac11e135a9e8db15df990e8106",
+    "references/workflows.md": "9fe7442e11db73fd0f65f421a12e6b11fd0a848953aea4ec4f21c00b697d51b4",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-typescript/skills/azure-search-documents-ts/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-typescript/skills/azure-search-documents-ts/SKILL.md",
+  "name": "microsoft:azure-search-documents-ts",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "b6a0a3f657d9b31b7eb59363f9bc10b688f99b1de035f581bfd765d3edc8d654",
+    "references/semantic-ranking.md": "f66727d9092c553595e5c91792731fed21ee466c9c787bfb547e20abba05cdb3",
+    "references/vector-search.md": "573a6bd823708a2267e1adb8e8555591d4210748235e4a93401eaf35819e3d58",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

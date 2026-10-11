@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/pennylane/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/pennylane/SKILL.md",
+  "name": "scientific:pennylane",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "7908ee374ed9bef310bd7071a175d97e0428cec184cce3e36db9fe3ae8e77c52",
+    "references/advanced_features.md": "bead74857b00611af4ddead8c885b2bbc506855765a7296a81fb4d5ea229949d",
+    "references/devices_backends.md": "9c281ad3666b2c431afeaeca04943a837e3a5eb811225e2bba956327a3297cc5",
+    "references/getting_started.md": "1826575ccbe7291f30d251383308775a4e54376ce0633e3e8300e817083f0f43",
+    "references/optimization.md": "d9311c73775f6922a06e9f097feae2dafb3dde77ee121e636dd0f80dee8054dc",
+    "references/quantum_chemistry.md": "69f573797f9c1c32e293e54a796e2ba2e9d3cbe6752e5f2fe777203d2448b894",
+    "references/quantum_circuits.md": "c4e6e7b8cefcb8c09a871f206c9951e12e21b2e873447ac4f187424b8a998a93",
+    "references/quantum_ml.md": "cd1b55544b305b6772e701083dda55d43145e22e77b61ba1c9f1b5b741374e6c",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

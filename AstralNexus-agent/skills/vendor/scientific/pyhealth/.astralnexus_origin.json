@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/pyhealth/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/pyhealth/SKILL.md",
+  "name": "scientific:pyhealth",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "ec4de54618b71a4f8cfeb086d131c610127784a6839d842a67b3c1e87b66e161",
+    "assets/starter_pipeline.py": "c355fa4eb7f421370d43e01b655697fbb769aa60237fb8bf4a9ae120c16daaca",
+    "references/datasets.md": "009e3a36e26a9845cefedf74f013efb23e6e31efae408a59b02b49c34f2e0549",
+    "references/examples.md": "d2f16cd19a087619810c0dc3fb9c1ce635b5c67a0bb01ec16811d0097b61b225",
+    "references/installation.md": "f07c89c78ff3cc003348b5c50375b45d89bdec28eaa0f9c0fc43a0dac0681be7",
+    "references/medcode.md": "2e3d3d98e21206e94dd924ce896c3c683a581c03d115a8bbc4c41c7e09d34387",
+    "references/models.md": "303822a66f67071105de616d51c5734a03400a5c38889b091f660cc40d29f2a2",
+    "references/tasks.md": "5848475335ca255fb2308f0bdcf816191506fb15016b07a47e267ca71734b6fa",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

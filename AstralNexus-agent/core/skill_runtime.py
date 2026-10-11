@@ -13,6 +13,7 @@ import sys
 import hashlib
 from pathlib import Path
 from typing import Any
+import yaml
 
 
 EXCLUDED = {".git", ".venv", "venv", "node_modules", "__pycache__", ".staging", "references", "templates", "assets", "scripts"}
@@ -35,15 +36,11 @@ def _frontmatter(content: str) -> tuple[dict[str, Any], str]:
         return {}, content
     raw = content[3:match.start() + 3]
     body = content[match.end() + 3:]
-    result: dict[str, Any] = {}
-    for line in raw.splitlines():
-        if ":" not in line or line[:1].isspace():
-            continue
-        key, value = line.split(":", 1)
-        value = value.strip().strip('"\'')
-        if value.startswith("[") and value.endswith("]"):
-            value = [x.strip().strip('"\'') for x in value[1:-1].split(",") if x.strip()]
-        result[key.strip()] = value
+    try:
+        parsed = yaml.safe_load(raw)
+        result: dict[str, Any] = json.loads(json.dumps(parsed, default=str)) if isinstance(parsed, dict) else {}
+    except yaml.YAMLError:
+        result = {}
     return result, body
 
 
@@ -70,10 +67,14 @@ def _manifest_records(home: Path | None) -> list[dict[str, Any]]:
 def _skill_files(roots: list[Path]) -> list[Path]:
     files: list[Path] = []
     for root in roots:
-        files.extend(
-            path for path in root.rglob("SKILL.md")
-            if not any(part in EXCLUDED for part in path.parts)
-        )
+        for directory, children, names in os.walk(root):
+            children[:] = [name for name in children if name not in EXCLUDED]
+            if 'SKILL.md' in names:
+                files.append(Path(directory) / 'SKILL.md')
+                if '.astralnexus_origin.json' in names:
+                    # Nested SKILL.md files remain readable supporting assets.
+                    # The importer separately indexes their namespaced copies.
+                    children[:] = []
     return sorted(files, key=lambda path: str(path).lower())
 
 
@@ -95,7 +96,7 @@ def _snapshot_fingerprint(files: list[Path]) -> list[dict[str, Any]]:
 def _read_snapshot(path: Path, fingerprint: list[dict[str, Any]]) -> list[dict[str, Any]] | None:
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
-        if data.get("fingerprint") == fingerprint and isinstance(data.get("entries"), list):
+        if data.get("version") == 2 and data.get("fingerprint") == fingerprint and isinstance(data.get("entries"), list):
             return data["entries"]
     except (OSError, json.JSONDecodeError, AttributeError):
         pass
@@ -106,7 +107,7 @@ def _write_snapshot(path: Path, fingerprint: list[dict[str, Any]], entries: list
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
         tmp = path.with_suffix(path.suffix + ".tmp")
-        tmp.write_text(json.dumps({"version": 1, "fingerprint": fingerprint, "entries": entries},
+        tmp.write_text(json.dumps({"version": 2, "fingerprint": fingerprint, "entries": entries},
                                   ensure_ascii=False, indent=2), encoding="utf-8")
         tmp.replace(path)
     except OSError:
@@ -141,7 +142,8 @@ def discover_skills(home: Path | None = None, *, query: str | None = None,
                                               (enabled_only and item.get("enabled") is False))}
     entries: list[dict[str, Any]] = []
     files = _skill_files(roots)
-    fingerprint = _snapshot_fingerprint(files)
+    fingerprint = _snapshot_fingerprint(files + [p.parent / '.astralnexus_origin.json' for p in files
+                                                 if (p.parent / '.astralnexus_origin.json').is_file()])
     cached = _read_snapshot(_snapshot_path(home), fingerprint)
     if cached is not None:
         entries = cached
@@ -153,6 +155,12 @@ def discover_skills(home: Path | None = None, *, query: str | None = None,
                 content = skill_file.read_text(encoding="utf-8", errors="replace")
                 front, body = _frontmatter(content)
                 name = str(front.get("name") or skill_file.parent.name)
+                origin = {}
+                origin_path = skill_file.parent / '.astralnexus_origin.json'
+                if origin_path.is_file():
+                    data = json.loads(origin_path.read_text(encoding='utf-8'))
+                    origin = {key: data[key] for key in ('name', 'namespace', 'repo', 'commit', 'source_path', 'status') if key in data}
+                    name = str(origin['name'])
                 description = str(front.get("description") or " ".join(body.strip().split())[:240])
                 entries.append({
                     "name": name,
@@ -163,8 +171,9 @@ def discover_skills(home: Path | None = None, *, query: str | None = None,
                     "platforms": front.get("platforms", []),
                     "metadata": front.get("metadata", {}),
                     "frontmatter": front,
+                    "origin": origin,
                 })
-            except OSError:
+            except (OSError, ValueError, KeyError):
                 continue
         _write_snapshot(_snapshot_path(home), fingerprint, entries)
     unique: dict[str, dict[str, Any]] = {}
@@ -173,10 +182,16 @@ def discover_skills(home: Path | None = None, *, query: str | None = None,
             continue
         if not _conditions_match(item, available_tools, toolsets):
             continue
-        if query and query.lower() not in (item["name"] + " " + item["description"]).lower():
-            continue
+        if query:
+            terms = re.findall(r'[\w-]+', query.casefold())
+            haystack = (item['name'] + ' ' + item['description']).casefold()
+            if not terms or not any(term in haystack for term in terms):
+                continue
         unique.setdefault(item["name"].lower(), item)
-    return sorted(unique.values(), key=lambda item: (item["category"], item["name"]))
+    terms = re.findall(r'[\w-]+', (query or '').casefold())
+    return sorted(unique.values(), key=lambda item: (
+        -sum(3 * (term in item['name'].casefold()) + (term in item['description'].casefold()) for term in terms),
+        item['category'], item['name']))
 
 
 def skill_manifest(home: Path | None = None, limit: int = 200, **filters: Any) -> list[dict[str, Any]]:
@@ -186,7 +201,12 @@ def skill_manifest(home: Path | None = None, limit: int = 200, **filters: Any) -
 
 def load_skill(name: str, home: Path | None = None) -> dict[str, Any] | None:
     needle = name.strip().lower()
-    for item in discover_skills(home):
+    catalog = discover_skills(home)
+    exact = [item for item in catalog if needle == item['name'].lower()]
+    candidates = exact or [item for item in catalog if needle in {Path(item['skill_dir']).name.lower(), item['path'].lower()}]
+    if len(candidates) > 1:
+        raise ValueError('Ambiguous skill name; use the namespaced catalog name')
+    for item in candidates:
         if needle not in {item["name"].lower(), Path(item["skill_dir"]).name.lower(), item["path"].lower()}:
             continue
         try:
@@ -194,7 +214,18 @@ def load_skill(name: str, home: Path | None = None) -> dict[str, Any] | None:
         except OSError:
             return None
         front, body = _frontmatter(raw)
-        return {**item, "frontmatter": front, "content": body.strip()}
+        bridge = ''
+        if item.get('origin'):
+            bridge = (
+                'AstralNexus compatibility: this is an upstream skill, not a replacement orchestrator. '
+                'Use skill_view(name, relative_path) for its supporting files. Read/Write/Edit map to '
+                'file_read/file_write; Bash/PowerShell map to terminal_exec argv; Skill maps to skill_view. '
+                'For delegation, todo, approval, worktree or provider-specific actions absent from the '
+                'current tool catalog, return a Governor next_action instead of inventing a tool. '
+                'Resolve scripts relative to skill_dir; inspect dependencies before execution. '
+                'A skill being installed does not mean its cloud credentials or external runtimes are configured.\n\n'
+            )
+        return {**item, "frontmatter": front, "compatibility": bridge.strip(), "content": bridge + body.strip()}
     return None
 
 
@@ -217,13 +248,18 @@ def view_skill_file(name: str, relative_path: str = "SKILL.md", home: Path | Non
     if size > max_bytes:
         raise ValueError(f"skill file exceeds {max_bytes} byte limit")
     return {"name": item["name"], "path": str(target), "relative_path": relative.as_posix(),
+            "skill_dir": str(root), "origin": item.get("origin"),
+            "compatibility": item.get("compatibility", ""),
             "size": size, "content": target.read_text(encoding="utf-8", errors="replace")}
 
 
 def runtime_skill_context(metadata: dict[str, Any], goal: str, role: str, home: Path | None = None) -> str:
     """Return compact index plus explicitly activated full Skill content."""
-    entries = skill_manifest(home, limit=50, enabled_only=True)
-    lines = ["Skill catalog (metadata only; activate a skill before reading its full instructions):"]
+    catalog = discover_skills(home, enabled_only=True)
+    relevant = discover_skills(home, query=goal + ' ' + role, enabled_only=True)
+    entries = (relevant or catalog)[:24]
+    lines = [f"Skill catalog ({len(catalog)} available; {len(entries)} task-ranked suggestions; metadata only):",
+             "Use skills_list(query, offset, limit) to search/page the complete catalog, then skill_view to load a skill."]
     for item in entries:
         lines.append(f"- {item['name']} [{item['category']}]: {item['description'][:180]}")
     requested = metadata.get("activated_skills") or metadata.get("skills") or []

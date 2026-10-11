@@ -1,0 +1,21 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/etetoolkit/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/etetoolkit/SKILL.md",
+  "name": "scientific:etetoolkit",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "da2e57c0e3677a4219d0629a2c1392470f20bc3ade2809c1f0334fd84441da08",
+    "references/api_reference.md": "162589999885f0a8cf9c1f58b5a732fc0f390960c51ff0d8ecdcdcf53d091e44",
+    "references/migration-ete3-to-ete4.md": "a15f52185e64ab3d4ff6b0addf77e99c3007241b9288d2d6bbc93b0eca517b1a",
+    "references/review.md": "300fb2cf971d2fa384b68ea9a6cd45f4473d35c066f3fc159659acd3d1b3c4c3",
+    "references/taxonomy.md": "f24319c3b20eb96875b9fe82803dc1e94ffc922618578fd646623744b4cc4b57",
+    "references/visualization.md": "5fb56a198d5b0cfda8698c5f67d946324ac32284de58f772b190eebdf7718884",
+    "references/workflows.md": "181322aa607b43065328f84883bc72d2f33ed525ed4495114276b9ddbcd086a8",
+    "scripts/quick_visualize.py": "0a717a87b9e48f74fda6a1212cde2802bc73df43bc9b8463b49870cd82abda57",
+    "scripts/tree_operations.py": "fc85104b201a51fc61365c37a97decb0ae9af7a033ade374b5dcb14b30015486",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

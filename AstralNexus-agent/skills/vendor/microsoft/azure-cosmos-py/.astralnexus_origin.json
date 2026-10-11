@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-cosmos-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-cosmos-py/SKILL.md",
+  "name": "microsoft:azure-cosmos-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "7b3c8cbbee11c4900cec94db00927a60f69d002385194df953af665768281925",
+    "references/partitioning.md": "c8e7e4005dbb09a9f6d2f5e5bf84eb9aea1654d4189c68affafae160dfe07e1d",
+    "references/query-patterns.md": "e95a0bbf78d434e3a78058aab1152cb53110486c1edd98ea6417d2834f038d10",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

@@ -21,11 +21,19 @@ import os
 import sys
 import time
 from pathlib import Path
+from typing import TypedDict
+
+
+class EnvironmentStatus(TypedDict, total=False):
+    mode: str
+    model: str
+    provider: str
+    warnings: list[str]
 
 
 def validate_environment() -> dict:
     """Validate that the runtime environment is ready for real LLM execution."""
-    status = {
+    status: EnvironmentStatus = {
         "mode": "real_llm_required",
         "model": os.getenv("ASTRALNEXUS_MODEL", "default"),
         "provider": os.getenv("ASTRALNEXUS_PROVIDER", "default"),
@@ -39,7 +47,7 @@ def validate_environment() -> dict:
     if not model_config.get("api_key_env"):
         status["warnings"].append("未检测到真实 LLM API 凭证，请先完成 AstralNexus 模型配置。")
     
-    return status
+    return dict(status)
 
 
 def run_demo(goal: str, constraints: list[str], run_dir: str | None = None):
@@ -67,7 +75,7 @@ def run_demo(goal: str, constraints: list[str], run_dir: str | None = None):
     
     # Initialize persistence
     db_path = rd / "task_graph.db"
-    graph_store = SQLiteTaskGraphStore(str(db_path))
+    graph_store = SQLiteTaskGraphStore(db_path)
     
     # Initialize orchestrator
     orchestrator = Orchestrator(

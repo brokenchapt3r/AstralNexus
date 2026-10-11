@@ -1,0 +1,18 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/pydeseq2/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/pydeseq2/SKILL.md",
+  "name": "scientific:pydeseq2",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "f06a9f5ece540c05bd8a8208bb3970d000b13cb1032abc9488cfbfe6106cd843",
+    "references/analysis_patterns.md": "de25b02590029166c9e22d845f6b194ddbc1f66ef8dfd4a99bffa54186e61894",
+    "references/api_reference.md": "8f60f7302417b8c094e3e716c1435aea4ebff556c3e90fe389dc0f5bb8509f75",
+    "references/core_workflow_steps.md": "af01451d1ed181f7d0194e28a0ece6ee16bdc5896f463f9b245eff8b47fd2a78",
+    "references/workflow_guide.md": "abcb6571119c4aa1611e959a8d780f76b0036b6da0f90277e2cba66ab7cd83c5",
+    "scripts/run_deseq2_analysis.py": "d99ee5d170fdeea2f80ab3282a9a5fff6e4bf7c3f784af5a4cc4211b1ab2b622",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

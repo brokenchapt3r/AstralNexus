@@ -1,0 +1,14 @@
+{
+  "repo": "deepseek-ai/deepseek-harness",
+  "commit": "5badb15009ae1756c3afe0ae0cef1faafc290ccc",
+  "source_path": ".agents/skills/dsh-find-simplifications/SKILL.md",
+  "source_url": "https://github.com/deepseek-ai/deepseek-harness/blob/5badb15009ae1756c3afe0ae0cef1faafc290ccc/.agents/skills/dsh-find-simplifications/SKILL.md",
+  "name": "dsh:dsh-find-simplifications",
+  "namespace": "dsh",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "94e08fcd86d5176787857b005152b154c5a0c9f2350e35473c8ceebbcc874a0d",
+    "references/historical-patterns.md": "54291e69eb96e6840ddf9322d09d5d19e24d875e67c7984cd328c03d19ce0e37",
+    "UPSTREAM-LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+  }
+}

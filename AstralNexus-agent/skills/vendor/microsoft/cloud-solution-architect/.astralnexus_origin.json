@@ -1,0 +1,20 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/skills/cloud-solution-architect/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/skills/cloud-solution-architect/SKILL.md",
+  "name": "microsoft:cloud-solution-architect",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "6087d00943083bd26c5b025597a8e56c034b6c6263b0a4c0fcfa23722a1461db",
+    "references/architecture-styles.md": "0bd8a4dd82194bb995f1c4c9caccf0ab3248b950e89e33110f767a0c84766522",
+    "references/best-practices.md": "6e42cb2995c1da70de75e387d4ddff6bae86a5f292e3cf6ff41d0c474ac427b0",
+    "references/design-patterns.md": "5e9154a40d78d8425827d1b4e3fa72d056949f17767b12f9f6fe7258422222a8",
+    "references/design-principles.md": "c4d0e751fb779daf38b5706fdc6c6af1b19d965613c3205e33572668bb7042b2",
+    "references/mission-critical.md": "f87da921f02672d5fbe6adb403af38e4cbb1fa54520c1f4284ecfb5acb60b552",
+    "references/performance-antipatterns.md": "764070bc2cdabb552c69817504d6bb3b0841551c3307e00d20872f0a22f30570",
+    "references/technology-choices.md": "40d7e73a5dff93e40af771a18ea85ed8b36999ef26ee2e6deb23a72cbc6cc751",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

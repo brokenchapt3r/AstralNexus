@@ -1,0 +1,27 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/uncertainty-and-units/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/uncertainty-and-units/SKILL.md",
+  "name": "scientific:uncertainty-and-units",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "caaafa079a4eaac6012717bcf705dec0417b5434f5dbd1af934a3a36ad375722",
+    "references/domain-conversions.md": "7ab73bbd69acbd23fac74ae9f3ad570a6f1501c1a5fd22998cfcd01c725441ca",
+    "references/gum-methodology.md": "def9b0ac9ff3d2912922d121062559b22ff3ec36aed94e183eef3338b4e0430f",
+    "references/pint-recipes.md": "9fbc1bc7b12267777a0359bf252e52415e6e1683cd8c4c3a6582ddca6cd51baa",
+    "references/plausibility-scales.md": "b9ef8acbc0ff6948ec7dca027cd31b7d73d2157b18bcf0c8e92d60c0029e8131",
+    "references/reporting-rules.md": "8d302b26e0792b866d3249955250e9132c09337639abb8cf36ac3f5cdaf4648e",
+    "references/review.md": "59c605f037739927495f0323246168abf9cd2bae5511b1566bb13e775bf00868",
+    "references/uncertainties-recipes.md": "2125796d070c4b13ed007e6d8f498c69698a1ce4917ece4cdda32a887dd7c214",
+    "scripts/audit_units.py": "2b891065c8b801f4a16b8dca2b73a6348c3ecf3fc88569936ded5e7f86a1e429",
+    "scripts/check_plausibility.py": "f4c1bff54a483d08f794f205454ed03fa263008b26cee772bd04d417cc86384f",
+    "scripts/convert_units.py": "89a9a0aa40a8158d2a739270115778fc1415f1a3cb207a6f17be14278872473a",
+    "scripts/format_result.py": "a839041c3f31a67cffda00e895bfed612cbc5748e83c41da83c17ff8f7b17302",
+    "scripts/propagate_uncertainty.py": "6c555f3fc7095ac340d11e8dd69f29f483f309b91af4b3489cd4c5ea468ceb86",
+    "scripts/uncertainty_budget.py": "162699fd5336fca43489757a1c63e81c89deb46aefb51ceb99a24682fde14b44",
+    "scripts/_common.py": "9d6b9ecabf92759a5d9f017ae3174673f827328b76cde238d07089f2d99c9323",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

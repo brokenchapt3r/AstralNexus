@@ -1,0 +1,28 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/optimize-for-gpu/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/optimize-for-gpu/SKILL.md",
+  "name": "scientific:optimize-for-gpu",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "e31bdb10b8ea66e5ec438583755999b66b9afab90f2583e1d500b8457ef28054",
+    "references/code_transformation_patterns.md": "55529fbb284e676c99410f16470945af360c79a3d0eafc627212c78bf633cd6e",
+    "references/cucim.md": "9632bd867bf09dcf46e9786ec41c5c99ff00298eb46ada9d164984c6f54ac119",
+    "references/cudf.md": "3ba80e6a77afc7c52023ef69a2fe432c71b21ac7179e56e3bd64f0b0b0f90422",
+    "references/cugraph.md": "36cf83e6d537ca9906c4b4de0ed6b5ecf035c73b42bf879e39643f97796bdb38",
+    "references/cuml.md": "637082bb63320a3a306965c8f1f0b27b7ec59d12a96144b7b4aad2f504de34cb",
+    "references/cupy.md": "d47335b6b423e0936eb0e31de8847042b3f92541bf4a33773acb457a8b3311b9",
+    "references/cuspatial.md": "267d7f5b9ff0df691facf5c5c24ae269af009aaf215bf77f423547f69de9633c",
+    "references/cuvs.md": "f0a518558336dc13032be0abb89c93d72b74be12e7cf7660b83b184a745e85d7",
+    "references/cuxfilter.md": "d0b135fa0218d8ed2a396e7755d9c7d95d489718eb5cdb2ecbb4bcd63feddfef",
+    "references/decision_framework.md": "89eae8f717c6685d8c834d6699bbcb06cd6091c6d761576f2d2d7f8c011b7f2a",
+    "references/installation.md": "389dd86573ba992449b9d2b59a4220778bfe7bd938f49ca55e871c136406ec71",
+    "references/kvikio.md": "62ebe035efd83846c3c6115f58418b75b86a744277755db49e5761d808aa1ec3",
+    "references/numba.md": "48c39401f0b4bf7179ca9b7d65d2b828a8a9c57533f06ff39ce0f735c6b89cb6",
+    "references/raft.md": "3d85e8dfb5b4f460bb0875ff2be2ce5cdad2011d203f5d599ebab45ab4d7c79e",
+    "references/warp.md": "fc310827045d5b5eeeceee53cccd96413cd2e8ee06ab2892b672b8d3d84e5072",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

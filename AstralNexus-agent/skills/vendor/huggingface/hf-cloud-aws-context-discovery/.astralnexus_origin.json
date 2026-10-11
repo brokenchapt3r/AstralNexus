@@ -1,0 +1,13 @@
+{
+  "repo": "huggingface/skills",
+  "commit": "ca0325bb20b2d0a1b2efa893670c4c72f79e707b",
+  "source_path": "skills/hf-cloud-aws-context-discovery/SKILL.md",
+  "source_url": "https://github.com/huggingface/skills/blob/ca0325bb20b2d0a1b2efa893670c4c72f79e707b/skills/hf-cloud-aws-context-discovery/SKILL.md",
+  "name": "huggingface:hf-cloud-aws-context-discovery",
+  "namespace": "huggingface",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "6b59128ea1834913b01ff6752d52e529d304ee6086e2edec5c7ce451f7a14dff",
+    "UPSTREAM-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}

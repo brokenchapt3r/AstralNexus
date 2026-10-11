@@ -1,0 +1,16 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/cellprofiler/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/cellprofiler/SKILL.md",
+  "name": "scientific:cellprofiler",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "b822ed64acb189d900f59ba69418e5e41261d539fd2fd847e402cded2fc1bb38",
+    "assets/nuclei.cppipe": "9e1564f79d5a54171aad28d366ef17b88f2003dfceded1055cac521743bdb568",
+    "references/runtime-and-qc.md": "960863799dd94485ce6105271854db899d3b1fd309c2923d3a21076fc21384b1",
+    "scripts/nuclei_assay.py": "2578f242515eec87a3d78926e33d2f0763094a834e3733353a92878cc5a83037",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

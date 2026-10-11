@@ -4,11 +4,12 @@ Provides an interactive model picker for CLI startup.
 """
 
 from __future__ import annotations
+from AstralNexus.runtime.run_context import get_env
 
 import os
 import sys
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 
 # Available models with metadata
@@ -62,6 +63,37 @@ AVAILABLE_MODELS = {
         "context_length": 1000000,
         "category": "chat",
     },
+    # doc 18 attempt7 候选（2026-09-14 经 dashscope 兼容端点实测连通：
+    # 非流式/流式 200 OK、JSON 输出干净）。context_length 取保守 128K
+    # ——未知窗口下宁可压缩早触发，不可撞提供方上限。
+    "deepseek-v4.1-flash": {
+        "name": "DeepSeek V4.1 Flash",
+        "description": "DeepSeek 快速模型（百炼三方模型，实测 1.9s 低延迟）",
+        "provider": "dashscope",
+        "context_length": 131072,
+        "category": "chat",
+    },
+    "deepseek-v4-flash": {
+        "name": "DeepSeek V4 Flash",
+        "description": "DeepSeek 快速模型（百炼三方模型）",
+        "provider": "dashscope",
+        "context_length": 131072,
+        "category": "chat",
+    },
+    "glm-5": {
+        "name": "GLM-5",
+        "description": "智谱 GLM-5（百炼三方模型，实测流式可用）",
+        "provider": "dashscope",
+        "context_length": 131072,
+        "category": "chat",
+    },
+    "glm-4.6": {
+        "name": "GLM-4.6",
+        "description": "智谱 GLM-4.6（百炼三方模型，实测流式可用）",
+        "provider": "dashscope",
+        "context_length": 131072,
+        "category": "chat",
+    },
 }
 
 # Capability profile consumed by Governor/Router.  Keeping these fields next
@@ -78,7 +110,13 @@ MODEL_PROFILES = {
     for model, info in AVAILABLE_MODELS.items()
 }
 
-DEFAULT_MODEL = "qwen3.7-max"
+# The default model when a caller names none.  User decision 2026-10-07: this
+# is the model that must be used unless someone explicitly asks for another --
+# the launcher used to override it per run, which left every other entry point
+# (CLI, direct Orchestrator/LLMClient construction) falling back to the heavy
+# tier by accident.  Role-level preference tables are a separate concern and
+# are deliberately untouched here.
+DEFAULT_MODEL = "deepseek-v4.1-flash"
 
 
 def get_model_profile(model: Optional[str] = None, overrides: Optional[dict] = None) -> dict:
@@ -98,11 +136,11 @@ def _default_config_home() -> Path:
     # Runtime evidence and user configuration have different ownership and
     # lifecycles. ``ASTRALNEXUS_HOME`` points at run artifacts; using it here
     # made a formal CLI run lose the API key already saved by ``model set``.
-    config_home = os.environ.get("ASTRALNEXUS_CONFIG_HOME", "").strip()
+    config_home = get_env("ASTRALNEXUS_CONFIG_HOME", "").strip()
     if config_home:
         return Path(config_home).expanduser()
     if sys.platform == "win32":
-        local_appdata = os.environ.get("LOCALAPPDATA", "").strip()
+        local_appdata = get_env("LOCALAPPDATA", "").strip()
         base = Path(local_appdata) if local_appdata else Path.home() / "AppData" / "Local"
         return base / "AstralNexus"
     return Path.home() / ".AstralNexus"
@@ -111,18 +149,22 @@ def _default_config_home() -> Path:
 def get_config_path(config_path: Optional[str] = None) -> Path:
     if config_path:
         return Path(config_path).expanduser()
-    env_config = os.environ.get("ASTRALNEXUS_CONFIG_FILE", "").strip()
+    env_config = get_env("ASTRALNEXUS_CONFIG_FILE", "").strip()
     if env_config:
         return Path(env_config).expanduser()
     return _default_config_home() / "config.yaml"
 
 
 def load_env_file(env_path: Optional[str] = None) -> Optional[Path]:
-    """Load AstralNexus secrets from a local .env file without overriding env."""
+    """Use captured secrets in a run; retain process bootstrapping for legacy callers."""
+    from AstralNexus.runtime.run_context import current_run_context
+    context = current_run_context()
+    if context is not None:
+        return context.settings.env_file
     candidates: list[Path] = []
     if env_path:
         candidates.append(Path(env_path).expanduser())
-    env_file = os.environ.get("ASTRALNEXUS_ENV_FILE", "").strip()
+    env_file = get_env("ASTRALNEXUS_ENV_FILE", "").strip()
     if env_file:
         candidates.append(Path(env_file).expanduser())
     candidates.append(_default_config_home() / ".env")
@@ -172,7 +214,11 @@ def get_model_config(config_path: Optional[str] = None, overrides: Optional[dict
     This is the **single source of truth** for model configuration across
     the entire AstralNexus codebase.
     """
-    cfg_path = get_config_path(config_path)
+    from AstralNexus.runtime.run_context import current_run_context
+    context = current_run_context()
+    cfg_path = context.settings.config_path if context is not None and config_path is None else get_config_path(config_path)
+    if context is not None and cfg_path.resolve() != context.settings.config_path:
+        raise ValueError("active run configuration file is frozen; start a new context for another file")
     # An explicitly selected configuration owns its sibling secret file. This
     # keeps CLI runs deterministic even when they are launched by another
     # process identity whose LOCALAPPDATA/HOME points somewhere else.
@@ -180,12 +226,12 @@ def get_model_config(config_path: Optional[str] = None, overrides: Optional[dict
     env_file_used = load_env_file(explicit_env)
 
     # --- Layer 1: environment variables ---
-    env_model = os.environ.get("ASTRALNEXUS_MODEL", "").strip()
-    env_provider = os.environ.get("ASTRALNEXUS_PROVIDER", "").strip()
+    env_model = get_env("ASTRALNEXUS_MODEL", "").strip()
+    env_provider = get_env("ASTRALNEXUS_PROVIDER", "").strip()
     env_api_key = ""
     for key_name in ("ASTRALNEXUS_API_KEY", "DASHSCOPE_API_KEY", "OPENAI_API_KEY",
                      "ANTHROPIC_API_KEY", "OPENROUTER_API_KEY", "DEEPSEEK_API_KEY"):
-        if os.environ.get(key_name):
+        if get_env(key_name):
             env_api_key = key_name
             break
 
@@ -193,11 +239,14 @@ def get_model_config(config_path: Optional[str] = None, overrides: Optional[dict
     file_model = ""
     file_provider = ""
     file_base_url = ""
-    if cfg_path.exists():
+    if context is not None or cfg_path.exists():
         try:
             import yaml
-            with cfg_path.open('r', encoding='utf-8') as f:
-                file_cfg = yaml.safe_load(f) or {}
+            if context is not None:
+                file_cfg = context.settings.config_body
+            else:
+                with cfg_path.open('r', encoding='utf-8') as f:
+                    file_cfg = yaml.safe_load(f) or {}
             model_cfg = file_cfg.get("model", {})
             if isinstance(model_cfg, str):
                 file_model = model_cfg
@@ -219,7 +268,7 @@ def get_model_config(config_path: Optional[str] = None, overrides: Optional[dict
     provider = env_provider or file_provider or ""
     # If provider not set explicitly, infer from model metadata
     if not provider and model in AVAILABLE_MODELS:
-        provider = AVAILABLE_MODELS[model].get("provider", "dashscope")
+        provider = str(AVAILABLE_MODELS[model].get("provider", "dashscope"))
     if not provider:
         provider = "dashscope"
 
@@ -232,7 +281,7 @@ def get_model_config(config_path: Optional[str] = None, overrides: Optional[dict
         "config_source": source,
         "config_path": str(cfg_path),
         "env_file": str(env_file_used) if env_file_used else "",
-        "base_url": os.environ.get("ASTRALNEXUS_BASE_URL", "").strip()
+        "base_url": get_env("ASTRALNEXUS_BASE_URL", "").strip()
         or file_base_url
         or "https://dashscope.aliyuncs.com/compatible-mode/v1",
     }
@@ -240,8 +289,12 @@ def get_model_config(config_path: Optional[str] = None, overrides: Optional[dict
         value = (overrides or {}).get(key)
         if value:
             result[key] = str(value).strip()
-    if (overrides or {}).get("api_key"):
-        result["api_key"] = str(overrides["api_key"])
+    api_key = (overrides or {}).get("api_key")
+    sub_model = (overrides or {}).get("sub_model") or get_env("ASTRALNEXUS_SUB_MODEL", "").strip()
+    if sub_model:
+        result["sub_model"] = str(sub_model)
+    if api_key:
+        result["api_key"] = str(api_key)
     return result
 
 
@@ -319,7 +372,7 @@ def get_selected_model(config_path: Optional[str] = None) -> str:
     """
     load_env_file()
     # Check environment variable first
-    env_model = os.environ.get("ASTRALNEXUS_MODEL", "").strip()
+    env_model = get_env("ASTRALNEXUS_MODEL", "").strip()
     if env_model:
         return env_model
     
@@ -349,7 +402,7 @@ def save_model_choice(model_id: str, config_path: str) -> None:
         import yaml
         
         # Load existing config
-        config = {}
+        config: dict[str, Any] = {}
         if os.path.exists(config_path):
             with open(config_path, 'r', encoding='utf-8') as f:
                 config = yaml.safe_load(f) or {}
@@ -384,8 +437,8 @@ def validate_model_config(model_id: str) -> bool:
     load_env_file()
     # Check API key
     api_key = (
-        os.environ.get("ASTRALNEXUS_API_KEY", "").strip()
-        or os.environ.get("DASHSCOPE_API_KEY", "").strip()
+        get_env("ASTRALNEXUS_API_KEY", "").strip()
+        or get_env("DASHSCOPE_API_KEY", "").strip()
     )
     if not api_key:
         print("✗ 未设置 API key")

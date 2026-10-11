@@ -1,0 +1,26 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/azure-storage/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/azure-storage/SKILL.md",
+  "name": "microsoft:azure-storage",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "a032c55a4414a1aa3ea40245806944b3e497ee094be04f933a049018fbe8da81",
+    "references/auth-best-practices.md": "34f6fe88e2b5819c1a0f24aa3930a060d9504fee68ea4b363f0912a78daa5396",
+    "references/sdk-usage.md": "954fa6e2c97facb2612a4c5e1f01294b09dc31ec44f755b5d86cff6b4b134a7a",
+    "references/sdk/azure-data-tables-java.md": "b70a8bc0fa7d587aec8ec9485bd68577d9685640dcce77d337ff039d9879c24b",
+    "references/sdk/azure-data-tables-py.md": "1f37fe3ba56ac8c1244461dc725fc1a8bc6d696073ff25cad52933be7be86049",
+    "references/sdk/azure-storage-blob-java.md": "f4e2a5ab810cfddd2c3c681814feaa216dc5059161e3c37326fee6910c2a82d0",
+    "references/sdk/azure-storage-blob-py.md": "afdd86c5b3e59452e36819195f578ee47207c9f4fd639e047675ef95cbd903d8",
+    "references/sdk/azure-storage-blob-rust.md": "0c0e37e728cc1115e74286d38c7f8ae1489b627f1231dab26a2229a43e8e0bcd",
+    "references/sdk/azure-storage-blob-ts.md": "fbcaa7379e7d98247675efd82553cacaef50abc1c61af547fcaf00e03c9c1d3d",
+    "references/sdk/azure-storage-file-datalake-py.md": "46abbb1effec468c999844cf6e0188691d9fb160da47385a56ed7d1c7d63ca43",
+    "references/sdk/azure-storage-file-share-py.md": "2ad59e6ec4fff052f565a63c4643fad85cd643e4de288d84ef0fc6249c7a521d",
+    "references/sdk/azure-storage-file-share-ts.md": "5cc219bb649529a29d735d9051eaf03b5a649a59d3ee7842e0da878ba1e8797c",
+    "references/sdk/azure-storage-queue-py.md": "a12ff28b4598f8a62ed22f820882afd954bc873788c17c90db5cbe2af0b2f531",
+    "references/sdk/azure-storage-queue-ts.md": "e9f68c8279e8ba5623a6495e209619a7f9cfad7f07beb0d81e2a4ed26231f284",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

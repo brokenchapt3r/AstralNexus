@@ -1,0 +1,14 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/folklore-variant-evidence/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/folklore-variant-evidence/SKILL.md",
+  "name": "scientific:folklore-variant-evidence",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "134b5ea684815b99c56fadf92a1cb42d37eaca4245515278e404b8876b7acfe0",
+    "references/mcp-contract.md": "ccc2a4ccd7ea57887575ee8c10fa8ae26e676791cdddf6ebd848872a81229a8f",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

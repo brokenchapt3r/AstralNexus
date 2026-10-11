@@ -336,7 +336,7 @@ class ValueRouter:
     
     def _count_drop_reasons(self) -> Dict[str, int]:
         """Count reasons for dropping messages."""
-        reasons = {}
+        reasons: dict[str, int] = {}
         for msg in self._dropped_messages:
             r = msg["reason"]
             reasons[r] = reasons.get(r, 0) + 1
@@ -344,7 +344,7 @@ class ValueRouter:
     
     def _count_edge_conditions(self) -> Dict[str, int]:
         """Count edge creation conditions."""
-        conditions = {}
+        conditions: dict[str, int] = {}
         for edge in self._dynamic_edges:
             c = edge["condition"]
             conditions[c] = conditions.get(c, 0) + 1

@@ -1,7 +1,26 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional, Type
+from typing import Any, Callable, Dict, List, Optional, ParamSpec, TypeVar, Concatenate, Iterator
+from contextvars import ContextVar
+from contextlib import contextmanager
+from copy import deepcopy
+from threading import RLock
+from functools import wraps
+
+from AstralNexus.agents.contracts import RegisteredAgent
+
+
+_P = ParamSpec('_P')
+_R = TypeVar('_R')
+
+
+def registry_locked(function: Callable[Concatenate[AgentRegistry, _P], _R]) -> Callable[Concatenate[AgentRegistry, _P], _R]:
+    @wraps(function)
+    def locked(self: AgentRegistry, *args: _P.args, **kwargs: _P.kwargs) -> _R:
+        with self._lock:
+            return function(self, *args, **kwargs)
+    return locked
 
 
 @dataclass
@@ -29,18 +48,22 @@ class AgentRegistry:
     """Registry for managing agent roles in the AstralNexus system."""
     
     def __init__(self):
+        self._lock = RLock()
         self._roles: Dict[str, AgentRole] = {}
-        self._role_factories: Dict[str, Callable] = {}
+        self._role_factories: Dict[str, Callable[..., RegisteredAgent]] = {}
         self._role_aliases: Dict[str, str] = {}  # alias -> canonical role name
     
+    @registry_locked
     def register_role(self, role: AgentRole) -> None:
         """Register a new agent role."""
         self._roles[role.name] = role
     
-    def register_role_factory(self, role_name: str, factory: Callable) -> None:
+    @registry_locked
+    def register_role_factory(self, role_name: str, factory: Callable[..., RegisteredAgent]) -> None:
         """Register a factory function for creating agents of a specific role."""
         self._role_factories[role_name] = factory
     
+    @registry_locked
     def register_role_alias(self, alias: str, canonical_role: str) -> None:
         """Register an alias for a canonical role name.
         
@@ -52,6 +75,7 @@ class AgentRegistry:
         """
         self._role_aliases[alias.lower()] = canonical_role
     
+    @registry_locked
     def resolve_role(self, role_name: str) -> str:
         """Resolve a role name through the alias map.
         
@@ -63,37 +87,45 @@ class AgentRegistry:
         """
         return self._role_aliases.get(role_name.lower(), role_name.lower())
     
+    @registry_locked
     def get_role(self, role_name: str) -> Optional[AgentRole]:
         """Get a registered role by name (resolves aliases)."""
         canonical = self.resolve_role(role_name)
         return self._roles.get(canonical) or self._roles.get(role_name)
     
-    def get_role_factory(self, role_name: str) -> Optional[Callable]:
+    @registry_locked
+    def get_role_factory(self, role_name: str) -> Optional[Callable[..., RegisteredAgent]]:
         """Get a factory function for creating agents of a specific role (resolves aliases)."""
         canonical = self.resolve_role(role_name)
         return self._role_factories.get(canonical) or self._role_factories.get(role_name)
     
+    @registry_locked
     def list_roles(self) -> List[str]:
         """List all registered role names."""
         return list(self._roles.keys())
     
+    @registry_locked
     def list_aliases(self) -> Dict[str, str]:
         """List all registered role aliases."""
         return dict(self._role_aliases)
     
-    def create_agent(self, role_name: str, **kwargs) -> Optional[object]:
+    def create_agent(self, role_name: str, **kwargs) -> Optional[RegisteredAgent]:
         """Create an agent instance for a specific role (resolves aliases)."""
         # Try canonical name first, then alias-resolved name
-        factory = self._role_factories.get(role_name)
-        if factory:
-            return factory(**kwargs)
-        canonical = self.resolve_role(role_name)
-        factory = self._role_factories.get(canonical)
+        factory = self.get_role_factory(role_name)
         if factory:
             return factory(**kwargs)
         return None
 
-    def create_worker(self, role_name: str, profile: Any = None, **kwargs) -> Optional[object]:
+    @registry_locked
+    def clone(self) -> AgentRegistry:
+        result = AgentRegistry()
+        result._roles = deepcopy(self._roles)
+        result._role_factories = dict(self._role_factories)
+        result._role_aliases = dict(self._role_aliases)
+        return result
+
+    def create_worker(self, role_name: str, profile: Any = None, **kwargs) -> Optional[RegisteredAgent]:
         """Instantiate a role and bind the Governor-selected Worker Profile.
 
         A role factory supplies the implementation; the profile supplies the
@@ -131,8 +163,36 @@ class AgentRegistry:
 
 # Global agent registry instance
 agent_registry = AgentRegistry()
+_scoped_registry: ContextVar[AgentRegistry | None] = ContextVar('agent_registry', default=None)
+_bootstrap_lock = RLock()
+_bootstrapped = False
+_bootstrap_registry: AgentRegistry | None = None
+
+
+@contextmanager
+def agent_registry_scope(registry: AgentRegistry) -> Iterator[None]:
+    token = _scoped_registry.set(registry)
+    try: yield
+    finally: _scoped_registry.reset(token)
 
 
 def get_agent_registry() -> AgentRegistry:
-    """Get the global agent registry instance."""
+    """Use the run catalogue; bootstrap defaults once on explicit first use."""
+    global _bootstrapped, _bootstrap_registry
+    scoped = _scoped_registry.get()
+    if scoped is not None: return scoped
+    with _bootstrap_lock, agent_registry._lock:
+        if not _bootstrapped:
+            if _bootstrap_registry is not None: return _bootstrap_registry
+            draft = agent_registry.clone()
+            _bootstrap_registry = draft
+            try:
+                from AstralNexus.core.role_registry import initialize_role_registry
+                initialize_role_registry(draft)
+                agent_registry._roles = draft._roles
+                agent_registry._role_factories = draft._role_factories
+                agent_registry._role_aliases = draft._role_aliases
+                _bootstrapped = True
+            finally:
+                _bootstrap_registry = None
     return agent_registry

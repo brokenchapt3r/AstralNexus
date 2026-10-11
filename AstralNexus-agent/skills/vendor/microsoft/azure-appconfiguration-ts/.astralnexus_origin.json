@@ -1,0 +1,13 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-typescript/skills/azure-appconfiguration-ts/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-typescript/skills/azure-appconfiguration-ts/SKILL.md",
+  "name": "microsoft:azure-appconfiguration-ts",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "9e3d2e976b1ed5ed25786a9a1df704a448408c7c0eea0a1f1c277bbf89d439e3",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

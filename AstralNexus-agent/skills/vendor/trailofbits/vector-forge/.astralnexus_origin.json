@@ -1,0 +1,20 @@
+{
+  "repo": "trailofbits/skills",
+  "commit": "82fe8226252622fa807643bdca1710901198553a",
+  "source_path": "plugins/trailmark/skills/vector-forge/SKILL.md",
+  "source_url": "https://github.com/trailofbits/skills/blob/82fe8226252622fa807643bdca1710901198553a/plugins/trailmark/skills/vector-forge/SKILL.md",
+  "name": "trailofbits:vector-forge",
+  "namespace": "trailofbits",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "aca07e846ce5615031e9df0faca3537f4796f72997dcece53c9e389cf9d9d132",
+    "agents/openai.yaml": "3ce59e0322a4dfe1ab64b9a0dc21e7f9be896cba2f9b1abe6dc5cf7a2f4a5173",
+    "assets/trail-of-bits-mark.svg": "4bf74c789b38dcf6ad762c136b6832363d27ae19fbaa9a18ec18d66ecce6ca05",
+    "references/fault-simulation.md": "2e39c262e4cb1f7c8f9737e6ed02d45c3c69c556c7003b077a1aae24d06ea308",
+    "references/lessons-learned.md": "bb92f8744839a60afb2d3c8a5ba3704f0db48fc2dbac019e00946e7f7359026f",
+    "references/mutation-frameworks.md": "ae781ebc35637c0c46cdee448bc8bad98a7e3676007039c7ed1eca7f612e82d9",
+    "references/report-template.md": "9fb727aa0f8f6dde0b4f533a0de0641848cdb0cffff2d47eba9c4335b6da9727",
+    "references/vector-patterns.md": "641edba466cfdf0ae8cd93b5009b6861b1f6aaa593b84fd5abcd5b468a8b91b1",
+    "UPSTREAM-LICENSE": "7abe19ec9bb73b36141b999b861d24ad855e808bafe0f81e84cce28556f6c297"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/rdkit/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/rdkit/SKILL.md",
+  "name": "scientific:rdkit",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "9f32d5d229bc1a5bac3e57de5fb87895cdb85dcc99132c57373905db0e1a941e",
+    "references/api_reference.md": "160f14e37cfaff3a93e77d77c772b0a06b5dd413fbefddc9a6bc414f5dd63d70",
+    "references/core_capabilities.md": "6ec3d2334012a4b6bbd46a1a055fccad3aa01650c778e6d9c2793d06fa666306",
+    "references/descriptors_reference.md": "5213da1e42c99249490e5a619d213911cafc708056c2e3444f8514cd9e9ce4f9",
+    "references/review.md": "66c4364a9949942203c32aa40766291da75112833576834c272fa24e80817119",
+    "references/smarts_patterns.md": "3746ed0bf7d7ca99b945e5c4ac53077f539e7a20d9091ec59c8c3e0f2a37f190",
+    "references/workflows_and_best_practices.md": "13ac8e6ce522b5585a6c964b10b539d06e18e1c3d4c18880a9733b0be5e54a3f",
+    "scripts/molecular_properties.py": "93deadbda64b763d5ff07e88f48de57968e8f2cf1ed210898899bc73f173806a",
+    "scripts/similarity_search.py": "fa935d7cb14f9aa601c15ae2daec539513a397727946b2b62126b77dcf1b52a6",
+    "scripts/substructure_filter.py": "3a737d874bab1007409aea7398d001602142cf54f8fc64b080109da91ac6b513",
+    "scripts/_common.py": "b9de71f55294e9587b42173a49f688f03808678fdf085604fd0a3b3d1ec4fafc",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/azure-resource-visualizer/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/azure-resource-visualizer/SKILL.md",
+  "name": "microsoft:azure-resource-visualizer",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "110c607c2626505931621c42f6cb21f2be9f35a2d35cf828b61f5562485ec8c4",
+    "assets/example-diagram.md": "634ad47b9dc958dd36e37b51369d1df60cc0430c072697b45f71b5a3e1ea221c",
+    "assets/template-architecture.md": "4f77937ad89eb8d333afb928592f0b5b22a83044083521dacfe55d8b7b1eff22",
+    "references/azure-resource-graph.md": "c178445ad2a41f459b2b83353b7f3dc5bf0f99c102bac043f2eb482ffb00f726",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

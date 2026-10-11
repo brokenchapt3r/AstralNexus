@@ -1,0 +1,25 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/qutip/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/qutip/SKILL.md",
+  "name": "scientific:qutip",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "6b93a95eb586147b2f1639f7e669dece3182ab4ddd70b1200291073cfd533902",
+    "references/advanced.md": "6bae64070a4fd32fede375195cb683e0bce83742bad1cc3f897c1af0a7f01aff",
+    "references/analysis.md": "201b508d50710335baa003eb68dadf7f3fe4df33917f09eb1548ed72be1f08a5",
+    "references/core_concepts.md": "3bc5c10f7b45faed6b00c048d623b4b1f6e35e9bd9dc99d3613c4cba0ee8005b",
+    "references/time_evolution.md": "c0fa5ea2761199d717263f35da99594c2d957efacfa188123d0c58296d43ab6e",
+    "references/visualization.md": "67d2574601532432d9b408c02ff68960e2ccce113a1d444efe6a31058e524216",
+    "scripts/convergence_sweep.py": "d341087e7d208b77e4b1ae180edf50401f0d11b1612a3e3598d5c51231cc8364",
+    "scripts/qobj_model_validator.py": "a3bb7107d245a6d62a1801b32113a2c9049f5d18a6f0412857d7fed1c67af150",
+    "scripts/result_audit.py": "bba4e5758def41038a5ceb7ff8e8847504412b4396d7ceed2a96551b647759cd",
+    "scripts/solver_config_planner.py": "cb13608330d321c904e1d0945d5a7fb655ab5c26aa7cb54979dd9f3b108db81f",
+    "scripts/steady_state_spectrum_planner.py": "9fbc4016d1e636a49133d5a8ab585e70aef791a5390ef1e8e644ea9d9cd57cac",
+    "scripts/two_level_simulation.py": "3e6419783c29146b95f5efbc60960f14c1d98dc63ab81b8f44ce34a0ece99f03",
+    "scripts/_common.py": "b640dffc8b93b85a4c2517c20d6c56e978d2aac51d7b51f4b32dc6e3453cf15f",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

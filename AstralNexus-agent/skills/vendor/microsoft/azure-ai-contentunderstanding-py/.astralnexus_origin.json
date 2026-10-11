@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-ai-contentunderstanding-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-ai-contentunderstanding-py/SKILL.md",
+  "name": "microsoft:azure-ai-contentunderstanding-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "3bb3d811f73db5724d3d64d572819a43467803e3e15ce20024845e9bb0a534a7",
+    "references/capabilities.md": "66bac1b431ea698552f1b8a83717a850ce16634f263bfd62fe1a61c6bb11380d",
+    "references/non-hero-scenarios.md": "9df187cd6dc49f0e678d6ef4d53adb3acc71566619a37bb90234fbc342f21919",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/torchdrug/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/torchdrug/SKILL.md",
+  "name": "scientific:torchdrug",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "03538274e00aad262d159ca5ebed55fe6519d605171569feff44afeb781088fd",
+    "references/core_concepts.md": "717b98e9cb474b99b6afeb59eacddde96a99ffcec9b85ee6a1ee0d4be1dddf19",
+    "references/datasets.md": "e9e99e7fdec54700804832c2d0f60a4391a9cbaa01efaab6efe5d30dbd7ff189",
+    "references/knowledge_graphs.md": "b612d4034cd7e8ec8680993f11128df29cd3294c08915b50129c4a65779b82fe",
+    "references/models_architectures.md": "5e5cdc50729e2ae4ab17e8f66eb4bb953f474e2b5e5ea1b9682ac765ed3f6adb",
+    "references/molecular_generation.md": "1ff3b721c18fa00336842de9d12efe233e0151b6a0eee45b75269d60b6cee00f",
+    "references/molecular_property_prediction.md": "554fe03c4ca9b715dee8465bbe1a926ae22add1a90ebc7c75bbb6ba30f50ef08",
+    "references/protein_modeling.md": "a692fc181a088f0133aa3465525a2d84871db8e69ac0b37c5fd784d15a1d9719",
+    "references/retrosynthesis.md": "3fce683d22e5f7664e87708289045808ef71d8c0e62983f5c7411578d4feed26",
+    "references/review.md": "c0296fef4087759bf2044da2b98345894a7c5c00c82b658951b7b2ce6786764f",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

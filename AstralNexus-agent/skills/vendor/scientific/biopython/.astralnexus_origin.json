@@ -1,0 +1,21 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/biopython/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/biopython/SKILL.md",
+  "name": "scientific:biopython",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "b617561b38a2e3ecc8f8cf3dd8bb0307ac1aaf4d67e6e0432b0c248bc4382245",
+    "references/advanced.md": "b023aa7df32c4c5f8db621929e23dde64ae0ef77169cbfdefdf479068c0001a8",
+    "references/alignment.md": "99668ee8cf0314f655149a8383f931d51ec039dea566a51219f7f37b02ef6bd4",
+    "references/blast.md": "487953c8120658887de77fe794cc07881b0a223f68e29b4575ec317995fa7151",
+    "references/databases.md": "87dcee5bb51eff9959c313b6680aebf7ff064155599bbb03630325148809bb50",
+    "references/phylogenetics.md": "c0129d6636b7628a512f5338e2afc0101561377210467d17c47008115d851ac6",
+    "references/review.md": "a44292d82f9ec99f1b232a835275e694275709b928e297ed9cc24ed1dbc2f139",
+    "references/sequence_io.md": "cb858b46c28873e5b681b54eba37cbf919dc9febe7d282ca3aeafafe3603c514",
+    "references/structure.md": "c5805632d9bd56cc933374a932a3669444329b135ba275216492659d5420da2e",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

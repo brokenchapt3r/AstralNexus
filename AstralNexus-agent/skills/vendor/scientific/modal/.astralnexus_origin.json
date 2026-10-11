@@ -1,0 +1,25 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/modal/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/modal/SKILL.md",
+  "name": "scientific:modal",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "5da5d0a39db4ea5f429ffc40772bbce87e26f778fac363c42873ca6bb84fecd9",
+    "references/api_reference.md": "9dbdcb1c9321865ada7b8077de23c1da1788f68bd16188b563ee41c226a9d3a3",
+    "references/examples.md": "a0f3624e5f9825cc25d44e7290fe49b96ef4c7d65691fc8fa72a78624fc56b98",
+    "references/functions.md": "66ebc05e9562c8815f21ddd4b567c20e5b895e656aaa30adeacca4f8a576b780",
+    "references/getting-started.md": "a07f00dd0f549a7f704f5a9730aa111c923a837156ba352636acd44c2215ff2f",
+    "references/gpu.md": "1ea927b676a4cddd3b7c7376298f2b2d1755aad8f6870715d9140c0f43ff6f8b",
+    "references/images.md": "66f559dbd19ec68c7d287975f5c3a9799d5ee2be0c61b9342e925e2188b2dab9",
+    "references/resources.md": "bdc346f9dbdb415580743d2fb8ea9cea92dc0eb7626e12579fccfcc5c53eac1d",
+    "references/scaling.md": "a3542f76b1519f7a8ac64bc1ca2b10607c46b636006b5747d671586728438cab",
+    "references/scheduled-jobs.md": "ef94216caf2508c141ab4150cee7fc220d053ae5a5ed0e2c7759111f2ce3cfe4",
+    "references/secrets.md": "5eb31de31b1ad8efd9508bf525dbf732fcc2ff109c1b5b202b211e4fa672cfbb",
+    "references/volumes.md": "290936b7ac55839db2b340edc76981eb1debe0a16fa56c75ebd8e34cb08d06da",
+    "references/web-endpoints.md": "772c33c7322c4487afbf58b5a82f54b110e4d81b4d92371782ce0a49ead15166",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

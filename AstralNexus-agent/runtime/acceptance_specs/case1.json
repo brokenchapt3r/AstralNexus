@@ -1,0 +1,12 @@
+{
+  "schema": "astralnexus.acceptance-spec/v1",
+  "profile": "case1",
+  "task_book_sha256": "1611d59ac0d00ff375a68d88a56dc96f635fa174cce67fd1b4f68944c33f564d",
+  "requirements": {
+    "api": ["2.1", "2.2", "2.3", "2.4"],
+    "browser": ["3.1", "3.2", "3.3"],
+    "database_isolation": "published_tree_copy",
+    "request_fields": ["external_id", "title", "priority"],
+    "statuses": ["open", "closed"]
+  }
+}

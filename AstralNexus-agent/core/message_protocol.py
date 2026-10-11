@@ -3,7 +3,10 @@ from __future__ import annotations
 import json
 import re
 from dataclasses import asdict, dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from AstralNexus.core.task_graph import TaskGraph
 
 from AstralNexus.core.state_machine import TaskStatus
 
@@ -43,7 +46,7 @@ class StructuredMessage:
     next_actions: List[Dict[str, Any]] = field(default_factory=list)
     
     # Budget used for this task
-    budget_used: Dict[str, int] = field(default_factory=dict)
+    budget_used: Dict[str, int | float] = field(default_factory=dict)
     
     # Additional metadata
     metadata: Dict[str, Any] = field(default_factory=dict)

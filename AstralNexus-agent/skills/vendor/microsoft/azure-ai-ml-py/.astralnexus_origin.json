@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-ai-ml-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-ai-ml-py/SKILL.md",
+  "name": "microsoft:azure-ai-ml-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "07491b57acea5747c3474bc1401e4813ce292dcf35658b33512aebd73d21609f",
+    "references/capabilities.md": "d355f0a328700cabb2e4fcf700b7cc2f86022be37e6c6be0216a243904bd219d",
+    "references/non-hero-scenarios.md": "a97c6fcccedcab8850567696deed7f86bdb5f82d876092733a31372a7ccc0144",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/phylogenetics/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/phylogenetics/SKILL.md",
+  "name": "scientific:phylogenetics",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "eef2354a8fe6c51c2ad8a506e512326553bda52c731952598adef677ae2d67d5",
+    "references/iqtree_inference.md": "a7631d76a61fbb425b0e9c9a51c26419730e985f0e88e7fbc485f70fd1eaa61e",
+    "scripts/phylogenetic_analysis.py": "78d120ad163eed7bf7f1fd936942dd4bd650ca52fbad0e2e61f5cdbcbf0f53fd",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

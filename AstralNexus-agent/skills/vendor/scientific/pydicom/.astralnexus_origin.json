@@ -1,0 +1,25 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/pydicom/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/pydicom/SKILL.md",
+  "name": "scientific:pydicom",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "e42c35688a3dc7e0faaf1d1e88c8883eabc60ad291d348bfe5aee89a64c95b01",
+    "references/common_tags.md": "2b86d28e957afff7aa8d9525737219e7708e68ee44e31a2cf10b1f5ed8e17f15",
+    "references/transfer_syntaxes.md": "3377e2f070e442b36f01e14be6cbda64dbfddb6e61cb8d9ae03aaf775d3186c6",
+    "scripts/anonymize_dicom.py": "d4591456fab314b180eaee01d961dd50a65ef8a00428246650a650db0cb73b38",
+    "scripts/deidentification_audit.py": "20fed508c9bd4bd502eda9e0e506de55a833a7b0b1ebd95105a039195429e79a",
+    "scripts/dicom_inventory.py": "dc087b39070fe975e48a454b43f2e243c0a0cfcd60890d05117fef0e2b2dbc79",
+    "scripts/dicom_to_image.py": "ca717623e48a7f613482d7d78e2e314b3305a03633855569a0d2f58129ffd198",
+    "scripts/extract_metadata.py": "823479be9a052c06894b66570b0165f846daf3d08c8211856ef7c8ae632ce336",
+    "scripts/pixel_frame_planner.py": "e5d708da90ad1b8df52ea18b0e1116f202a22f5d01f20c772da31c2576d0da6c",
+    "scripts/transfer_syntax_inspector.py": "952e06fc095a02846013e3c270accf4e340453a2ae0665743688629acb58202a",
+    "scripts/uid_mapping_validator.py": "262cfe53ed911b6d41985455819653b1d3c799f08c95df49c31682616f44bbc1",
+    "scripts/_common.py": "58d1f8379afdef3b1e746d0a2ecb826b4c5e6126730e62fcf66a65f469a6a6bf",
+    "scripts/__init__.py": "fecf71e36c1caf5edc7470964188e93742dc8e4d69a977e04df910382898a96d",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

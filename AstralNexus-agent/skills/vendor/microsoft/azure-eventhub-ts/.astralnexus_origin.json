@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-typescript/skills/azure-eventhub-ts/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-typescript/skills/azure-eventhub-ts/SKILL.md",
+  "name": "microsoft:azure-eventhub-ts",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "6f452bd5f842bafc697edbb8201a091a360584c7a03881bfb63c38745899de2a",
+    "references/checkpointing.md": "fda2d06d01d133434f1dbeee4ba6119c59e9aa87f409e76ea11b3b5372b02cdb",
+    "references/event-processing.md": "2dd7cf558bd813cdb64aafa97510b540500183d16806eec498ed81509b71014c",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

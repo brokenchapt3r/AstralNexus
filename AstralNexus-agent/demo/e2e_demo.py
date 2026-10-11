@@ -22,6 +22,14 @@ import os
 import sys
 import time
 from pathlib import Path
+from typing import TypedDict
+
+
+class EnvironmentStatus(TypedDict, total=False):
+    mode: str
+    model: str
+    provider: str
+    warnings: list[str]
 from datetime import datetime
 
 # Add parent to path
@@ -45,7 +53,7 @@ def print_section(title: str):
 
 def validate_environment() -> dict:
     """Validate runtime environment."""
-    status = {
+    status: EnvironmentStatus = {
         "mode": "real_llm_required",
         "warnings": [],
     }
@@ -57,7 +65,7 @@ def validate_environment() -> dict:
     if not model_config.get("api_key_env"):
         status["warnings"].append("未检测到真实 LLM API 凭证，请先完成 AstralNexus 模型配置。")
     
-    return status
+    return dict(status)
 
 
 def demonstrate_multifactor_router(orchestrator):
@@ -154,52 +162,25 @@ def demonstrate_role_executor(orchestrator):
     """展示角色执行器（生产链路保护）。"""
     print_section("🎭 角色执行器演示")
     
-    from AstralNexus.core.role_executor import RoleExecutor
-    
-    executor = RoleExecutor(orchestrator)
-    
-    print("1. 生产链路保护 (Production Guard):")
-    
-    # 尝试执行不存在的角色
-    fake_role = "nonexistent_expert"
-    print(f"   - 尝试执行未注册角色: {fake_role}")
-    
-    try:
-        result = executor.execute_role(
-            role=fake_role,
-            task_id="test_task",
-            context={"goal": "测试任务"}
-        )
-        print(f"   - 结果: {result.status}")
-        if result.status in {"failure", "error"}:
-            print("   - ✓ 未注册角色被明确拒绝，未生成模拟结果")
-    except Exception as e:
-        print(f"   - 异常: {e}")
-    
-    # 执行已注册角色
-    print("\n2. 已注册角色执行:")
-    real_role = "planner"
-    print(f"   - 执行已注册角色: {real_role}")
-    
-    try:
-        result = executor.execute_role(
-            role=real_role,
-            task_id="planner_task_1",
-            context={"goal": "设计系统架构"}
-        )
-        print(f"   - 状态: {result.status}")
-        print(f"   - 输出长度: {len(result.output)} 字符")
-    except Exception as e:
-        print(f"   - 异常: {e}")
-    
-    return {"fake_role_tested": True}
+    # Factory lookup is the production registry boundary. Execution itself
+    # belongs to the Governor-approved graph run above, not a second executor.
+    registry = orchestrator.agent_registry
+    unknown = registry.create_agent("nonexistent_expert")
+    if unknown is not None:
+        raise RuntimeError("Unregistered role unexpectedly resolved to a worker")
+    planner = registry.create_agent("planner")
+    if planner is None:
+        raise RuntimeError("Planner role has no registered production factory")
+    print("Unregistered role rejected; planner factory is available.")
+    print("Worker execution is owned by the Governor-approved task graph.")
+    return {"fake_role_tested": True, "planner_registered": True}
 
 
 def generate_complete_delivery_package(orchestrator, run_dir: Path):
     """生成完整交付包。"""
     print_section("📦 交付包生成")
     
-    from demo.delivery_package import generate_delivery_package
+    from AstralNexus.demo.delivery_package import generate_delivery_package
     
     pkg_dir = generate_delivery_package(orchestrator, run_dir)
     

@@ -1,0 +1,18 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/benchling-integration/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/benchling-integration/SKILL.md",
+  "name": "scientific:benchling-integration",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "115b5418f7c42748918eed922b78010c795920b276063b8b759802eb0172d5de",
+    "references/api_endpoints.md": "3e36448c905777440689a54cc8667fe58fd40553deb39e5466af90d214a73d20",
+    "references/authentication.md": "3cadedf79a54997708f838e0342463b2e53457d80cd566e1b8d83fa875c9ed5b",
+    "references/core_capabilities.md": "f1e886764a21a46f6d22fce0b13efc8728f56a97303e8126151d87ab2be432f3",
+    "references/eventbridge.md": "6cf423ddd027f90909b336d178b1c35db4f79fdda9b373d0b827cfd7fd8c4e6e",
+    "references/sdk_reference.md": "32bef847f715376d97e47fe2938402c6b2c9f7d4d626ee1d9dae6f206b1da56e",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

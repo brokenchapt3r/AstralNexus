@@ -85,9 +85,9 @@ class ReadyWaveTracker:
         
         # Role diversity per wave
         role_diversity: Dict[int, float] = {}
-        for w in self.waves:
-            unique_roles = len(set(w.roles))
-            role_diversity[w.wave_id] = unique_roles / max(1, w.wave_width)
+        for wave in self.waves:
+            unique_roles = len(set(wave.roles))
+            role_diversity[wave.wave_id] = unique_roles / max(1, wave.wave_width)
         
         return {
             "total_waves": len(self.waves),
@@ -152,7 +152,35 @@ class Router:
             List of TaskNode objects that are ready to be executed
         """
         ready = self.task_graph.get_ready_nodes()
-        
+
+        # Ready-gate (r13c live, 2026-09-29 08:07:08Z, commit_seq 161-164):
+        # status=="ready" is a claim, not a proof.  A verification-recovery
+        # patch added producer N-120, the dependency edge N-118->N-120, and
+        # the repair_pending->ready requeue of N-118 in ONE commit; trusting
+        # the flag alone let the wave start N-118 before N-120 ever ran --
+        # the consumer executed ahead of the producer its own root-cause
+        # routing had just created.  Scheduling must therefore apply the
+        # SAME dependency/evidence gate as promotion (readiness_blockers is
+        # documented as "the same gate as scheduling"): a ready node with
+        # unsatisfied blockers is deferred -- never executed, never
+        # re-statused -- until its producers finish.  Repair leniency for
+        # failed/repair_pending parents lives inside dependency_available
+        # and is preserved unchanged.
+        selectable: List[TaskNode] = []
+        deferred: List[Dict[str, Any]] = []
+        for node in ready:
+            blockers = self.task_graph.readiness_blockers(node)
+            if any(blockers.values()):
+                deferred.append({"node_id": node.node_id, **blockers})
+            else:
+                selectable.append(node)
+        if deferred and self.trace_recorder:
+            self.trace_recorder.record("router.ready_gate.deferred", {
+                "deferred_count": len(deferred),
+                "deferred": deferred,
+            })
+        ready = selectable
+
         # Record ready-wave for parallelism evidence (阶段五 P0)
         if ready:
             wave = self.wave_tracker.record_wave(ready)
@@ -270,7 +298,7 @@ class Router:
         Returns:
             Dictionary containing minimal context
         """
-        context = {
+        context: Dict[str, Any] = {
             "constraints": node.constraints,
             "recent_decisions": [],
             "relevant_facts": [],
@@ -389,7 +417,7 @@ class Router:
         
         # Select the role with the highest score
         if role_scores:
-            best_role = max(role_scores, key=role_scores.get)
+            best_role = max(role_scores, key=lambda role: role_scores[role])
             return best_role
         
         raise LookupError(
@@ -669,9 +697,9 @@ class Router:
         receiver: str,
         msg_type: str,
         task_id: str,
-        claims: List[Dict[str, Any]] = None,
-        evidence_refs: List[str] = None,
-        open_questions: List[str] = None,
+        claims: List[Dict[str, Any]] | None = None,
+        evidence_refs: List[str] | None = None,
+        open_questions: List[str] | None = None,
         information_gain: float = 0.5,
         relevance: float = 0.5,
         urgency: float = 0.5,
@@ -876,8 +904,8 @@ class Router:
         if len(node_ids) < 2:
             return []
 
-        nodes = {nid: self.task_graph.get_node(nid) for nid in node_ids}
-        nodes = {k: v for k, v in nodes.items() if v}
+        nodes = {nid: node for nid in node_ids
+                 if (node := self.task_graph.get_node(nid)) is not None}
         if len(nodes) < 2:
             return []
 
@@ -1105,9 +1133,8 @@ class Router:
         while ready:
             # Sort ready nodes: critical-path depth descending, risk descending
             ready.sort(key=lambda nid: (-depths.get(nid, 0),
-                                        -self._calculate_risk_score(
-                                            self.task_graph.get_node(nid))
-                                        if self.task_graph.get_node(nid) else 0))
+                                        -self._calculate_risk_score(node)
+                                        if (node := self.task_graph.get_node(nid)) is not None else 0))
 
             current = ready.pop(0)
             ordered.append(current)

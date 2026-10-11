@@ -1,0 +1,16 @@
+{
+  "repo": "huggingface/skills",
+  "commit": "ca0325bb20b2d0a1b2efa893670c4c72f79e707b",
+  "source_path": "skills/huggingface-local-models/SKILL.md",
+  "source_url": "https://github.com/huggingface/skills/blob/ca0325bb20b2d0a1b2efa893670c4c72f79e707b/skills/huggingface-local-models/SKILL.md",
+  "name": "huggingface:huggingface-local-models",
+  "namespace": "huggingface",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "814640db1d5f2f274aec09d66b3589ed5a0fdcfaf536afd508b1d757dcae1534",
+    "references/hardware.md": "c708d7436bb654edf18b1f4cdc577d6c9c4edcf76896c97d510d35bbb7fb7f52",
+    "references/hub-discovery.md": "fb7d1d19dcf428d07b6fc8643d58396c180b2921eb0a9496955cfe9743da6b47",
+    "references/quantization.md": "8c388a37ba947023070c03b54b97d918166530d4cd0b26ede460b2435402fc55",
+    "UPSTREAM-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}

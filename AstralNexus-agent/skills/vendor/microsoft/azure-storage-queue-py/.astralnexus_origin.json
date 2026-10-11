@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-storage-queue-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-storage-queue-py/SKILL.md",
+  "name": "microsoft:azure-storage-queue-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "7a348472e13aaafa5d631b39dc9198d5b90123ea00b4cac4d359cbcaf886bc45",
+    "references/capabilities.md": "a5d7c3fb5e84b54acbe547f78f2777f4e34f643fff973ab9691909c8f5b64235",
+    "references/non-hero-scenarios.md": "baff50197077731400be53613caec9687ebabcfe3e06d6adb3abf249d6fbdc20",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

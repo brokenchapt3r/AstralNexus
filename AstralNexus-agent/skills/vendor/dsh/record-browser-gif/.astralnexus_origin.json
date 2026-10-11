@@ -1,0 +1,15 @@
+{
+  "repo": "deepseek-ai/deepseek-harness",
+  "commit": "5badb15009ae1756c3afe0ae0cef1faafc290ccc",
+  "source_path": ".agents/skills/record-browser-gif/SKILL.md",
+  "source_url": "https://github.com/deepseek-ai/deepseek-harness/blob/5badb15009ae1756c3afe0ae0cef1faafc290ccc/.agents/skills/record-browser-gif/SKILL.md",
+  "name": "dsh:record-browser-gif",
+  "namespace": "dsh",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "0ffc2b065a4abee9ad5766d0a0fcaf0009a8699576bcf2f8db39faaed5becfd8",
+    "scripts/encode_gif.py": "34aa805990361bc9838267a767160bd209f3e113d844913d4370b98af8441a47",
+    "scripts/test_encode_gif.py": "b803ee933e13123ec4663e08243c207881c609a16abf158f944fa626e31272d5",
+    "UPSTREAM-LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+  }
+}

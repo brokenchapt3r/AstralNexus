@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/infographics/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/infographics/SKILL.md",
+  "name": "scientific:infographics",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "dcd4ac5b46ac7f88ce8bd4ddf3efc8aa99a3f4bc6cc9ce2067c7d469758f0a8f",
+    "references/color_palettes.md": "69046b6d3e2845859d0ecf4fd2f83366bf1d7f929ebb5800b32a5e7ae8c14efb",
+    "references/design_principles.md": "0dc8a21eac0a524eeac8c0d9e503949a19c922a37cbbb70350801e2e5e2c5f82",
+    "references/infographic_types.md": "7e776a53dadfe2c8293abbb135756512bebfc66b72ad0aaa2076f96b2951e0b3",
+    "references/infographic_type_catalog.md": "2321a37bc451e76903fe18f5b0b6969e0b36757ffedce5def634197a9b9d5f68",
+    "references/iterative_refinement.md": "31034254d9c849c3a1295aa11223d12c120288b4a7e825d915a411f726ff9f0b",
+    "scripts/generate_infographic.py": "c70c52ee56921bf941edd17168cb90aa57373fa7c34ff7f8360fc8fa9df21b99",
+    "scripts/generate_infographic_ai.py": "edb5abe887af7cd24cc85f4440006a19f4dde5d1d9564cb22031e40712faa338",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

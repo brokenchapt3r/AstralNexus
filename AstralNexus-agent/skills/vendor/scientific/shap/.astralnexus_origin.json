@@ -1,0 +1,22 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/shap/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/shap/SKILL.md",
+  "name": "scientific:shap",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "9c395662e608accd60acb62158f1d25299b12ec0e40f9f94b70a46ec527d52c1",
+    "references/data-maskers.md": "fe586f1d7aac5c799437506c2353dc7c0b4916a09c10ea714b22db49aaa12f12",
+    "references/explainers.md": "d173b54e0ee1d5c5e627609967000926fd6036e8efba282534f68857d9cdefca",
+    "references/migration.md": "81278c5d30634b1e2f16bf7b6b703b2b968bfa01636bd7eecae2201baa76e721",
+    "references/modalities.md": "dd19dc010438ed9dca06bce06d3820d617c2fa5740bf0ac86706081ae2ade518",
+    "references/plots.md": "634067fd6d2c951ac4db35a182109f8313be501b6fcd04e0d99e7957f77d3ec2",
+    "references/theory.md": "103d0f50131649c63d6c0895a723d28f5fc175cb5ef923adec0655adc7a136dd",
+    "references/troubleshooting.md": "92ddecfa7a40e30274b812f14abd0ae2e1ec9ab6f14d1a93e77cb15208e754f8",
+    "references/workflows.md": "d227b27899216451daa89b145c6f9e0f4850efacba687d0db00a06921743132e",
+    "scripts/tabular_report.py": "06161aefd48914406f41ad8b26389853537235c5577a962a29fb4a246013214e",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/pyzotero/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/pyzotero/SKILL.md",
+  "name": "scientific:pyzotero",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "82dec36c7294674f33d9b6003e523d1dc4da33ed1c7427dc4e53731119fc5f74",
+    "references/authentication.md": "5a2a09a6adfad33d03f4a7e84eb16f955e4aba7fa8e29fbd81e4ee37a46bc21c",
+    "references/cli.md": "2d76df610085b177d660576a7c694f3b6fcd6dba50a2e22fd86e37ef52468f88",
+    "references/collections.md": "79950aba56a0efbd0358b3ce662bff5c67c8aa20ecda1a371e38ec5fd5b72b7a",
+    "references/error-handling.md": "a87eda6c3fccd520a8120093fedfde0fa04aa757871c9430ba117d359bda48d8",
+    "references/exports.md": "127bd01447fb2c70956f048dc87a065761603bff522be1c4eacae3638bf3bdaf",
+    "references/files-attachments.md": "ce3f3dc28d5455938698bd6553ba7a82ff28a86070cd4ec2a43a9a6969c29136",
+    "references/full-text.md": "b75d3f7dbb77a52b3688824fc6f80f17888130b54eea486d56d493c4ef676d2d",
+    "references/mcp.md": "c4a7e6e7f4dc784f156662ebd9d13919e060f4cf472f184451281193ba426032",
+    "references/pagination.md": "386cf1d84c3021143582ff557dd640e9cbcfcd4245e4fcc32ecdf0796ee80342",
+    "references/read-api.md": "4182ef44d6c4a83c2993658dfe30d23b9e7b1e5aadb32405ae514707e032e828",
+    "references/saved-searches.md": "8c891c84d023fa215920c61a385c3afc8363c5b7bc48e6b1294d84936f81329e",
+    "references/search-params.md": "d75501f2278720f02b10f58d14d3fa347366b6144497ceea333a5fb6f6e35312",
+    "references/tags.md": "31be953e7c8f9f3b93739d30fc4edbcf81ceb652f803a92e971a2ad74b49a20d",
+    "references/write-api.md": "008ee377cf20425069169c896aaefe57a14583c82ca7625ca9d9fc1e8292a0d8",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

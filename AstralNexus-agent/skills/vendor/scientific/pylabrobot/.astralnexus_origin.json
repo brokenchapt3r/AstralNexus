@@ -1,0 +1,28 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/pylabrobot/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/pylabrobot/SKILL.md",
+  "name": "scientific:pylabrobot",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "b2aab8871006d84e53621fc0f4886d0fd0c671007d112569e444e0a56a564d76",
+    "assets/protocol-manifest.schema.json": "ba9d2a52b5e5eb76b1e0ae88b30c6a16e89b22fd0b9b6019d90f09640b16ec17",
+    "references/analytical-equipment.md": "64f8ae4292d5843aa95fe0e9bcf13913eb4cc0cf551cfb3a3d7d759753f25c03",
+    "references/hardware-backends.md": "72dbc55c38bb15ec196fef7cd5d609a0d25899208829d5dd533839ab72ca1227",
+    "references/liquid-handling.md": "8e804c5f533213e46e09b13e87f33532f305e43bc28aa525aecf4eaba4fdbf67",
+    "references/material-handling.md": "7b62fc0874982c94c77e2e5a2dabf8c22201eec1bb1098ec539456cbc0900d5a",
+    "references/resources.md": "f694f2fe5f778cfbc94da7034a6a119d7e0dde676315c514ede8e3c4b28a5bab",
+    "references/review.md": "1b99979ebe35c23840d80e3f347b75b8e5200034c342431d904e52184d68b10c",
+    "references/visualization.md": "35411f5dba90978ef896270fd6f82f03dbb65810abc9a6fbeee61bf5787b7cb7",
+    "scripts/check_deck_geometry.py": "0e219941e7013cb1a812966ec730a29f17037be819c19a08d4ab3342a5b0b74b",
+    "scripts/generate_simulation_plan.py": "071e42a404830476134331af47bc0d103882c2d5a5f2773b8b220bdd7efa6092",
+    "scripts/inspect_backends.py": "e082a60332e96d91324aafed1fe729513bfbece7eff6b62a436dfe9fc2bf2d71",
+    "scripts/plan_transfers.py": "92a059726a5707506c2bd68877e7bf3fc36a61201f4de4f8e0d8ad66963fd0ab",
+    "scripts/validate_manifest.py": "6fe09732a1fc75fa5ee534a2e79abd8724bd149c4ef3a698c0960c093762ca1c",
+    "scripts/_common.py": "48cce3a8ea9ee313e657ca1fd63176448ef6f0e30bdb73472c494d4c0c5c23ef",
+    "scripts/__init__.py": "d1a981fe4edf160c2ed51409244c623b0bb6d73b1ffc9b50e6b729303c640cca",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

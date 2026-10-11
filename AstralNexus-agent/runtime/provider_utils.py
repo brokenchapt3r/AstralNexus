@@ -4,6 +4,7 @@ Centralizes API key resolution and provider detection to eliminate
 duplication between LLMClient, ModelClient, and ProviderRequestGate.
 """
 from __future__ import annotations
+from AstralNexus.runtime.run_context import get_env
 
 import os
 from typing import Any, Dict, Optional
@@ -42,7 +43,7 @@ def resolve_api_key(
         return explicit_key, ""
     
     for env_var in API_KEY_ENV_VARS:
-        value = os.environ.get(env_var, "").strip()
+        value = get_env(env_var, "").strip()
         if value:
             return value, env_var
     
@@ -68,7 +69,7 @@ def resolve_base_url(
     if explicit_url:
         return explicit_url
     
-    env_url = os.environ.get("ASTRALNEXUS_BASE_URL", "").strip()
+    env_url = get_env("ASTRALNEXUS_BASE_URL", "").strip()
     if env_url:
         return env_url
     

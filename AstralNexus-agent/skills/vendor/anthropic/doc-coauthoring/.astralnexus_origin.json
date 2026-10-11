@@ -1,0 +1,13 @@
+{
+  "repo": "anthropics/skills",
+  "commit": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4",
+  "source_path": "skills/doc-coauthoring/SKILL.md",
+  "source_url": "https://github.com/anthropics/skills/blob/8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4/skills/doc-coauthoring/SKILL.md",
+  "name": "anthropic:doc-coauthoring",
+  "namespace": "anthropic",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "2e47d78846faeea4a56e9809c52700087a15a2155a3f293a3efbaded81398ef4",
+    "UPSTREAM-README.md": "2fb9c4cc026366ea6e21c60cb23c908a4d27c62071819cc06beffaac102d0694"
+  }
+}

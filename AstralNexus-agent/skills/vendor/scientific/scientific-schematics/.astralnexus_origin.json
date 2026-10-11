@@ -1,0 +1,18 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/scientific-schematics/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/scientific-schematics/SKILL.md",
+  "name": "scientific:scientific-schematics",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "e15d761ef88013c98fd5b19cc144aba7336e20dbadf340db17bd1ba2227d1d69",
+    "references/best_practices.md": "a991e1f2219feaffea93360c39cb5a7102c7cd8985c0c7aafc68fa617d3b8581",
+    "references/iterative_refinement.md": "f151ecba3c786b55f6f4b505ddca01957deabbc8f5dc9dcd0d3e27e766c3da75",
+    "scripts/example_usage.sh": "921e4c2332f83cafa75491be4bb92dd863c86cd9118ef0e04028a7eb74a9ae0b",
+    "scripts/generate_schematic.py": "0c81ce099d5ab9aa3d3c486aa9bd3e81ee1117e18a54db14bb0a68de61eaa4bc",
+    "scripts/generate_schematic_ai.py": "7316f2df92f442b8c60a5dd2bd8b504e17449d4be89352e5af24be2239700046",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

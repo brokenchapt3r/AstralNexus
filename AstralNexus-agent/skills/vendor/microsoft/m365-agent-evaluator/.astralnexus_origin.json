@@ -1,0 +1,29 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/microsoft-365-agents-toolkit/skills/m365-agent-evaluator/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/microsoft-365-agents-toolkit/skills/m365-agent-evaluator/SKILL.md",
+  "name": "microsoft:m365-agent-evaluator",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "5a1da9a62088eb7518937e1cba1d66e5a644083d82a22aa51f242f5915ca21ee",
+    "examples/analyze-failures.md": "01eb1ab5286a15bee9b0f03efd5596035d5fb9d6726f489e67ab11ef67eb79e8",
+    "examples/basic-generation.md": "30b227fd8ea53fc6a2a7a93273473185add4be168f8d63f2e54455ea88ca0940",
+    "examples/iterate-on-changes.md": "56f41fc11c36061bf9518b1d3c88cab57e70d8019c6c0424edfb2e376c8c2c13",
+    "examples/missing-instructions.md": "8617159c45e30c8361091e8dca5c18060d58418b95c986ebfc905ab6729f4fcf",
+    "examples/not-atk-project.md": "561b687faeba871bcad879e2d57340be2b665cbc29c2b5bcdeea5d4e5b8e480b",
+    "examples/run-and-analyze.md": "c1994a14d9480b93a575707dce6875bc3c90cab4380d7a5ac3c6fc9f47b02957",
+    "references/azure-setup.md": "da2a31e35589791c09d7b22ff224e554f63567c4072186079591c9b35554d90c",
+    "references/eval-templates.md": "d7fabdbcbe16a6dd621c53346cce42fbda2f64c7d5feedf6c27e9cde2984f62e",
+    "references/guardrails.md": "e128ebdd3433170ef4ac942a2a10c5e69e494c71b2ee09c6303f9ec5007a675d",
+    "references/output-schema.json": "2e420f9291d158d74f6bd6a1a934aa6458f69454d7ababaa84c0e34064590f97",
+    "references/output-schema.md": "75a84a0d91869d990e257631765c2a20b70e4bfda823fc60ce8050447cd8d892",
+    "references/pra-framework.md": "443e5195cb07427bbbd57fbe453563fc18d4320f3ec6dde29b98a94d11659c96",
+    "references/prompts-schema.json": "726a8726dd4eeb17d95d661979e7be27f250e6465b8197d3a5f5676b8f5d090a",
+    "references/remediation-patterns.md": "064b50aadf2a7ac2e4512e1e7fb98e8d3b87ebb2b8db2dea07353b09a5a830bc",
+    "references/result-analysis.md": "5bcf4a35fb605080fab9b6c0e9313f8e461ea1281980b4c02fb228dc45ee45c4",
+    "references/workflow.md": "aeb5eab90ae6115824c61649e084d2c10ce7ccdc8d48c999b6f93a0a34418fbf",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

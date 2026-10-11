@@ -1,0 +1,16 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-dotnet/skills/azure-resource-manager-sql-dotnet/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-dotnet/skills/azure-resource-manager-sql-dotnet/SKILL.md",
+  "name": "microsoft:azure-resource-manager-sql-dotnet",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "95f952b72a93affd41483f7a44f1bb4043942794fc1d3ed070cde247e2cf1854",
+    "references/database-operations.md": "0780a88d23a285ad779d3f97be9de38b59bc8bc866a912180a165cad8e1269b5",
+    "references/elastic-pools.md": "350212861fcc57ea4a31433ab49311c0169ede6d9ba133c4245faa205597e4d2",
+    "references/server-management.md": "a38accf22506d493baf36a10dbbed77eb55e6019e75bbcfcdfd1b8f92e2a0aa4",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

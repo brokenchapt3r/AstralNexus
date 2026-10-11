@@ -1,0 +1,14 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-java/skills/azure-monitor-ingestion-java/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-java/skills/azure-monitor-ingestion-java/SKILL.md",
+  "name": "microsoft:azure-monitor-ingestion-java",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "edc52c6adc3d7503cfce4bee6fca0357f98f003b3555b4b2867daace43210f5f",
+    "references/examples.md": "930e5cfa1a13c14d17f1f46c6812b2143c4bed0194141909416a72c17bae8fd2",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

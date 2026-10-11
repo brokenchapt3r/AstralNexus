@@ -3,6 +3,26 @@ import pytest
 from AstralNexus.core.governor import DeliveryContract, EventType
 
 
+@pytest.mark.parametrize("declared,expected", [(None, False), (False, False), (True, True)])
+def test_new_contract_does_not_invent_summary_phase(tmp_path, declared, expected):
+    import json
+    from types import SimpleNamespace
+    from AstralNexus.core.governor import GlobalGovernor
+    from AstralNexus.core.task_graph import TaskGraph
+    from AstralNexus.runtime.trace import TraceRecorder
+
+    response = {"required_outputs": [{"output_id": "O-01", "name": "main.py",
+                "type": "file", "path": "main.py", "required": True}]}
+    if declared is not None:
+        response["summary_required"] = declared
+    governor = GlobalGovernor(TaskGraph(), TraceRecorder(tmp_path))
+    contract = governor.derive_delivery_contract("交付指定文件并通过测试", SimpleNamespace(
+        chat=lambda *args, **kwargs: json.dumps(response),
+    ))
+    assert contract["summary_required"] is expected
+    assert len(contract["required_outputs"]) == 1
+
+
 class TestDeliveryContract:
     """Test DeliveryContract dataclass functionality."""
 

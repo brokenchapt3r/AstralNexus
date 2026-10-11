@@ -1,0 +1,27 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/pymatgen/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/pymatgen/SKILL.md",
+  "name": "scientific:pymatgen",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "4a106d7682cd9881765700d534cb419458ba407935a59168547da1ae6ea4b6b1",
+    "references/analysis_modules.md": "80f2b10954eb382326f29b42e2c0ba36ecffcb7b7f7aa7baac41787417e98619",
+    "references/core_classes.md": "855b72c5860def49bda192d93b114a411493d639772bf7b4b75965ed9c6d994a",
+    "references/io_formats.md": "86a02f2c65b2bd9007b9b51a67694610cb468517a0e213b42e51c3e6ed2a310f",
+    "references/materials_project_api.md": "dd1940b0ffb25d59f49aa2c7ff2167be5542c46025b6af599425b9ff5a7300d7",
+    "references/transformations_workflows.md": "2ba11b7b1f61de4af89ca216abf12b8c28ee7fa4659623914730bb9733991628",
+    "scripts/artifact_manifest.py": "20e64dcd2e65996312bd17a487e0eebfb8e87fc814f938cc030a972f64d6118c",
+    "scripts/composition_structure_validator.py": "cc008c188a2e864a4498df0b90acab4c02f2270e58cc5659dd2129c21f5766c9",
+    "scripts/io_conversion_plan.py": "bbaa88773984f1cc2ae170720ff18142e7d4a5114a98c83b1da905e9803605f1",
+    "scripts/mp_query.py": "7b9fc0e0ec04d63b2349d6c336bb5e390f5ab481ea669a2f43efc7f0d6d1f704",
+    "scripts/phase_diagram_generator.py": "2deeae612bae443c643078ddecea37000aeb88b6982a39522985d93436c38208",
+    "scripts/structure_analyzer.py": "1f1bccf254b80edb28f9b2925dccc72327e948d41c1fb3adef6a5e72288413b9",
+    "scripts/structure_converter.py": "eead5fd4e7c18a050c226f9ecdcc8ae97fa570d9e0269421f1142013deaf92d8",
+    "scripts/symmetry_sensitivity_report.py": "21a384d299e20b7e98281c8623da02a4a8e82604275c8c83454f87163652da15",
+    "scripts/_common.py": "8eaa46482ecd54861730808aa628b515eae633eb5414835e600917505fc98772",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/analytical-method-validation/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/analytical-method-validation/SKILL.md",
+  "name": "scientific:analytical-method-validation",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "7c2cd278bd397f0f85f4fc790b236a61190cff8799c8ece8da923342f4dc0032",
+    "assets/validation-protocol-template.md": "c157c47eb77e136b40904f6323988ccf662dad6b60811d330323b189c232fc5f",
+    "assets/validation-report-template.md": "f0519fb2abd9d0315f0b6cba76527659ab500f9a311f268d66452f7798e574e0",
+    "references/compendial-and-clsi.md": "f3bfe0e15892966b3c4db43c542b32af89455f755529f1f13a04c15421013230",
+    "references/framework-selection.md": "ad7a9d07c6c66d68464ed759bd9a646df8db06fca2897478825e0de12d341945",
+    "references/ich-m10-bioanalytical.md": "695367208b8b4883879b364f57df9bc73f17cb98181a093d43880c0453764c4a",
+    "references/ich-q2r2.md": "9871db11c76e1c74e191f28a44e3047a67663d487384188b4f0b228f886ad34b",
+    "references/source-ledger.md": "fd5605e03d4203df8caffa7ba3464147a65c3ee5f8a7056bdcc8a2d2beb2fca6",
+    "references/statistics.md": "0f8f33bc0c363e0fe7088ea718fe8928bd1bdd4afef1646f927cca317915d453",
+    "scripts/check_accuracy_precision.py": "1d24ee3f5a81d0bc40d30009f6ea7dab7422455eaf9adef6e4d0f5a1f5cd88a7",
+    "scripts/check_bioanalytical_run.py": "e754fc8407e5e6b003c96e25db577a1e88b6dcebc0c47f188e299cc13dfbc18c",
+    "scripts/check_detection_limits.py": "78178d76499005497f7b05a2a8ca6b948c151860ad34195e0f3701f0b2f4d402",
+    "scripts/check_response.py": "fa732cb35a6652a5ffa08208271180d51160f73e89307883251da670f9aaac1d",
+    "scripts/compare_methods.py": "d3f51cd0a31fbcc9e4259f791e1a9c515ba42f0d4090348962387cdf91f0fead",
+    "scripts/plan_validation.py": "e2d95299d6a4e1eaf57de9e96dfd5dae82596e5f239b14b19e0e35cc0dcf01b3",
+    "scripts/_catalog.py": "c597f14d44eceb997b7f12a5035e81669c3ad3ded1e487796f58d4392efef8ed",
+    "scripts/_common.py": "c801e568b409acf7a510069b3697e6a74bf372adcfa7dcfb27b442a670580b26",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/relsa-severity-assessment/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/relsa-severity-assessment/SKILL.md",
+  "name": "scientific:relsa-severity-assessment",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "10ee1a904565f5e9c9d432b3af136db42927d0811f07f646355600fec6633f8a",
+    "assets/example_cohort.csv": "8becb57b62367de1cf03e287ae002f9a3361396b73c6d1385466738b4efff86e",
+    "references/forecasting.md": "329605e6087025d4a256e211add766bdf00b2ca6c30d42ce03125fadb16aef4d",
+    "references/relsa-method.md": "d1cd8963db2761e2b9555f466111b6752ea48564e4b4cb1976e00ae304c80b74",
+    "references/thresholds-and-zones.md": "6dba2a68f3d32835b5a5ffd8ec5b1d4fc6e600c9dc94637eb07322ea4604eaaa",
+    "scripts/forecast_relsa.py": "a1c83e8779078a7abd51cca0dfd839d5fb806cf9a66a12c010b228690cbfe06a",
+    "scripts/kde_thresholds.py": "b58db3e1ff0168dbccce659ced2a2eed5cb741881864ac8a5c0cecf5d946d4d5",
+    "scripts/relsa_score.py": "25729f9d53b4efd46f3f9930d33594284cb2c0ccdecf791ce2960fb04679bd1a",
+    "scripts/_common.py": "78c14602ff937e16ac9e609f24d76c4bd0edf14295ea4df09cf0c9c7e1b3d513",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

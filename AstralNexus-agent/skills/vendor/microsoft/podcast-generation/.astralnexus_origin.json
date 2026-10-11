@@ -1,0 +1,16 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/skills/podcast-generation/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/skills/podcast-generation/SKILL.md",
+  "name": "microsoft:podcast-generation",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "5719cfda0fd19819d52702426992551224060ce1cb4618ed8356785b6bb010fc",
+    "references/architecture.md": "81d0b68a1eda6320c62446fccd44ae92645ac22a3e2aeff2dfd538f76a449d5a",
+    "references/code-examples.md": "a4dbaca4cf3302478c9b4eff28a1b65d6899d4286d61288a24c544ff3772c455",
+    "scripts/pcm_to_wav.py": "fa728011e7b9c1641b4f6dac26b798260bee4738799651341c16bae5c9b0c6f8",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

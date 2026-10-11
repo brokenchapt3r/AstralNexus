@@ -1,0 +1,17 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/microsoft-foundry/models/deploy-model/capacity/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/microsoft-foundry/models/deploy-model/capacity/SKILL.md",
+  "name": "microsoft:capacity",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "91b3ce958de44f728453572747504e8c9146f119892aa690546fd19f8d96a344",
+    "scripts/discover_and_rank.ps1": "cc0515af5d6a48d77122dcd451ffb44b6332920a91add8704eec52da129be677",
+    "scripts/discover_and_rank.sh": "21b1a3197e2b49c0bdc0af5dafa368c9807df0841a718e344fd09d1849df8939",
+    "scripts/query_capacity.ps1": "b8580f46de51cd09dc43f0d30dde95ae64f2b54723b70768cd78ccfe107ce6cc",
+    "scripts/query_capacity.sh": "3af156c2cf0b2306f3389a34475ad39a9960ebf8e2384bfa6da6f05b62432ae8",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

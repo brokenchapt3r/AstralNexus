@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-ai-contentsafety-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-ai-contentsafety-py/SKILL.md",
+  "name": "microsoft:azure-ai-contentsafety-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "a87b5c2b469ddb77776770d12b7a3a1a481c72af6300b6aac96887825df063fb",
+    "references/capabilities.md": "b3b3a25a652486ee668ada055e3ec03b09e1a01ebac0d4202e374670d6c663a5",
+    "references/non-hero-scenarios.md": "04a4cd123158fc993a4f0abd454200420bbf90546d8122d0b5386ac57aa0fbd3",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

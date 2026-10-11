@@ -4,6 +4,19 @@ from pathlib import Path
 from AstralNexus.core.layered_synthesis import build_layered_context
 
 
+def test_reducer_cannot_replace_or_drop_structured_execution_facts():
+    from AstralNexus.core.layered_synthesis import _normalize_reducer
+    facts = {"source": "execution_store", "execution_id": "original-execution",
+             "receipts": [{"receipt_id": "original-receipt", "returncode": 0,
+                           "stderr_tail": "Ran 3 tests\nOK", "files": {"app.py": {"sha256": "original"}}}]}
+    packets = [{"node_id": "T-001", "evidence_refs": ["node_io/original.json"],
+                "runtime_evidence": facts}]
+    result = _normalize_reducer({"group_id": "G", "node_ids": ["T-001"]},
+                                {"recorded_execution_evidence": [{"execution_id": "model-invented"}]},
+                                packets, task_version=1)
+    assert result["recorded_execution_evidence"] == [facts]
+
+
 class FakeClient:
     def __init__(self):
         self.calls = []
@@ -137,3 +150,55 @@ def test_build_layered_context_keeps_raw_artifacts_and_bounds_inputs(tmp_path: P
     assert (tmp_path / "layered" / "outline.md").exists()
     assert (tmp_path / "layered" / "global_verification.json").exists()
     assert all(len(call) < 20000 for call in client.calls)
+
+
+def test_packet_loader_excludes_control_and_superseded_attempts(tmp_path):
+    from AstralNexus.core.layered_synthesis import _load_packets
+    node_dir = tmp_path / "node_io"
+    node_dir.mkdir()
+    for name, node_id, role, attempt, outcome in [
+        ("plan", "P-001", "planner", 1, "succeeded"),
+        ("old", "worker", "coder", 1, "succeeded"),
+        ("new", "worker", "coder", 2, "failed"),
+        ("current", "valid", "coder", 1, "succeeded"),
+    ]:
+        (node_dir / f"{name}_output.json").write_text(json.dumps({
+            "node_id": node_id, "role": role, "attempt": attempt,
+            "execution_outcome": outcome, "content": "real content", "artifacts": ["deliverables/result.json"],
+        }), encoding="utf-8")
+    (node_dir / "current_input.json").write_text(json.dumps({"goal": "compute actual result"}), encoding="utf-8")
+    packets = _load_packets(tmp_path)
+    assert [packet["node_id"] for packet in packets] == ["valid"]
+    assert packets[0]["artifact_refs"] == ["deliverables/result.json"]
+    assert packets[0]["goal"] == "compute actual result"
+
+
+
+def test_reducer_provenance_cannot_claim_other_producers_inputs():
+    from AstralNexus.core.layered_synthesis import _normalize_reducer
+    packet = {"node_id": "V", "evidence_refs": ["node_io/V_output.json"]}
+    raw = {"source_artifacts": ["deliverables/main.py", "node_io/C_output.json"],
+           "verified_claims": [{"claim": "tests ran", "evidence_refs": ["node_io/V_output.json"]}]}
+    result = _normalize_reducer({"group_id": "G", "node_ids": ["V"]}, raw, [packet], task_version=1)
+    assert result["source_nodes"] == ["V"]
+    assert result["source_artifacts"] == ["node_io/V_output.json"]
+    assert result["context_artifact_refs"] == raw["source_artifacts"]
+    assert result["verified_claims"][0]["evidence_refs"] == ["node_io/V_output.json"]
+
+
+def test_reducer_does_not_rewrite_a_forged_claim_reference():
+    from AstralNexus.core.layered_synthesis import _normalize_reducer
+    raw = {"verified_claims": [{"claim": "unsupported claim", "evidence_refs": ["node_io/other_output.json"]}]}
+    result = _normalize_reducer({"group_id": "G", "node_ids": ["V"]}, raw,
+                                [{"node_id": "V", "evidence_refs": ["node_io/V_output.json"]}], task_version=1)
+    assert result["verified_claims"][0]["evidence_refs"] == ["node_io/other_output.json"]
+
+
+def test_normalized_summary_emits_only_canonical_machine_fields():
+    from AstralNexus.core.layered_synthesis import _normalize_reducer
+    summary = _normalize_reducer({"group_id": "G", "node_ids": ["V"]},
+        {"claims": ["legacy input"], "open_issues": [], "suggested_followups": ["check"]},
+        [{"evidence_refs": ["node_io/V_output.json"]}], task_version=1)
+    assert summary["verified_claims"][0]["claim"] == "legacy input"
+    assert summary["recommended_followups"] == ["check"]
+    assert not {"claims", "evidence", "artifacts", "open_issues", "suggested_followups"}.intersection(summary)

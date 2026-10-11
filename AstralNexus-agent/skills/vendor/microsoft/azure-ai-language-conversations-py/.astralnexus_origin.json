@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-ai-language-conversations-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-ai-language-conversations-py/SKILL.md",
+  "name": "microsoft:azure-ai-language-conversations-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "4b51c68f15f6155f4621be975bdbb9f41ce79097c9a7cd1784669d8f87cae665",
+    "references/capabilities.md": "8fe8ae6c05235fa6d6a705715231910e50729188f6d41eb5d4185043db695383",
+    "references/non-hero-scenarios.md": "71db8bac4317c7335b39358cc638d8387103771bccd0adbab6cba51db8dedc62",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from AstralNexus.runtime.model_selector import get_model_config, load_env_file
+from AstralNexus.runtime.run_context import get_env
 
 
 @dataclass(frozen=True)
@@ -21,11 +22,11 @@ class ModelClient:
         """
         load_env_file()
         config = get_model_config()
-        env_model = os.getenv("ASTRALNEXUS_MODEL", "").strip()
+        env_model = get_env("ASTRALNEXUS_MODEL", "").strip()
         effective_model = (self.model or "").strip() or env_model or config["model"]
         effective_provider = (
             (self.provider or "").strip()
-            or os.getenv("ASTRALNEXUS_PROVIDER", "").strip()
+            or get_env("ASTRALNEXUS_PROVIDER", "").strip()
             or config.get("provider", "dashscope")
         )
 

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from threading import RLock
-from typing import Any
+from typing import Any, Literal
 
 from AstralNexus.core.task_graph import TaskGraph
 
@@ -37,7 +37,7 @@ class TaskGraphTransaction:
         }
         return self
 
-    def __exit__(self, exc_type, exc, traceback) -> bool:
+    def __exit__(self, exc_type, exc, traceback) -> Literal[False]:
         try:
             if exc_type is not None and self._snapshot is not None:
                 self.task_graph.nodes.clear()

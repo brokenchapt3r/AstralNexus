@@ -1,0 +1,25 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/pathml/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/pathml/SKILL.md",
+  "name": "scientific:pathml",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "654cef910bd567689b854eab52176628f39184d7cca7a6bf405343f337e58538",
+    "references/data_management.md": "ffb0e9e16b13e17a4d0651edca57335bd9d4c085bc59ecb41f6807656b5cf5a6",
+    "references/graphs.md": "dbe86e21af1e97d0a43a84540cb28d5572ba3bf41ae1c0579982cb0ab2b21b66",
+    "references/image_loading.md": "20c6fb4f0d6fce55feb6821e20b48f4322c70e6e7bb939ae03d6794fd32bb6f0",
+    "references/machine_learning.md": "300dd2aab88bd976237d2bdb20f52b567097fccbb1a965ebee0128f66f71337d",
+    "references/multiparametric.md": "54e45a60e2bd19412bbbc848eb28a2160fe7d074df77b571c76763c22279f9aa",
+    "references/preprocessing.md": "26887b2bed4e7486580c250b2c9114146134058fe80e67dcf7585a0ce2cbd15e",
+    "scripts/image_qc.py": "966c9cd9aee301ac047a1213c00cba617583c3415110601dd0b36d5b5423e7ef",
+    "scripts/plan_inference.py": "6e8667a22515a84d10b65de44a36b332ccc4eb5b038571144698cc40a2331d68",
+    "scripts/plan_pipeline.py": "ffa2d20144e3af9e27799a8c4731c9983fd1530a94ca3f29acc616ade6e00ef0",
+    "scripts/slide_manifest.py": "a9476e11edde2725dae2e217cff2e1abf720bdf84edb07ce617e5a5f89778537",
+    "scripts/validate_spatial_schema.py": "0aaad70642e36f6c4eb5bc5328c87a401a7ec18030f15d63af23a97dda4d41ac",
+    "scripts/_common.py": "6c811608f2bcb66839f05dc3b9563691fc41c3468f503cf914b1ff59c46a2ae1",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

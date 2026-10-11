@@ -8,6 +8,44 @@ from pathlib import Path
 from AstralNexus.cli import commands
 
 
+def test_report_uses_current_graph_records(tmp_path):
+    from AstralNexus.cli.main import _generate_report
+    from AstralNexus.core.orchestrator import Orchestrator
+    from AstralNexus.core.task_graph import TaskNode, Fact, Artifact
+    run_dir = tmp_path / "runs" / "report-run"
+    with Orchestrator(run_dir, run_id="report-run") as orchestrator:
+        graph = orchestrator.task_graph
+        graph.add_node(TaskNode(
+            node_id="worker", goal="report current records", role="coder",
+            status="completed", metadata={"error": "historical diagnostic"},
+        ))
+        graph.add_fact(Fact("fact-1", "verified fact", "worker", 1.0, "2026-09-09"))
+        graph.add_artifact(Artifact("artifact-1", "worker", "file", "result.json", "result"))
+        orchestrator._save_checkpoint()
+    output = tmp_path / "report.md"
+    assert _generate_report(SimpleNamespace(run_id="report-run", output=str(output)), tmp_path) == 0
+    text = output.read_text(encoding="utf-8")
+    assert "verified fact" in text and "result.json" in text
+    assert "historical diagnostic" in text
+
+
+def test_inject_fault_finds_run_and_reports_current_worker(tmp_path, monkeypatch):
+    from AstralNexus.cli.main import _inject_fault
+    from AstralNexus.core.orchestrator import Orchestrator
+    from AstralNexus.core.task_graph import TaskNode
+    run_dir = tmp_path / "runs" / "fault-run"
+    with Orchestrator(run_dir, run_id="fault-run") as orchestrator:
+        orchestrator.task_graph.add_node(TaskNode(
+            node_id="worker", goal="inject fault", role="coder", status="ready",
+        ))
+        orchestrator._save_checkpoint()
+    monkeypatch.setattr(Orchestrator, "inject_fault", lambda *args: {
+        "fault_id": "fault-test", "recovery_success": False,
+    })
+    assert _inject_fault(SimpleNamespace(run_id="fault-run", type="node_failure", payload=None), tmp_path) == 0
+    assert (run_dir / "fault_injection_fault-test.md").is_file()
+
+
 def test_interactive_task_keeps_user_intent_separate_from_control_metadata(
     monkeypatch, tmp_path: Path,
 ) -> None:
@@ -88,14 +126,18 @@ def test_noninteractive_interrupt_does_not_report_false_success(capsys) -> None:
 
 
 def test_system_cli_uses_registry_for_non_argparse_commands(monkeypatch, tmp_path) -> None:
-    calls = []
+    def _capture_callback(parts, home=None):
+        calls.append((parts, home))
+        return 0
+
+    calls: list[tuple[object, object]] = []
     from AstralNexus.cli import main as cli_main
 
     monkeypatch.setattr(cli_main, "bootstrap_environment", lambda: tmp_path)
     monkeypatch.setattr(
         cli_main,
         "process_command_args",
-        lambda parts, home=None: calls.append((parts, home)) or 0,
+        _capture_callback,
     )
 
     assert cli_main.main(["model", "list"]) == 0
@@ -131,10 +173,14 @@ def test_gateway_routes_slash_commands_through_canonical_handler() -> None:
 
 
 def test_resume_handler_delegates_to_canonical_resume(monkeypatch, tmp_path) -> None:
+    def _capture_callback(args, home):
+        calls.append((args, home))
+        return 0
+
     run_dir = tmp_path / "run"
     run_dir.mkdir()
     (run_dir / "task_graph.sqlite").write_bytes(b"")
-    calls = []
+    calls: list[tuple[SimpleNamespace, Path]] = []
 
     monkeypatch.setattr(commands, "_resolve_run_dir", lambda session_id, home: run_dir)
 
@@ -143,7 +189,7 @@ def test_resume_handler_delegates_to_canonical_resume(monkeypatch, tmp_path) -> 
     monkeypatch.setattr(
         cli_main,
         "_resume_task",
-        lambda args, home: calls.append((args, home)) or 0,
+        _capture_callback,
     )
 
     assert commands._handle_resume(["run-1"], home=tmp_path) == 0

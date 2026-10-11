@@ -1,0 +1,32 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/matlab/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/matlab/SKILL.md",
+  "name": "scientific:matlab",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "91afa6ec0f0b3797f51da62b79d44d00a32fcdf3690b9505e5987982a8e6d0e2",
+    "assets/project_manifest_template.json": "3de6b01b3d463f5d170f19e3fd87d56477bbf65a64f98a7d237f40397026c225",
+    "assets/python_compatibility_r2026a.json": "38ece6da5c000727cbe04b8a7412a99c140699e72393dc2f93d7394b1c6c03ed",
+    "assets/reproducibility_manifest_template.json": "7f0ad44a30e7d502d92642fa1617e73fc8fb0e252a4de94dd529453f5eac287e",
+    "references/data-import-export.md": "bd1dc1deb4b717bd6dc079653faf63a84c49d4239adff36ddc2910ef7b4d5f88",
+    "references/executing-scripts.md": "5172a95879d65c04631e6f4eb0a619c70c01ddfb76639e3b72311f08aa953019",
+    "references/graphics-visualization.md": "0ea6b945ee31fcdc09168430c9aae28c00ee63b79a12800a70a7aabfd3799c33",
+    "references/mathematics.md": "04bb40d7dd604fe4fb24dea9686fc93bea658ab36abb24bfaca1c5a599b7b5d1",
+    "references/matrices-arrays.md": "54a6b56ea63093c01793c0b21c95e9d75316aca1bd476cd90d4b6573f1d5d3c8",
+    "references/octave-compatibility.md": "d18734d6e33065e7e18805ce95ecca40844a5723b6e618aa65fc973bad587bef",
+    "references/programming.md": "51b4df60afee7fd581d3e1b710ab577cc0ae5750ad244b4d09f1db632a0f85b8",
+    "references/python-integration.md": "558fe145f4a38b4fdfe775b007def8643517aba8bb013ae73f9d972122ba5d5b",
+    "scripts/generate_function_scaffold.py": "cbbe38eff9e4e6ce2695db478d6de45df3736b04c6ba74618434cf853539947f",
+    "scripts/inventory_mat_file.py": "7eef24b9dff17c2072e41c513f5e3c330246f24ea9d069e430a3cd70f4feefa0",
+    "scripts/plan_batch_command.py": "2c7ca14933f223f08620d76ad5fa3df834d4c986c267dc444d8dca2fbdf1b739",
+    "scripts/plan_python_compatibility.py": "8da20d413fceae86f8f90db1b0925858aead825ce3aafc35bb2baeb7cece1da6",
+    "scripts/reproducibility_report.py": "2784ffe6acee2a90f554cba73bb1578b2e8408935a34749353e5bd2ceac3bde8",
+    "scripts/scan_m_code.py": "88b02dbf934db710d22a787b1fb45a0c0009dc6874dd379f5100fa0672f7b92b",
+    "scripts/validate_project_manifest.py": "21cdead6d2c246e345f7fc702a202600787557f0f8da37ebd072998d6cd122f3",
+    "scripts/_common.py": "efeb57fc631f5fa4bb8235821769858589999c7483fffa14408d1c0a7207ac5c",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

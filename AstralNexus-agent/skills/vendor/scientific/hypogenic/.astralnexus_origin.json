@@ -1,0 +1,30 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/hypogenic/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/hypogenic/SKILL.md",
+  "name": "scientific:hypogenic",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "8ad3f55669b7c5e8bbf1c70111259f2782fc26ec39826b011d51799de08b9da5",
+    "assets/dataset_manifest.example.json": "4fdf7409a5f33c9cbab66851e56e2e1a721b43b8aaeb10a7bd7683010eab8f31",
+    "assets/result.example.json": "ed248d15d0064a22bfe817ffe1de8004d9d01786ea709b6271d61b7f65cb8442",
+    "assets/run_config.example.json": "7fb154ab7b0f27bbd6056d1ee6f3d8b3d27619989fb9368c9c60562f2fc670b8",
+    "assets/task_config.example.yaml": "aa0b4c0e73b6d3cf23ce1e52a1f97e8d938c0abef7d59abd653a41b9c42eb7b9",
+    "references/configuration.md": "1e7cd949ed12b30fb8a78021c00098212245e8468f4441b8dd061cf85ddf41e2",
+    "references/datasets.md": "83594cb77958c8d6a8ac9888bf0df5b066ccd2c6069ae4f56dcdb3b20f056c27",
+    "references/evaluation.md": "bf6c6cd962b31a91010264867540a50dd0b0d7e39f698362fd01cd3431611173",
+    "references/security.md": "cb1017a77228b03996a3fad5bb532a9dcdad567c5bfe6fc00e44eb38a8d9cd49",
+    "references/sources.md": "0c749e60f3355e705d2f7f0da0d5aff8ae173f3e3a997ae888b284cffa555164",
+    "references/upstream.md": "1e5a7eee56cf7516b24f82586251f38e3554ca7c7c66ea5c41179c55357fa33f",
+    "scripts/audit_dataset.py": "ea75f16b3e4cc3d81b4700cfc18abbc0179d7fd0db57d1c9a37aca4d6b3a474d",
+    "scripts/evaluate_local.py": "eec40f9437eee0f318270ac6dc53c0eb051ad52dc6937cc9052d0e880f78ecf5",
+    "scripts/inspect_outputs.py": "8440baa60fd5a3453f3dd5eb15f7ea082ce39d147c306514e2879cd099488449",
+    "scripts/plan_run.py": "415528382cb6bb1d22647c5988f59c2392c2eb84121f6754cf179d116a6cc2c8",
+    "scripts/validate_config.py": "de14d532ae5d814d4f2240f11f73afc5996f9e4b84240eceea34dc8dfb11084a",
+    "scripts/_common.py": "ef44228e0df7e94b12b17ac618206234318a9ada310ac3fc4953325d722195b8",
+    "scripts/__init__.py": "1ed9e63a4d602a186d27f4aff40c1ab38e25ec8b971a4fa7731fdbae280eb2ca",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

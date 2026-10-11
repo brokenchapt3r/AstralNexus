@@ -1,0 +1,16 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-typescript/skills/applicationinsights-web-ts/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-typescript/skills/applicationinsights-web-ts/SKILL.md",
+  "name": "microsoft:applicationinsights-web-ts",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "05ec3512a9d20bbc1e63aebc1e721ecfc26be2c0332e3e9affb6e6975e3f657d",
+    "references/agent-traces.md": "7bb9cb869faf80bea084980ae7f6e807bfb829637c4dc6e1f0529825700ced23",
+    "references/configuration.md": "e61235c34bc2f79819e656cf9e8401f7042ddb5353133320f89d5b2e4c116abf",
+    "references/framework-extensions.md": "c2e1bf586ae8e54f4a06ab9a012384261d4bf0dda93b0dd48390260b9c7c0ab6",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

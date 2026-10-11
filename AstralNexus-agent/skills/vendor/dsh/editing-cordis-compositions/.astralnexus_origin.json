@@ -1,0 +1,13 @@
+{
+  "repo": "deepseek-ai/deepseek-harness",
+  "commit": "5badb15009ae1756c3afe0ae0cef1faafc290ccc",
+  "source_path": "packages/preset/agent-preset/skills/editing-cordis-compositions/SKILL.md",
+  "source_url": "https://github.com/deepseek-ai/deepseek-harness/blob/5badb15009ae1756c3afe0ae0cef1faafc290ccc/packages/preset/agent-preset/skills/editing-cordis-compositions/SKILL.md",
+  "name": "dsh:editing-cordis-compositions",
+  "namespace": "dsh",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "974cc1e115bf07a8de7229c20a7e7aa7fa5cc5bfe0fbc22f86b5bc776a7298e6",
+    "UPSTREAM-LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+  }
+}

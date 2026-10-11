@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-mgmt-fabric-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-mgmt-fabric-py/SKILL.md",
+  "name": "microsoft:azure-mgmt-fabric-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "0f746e9585020361bef8893f523c07782e200840da2770f7bff85290e939954c",
+    "references/capabilities.md": "fc97e16f18b7b8944869e70f30fea7b31f7e2acef9abf724a5a4db11b8f46af5",
+    "references/non-hero-scenarios.md": "fe26d746648270d4e4058d5aab978e198ee52ca7e7374d7e3ffafbfe755bda02",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

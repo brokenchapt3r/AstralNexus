@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-typescript/skills/azure-keyvault-keys-ts/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-typescript/skills/azure-keyvault-keys-ts/SKILL.md",
+  "name": "microsoft:azure-keyvault-keys-ts",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "fea0132867c93d93ad3d36617d66ce66c7e68c1e26046daa9324b676bd8e00cb",
+    "references/keys.md": "cb436dc541fc0dbf94848066888cfac9ef368cf25887a20c19220a8bc9eec548",
+    "references/secrets.md": "3abe16a446261dbf93d8b8c698cc91cd7552be58e3c5be11cd608af0aa1c3a2b",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

@@ -52,24 +52,35 @@ class CompressionRecall:
 class MemoryFederation:
     """Federated memory system for AstralNexus."""
     
-    def __init__(self, store=None):
+    def __init__(self, store=None, run_id: Optional[str] = None):
         """Initialize memory federation.
         
         Args:
             store: Optional SQLiteTaskGraphStore for persistence
         """
         self.store = store
+        self.run_id = run_id
         # Memory tiers are bounded runtime views; SQLite remains the durable fact source.
-        self.short_term_memory = {}
-        self.medium_term_memory = {}
-        self.long_term_memory = {}
+        self.short_term_memory: Dict[str, Any] = {}
+        self.medium_term_memory: Dict[str, Any] = {}
+        self.long_term_memory: Dict[str, Any] = {}
         
-        # Load existing facts from store if available
+        # Load existing facts from store if available.
+        # Round 9: LOADING must never PERSIST — add_fact() writes through to
+        # the store, so hydrating the tier through it re-committed every
+        # loaded fact (one connection + commit each).  Live r11: 111k
+        # polluted facts made startup and every checkpoint crawl.
         if self.store:
-            facts = self.store.facts()
+            facts = self._store_call("facts")
             for fact in facts:
-                self.add_fact(fact)
+                self.medium_term_memory[fact.fact_id] = fact
     
+    def _store_call(self, method: str, *args: Any) -> Any:
+        call = getattr(self.store, method)
+        if self.run_id is not None:
+            return call(*args, run_id=self.run_id)
+        return call(*args)
+
     def seed_from_task_graph(self, task_graph=None) -> int:
         """Seed goal, constraint and acceptance memory from the canonical graph."""
         nodes = []
@@ -77,8 +88,10 @@ class MemoryFederation:
             nodes = list(task_graph.nodes.values())
         elif self.store is not None:
             try:
-                nodes = list(self.store.nodes())
+                nodes = list(self._store_call("nodes"))
             except Exception:
+                if self.run_id is not None:
+                    raise
                 nodes = []
         for node in nodes:
             self.sync_task_node(node)
@@ -87,6 +100,8 @@ class MemoryFederation:
     def sync_task_node(self, node) -> None:
         """Persist the non-negotiable contract of one admitted task node."""
         node_id = node.get("node_id") if isinstance(node, dict) else node.node_id
+        if not isinstance(node_id, str) or not node_id:
+            raise ValueError("Task node must have a non-empty string node_id")
         goal = node.get("goal", "") if isinstance(node, dict) else node.goal
         constraints = (
             node.get("constraints", []) if isinstance(node, dict) else node.constraints
@@ -134,9 +149,11 @@ class MemoryFederation:
         # Persist to store if available
         if self.store:
             try:
-                self.store.add_fact(fact)
+                self._store_call("add_fact", fact)
             except Exception:
-                # Store might not support add_fact yet, ignore
+                if self.run_id is not None:
+                    raise
+                # Compatibility with older optional store implementations.
                 pass
     
     def get_all_facts(self):
@@ -177,15 +194,17 @@ class MemoryFederation:
         version = 1
         if self.store:
             try:
-                versions = self.store.constraint_versions()
+                versions = self._store_call("constraint_versions")
                 if versions:
                     previous_version = versions[-1]["constraint_id"]
                     version = versions[-1]["version"] + 1
             except AttributeError:
-                # Store doesn't have constraint_versions method yet
+                if self.run_id is not None:
+                    raise
                 pass
             except Exception:
-                # Other errors, just use default version
+                if self.run_id is not None:
+                    raise
                 pass
         
         # Create fact for the constraint
@@ -235,7 +254,7 @@ class MemoryFederation:
         # Store the constraint in the task graph store if available
         if self.store:
             try:
-                self.store.add_constraint_version({
+                self._store_call("add_constraint_version", {
                     "constraint_id": constraint_id,
                     "text": constraint_text,
                     "source": source,
@@ -244,7 +263,8 @@ class MemoryFederation:
                     "version": version
                 })
             except Exception:
-                # Store might not support constraint versioning yet, ignore
+                if self.run_id is not None:
+                    raise
                 pass
         
         return constraint_id
@@ -331,7 +351,7 @@ class MemoryFederation:
         
         return None
     
-    def search_memory(self, query: str, memory_types: List[str] = None, top_k: int = 5) -> List[MemoryEntry]:
+    def search_memory(self, query: str, memory_types: List[str] | None = None, top_k: int = 5) -> List[MemoryEntry]:
         """Search memory for entries matching a query.
         
         Args:
@@ -346,7 +366,7 @@ class MemoryFederation:
             memory_types = ["short_term", "medium_term", "long_term"]
         
         # Collect entries from specified memory layers
-        entries = []
+        entries: List[Any] = []
         if "short_term" in memory_types:
             entries.extend(self.short_term_memory.values())
         if "medium_term" in memory_types:
@@ -740,9 +760,29 @@ class MemoryFederation:
         """
         import re
         
-        captured_facts = []
-        captured_constraints = []
+        captured_facts: list[str] = []
+        captured_constraints: list[str] = []
         recorded_at = datetime.now(timezone.utc).isoformat()
+
+        # Round 9 (live r11 iter-136 stall): never re-capture serialized
+        # durable memories.  The orchestrator's pre-compression context
+        # renders the store back as "Fact [fact_…]: … (confidence: …,
+        # source: …)" / "Artifact [artifact_…]: …" lines; keyword extraction
+        # over that echo re-created the memories as NEW facts on every
+        # compression — 5,080 → 19,105 → 37,690 → 111,693 nested captures —
+        # and every checkpoint then rewrote the whole pile.  An echo of the
+        # store is data, not news.  Two layers: whole serialized lines are
+        # dropped BEFORE sentence splitting (a keyword-rich fact text must
+        # not leak through as bare fragments), and any surviving sentence
+        # carrying the serialization marker is skipped.
+        transcript = "\n".join(
+            line for line in transcript.splitlines()
+            if not (line.startswith("Fact [") or line.startswith("Artifact ["))
+        )
+        echo_pattern = re.compile(r"(?:Fact|Artifact)\s*\[(?:fact_|artifact_)")
+
+        def _is_memory_echo(sentence: str) -> bool:
+            return bool(echo_pattern.search(sentence)) or "(confidence:" in sentence
         
         # Extract potential facts (sentences with specific keywords)
         fact_keywords = [
@@ -754,6 +794,8 @@ class MemoryFederation:
         for i, sentence in enumerate(sentences):
             sentence = sentence.strip()
             if not sentence:
+                continue
+            if _is_memory_echo(sentence):
                 continue
             
             # Check if sentence contains fact keywords
@@ -782,6 +824,8 @@ class MemoryFederation:
         for i, sentence in enumerate(sentences):
             sentence = sentence.strip()
             if not sentence:
+                continue
+            if _is_memory_echo(sentence):
                 continue
             
             if any(keyword in sentence.lower() for keyword in constraint_keywords):

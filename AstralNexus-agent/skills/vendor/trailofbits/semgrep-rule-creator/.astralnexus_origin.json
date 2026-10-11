@@ -1,0 +1,17 @@
+{
+  "repo": "trailofbits/skills",
+  "commit": "82fe8226252622fa807643bdca1710901198553a",
+  "source_path": "plugins/semgrep-rule-creator/skills/semgrep-rule-creator/SKILL.md",
+  "source_url": "https://github.com/trailofbits/skills/blob/82fe8226252622fa807643bdca1710901198553a/plugins/semgrep-rule-creator/skills/semgrep-rule-creator/SKILL.md",
+  "name": "trailofbits:semgrep-rule-creator",
+  "namespace": "trailofbits",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "6ca2e3b8520ed20af1b0879b7cab318832fcbe89c19c17a9fa347a45a9f28913",
+    "agents/openai.yaml": "d904505164405f5801244963a494e4c16072e9b0c0ee64235e45d725cfb66a62",
+    "assets/trail-of-bits-mark.svg": "4bf74c789b38dcf6ad762c136b6832363d27ae19fbaa9a18ec18d66ecce6ca05",
+    "references/quick-reference.md": "3e87f6e87b7cab07578037c6db1fb7d7cb57be03bbccc793c043720a8c3a435e",
+    "references/workflow.md": "3dab347aa2e2c78b5a7a94ebb0d73d92dcb5c7df87d60ea9ee8f2671eba1c7b9",
+    "UPSTREAM-LICENSE": "7abe19ec9bb73b36141b999b861d24ad855e808bafe0f81e84cce28556f6c297"
+  }
+}

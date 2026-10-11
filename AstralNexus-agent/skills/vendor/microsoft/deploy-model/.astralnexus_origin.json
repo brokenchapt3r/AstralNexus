@@ -1,0 +1,29 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/microsoft-foundry/models/deploy-model/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/microsoft-foundry/models/deploy-model/SKILL.md",
+  "name": "microsoft:deploy-model",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "ae0de869fdaee1a6b6b04582e723a2363d482d85a5c119f1963a2c36eff5667c",
+    "TEST_PROMPTS.md": "a976fc095bdcfeadb830b73d04937adbc6e59121a7193bbd39f94879b5000ddf",
+    "capacity/SKILL.md": "91b3ce958de44f728453572747504e8c9146f119892aa690546fd19f8d96a344",
+    "capacity/scripts/discover_and_rank.ps1": "cc0515af5d6a48d77122dcd451ffb44b6332920a91add8704eec52da129be677",
+    "capacity/scripts/discover_and_rank.sh": "21b1a3197e2b49c0bdc0af5dafa368c9807df0841a718e344fd09d1849df8939",
+    "capacity/scripts/query_capacity.ps1": "b8580f46de51cd09dc43f0d30dde95ae64f2b54723b70768cd78ccfe107ce6cc",
+    "capacity/scripts/query_capacity.sh": "3af156c2cf0b2306f3389a34475ad39a9960ebf8e2384bfa6da6f05b62432ae8",
+    "customize/EXAMPLES.md": "f1476b98fe34a8a4e414703f674ed497f2182267810218911035fc3a55bb104f",
+    "customize/SKILL.md": "d0a25090ffc3e139ff2eaeca5f814a83aa61d596571d267f6a7ad534c153ba68",
+    "customize/references/customize-guides.md": "28132d05c5db1f40618d74e6cde43bcab241c97d6f6e15d8866f61481b26b2a0",
+    "customize/references/customize-workflow.md": "9b7881474c34d46b58678bc6c88e9254248cedd4c177ab83b61d04d8f83b06f6",
+    "preset/EXAMPLES.md": "a13e5072e0f1f2d1f10fa4b193d9566feea9451fda3e545c4a60cf9ca474778a",
+    "preset/SKILL.md": "a2bab6b973292e2e0833b47257cfdb7354777dbdff5669db67ea6874c453bd09",
+    "preset/references/preset-workflow.md": "81af3221959d89f565c2eadd800841817bba373ed79df8f62568a9f9c30bb071",
+    "preset/references/workflow.md": "fd7c06e54cf7f1dc437b6e30683550f2511e9138f7038e67b7c382730a0c83e2",
+    "scripts/generate_deployment_url.ps1": "632a65aa03a3d0b9c73e31cf1dadbfa6299f52f0ba0cc628b2d32922445b26e3",
+    "scripts/generate_deployment_url.sh": "7fbbab8aa07bf666015628b152fa64c9046c96fde3b207d0c1cba2ac16594654",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

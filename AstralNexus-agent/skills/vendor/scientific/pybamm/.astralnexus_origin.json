@@ -1,0 +1,16 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/pybamm/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/pybamm/SKILL.md",
+  "name": "scientific:pybamm",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "9d6f375f4d9def40072ea734f07e1a48c60a1cd906231cab1a4189a75499a1a4",
+    "assets/chen2020-protocol.json": "f769f94f1a9f933d253b3a4a6f51dc661b8af49bf9df52cfdabd81ea185de80e",
+    "references/protocol-and-comparison.md": "6345686a86a460103ed0ba29a06419497d8842cf85e6b3d94fe2ae9bda363d19",
+    "scripts/simulate_battery.py": "96c9c774860a80f3fddda2fd94d90905e9254b766f191a79e843613ec4da7647",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-ai-voicelive-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-ai-voicelive-py/SKILL.md",
+  "name": "microsoft:azure-ai-voicelive-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "8a765d22c122b71f8726aded787a45e248ed3823fdf373cc041d3adc2a5814f5",
+    "references/api-reference.md": "09d1fde82ca8c571a17f7c492bcf220ddbe44e133d71496851cb03fd333b9c1d",
+    "references/examples.md": "5f9c9cf8ef6dd5895a4e86e5fa022592ffac2b410f4d601cc32b37e9313afe5e",
+    "references/models.md": "6e150bbb15bb19ba010015b4f2ba0f6ae5024eae67f7f5d11bd67e6364ba782b",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

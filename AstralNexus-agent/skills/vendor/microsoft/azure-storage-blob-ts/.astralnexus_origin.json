@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-typescript/skills/azure-storage-blob-ts/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-typescript/skills/azure-storage-blob-ts/SKILL.md",
+  "name": "microsoft:azure-storage-blob-ts",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "180a75a03963329bd2671651ab1b90ab7e21c1307e7f822a3f649d5bebf367d1",
+    "references/sas-tokens.md": "3cf8e1419061494c9d97f827df7de0da55a2e19c58d3bb01d8683f26b621ee68",
+    "references/streaming.md": "6313cd1edaa8189ae974439d65cb95b5b8785699bcc3b7b0ff3e89def13d9653",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

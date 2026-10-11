@@ -1,0 +1,19 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/skills/debugview/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/skills/debugview/SKILL.md",
+  "name": "microsoft:debugview",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "4694de74b7a67f15c59ea9a6af7d916920380b7ab54b201f6e37ab24e04ca12d",
+    "references/driver-ioctls.md": "6be0cda588a011d10a0e719d9790c27c8b23e26e6022c440c01fc2f4ae9edf69",
+    "references/output-formats.md": "9b993effed80c31acc75a9c5ffd6a7f31994084d922589ea277a82f4bfe1e946",
+    "references/remote-protocol.md": "68eeecc88f385ec0a9b95450d4164ea4053044367aa64bdb0fd0bd529979c955",
+    "scripts/boot-logging-workflow.ps1": "f4060e7bb4b64e8a381f5bede83522ff558c58bde2b4eb3939cfe63f5ffb5e76",
+    "scripts/capture-wrapper.ps1": "a8df9ab4034d178cefba26d50c0ad992966c4c583a6ea68817e3ecc3712b8468",
+    "scripts/detect-dbgview.ps1": "2b2c7a81bdb173629c781db8bae6e4f219e8b6937dd2080f462cc319e409d02a",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

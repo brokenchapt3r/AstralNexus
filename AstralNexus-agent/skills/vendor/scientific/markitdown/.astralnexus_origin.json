@@ -1,0 +1,23 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/markitdown/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/markitdown/SKILL.md",
+  "name": "scientific:markitdown",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "8c165c18ceaddc9367dd74f65fd60e42c1c3de9d180828ae1ff09a001af42339",
+    "references/api_reference.md": "79936dc3cc52c3954a1326e995edd43d97d1b03d3bb4d867ca861fe1a31a3f4f",
+    "references/cloud_and_ocr.md": "b6699e835f96e3a6e97d12a1a66871a68c38cbcadf9bf0e28f694d4edfadc319",
+    "references/file_formats.md": "58cc49fa63cff5ea8fd73fc7915a43d2ab822c3b338976758a933919cf0acf7e",
+    "references/mcp_and_plugins.md": "98a97fd541b1abe8edb694d8c6af73797664251d9a89c731a54ef7d216ca8e39",
+    "references/migration.md": "b2966652252d265165809f37d14db136f03ae8469dd604760a08d02f85d11de8",
+    "references/security.md": "42d01ddb6fdf601647b605b485353c8080c2d22fc45429ceb6cc302636a9fd0b",
+    "references/workflows.md": "06f81ea6888626acd667af314f7faa2ee45fd29c7d371049bd3ca9a876e934b6",
+    "scripts/batch_convert.py": "13e64df33ae0c66ebf1ca71e1650de98a4bc4491d429be9067991f1fb7aa9f4f",
+    "scripts/convert_literature.py": "6c28a9b005a252bcfbab4e1a637129f7be30f9f154bb7bb5adb67cf5361b0aed",
+    "scripts/inspect_installation.py": "4b5443c518a7d4f73bc23f0394fe3232581bcfd467f230b6c866212e20e199ce",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-typescript/skills/azure-ai-projects-ts/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-typescript/skills/azure-ai-projects-ts/SKILL.md",
+  "name": "microsoft:azure-ai-projects-ts",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "d8b87cebdb290487cc2720b2a8a2f5c1888234f7e09e4fec679b0035d776b931",
+    "references/connections.md": "e8f159e65ffa8d050155e64d63aa204c8333afe2ba20353581f6ea716ba55ddb",
+    "references/evaluations.md": "b4219942bf46c1bc6733e56b4664cab1a0aa7e3ea28af9d4722475642a54b757",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/geopandas/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/geopandas/SKILL.md",
+  "name": "scientific:geopandas",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "c03a46f911535326802af476208a1e04de13ea385f4d5309b022ad931826b222",
+    "references/crs-management.md": "39c0f83941fa8d781e7a5f2d78f6525ef7f154d5a41659fd64e312a9ca05852b",
+    "references/data-io.md": "62a6c42142aa28ebc75b948a4ca1425ac475dcc135c71b4a20705c9b75dde409",
+    "references/data-structures.md": "6468ee20c71fbdfac409c4cf33f61c6e07cc0ff31e0d92e2eb193c39610637ec",
+    "references/geometric-operations.md": "a335fa87508b20a110c4e0905459a18abdd9267b19bec6daf327864ca071d732",
+    "references/spatial-analysis.md": "9f29ca1cd7c818baf887684bda5b1c6433a8feb0a8afff0cd6c911821cb15765",
+    "references/visualization.md": "a6d20e0370e71fd6994c4381743ecbf5fd19edd0087e140cdddc6096fb9b209e",
+    "scripts/crs_reprojection_plan.py": "bc31f67674903f87625b9c88e699097bdeab5fdd919111fc31bae516d0328589",
+    "scripts/export_plan.py": "f2f9de1616c846be48e30812abf3d3c02f29302ee007f162f1cc4dd913e9bc22",
+    "scripts/geometry_validity_report.py": "d1727489a97f8b5941fecb9e7612da727416f4bc3c91a6bc5a8b86052e62f798",
+    "scripts/sensitive_coordinates_checklist.py": "b53830e89bae6c359d237895d8836df29f11b0220facb97eda444d0d98b89079",
+    "scripts/spatial_join_audit.py": "a3828a96b5d4861e2fcea642687e4e7408b6e58631d3198c499b8f8272374661",
+    "scripts/vector_inventory.py": "5b69d0c0f1e99cb9c7c663e4286f703c797b0d150711e1e4c293f6082767483f",
+    "scripts/_common.py": "6cf6999f0dff04f65d9ba5387c43262ba9210f6a32769a786dfe346a9e76bdcd",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

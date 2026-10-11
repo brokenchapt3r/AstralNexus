@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-typescript/skills/azure-servicebus-ts/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-typescript/skills/azure-servicebus-ts/SKILL.md",
+  "name": "microsoft:azure-servicebus-ts",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "7abee3d8459e716a5e0b3d46fccf2f1e0db7c128e843b2981f2dbe97eef1a60e",
+    "references/error-handling.md": "e5b822a4c7656875b62b685d98d4f7760b2d724f691c33f205afd669248f1490",
+    "references/queues-topics.md": "76a5c385da9487da00233e919307fe0cc38d7e9167ec72e40a4c9081ab71ffe0",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

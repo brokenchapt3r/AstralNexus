@@ -1,0 +1,33 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/exploratory-data-analysis/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/exploratory-data-analysis/SKILL.md",
+  "name": "scientific:exploratory-data-analysis",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "955c4cefa49106dd03b55cbd62603bab2d2fb678e627dd452ba62040c7128484",
+    "assets/report_template.md": "c6cd0644dbefeb64c77e84935509f52a92d45256daf2cd4be84012e99e4d7d44",
+    "references/bioinformatics_genomics_formats.md": "b3594673cbe22e29fd5bc2681c1b53d4f8b02b48ff17fc9ffaf5a09d1d885be3",
+    "references/chemistry_molecular_formats.md": "3ff937541ebf0396d4c2304016cebc42d405110300df7379f59c40953fc8ed41",
+    "references/general_scientific_formats.md": "42bcf3389bbd78e426dd41139208517f3f78bdc17e068a1eb3a984d2f2487320",
+    "references/microscopy_imaging_formats.md": "c96bb7291ded320a106800c1132191683aa3028f2240c5fcf954079f1a26c382",
+    "references/proteomics_metabolomics_formats.md": "66d9493fe14c717f5e8e60500e8fa7bfe1f619084e23b643a767f0952a35efd7",
+    "references/spectroscopy_analytical_formats.md": "102a68c212ef5447815c889cf06668f3cb5bd8644f018354d6e98d1a15101a0f",
+    "scripts/capability_manifest.py": "1e52e1db668ebce919751a75b53ad959c36749e4b1695f59d8ac2d6c8eda4abf",
+    "scripts/distribution_sensitivity.py": "ca6e9f3dd59cfb382b1ff0874e709933c136ec942085a0437d4000bbf7f1f3c8",
+    "scripts/eda_analyzer.py": "6532b28ad3f28dd9f58acecb54361c8271d2755584a54ecb0be34da74d1e5d20",
+    "scripts/image_inspector.py": "79c21b35d01376929ff0edf26a3bb25923b9e75458c586e0f5721cec356fe639",
+    "scripts/missingness_leakage_audit.py": "28458714e80ee31db636c0265ba21e1623ba27816d31e236fdc9b873a5b78ffc",
+    "scripts/report_scaffold.py": "4d745592384bfceb0ec7384eecfc5e8ba49ebfa4ec55be75a99ce7c7e102f60b",
+    "scripts/sequence_inspector.py": "11ca2fa3a0d660192631b9b562f362b0fd120c9e54639bfb049c600c6920be28",
+    "scripts/tabular_profile.py": "78cd139292c18e31d17de882762948db7b51fdc3278546f994270a287d0149db",
+    "scripts/_capabilities.py": "93fd42bcc6940db0a6cad364dab42a52f0867e782f7e93c9b27c4185249edc06",
+    "scripts/_common.py": "f363af255cc78ea63864e0da9f679f57a9e71efd36b6813332f3d2c419b30d51",
+    "scripts/_structured.py": "8cb23c8552339acc926f4dc84e1ec032c79152515098e1fd97f2326b84b4ead9",
+    "scripts/_tabular.py": "5d1db825890dd035c30e51ac1c11aee56e1e1dca6ffd238ee87ae7d51d8df2f0",
+    "scripts/__init__.py": "87539288ce5d4caf24fc9fca14e5d70c41730c9d4285106ac4db0c4b5cefd60c",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

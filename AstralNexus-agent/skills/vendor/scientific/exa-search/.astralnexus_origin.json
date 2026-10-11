@@ -1,0 +1,17 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/exa-search/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/exa-search/SKILL.md",
+  "name": "scientific:exa-search",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "8cdedf5648783a209593ff91024f43bd8d8e066b03f0a72a6cf36d90e1650204",
+    "references/web-extract.md": "76a640173685c54e59390de78d3201ec8004868e883ffe38ca919b38f6ab73e1",
+    "references/web-search.md": "bec3632bb485083223a9868bcb4b04a6374fca3627c9c8e642d9de3356036acb",
+    "scripts/exa_extract.py": "1fad25a9a501944c07ed95a8df06bbf6c0e71819522738362a2337ee5ac0611b",
+    "scripts/exa_search.py": "0775f747cedd26abf165e008482523dc8edde652ac6d2e27410c05c244e8789e",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

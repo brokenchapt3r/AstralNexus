@@ -6,13 +6,18 @@ report; it never receives the full node transcript by default.
 """
 
 from __future__ import annotations
+from AstralNexus.runtime.run_context import get_env
 
 import json
 import os
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-from typing import Any
+from typing import Any, Protocol
+
+
+class SynthesisChatClient(Protocol):
+    def chat(self, messages: list[dict[str, str]], *, max_tool_rounds: int | None = None) -> str: ...
 
 from AstralNexus.runtime.llm_client import LLMClient
 from AstralNexus.core.output_paths import RunOutputLayout
@@ -67,16 +72,35 @@ def _infer_status(text: str, explicit: Any = None) -> str:
     return "derived"
 
 
-def _load_packets(run_dir: Path, *, task_version: int = 1) -> list[dict[str, Any]]:
+def _load_packets(run_dir: Path, *, task_version: int = 1, graph: Any = None) -> list[dict[str, Any]]:
     """Build non-empty, traceable L1 EvidencePackets from node artifacts."""
     packets: list[dict[str, Any]] = []
+    from AstralNexus.runtime.evidence_catalog import EvidenceCatalog
+    catalog = EvidenceCatalog(run_dir, graph=graph, task_version=task_version)
+    latest: dict[str, tuple[tuple, Path, dict[str, Any]]] = {}
     for path in sorted((run_dir / "node_io").glob("*_output.json")):
         try:
-            payload = json.loads(path.read_text(encoding="utf-8"))
+            payload = json.loads(catalog.read_text(path) or "{}")
         except (OSError, json.JSONDecodeError):
+            continue
+        node_id = str(payload.get("node_id") or path.stem)
+        if graph is not None and not catalog.validate_reference(path, source_nodes={node_id})["valid"]:
+            continue
+        key = (int(payload.get("task_version") or task_version), str(payload.get("recorded_at") or ""), int(payload.get("attempt") or 1), path.name)
+        if node_id not in latest or key > latest[node_id][0]:
+            latest[node_id] = (key, path, payload)
+    for _, path, payload in latest.values():
+        if str(payload.get("role", "")).lower() in {"planner", "governor", "user_intent"}:
+            continue
+        if int(payload.get("task_version") or task_version) != task_version:
             continue
         if payload.get("execution_outcome") != "succeeded":
             continue
+        input_path = path.with_name(path.name.replace("_output.json", "_input.json"))
+        try:
+            input_payload = json.loads(catalog.read_text(input_path) or "{}")
+        except (OSError, json.JSONDecodeError):
+            input_payload = {}
         content = str(payload.get("content", "")).strip()
         if not content:
             continue
@@ -127,19 +151,51 @@ def _load_packets(run_dir: Path, *, task_version: int = 1) -> list[dict[str, Any
                 }]
         execution_id = str(payload.get("execution_id") or path.stem)
         attempt = int(payload.get("attempt") or 1)
+        runtime_evidence: dict[str, Any] = {
+            "source": "real_llm_node_output", "raw_artifact": f"node_io/{path.name}",
+        }
+        node = graph.get_node(node_id) if graph is not None else None
+        runtime_id = str(node.metadata.get("runtime_execution_id") or "") if node is not None else ""
+        if node is not None and runtime_id and (run_dir / ".astralnexus_state" / "executions.sqlite").is_file():
+            from AstralNexus.runtime.execution_store import ExecutionStore
+            state = ExecutionStore(run_dir).get(runtime_id)
+            acceptance = state.get("acceptance") or {}
+            if isinstance(acceptance, dict) and acceptance.get("approved") is True:
+                runtime_evidence = {
+                    "source": "execution_store", "execution_id": runtime_id,
+                    "runtime_status": state.get("status"), "acceptance": state.get("acceptance"),
+                    "observations": (node.metadata.get("_verification_receipt") or {}).get("observations", []),
+                    "receipts": [{key: receipt.get(key) for key in (
+                        "receipt_id", "execution_id", "tool", "arguments", "status", "returncode",
+                        "stdout_tail", "stderr_tail", "files", "ownership",
+                    )} for receipt in state.get("receipts", [])[-50:]],
+                    "receipt_count": len(state.get("receipts", [])),
+                    "receipts_truncated": len(state.get("receipts", [])) > 50,
+                }
+        contents = []
+        for ref in _as_list(payload.get("artifacts")):
+            if not isinstance(ref, str):
+                continue
+            validation = catalog.validate_reference(ref, source_nodes={node_id})
+            if not validation.get("valid"):
+                continue
+            text = catalog.read_text(ref, max_bytes=12000, errors="replace")
+            if text is not None:
+                contents.append({"path": ref, "content_excerpt": text, "byte_cap": 12000})
+        runtime_evidence["verified_artifact_contents"] = contents
         packets.append({
             "packet_id": f"packet:{node_id}:v{task_version}:a{attempt}:{execution_id}",
             "task_id": node_id,
             "node_id": node_id,
             "execution_id": execution_id,
             "attempt": attempt,
-            "goal": str(payload.get("goal") or payload.get("objective") or f"Execute {node_id}"),
+            "goal": str(payload.get("goal") or payload.get("objective") or input_payload.get("goal") or f"Execute {node_id}"),
             "role": str(payload.get("role", "")),
             "status": payload.get("status"),
             "conclusion": conclusion[:5000],
             "claims": normalized_claims,
             "evidence_refs": [f"node_io/{path.name}"],
-            "artifact_refs": _as_list(embedded.get("artifact_refs")) or [f"node_io/{path.name}"],
+            "artifact_refs": _as_list(embedded.get("artifact_refs")) or _as_list(payload.get("artifacts")) or [f"node_io/{path.name}"],
             "limitations": _as_list(embedded.get("limitations")) or ["节点结果尚未经过 Global Verifier 独立复核"],
             "open_questions": _as_list(embedded.get("open_questions")),
             "constraints": _as_list(embedded.get("constraints") or embedded.get("constraints_preserved")),
@@ -148,7 +204,7 @@ def _load_packets(run_dir: Path, *, task_version: int = 1) -> list[dict[str, Any
             "task_version": task_version,
             "epistemic_status": _infer_status(conclusion, embedded.get("epistemic_status")),
             "lifecycle_class": str(embedded.get("lifecycle_class") or payload.get("lifecycle_class") or "durable"),
-            "runtime_evidence": {"source": "real_llm_node_output", "raw_artifact": f"node_io/{path.name}"},
+            "runtime_evidence": runtime_evidence,
         })
     return packets
 
@@ -200,6 +256,7 @@ def _normalize_coverage_gaps(value: Any) -> list[dict[str, Any]]:
 def _normalize_reducer(group: dict[str, Any], raw: Any, packets: list[dict[str, Any]], *, task_version: int) -> dict[str, Any]:
     """Normalize model JSON without turning Markdown into a second protocol."""
     value = raw if isinstance(raw, dict) else {}
+    source_refs = list(dict.fromkeys(str(ref) for packet in packets for ref in (packet.get("evidence_refs") or []) if str(ref).strip()))
     source_nodes = [str(x) for x in group.get("node_ids", [])]
     claims = value.get("verified_claims", value.get("claims", []))
     verified_claims = []
@@ -209,7 +266,7 @@ def _normalize_reducer(group: dict[str, Any], raw: Any, packets: list[dict[str, 
             if text:
                 verified_claims.append({
                     "claim": text,
-                    "evidence_refs": _as_list(claim.get("evidence_refs")) or [f"node_io/{node}_output.json" for node in source_nodes],
+                    "evidence_refs": _as_list(claim.get("evidence_refs")) or list(source_refs),
                     "confidence": _infer_confidence(text, claim.get("confidence")),
                     "epistemic_status": _infer_status(text, claim.get("epistemic_status")),
                 })
@@ -217,7 +274,7 @@ def _normalize_reducer(group: dict[str, Any], raw: Any, packets: list[dict[str, 
             text = str(claim).strip()
             verified_claims.append({
                 "claim": text,
-                "evidence_refs": [f"node_io/{node}_output.json" for node in source_nodes],
+                "evidence_refs": list(source_refs),
                 "confidence": _infer_confidence(text),
                 "epistemic_status": _infer_status(text),
             })
@@ -226,11 +283,11 @@ def _normalize_reducer(group: dict[str, Any], raw: Any, packets: list[dict[str, 
         if source_text.strip():
             sentences = [s.strip() for s in source_text.replace('\n', '。').split('。') if len(s.strip()) > 20][:3]
             if sentences:
-                verified_claims = [{"claim": s, "evidence_refs": [f"node_io/{node}_output.json" for node in source_nodes], "confidence": _infer_confidence(s), "epistemic_status": _infer_status(s)} for s in sentences]
+                verified_claims = [{"claim": s, "evidence_refs": list(source_refs), "confidence": _infer_confidence(s), "epistemic_status": _infer_status(s)} for s in sentences]
             else:
-                verified_claims = [{"claim": source_text[:3000], "evidence_refs": [f"node_io/{node}_output.json" for node in source_nodes], "confidence": _infer_confidence(source_text), "epistemic_status": _infer_status(source_text)}]
+                verified_claims = [{"claim": source_text[:3000], "evidence_refs": list(source_refs), "confidence": _infer_confidence(source_text), "epistemic_status": _infer_status(source_text)}]
         else:
-            verified_claims = [{"claim": "No extractable claims from source", "evidence_refs": [f"node_io/{node}_output.json" for node in source_nodes], "confidence": 0.3, "epistemic_status": "unknown"}]
+            verified_claims = [{"claim": "No extractable claims from source", "evidence_refs": list(source_refs), "confidence": 0.3, "epistemic_status": "unknown"}]
     result = {
         "group_id": str(value.get("group_id") or group.get("group_id")),
         "source_nodes": source_nodes,
@@ -241,29 +298,27 @@ def _normalize_reducer(group: dict[str, Any], raw: Any, packets: list[dict[str, 
         "limitations": _as_list(value.get("limitations")),
         "open_questions": _as_list(value.get("open_questions")),
         "recommended_followups": _as_list(value.get("recommended_followups") or value.get("suggested_followups")),
-        "source_artifacts": _as_list(value.get("source_artifacts") or value.get("artifacts")) or [f"node_io/{node}_output.json" for node in source_nodes],
+        "source_artifacts": list(source_refs),
+        # Context references are not evidence produced by this reducer group.
+        "context_artifact_refs": _as_list(value.get("source_artifacts") or value.get("artifacts")),
         "task_version": int(value.get("task_version") or task_version),
     }
-    # Stable aliases used by earlier Governor documents and human reviewers;
-    # the canonical machine fields above remain the verification contract.
-    result["claims"] = result["verified_claims"]
-    result["evidence"] = result["source_artifacts"]
-    result["artifacts"] = result["source_artifacts"]
-    result["open_issues"] = result["coverage_gaps"]
-    result["suggested_followups"] = result["recommended_followups"]
+    # Model summaries cannot drop or replace the original execution facts.
+    result["recorded_execution_evidence"] = [packet["runtime_evidence"]
+        for packet in packets if packet.get("runtime_evidence", {}).get("source") == "execution_store"]
     return result
 
 
-def _reducer_client(client: LLMClient) -> LLMClient:
+def _reducer_client(client: SynthesisChatClient) -> SynthesisChatClient:
     """Give each parallel reducer a bounded control-plane timeout.
 
     Final synthesis may legitimately need a long timeout, but a reducer is a
     bounded JSON transformation.  Sharing the final-writer timeout here can
     make one stalled API request hold the whole reducer wave indefinitely.
     """
-    timeout = max(15, int(os.getenv("ASTRALNEXUS_REDUCER_TIMEOUT", "180")))
-    retries = max(0, int(os.getenv("ASTRALNEXUS_REDUCER_RETRIES", "1")))
-    if not hasattr(client, "api_key") or not hasattr(client, "model"):
+    timeout = max(15, int(get_env("ASTRALNEXUS_REDUCER_TIMEOUT", "180")))
+    retries = max(0, int(get_env("ASTRALNEXUS_REDUCER_RETRIES", "1")))
+    if not isinstance(client, LLMClient):
         return client
     if getattr(client, "timeout", timeout) <= timeout and getattr(client, "max_retries", retries) <= retries:
         return client
@@ -280,7 +335,7 @@ def _reducer_client(client: LLMClient) -> LLMClient:
     return reduced
 
 
-def _synthesis_client(client: LLMClient) -> LLMClient:
+def _synthesis_client(client: SynthesisChatClient) -> SynthesisChatClient:
     """Create a bounded text-only client for outline/final synthesis.
 
     Reducers and final writers transform already collected evidence; they do
@@ -288,9 +343,9 @@ def _synthesis_client(client: LLMClient) -> LLMClient:
     budget separate prevents a stalled provider request from consuming the
     whole orchestration run, and avoids accidentally entering a tool loop.
     """
-    timeout = max(30, int(os.getenv("ASTRALNEXUS_SYNTHESIS_STAGE_TIMEOUT", "180")))
-    retries = max(0, int(os.getenv("ASTRALNEXUS_SYNTHESIS_STAGE_RETRIES", "1")))
-    if not hasattr(client, "api_key") or not hasattr(client, "model"):
+    timeout = max(30, int(get_env("ASTRALNEXUS_SYNTHESIS_STAGE_TIMEOUT", "180")))
+    retries = max(0, int(get_env("ASTRALNEXUS_SYNTHESIS_STAGE_RETRIES", "1")))
+    if not isinstance(client, LLMClient):
         return client
     bounded = LLMClient(
         model=client.model,
@@ -305,17 +360,52 @@ def _synthesis_client(client: LLMClient) -> LLMClient:
     return bounded
 
 
+def reduce_evidence_group(
+    group: dict[str, Any], source_packets: list[dict[str, Any]], *,
+    task_content: str, delivery_contract: dict[str, Any],
+    client: SynthesisChatClient, task_version: int, governor: Any,
+) -> tuple[str, dict[str, Any]]:
+    """One production reducer boundary, also callable for isolated API replay."""
+    source = json.dumps(source_packets, ensure_ascii=False)
+    canonical_refs = [ref for packet in source_packets for ref in packet.get("evidence_refs", [])]
+    reducer_client = _reducer_client(client)
+    if hasattr(governor, "trace_recorder"):
+        governor.trace_recorder.record("layered.reducer.started", {
+            "group_id": group["group_id"],
+            "timeout_seconds": getattr(reducer_client, "timeout", None),
+            "max_retries": getattr(reducer_client, "max_retries", None),
+        })
+    response = reducer_client.chat([
+        {"role": "system", "content": "你是通用 Local Reducer，只输出一个严格 JSON 对象，不输出 Markdown。不得预设领域、角色数量或章节。"},
+        {"role": "user", "content": f"任务目标：{task_content}\n交付契约：{json.dumps(delivery_contract, ensure_ascii=False)}\n子图：{group['title']}\n证据包：{source}\n来源清单（由框架确定）：{json.dumps(canonical_refs, ensure_ascii=False)}\n只输出字段：group_id, source_nodes, verified_claims, conflicts, coverage_gaps, constraints, limitations, open_questions, recommended_followups, source_artifacts, task_version。source_artifacts 必须使用上面的来源清单；输入文件、其他生产者的产物与历史节点输出只是上下文，不是本组生产的证据。主张的 evidence_refs 必须是本组来源清单中的引用，不能拼接文件名或虚构节点。每个 verified_claims 项必须包含 claim、evidence_refs、confidence、epistemic_status，其中状态只能是 observed/derived/hypothesis/planned/unknown。coverage_gaps 必须是对象数组，每项包含 gap、severity、required_for_delivery、blocking_stage、evidence_needed、recommended_action；blocking_stage 只能是 evidence、synthesis 或 delivery。前置 Global Verifier 只阻断 evidence 阶段缺口；Final Synthesizer 尚未生成的文件、章节和格式属于 synthesis/delivery 阶段，不能在本阶段作为 evidence 缺口。只有缺失交付契约要求、明确交付章节或全局验收条件的内容才允许 required_for_delivery=true。尚未展开的方向、研究开放问题或可选增强必须放入 limitations/open_questions，不得冒充阻塞缺口。"},
+    ])
+    parsed = _parse_json(response)
+    if not isinstance(parsed, dict) and hasattr(governor, "verify_evidence_summaries"):
+        raise RuntimeError(f"Reducer {group['group_id']} returned non-JSON output")
+    summary = _normalize_reducer(group, parsed, source_packets, task_version=task_version)
+    if hasattr(governor, "trace_recorder"):
+        governor.trace_recorder.record("layered.reducer.completed", {
+            "group_id": group["group_id"],
+            "claim_count": len(summary["verified_claims"]),
+            "gap_count": len(summary["coverage_gaps"]),
+        })
+    return group["group_id"], summary
+
+
 def build_layered_context(
     *,
     task_content: str,
     run_dir: Path,
-    client: LLMClient,
+    client: SynthesisChatClient,
     governor: Any,
     reducer_workers: int = 4,
 ) -> dict[str, Any]:
     """Run Governor grouping -> parallel JSON reducers -> Global Verifier -> outline."""
     task_version = int(getattr(governor, "goal_version", 1))
-    packets = _load_packets(run_dir, task_version=task_version)
+    graph = getattr(governor, "task_graph", None)
+    packets = _load_packets(run_dir, task_version=task_version, graph=graph)
+    if graph is not None:
+        packets = [packet for packet in packets if (graph.get_node(packet["node_id"]) is not None and graph.get_node(packet["node_id"]).status == "completed")]
     if not packets:
         raise RuntimeError("No successful node outputs available for layered synthesis")
     layout = RunOutputLayout(run_dir)
@@ -341,29 +431,9 @@ def build_layered_context(
 
     def reduce_group(group: dict[str, Any]) -> tuple[str, dict[str, Any]]:
         source_packets = [by_id[node_id] for node_id in group["node_ids"] if node_id in by_id]
-        source = json.dumps(source_packets, ensure_ascii=False)
-        reducer_client = _reducer_client(client)
-        if hasattr(governor, "trace_recorder"):
-            governor.trace_recorder.record("layered.reducer.started", {
-                "group_id": group["group_id"],
-                "timeout_seconds": getattr(reducer_client, "timeout", None),
-                "max_retries": getattr(reducer_client, "max_retries", None),
-            })
-        response = reducer_client.chat([
-            {"role": "system", "content": "你是通用 Local Reducer，只输出一个严格 JSON 对象，不输出 Markdown。不得预设领域、角色数量或章节。"},
-            {"role": "user", "content": f"任务目标：{task_content}\n交付契约：{json.dumps(delivery_contract, ensure_ascii=False)}\n子图：{group['title']}\n证据包：{source}\n只输出字段：group_id, source_nodes, verified_claims, conflicts, coverage_gaps, constraints, limitations, open_questions, recommended_followups, source_artifacts, task_version。每个 verified_claims 项必须包含 claim、evidence_refs、confidence、epistemic_status，其中状态只能是 observed/derived/hypothesis/planned/unknown。coverage_gaps 必须是对象数组，每项包含 gap、severity、required_for_delivery、blocking_stage、evidence_needed、recommended_action；blocking_stage 只能是 evidence、synthesis 或 delivery。前置 Global Verifier 只阻断 evidence 阶段缺口；Final Synthesizer 尚未生成的文件、章节和格式属于 synthesis/delivery 阶段，不能在本阶段作为 evidence 缺口。只有缺失交付契约要求、明确交付章节或全局验收条件的内容才允许 required_for_delivery=true。尚未展开的方向、研究开放问题或可选增强必须放入 limitations/open_questions，不得冒充阻塞缺口。"},
-        ])
-        parsed = _parse_json(response)
-        if not isinstance(parsed, dict) and hasattr(governor, "verify_evidence_summaries"):
-            raise RuntimeError(f"Reducer {group['group_id']} returned non-JSON output")
-        summary = _normalize_reducer(group, parsed, source_packets, task_version=task_version)
-        if hasattr(governor, "trace_recorder"):
-            governor.trace_recorder.record("layered.reducer.completed", {
-                "group_id": group["group_id"],
-                "claim_count": len(summary["verified_claims"]),
-                "gap_count": len(summary["coverage_gaps"]),
-            })
-        return group["group_id"], summary
+        return reduce_evidence_group(group, source_packets, task_content=task_content,
+                                     delivery_contract=delivery_contract, client=client,
+                                     task_version=task_version, governor=governor)
 
     reducers: dict[str, dict[str, Any]] = {}
     with ThreadPoolExecutor(max_workers=max(1, min(reducer_workers, len(groups)))) as pool:

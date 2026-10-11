@@ -1,0 +1,14 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/tiledbvcf/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/tiledbvcf/SKILL.md",
+  "name": "scientific:tiledbvcf",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "38e55a6962e14637e82f60be8e53e6d87c78f1a7874b9f832f442a038942f7d5",
+    "references/verification.md": "a721c33ca3895e407563a55abc8423883f608bfbe186a516215e1790104ba6e1",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

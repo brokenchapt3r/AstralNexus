@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 
+from AstralNexus.core.exceptions import InterruptionRequested
 from AstralNexus.core.governor import (
     EventType,
     GlobalGovernor,
@@ -46,6 +47,60 @@ def test_governor_routes_implementation_to_coding_profile(tmp_path: Path):
     assert decision["selected"]["worker_type"] == "Coding"
 
 
+def test_architecture_task_type_is_not_promoted_to_implementation(tmp_path: Path):
+    governor = GlobalGovernor(TaskGraph(), TraceRecorder(tmp_path))
+    decision = governor.select_worker_profile(
+        {
+            "task_id": "architecture-node",
+            "task_type": "architect",
+            "goal": "定义系统架构、数据库模型、API 接口契约和权限状态机",
+            "required_capabilities": [
+                "system_architecture", "database_modeling", "api_design",
+                "permission_design",
+            ],
+        },
+        HETEROGENEOUS_WORKERS,
+    )
+    assert decision["selected"]["worker_type"] == "Architect"
+    assert "implementation" not in decision["required_capabilities"]
+    assert "code_generation" not in decision["required_capabilities"]
+
+
+def test_documentation_task_type_is_not_promoted_by_api_vocabulary(tmp_path: Path):
+    governor = GlobalGovernor(TaskGraph(), TraceRecorder(tmp_path))
+    decision = governor.select_worker_profile(
+        {
+            "task_id": "docs-node",
+            "task_type": "documentation",
+            "goal": "生成架构、数据库和 API 接口文档",
+            "required_capabilities": [
+                "documentation", "requirement_analysis", "system_architecture",
+                "api_design",
+            ],
+        },
+        HETEROGENEOUS_WORKERS,
+    )
+    assert decision["selected"]["worker_type"] == "Architect"
+    assert "code_generation" not in decision["required_capabilities"]
+
+
+def test_staged_inputs_are_admitted_as_user_intent_artifacts(tmp_path: Path):
+    inputs = tmp_path / "inputs" / "data" / "maintenance"
+    inputs.mkdir(parents=True)
+    (inputs / "assets.csv").write_text("asset_id,name\nEQ-1,pump\n", encoding="utf-8")
+
+    with Orchestrator(run_dir=tmp_path) as orchestrator:
+        orchestrator.register_staged_inputs(["inputs/data/maintenance/assets.csv"])
+        orchestrator.initialize_task_graph("build an application")
+
+        artifact = orchestrator.task_graph.artifacts["artifact:assets_csv"]
+        assert artifact.node_id == "U-001"
+        assert artifact.path == "inputs/data/maintenance/assets.csv"
+        assert artifact.acceptance_status.value == "accepted"
+        summary, _, _ = orchestrator._build_governor_planning_context()
+        assert "artifact:assets_csv" in summary
+
+
 def test_governor_routes_test_writing_to_testing_profile(tmp_path: Path):
     """Writing tests is a Testing capability, not a Coding-only boundary."""
     governor = GlobalGovernor(TaskGraph(), TraceRecorder(tmp_path))
@@ -70,11 +125,11 @@ def test_incompatible_llm_profile_cannot_keep_stale_preselection(tmp_path: Path)
     """An LLM mismatch must rematch or reject, never run the old profile."""
     governor = GlobalGovernor(TaskGraph(), TraceRecorder(tmp_path))
 
-    governor._llm_worker_match = lambda task, candidates: {
+    setattr(governor, "_llm_worker_match", lambda task, candidates: {
         "worker_type": "Architect",
         "confidence": 0.99,
         "reason_codes": [],
-    }
+    })
     governor.llm_matching_enabled = True
     decision = governor.select_worker_profile(
         {
@@ -232,7 +287,9 @@ def test_governor_patch_rejects_invalid_status_transition(tmp_path: Path):
         governor.apply_task_graph_patch(TaskGraphPatch(update_nodes=[{
             "node_id": "root", "status": "running",
         }]))
-    assert graph.get_node("root").status == "completed"
+    checked_node = graph.get_node("root")
+    assert checked_node is not None
+    assert checked_node.status == "completed"
 
 
 def test_governor_patch_allows_idempotent_status_update(tmp_path: Path):
@@ -251,13 +308,16 @@ def test_governor_patch_allows_idempotent_status_update(tmp_path: Path):
         "acceptance_criteria": ["rerun the integration test"],
     }]))
     assert result["updated"] == ["repair"]
-    assert graph.get_node("repair").status == "repair_pending"
+    checked_node = graph.get_node("repair")
+    assert checked_node is not None
+    assert checked_node.status == "repair_pending"
 
 
 class GovernorClient:
     def chat(self, messages, **kwargs):
         prompt = messages[-1]["content"]
         if "提取一个通用" in prompt:
+            assert kwargs.get("response_format") == "json"
             return json.dumps({
                 "delivery_mode": "mixed",
                 "required_outputs": ["用户交付物"],
@@ -309,6 +369,20 @@ def test_governor_owns_generic_contract_and_working_set(tmp_path: Path):
     assert any(event["event_type"] == "governor.context_governance.decided" for event in trace.events)
 
 
+
+def _accepted_prose_reducer(governor, summary):
+    from AstralNexus.core.task_graph import Fact
+    for node_id in summary["source_nodes"]:
+        if governor.task_graph.get_node(node_id) is None:
+            governor.task_graph.add_node({"node_id": node_id, "goal": "accepted analysis", "role": "researcher", "status": "completed", "metadata": {"task_version": 1}})
+    for index, claim in enumerate(summary["verified_claims"]):
+        fact_id = f"fact-fixture-{index}"
+        governor.task_graph.add_fact(Fact(fact_id=fact_id, text=claim["claim"], source=summary["source_nodes"][0], confidence=1.0, recorded_at="fixture",
+            metadata={"verification_verdict": "approved", "task_version": 1}))
+        claim["evidence_refs"] = [fact_id]
+    summary["source_artifacts"] = []
+    return summary
+
 def test_governor_keeps_optional_external_evidence_out_of_replan_gate(tmp_path: Path):
     trace = TraceRecorder(tmp_path)
     governor = GlobalGovernor(TaskGraph(), trace)
@@ -319,7 +393,7 @@ def test_governor_keeps_optional_external_evidence_out_of_replan_gate(tmp_path: 
     report = governor.verify_evidence_summaries(
         contract,
         {
-            "g": {
+            "g": _accepted_prose_reducer(governor, {
                 "group_id": "g",
                 "source_nodes": ["T-1"],
                 "verified_claims": [{"claim": "已分析输入", "evidence_refs": ["T-1"]}],
@@ -331,7 +405,7 @@ def test_governor_keeps_optional_external_evidence_out_of_replan_gate(tmp_path: 
                     "blocking_stage": "evidence",
                 }],
                 "constraints": [], "recommended_followups": [], "source_artifacts": [],
-            }
+            })
         },
     )
     assert report["overall_status"] == "pass"
@@ -364,6 +438,24 @@ def test_governor_graph_patch_is_incremental_and_capability_based(tmp_path: Path
     assert len(patch.add_nodes) == 1
     assert patch.add_nodes[0]["required_capabilities"] == ["api_validation", "test_execution"]
     assert patch.reason_codes == ["VERIFICATION_GAP"]
+
+
+def test_governor_propagates_stream_interruption(tmp_path: Path):
+    governor = GlobalGovernor(TaskGraph(), TraceRecorder(tmp_path))
+    cancel_check = lambda: True
+
+    class PlannerClient:
+        def chat(self, messages, **kwargs):
+            raise AssertionError("streaming planner path should be used")
+
+        def stream_chat(self, messages, **kwargs):
+            assert kwargs["cancel_check"] is cancel_check
+            raise InterruptionRequested("cancelled during planner stream")
+
+    with pytest.raises(InterruptionRequested, match="cancelled during planner stream"):
+        governor.plan_task_graph_patch(
+            "plan a graph patch", PlannerClient(), cancel_check=cancel_check,
+        )
 
 
 def test_governor_applies_complete_patch_atomically(tmp_path: Path):
@@ -405,12 +497,24 @@ def test_governor_applies_complete_patch_atomically(tmp_path: Path):
     assert result["edge_count_before"] == 2
     assert result["edge_count_after"] == 2
     assert result["edge_growth"] == 0
-    assert graph.get_node("old").status == "cancelled"
-    assert graph.get_node("old").updated_at is not None
-    assert graph.get_node("keep").goal == "Updated branch"
-    assert graph.get_node("keep").role == "verifier"
-    assert graph.get_node("keep").status == "ready"
-    assert graph.get_node("keep").dependencies == ["replacement"]
+    checked_node = graph.get_node("old")
+    assert checked_node is not None
+    assert checked_node.status == "cancelled"
+    checked_node = graph.get_node("old")
+    assert checked_node is not None
+    assert checked_node.updated_at is not None
+    checked_node = graph.get_node("keep")
+    assert checked_node is not None
+    assert checked_node.goal == "Updated branch"
+    checked_node = graph.get_node("keep")
+    assert checked_node is not None
+    assert checked_node.role == "verifier"
+    checked_node = graph.get_node("keep")
+    assert checked_node is not None
+    assert checked_node.status == "ready"
+    checked_node = graph.get_node("keep")
+    assert checked_node is not None
+    assert checked_node.dependencies == ["replacement"]
     assert graph.get_node("duplicate") is None
     edge_keys = {(edge.source, edge.target, edge.edge_type) for edge in graph.edges}
     assert ("root", "keep", "depends_on") not in edge_keys
@@ -461,8 +565,12 @@ def test_governor_cancellation_uses_state_machine(tmp_path: Path):
     result = governor.apply_task_graph_patch(TaskGraphPatch(cancel_nodes=["done"]))
 
     assert result["cancelled"] == []
-    assert graph.get_node("done").status == "completed"
-    assert graph.get_node("done").updated_at is None
+    checked_node = graph.get_node("done")
+    assert checked_node is not None
+    assert checked_node.status == "completed"
+    checked_node = graph.get_node("done")
+    assert checked_node is not None
+    assert checked_node.updated_at is None
 
 
 def test_governor_selects_worker_by_capability_and_resource(tmp_path: Path):
@@ -541,6 +649,31 @@ def test_governor_llm_matcher_is_registry_bounded(tmp_path: Path):
     assert decision["selected"]["worker_type"] == "Coding"
     assert "capability_extensions" not in decision["selected"]
     assert "extension_tools" not in decision["selected"]
+
+
+def test_implementation_database_contract_routes_to_coding(tmp_path: Path):
+    """Shared database-modeling terms must not require two Worker profiles."""
+    trace = TraceRecorder(tmp_path)
+
+    class Matcher:
+        def chat(self, messages):
+            return '{"worker_type":"Coding","confidence":0.95}'
+
+    governor = GlobalGovernor(TaskGraph(), trace, llm_client=Matcher())
+    decision = governor.select_worker_profile(
+        {
+            "task_id": "db-init",
+            "task_type": "implementation",
+            "goal": "生成数据库初始化脚本并写入真实 SQL 文件",
+            "required_capabilities": [
+                "database_design", "database_modeling", "sql_design", "file_write",
+            ],
+        },
+        HETEROGENEOUS_WORKERS,
+    )
+
+    assert decision["selected"] is not None
+    assert decision["selected"]["worker_type"] == "Coding"
 
 
 def test_governor_llm_matcher_rejects_unknown_profile(tmp_path: Path):
@@ -802,22 +935,6 @@ def test_orchestrator_instantiates_governor_selected_profile(tmp_path: Path, mon
     assert agent.output_contract == "verified evidence"
 
 
-def test_delivery_gate_produces_global_verification_report(tmp_path: Path):
-    trace = TraceRecorder(tmp_path)
-    governor = GlobalGovernor(TaskGraph(), trace)
-    report = governor.run_delivery_gate(
-        {
-            "required_sections": ["结果"],
-            "acceptance_criteria": [],
-            "forbidden_claims": ["未验证"],
-            "needs_artifact_refs": False,
-            "task_version": 1,
-        },
-        content="# 结果\n已完成。",
-    )
-    assert report["overall_status"] == "pass"
-    assert report["delivery_authorized"] is True
-    assert any(event["event_type"] == "governor.delivery_gate" for event in trace.events)
 
 
 def _reducer_with_gap(required_for_delivery: bool) -> dict:
@@ -846,7 +963,7 @@ def _reducer_with_gap(required_for_delivery: bool) -> dict:
 
 def test_global_verifier_keeps_optional_gap_without_blocking(tmp_path: Path):
     governor = GlobalGovernor(TaskGraph(), TraceRecorder(tmp_path))
-    report = governor.verify_evidence_summaries({}, {"G-1": _reducer_with_gap(False)})
+    report = governor.verify_evidence_summaries({}, {"G-1": _accepted_prose_reducer(governor, _reducer_with_gap(False))})
     assert report["overall_status"] == "pass"
     assert report["coverage_gaps"] == []
     assert len(report["optional_gaps"]) == 1
@@ -854,14 +971,14 @@ def test_global_verifier_keeps_optional_gap_without_blocking(tmp_path: Path):
 
 def test_global_verifier_blocks_required_gap(tmp_path: Path):
     governor = GlobalGovernor(TaskGraph(), TraceRecorder(tmp_path))
-    report = governor.verify_evidence_summaries({}, {"G-1": _reducer_with_gap(True)})
+    report = governor.verify_evidence_summaries({}, {"G-1": _accepted_prose_reducer(governor, _reducer_with_gap(True))})
     assert report["overall_status"] == "fail"
     assert len(report["coverage_gaps"]) == 1
 
 
 def test_global_verifier_defers_required_synthesis_gap(tmp_path: Path):
     governor = GlobalGovernor(TaskGraph(), TraceRecorder(tmp_path))
-    summary = _reducer_with_gap(True)
+    summary = _accepted_prose_reducer(governor, _reducer_with_gap(True))
     summary["coverage_gaps"][0]["blocking_stage"] = "delivery"
     report = governor.verify_evidence_summaries({}, {"G-1": summary})
     assert report["overall_status"] == "pass"
@@ -905,3 +1022,49 @@ def test_requirement_change_is_versioned_and_planned_by_governor(tmp_path: Path)
     assert decision["affected_node_ids"] == ["T-001"]
     assert decision["patch"].add_nodes[0]["node_id"] == "N-TENANT-VERIFY"
     assert any(event["event_type"] == "governor.user_requirement_changed" for event in trace.events)
+
+
+def test_hybrid_implementation_testing_contract_falls_back_to_coding(tmp_path: Path):
+    """Round 13 (live r11 resume #20, blocked 21:48): a correct hybrid
+    repair node declared backend_development + api_testing (fix main.py AND
+    rerun the four boundary tests).  Both hard capability boundaries fired,
+    no catalogue profile carries both, the matcher returned null and the
+    node was blocked as NO_CAPABILITY_CANDIDATE without ever executing.
+    task_type is the authoritative boundary: an implementation task must
+    fall back to the best implementation-capable profile instead of
+    dead-ending the run."""
+    class NullMatcher:
+        def chat(self, messages, **kwargs):
+            return json.dumps({
+                "worker_type": None,
+                "reason_codes": ["no single profile covers both"],
+                "confidence": 0.0,
+            })
+
+    governor = GlobalGovernor(TaskGraph(), TraceRecorder(tmp_path))
+    governor.enable_llm_worker_matching(NullMatcher())
+    decision = governor.select_worker_profile(
+        {
+            "task_id": "hybrid-repair",
+            "goal": (
+                "Remove the illegal query parameters from the FastAPI route "
+                "signatures in main.py and rerun the four boundary tests "
+                "with live curl receipts"
+            ),
+            "task_type": "implementation",
+            "required_capabilities": [
+                "backend_development", "python_execution", "api_testing",
+            ],
+            "expected_outputs": ["deliverables/app/backend/main.py"],
+        },
+        HETEROGENEOUS_WORKERS,
+    )
+    selected = decision["selected"]
+    assert selected is not None, decision["reason_codes"]
+    assert "HYBRID_BOUNDARY_RELAXED" in selected["reason_codes"]
+    assert selected["worker_type"] == "Coding"
+    assert any(
+        event["event_type"] == EventType.WORKER_SELECTED.value
+        and event["payload"].get("selection_source") == "hybrid_boundary_relax"
+        for event in governor.trace_recorder.events
+    )

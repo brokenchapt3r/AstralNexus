@@ -60,8 +60,8 @@ class MetricsAggregator:
         nodes = list(self.graph.nodes.values())
         edges = self.graph.edges
 
-        status_counts = {}
-        role_counts = {}
+        status_counts: dict[str, int] = {}
+        role_counts: dict[str, int] = {}
         for node in nodes:
             status_counts[node.status] = status_counts.get(node.status, 0) + 1
             role_counts[node.role] = role_counts.get(node.role, 0) + 1
@@ -226,7 +226,7 @@ class MetricsAggregator:
         total_attempts = len(recovery_events)
         total_successes = len(recovery_success_events)
 
-        fault_type_counts = {}
+        fault_type_counts: dict[str, int] = {}
         for event in injection_events:
             ft = event.get("fault_type", "unknown")
             fault_type_counts[ft] = fault_type_counts.get(ft, 0) + 1
@@ -332,7 +332,7 @@ class MetricsAggregator:
         prune_events = self.trace.get_events_by_type("governor.pruned")
 
         scores = [e.get("admission_score", 0) for e in admission_events if "admission_score" in e]
-        reasons = {}
+        reasons: dict[str, int] = {}
         for event in rejection_events:
             r = event.get("rejection_reason", "unknown")
             reasons[r] = reasons.get(r, 0) + 1
@@ -359,7 +359,7 @@ class MetricsAggregator:
         replan_events = self.trace.get_events_by_type("verification.replan")
 
         scores = [e.get("overall_score", 0) for e in verify_events if "overall_score" in e]
-        statuses = {}
+        statuses: dict[str, int] = {}
         for event in verify_events:
             s = event.get("status", "unknown")
             statuses[s] = statuses.get(s, 0) + 1

@@ -1,0 +1,13 @@
+{
+  "repo": "deepseek-ai/deepseek-harness",
+  "commit": "5badb15009ae1756c3afe0ae0cef1faafc290ccc",
+  "source_path": ".agents/skills/dsh-merging-stacked-prs/SKILL.md",
+  "source_url": "https://github.com/deepseek-ai/deepseek-harness/blob/5badb15009ae1756c3afe0ae0cef1faafc290ccc/.agents/skills/dsh-merging-stacked-prs/SKILL.md",
+  "name": "dsh:dsh-merging-stacked-prs",
+  "namespace": "dsh",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "d7b45f7c56f741e725d369887396f582f65d131c775ae58861d7835ca892bfcd",
+    "UPSTREAM-LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+  }
+}

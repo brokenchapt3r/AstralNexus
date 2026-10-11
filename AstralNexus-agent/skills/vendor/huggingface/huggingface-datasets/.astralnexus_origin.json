@@ -1,0 +1,13 @@
+{
+  "repo": "huggingface/skills",
+  "commit": "ca0325bb20b2d0a1b2efa893670c4c72f79e707b",
+  "source_path": "skills/huggingface-datasets/SKILL.md",
+  "source_url": "https://github.com/huggingface/skills/blob/ca0325bb20b2d0a1b2efa893670c4c72f79e707b/skills/huggingface-datasets/SKILL.md",
+  "name": "huggingface:huggingface-datasets",
+  "namespace": "huggingface",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "eeca50adf211ea64a288b852938f85a5183b045c720dc696b62db9aa2ea8deb2",
+    "UPSTREAM-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}

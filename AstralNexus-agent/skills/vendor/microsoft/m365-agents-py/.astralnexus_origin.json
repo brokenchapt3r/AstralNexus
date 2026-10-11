@@ -1,0 +1,14 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/m365-agents-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/m365-agents-py/SKILL.md",
+  "name": "microsoft:m365-agents-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "cd3b4a536bab82b795960a3ba728bf74345729a6cb278a50913639d5d77609a0",
+    "references/capabilities.md": "a6c0c18b143a8506b60b832ddfe2cb7987ba5c3ea087faf22608da5fd6157713",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

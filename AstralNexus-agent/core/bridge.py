@@ -89,15 +89,29 @@ def response_to_message(
                 "confidence": 1.0,
             })
 
-    # Build next actions for the task graph
-    next_actions = [
-        {
+    # Build next actions for the task graph. type/target/reason are the
+    # protocol-required keys; goal/role/dependencies/contract fields are
+    # routing metadata preserved verbatim so Governor admission can derive
+    # an actionable repair node (dropping them previously forced every
+    # proposal to be rejected as "missing_goal" downstream).
+    next_actions = []
+    for action in response.next_actions:
+        entry = {
             "type": action.get("type", "finish"),
             "target": action.get("target", node_id),
             "reason": action.get("reason", ""),
         }
-        for action in response.next_actions
-    ]
+        for key in (
+            "goal",
+            "role",
+            "dependencies",
+            "acceptance_criteria",
+            "owned_paths",
+            "expected_outputs",
+        ):
+            if action.get(key):
+                entry[key] = action[key]
+        next_actions.append(entry)
 
     # Extract budget from metrics
     budget_used = {

@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/bioservices/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/bioservices/SKILL.md",
+  "name": "scientific:bioservices",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "9edc884f0fe216d510417d565ae74cc61608824b52eeb53ed0cdea3dcda5bda3",
+    "references/identifier_mapping.md": "934ad3a80c2397b5373eb2ffa751ac2e49909e1f1c75c2056da9a0e5f3fbdb96",
+    "references/services_reference.md": "2d1df028ed478f8a3cff3ae0541f1e77e354d1283f2a475f1ef43c49aaf26599",
+    "references/workflow_patterns.md": "2fef51925a070f46580045a6066073c255e55c66f4630aab7a7eaffc1dad8f8a",
+    "scripts/batch_id_converter.py": "1ad67f3a083ba39f95eb72b5e3bbc2d46a642a8ce7997d953059c86f3c98d869",
+    "scripts/compound_cross_reference.py": "0425079cb5d26570ddb1fd17bd9cd689e357aeddc8a14a36984cd5bcf3d2507e",
+    "scripts/pathway_analysis.py": "2c8e32efa43c6a2423a9779a7a0ddcecd227cee7773e604b9447363a387a3489",
+    "scripts/protein_analysis_workflow.py": "dd2033b47701f70a44e9470bd2cbce2190858b27bd7345339ce13f1f1ecab6d1",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/qiime2-amplicon/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/qiime2-amplicon/SKILL.md",
+  "name": "scientific:qiime2-amplicon",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "605ae0581620f654ca9e12122a2bdb1d62a813841c5fea61b0eacb2031377cf7",
+    "references/runtime-and-interpretation.md": "d364d7f4ae66d3481168f71ce677e188c6135db349d498744ebf387223cd9741",
+    "scripts/amplicon_workflow.py": "4f781d70594f8624af3ad71e3cdedc0f5cbcd285ed630a3277cae2fe8a94827a",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

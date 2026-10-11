@@ -1,0 +1,18 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/anndata/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/anndata/SKILL.md",
+  "name": "scientific:anndata",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "a619c4088e1be6f6feaa5838c63ff8c4381fa21b4adee2a9276aa61464f3a034",
+    "references/best_practices.md": "bdc271aeb64c884cc0ebe5b6bdfde09855ca76862bb374783a5e8d113ce63a3b",
+    "references/concatenation.md": "0a34a1f21ed9577f521c6ef649ed5f15972ca1cc7e6b9906aeb00ec16b4b142c",
+    "references/data_structure.md": "5ee825849caf215f7810bfe00facdd9f1a00a099f346dafc149f7da024346b11",
+    "references/io_operations.md": "63bf1113076a0d74fe2ab1e02d84c2d32fb29489b7df5e74c981c62c31007af7",
+    "references/manipulation.md": "0c253c29e199bd75ad0ebf47741942aae23732f735f4c0990aaf6dccc5912258",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

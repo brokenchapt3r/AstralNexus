@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/polars/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/polars/SKILL.md",
+  "name": "scientific:polars",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "05d64a001190b516bc922bac616483c3109a6d29c3e9950e3e2d6c31b9415e79",
+    "references/best_practices.md": "8f4a2f994c3d6cac42a7236d0b040d904b872221f781f856b4529fd9e0bb08a5",
+    "references/core_concepts.md": "9447e5587c705a02325978cb8a3095e97c6299678648256056552c5597ecc4af",
+    "references/io_guide.md": "a22663ec99e190f2e571ab085afd01fa2332ff41c0d90a6e5c77835be953bbce",
+    "references/operations.md": "782ed44ed4a2a3091aa6635fec4ec7c94288ecc1844d31afc9e46e43ccb5f5d9",
+    "references/pandas_migration.md": "8decb1e39305c134a58f1d2db2162cb45a1d9f13f76d633e446c1879730bd3fb",
+    "references/review.md": "3a54bb353f4af078ca4d7ba3ae5ad3845d1dc0699b89a3fc443dfb3617627df9",
+    "references/transformations.md": "dcbaadcece9335b120a0deaa6950abd1068c30d2d24960b3bf26ba424638f529",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

@@ -27,7 +27,9 @@ def source_root() -> Path:
 
 
 def bundle_path() -> Path:
-    return source_root() / "tui" / "dist" / "entry.js"
+    source = source_root() / 'tui' / 'dist' / 'entry.js'
+    packaged = Path(__file__).resolve().parents[1] / 'tui_assets' / 'entry.mjs'
+    return source if source.is_file() or not packaged.is_file() else packaged
 
 
 def _tui_source_paths() -> list[Path]:
@@ -39,7 +41,7 @@ def _tui_source_paths() -> list[Path]:
                 path for path in directory.rglob("*")
                 if path.is_file() and path.suffix in {".ts", ".tsx", ".js", ".mjs"}
             )
-    return paths
+    return [path for path in paths if path.is_file()]
 
 
 def bundle_is_stale() -> bool:
@@ -80,11 +82,16 @@ def resolve_node_executable() -> str | None:
 
 
 def native_tui_available() -> bool:
+    if os.environ.get('ASTRALNEXUS_TUI_SCREEN_READER', '').lower() in {'1', 'true', 'yes'}:
+        return True
     return bool(resolve_node_executable() and bundle_path().is_file())
 
 
 def launch_native_tui() -> int:
     """Run the AstralNexus Ink TUI in the current terminal."""
+    if os.environ.get('ASTRALNEXUS_TUI_SCREEN_READER', '').lower() in {'1', 'true', 'yes'}:
+        from AstralNexus.tui_gateway.plain import run_plain
+        return run_plain()
     node = resolve_node_executable()
     bundle = bundle_path()
     if not node:

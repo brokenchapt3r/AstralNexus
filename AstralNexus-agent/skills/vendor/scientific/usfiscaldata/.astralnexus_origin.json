@@ -1,0 +1,21 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/usfiscaldata/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/usfiscaldata/SKILL.md",
+  "name": "scientific:usfiscaldata",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "7cdcb756489ae8e94a73df1eebfb9abef554e912af6559ebd28dffa021ab63d5",
+    "references/api-basics.md": "6f3d80a2d49dc28d41908274fb96efcc63242d0dcff6a5b369a4e9ec9a69d256",
+    "references/datasets-debt.md": "4822640d01a464cba36ca344c112fe7ab00786085a86d5bb798c6e7e95f6f858",
+    "references/datasets-fiscal.md": "64b10a2ee66781d6832dfb697a3d4b43d686d3f8ad74ddea46dc4659176bb8ec",
+    "references/datasets-interest-rates.md": "51504b8d7c6fa9d2481ca24446cb45a6216d291e93e4cc9ac6761cff25bec743",
+    "references/datasets-securities.md": "96286113846f6d9cc64f76ba94c8a1fe79be60df63f613812cb0620bfe094bd9",
+    "references/examples.md": "57cce4b3f3bc81431f0a8b6826b495953a4210199a86af09fd7edcf2a39413d6",
+    "references/parameters.md": "93b230c3d944fab0629e12709265d0b52f3b1afebf061928ae6d1b7183dc8a2e",
+    "references/response-format.md": "a8993a9b8d154ddd39801cae05b2e052366ea37bfafce4793a75b67fa1fb0ac1",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

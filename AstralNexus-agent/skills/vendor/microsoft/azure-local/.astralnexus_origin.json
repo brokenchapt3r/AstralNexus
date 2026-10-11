@@ -1,0 +1,22 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-local-skills/skills/azure-local/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-local-skills/skills/azure-local/SKILL.md",
+  "name": "microsoft:azure-local",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "f921b771ccbad9938d0bc4984fc54a6878d4c5cb253542ef676d740060bc67ca",
+    "references/docs-map.md": "966dbc2c9a4728cf199c6e7555468fa22781e3b4dbd3b00206992c8dd9023471",
+    "references/mcp-and-cli-tools.md": "7b4284175c491ad5b6d307862ff21e5c3b75914a22ca2b19454bf34abdb4a7fc",
+    "references/resource-types.md": "b40b6c4168827f83fe31944b88cda5bf136142aacbef9402cc982c5c573ac537",
+    "references/safety-rules.md": "39fe77803d0b1735561881df2c935db47b7484b53f505accd137505e1fc53703",
+    "workflows/networking-and-security/networking-and-security.md": "81366c19a957a702b40a8b905900314753cdaf6d5a21cda1a0a1a1cc0d7e5f7f",
+    "workflows/operate-and-update/operate-and-update.md": "04e5f14f5b9a2aa9797408ff6795e4468a4b6608539cb8ffc6eb91d94d3c4709",
+    "workflows/plan-and-deploy/plan-and-deploy.md": "ad0881aca298702fce4544ff8b04a4b71ee11009e0f229bd03805cc1ce1f0f0f",
+    "workflows/troubleshooting/troubleshooting.md": "68e6f4e8fb04248ff3339aa5f5a025e0834d09265a7ea41f48156b904974a8e6",
+    "workflows/workload-management/workload-management.md": "04b5590d18599b6b2fba8f5522d82f8e1f96ef8fc3cd0c81413a99063d9dd1a3",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

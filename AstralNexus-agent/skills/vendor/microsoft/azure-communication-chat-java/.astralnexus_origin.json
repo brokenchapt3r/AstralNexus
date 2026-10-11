@@ -1,0 +1,14 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-java/skills/azure-communication-chat-java/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-java/skills/azure-communication-chat-java/SKILL.md",
+  "name": "microsoft:azure-communication-chat-java",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "6b4cf495990c027f146f4dab11b17a2d04c21e67fcf96af26ad56260f7a764fd",
+    "references/examples.md": "fada42581c630e69ae02ac7e5eba1c679af26c0d750fe268f04c2a5f395e545e",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

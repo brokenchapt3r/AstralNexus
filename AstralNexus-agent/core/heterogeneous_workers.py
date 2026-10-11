@@ -157,6 +157,8 @@ HETEROGENEOUS_WORKERS: Dict[str, WorkerProfile] = {
             "github_repo_contents",
             "skills_list",
             "skill_view",
+            "lsp_query",
+            "runtime_plugins",
         ],
         model_preference="coding_specialized",
         resource_tier="cloud",
@@ -182,7 +184,8 @@ HETEROGENEOUS_WORKERS: Dict[str, WorkerProfile] = {
     "Tool": WorkerProfile(
         worker_type="Tool",
         description="Python, SQL, Shell, API execution - the execution layer",
-        tools=["python_exec", "terminal_exec", "http_get", "file_read", "file_write"],
+        tools=["python_exec", "terminal_exec", "http_get", "file_read", "file_write",
+               "workflow_submit", "workflow_status", "workflow_cancel", "runtime_plugins"],
         model_preference="small_fast",  # Tool execution is deterministic
         resource_tier="local",  # Execute locally for speed
         input_contract="command: str, language: str, timeout: int, sandbox: bool",
@@ -391,17 +394,17 @@ def get_heterogeneity_metrics() -> Dict[str, Any]:
         all_capabilities.update(w.capabilities)
     
     # Model preference distribution
-    model_prefs = {}
+    model_prefs: dict[str, int] = {}
     for w in workers:
         model_prefs[w.model_preference] = model_prefs.get(w.model_preference, 0) + 1
     
     # Resource tier distribution
-    resource_tiers = {}
+    resource_tiers: dict[str, int] = {}
     for w in workers:
         resource_tiers[w.resource_tier] = resource_tiers.get(w.resource_tier, 0) + 1
     
     # Cost distribution
-    costs = {}
+    costs: dict[str, int] = {}
     for w in workers:
         costs[w.cost_per_call] = costs.get(w.cost_per_call, 0) + 1
     

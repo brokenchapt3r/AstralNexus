@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-containerregistry-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-containerregistry-py/SKILL.md",
+  "name": "microsoft:azure-containerregistry-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "15bb9f18c67f30940b36edd5a2c050c05153ce2b3626d8ebf55604a9fbe946b2",
+    "references/capabilities.md": "979d61d84dd9bdd8c33faba7a2ce3af1a6e3c824081b3e3d0ad8cd60f75f0249",
+    "references/non-hero-scenarios.md": "b919f1e7e42e49b33815c7cbb7737be105b89539364f93b102f50bdf15e645bd",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

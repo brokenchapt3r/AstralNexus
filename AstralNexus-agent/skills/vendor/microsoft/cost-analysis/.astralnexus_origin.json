@@ -1,0 +1,25 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-cost/skills/cost-analysis/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-cost/skills/cost-analysis/SKILL.md",
+  "name": "microsoft:cost-analysis",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "a3708374c3c66dc2e353e745ca9c9e3b48632b8abbfd7b6c64ab2cbb31693594",
+    "references/ai-cost-analysis.md": "0393847ca0a931705987f6d5609706271bd21cd73aeaa4a25b217f963f36a9a1",
+    "references/aks-anomaly.md": "b22aa853cc0d6962c986c056d9e42c46582b8de694d7cf63f252bdc5bd1ec62c",
+    "references/aks-cost-analysis.md": "826d7daff7c2e984ab59fafc3ccc72e9a587e4b215cd052ec54b3f7f6dcaf039",
+    "references/aks-enablement.md": "4f074ffa1882fb7d68acfbd641478d2932bfc94ed013bcfcb6310f3fcb20766d",
+    "references/cost-investigation.md": "9146c32b0364a550680c4ab46497d6a1113ec63c0140f7762dac91ef598b2be9",
+    "references/tools-and-safety.md": "ffbee38a90905eaee1afad28d007708dfe46ae368e4b095dc1fea5d203d7f7d6",
+    "references/cost-query/dimensions-by-scope.md": "e74b9dfc1ae1b19c95e2c254f28f6bf4e292625554ab3f21d88741633253f2db",
+    "references/cost-query/error-handling.md": "661f2253f7d3d5544e72480fd99bd3825a950fab200feeeb41c9a9c2a08e2677",
+    "references/cost-query/examples.md": "9d7f0d40cead29749fc5e09c9cf0fccb385e2c459bb7f74a5fd390711b5616af",
+    "references/cost-query/guardrails.md": "ee61f789ab49015d5311fb6589eae11a82f512311b881af78c72a31e377cf529",
+    "references/cost-query/request-body-schema.md": "44e501d8db145b4fdfd510dbd12ce3896fdcee5bb3182b44b71e08f628e39aa3",
+    "references/cost-query/workflow.md": "a0c3cd0437434adccfeaa2e446fc2487778c4b7903d20fd9e1a22dc3efb8759e",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

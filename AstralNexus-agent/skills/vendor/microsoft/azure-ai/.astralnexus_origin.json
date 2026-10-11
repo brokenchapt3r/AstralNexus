@@ -1,0 +1,28 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/azure-ai/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/azure-ai/SKILL.md",
+  "name": "microsoft:azure-ai",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "d445410cfbeb391a1eaf95fbf951ba08a017b66f9404cd434c534d54f64329b5",
+    "references/auth-best-practices.md": "34f6fe88e2b5819c1a0f24aa3930a060d9504fee68ea4b363f0912a78daa5396",
+    "references/sdk/azure-ai-contentsafety-java.md": "69bc81ac571f57270e2ee6c2c6453bc9d93a1b5a72598d8d8406cad74f91409a",
+    "references/sdk/azure-ai-contentsafety-py.md": "21f78e6865a6c74ffb405ceeb2f91350e5b5ec24f17d236f8c9a7d996999a01f",
+    "references/sdk/azure-ai-contentsafety-ts.md": "556cad24ac915c99ad0d19bfcb153a8f9b2ac2750d8c4b78391d29b3d67f27d8",
+    "references/sdk/azure-ai-document-intelligence-dotnet.md": "3d623c19a94bc8f60b798a9c1b2869824ac0f0fbd3f28987f0156d018ccaa10f",
+    "references/sdk/azure-ai-document-intelligence-ts.md": "4d0a21b9324676d2fb107d5e84e2d21c744aab0feeb9c879fe57412b0aaec47b",
+    "references/sdk/azure-ai-openai-dotnet.md": "f91f7ff0e9f5668d148d2ae304da90bb23bec13a713a4256905c8bdd4ec99d17",
+    "references/sdk/azure-ai-transcription-py.md": "8a8323d15dcfc336ca2a8bc6b65d8413ce413deed884bc0cb329b7c74acd9f8f",
+    "references/sdk/azure-ai-translation-text-py.md": "db1a6b5b63ce54b7d55124976fe242ee69d05dcd05ef1af9af02fd9bbad6eb59",
+    "references/sdk/azure-ai-translation-ts.md": "ba50ad65f29bf3c1707f638a47549627bd236b54538f2f64a6d726f1d245f2d0",
+    "references/sdk/azure-ai-vision-imageanalysis-java.md": "7b9d980261377dfe61683b4b62775c563e3b74154b616ad09b6a14700c768309",
+    "references/sdk/azure-ai-vision-imageanalysis-py.md": "ec5e3ecec27ef7b90e3e24acba3b4859ae735d6074c1bc19ea3c007502d81292",
+    "references/sdk/azure-search-documents-dotnet.md": "70c91efbd4b10978db2798486b3c55cd93b7e022d6b74c21ef53aecf0b6ea241",
+    "references/sdk/azure-search-documents-py.md": "d65d61fe00ed7c54d4163279da7f915613aa94a88b0613801dfb82514f89bc86",
+    "references/sdk/azure-search-documents-ts.md": "69060237239c07d27a7e5bfe24ef146625bf12264a4fdac356e1d5324517837a",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

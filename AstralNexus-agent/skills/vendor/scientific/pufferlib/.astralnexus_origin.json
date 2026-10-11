@@ -1,0 +1,28 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/pufferlib/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/pufferlib/SKILL.md",
+  "name": "scientific:pufferlib",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "031975c6abaabd8237c18b6472886f4a718c509da70fc6ebca06455f8a002fa7",
+    "references/environments.md": "0defeddfae85e5517d3f25d03fc43be22455cc5c13379efea7c2f5769d58667e",
+    "references/integration.md": "1baf88eafdb12b8d43dde7dfdc9690bf9a28ff6483f5303695a2307166620d02",
+    "references/native-5.md": "48222d65c5814bda828f274122b60896b49ba515f171277b8b208076560376d8",
+    "references/policies.md": "88a2a468b647656d23306ee2cc885643d210b041b920078e84e4ef237ea3d68b",
+    "references/training.md": "b59e378ff3e592d553336dcff61bb9b7b988dc59407287f53e1336bd33db91f2",
+    "references/vectorization.md": "8e10c7b1ef60cd52fdb7f00b7672fb477451c962602e09948e5a456adf1f2c38",
+    "scripts/benchmark_vectorization.py": "4601b83d9493dd4fd1c21b84afb2bd17fcedb0674d2bf526e62e770a59b16d6b",
+    "scripts/env_contract_validator.py": "2308a4f0076f6e5cba7a1a8328fa8764ba2f21828c252d0bd0bb0689321abade",
+    "scripts/env_template.py": "058f479e510d8f02d8bbba517c96d7a9f8fe6dfc5e32f01f333b22651204df70",
+    "scripts/inspect_checkpoint.py": "df2ae60bcff0f885b8dbdb03998ed6bfbf6105bd5bb2e2d56cb19bb125ab1c59",
+    "scripts/repro_plan.py": "d89d5c448db6ee48e728b74c76f5326f0e156fa163a936061913b464e7bf470c",
+    "scripts/train_template.py": "cdb2c3d31836aba7497c85f0e5864b3fbb935ec99db5a7096106fdf7c56b20bf",
+    "scripts/validate_plan.py": "6ede920afb89b4ce3d29c6a8f9fda503049e58a9ae7f1fc9d11a964bec9231d3",
+    "scripts/_common.py": "8f3f610237c6035f4fcb379ec16198f9e2a93c7770ba93e9d222530e5512f85f",
+    "scripts/__init__.py": "5e2a587bf7e4f8fb11154872238594d6ba21805716d7f3b974675ebe54e52bfb",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

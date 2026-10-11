@@ -1,0 +1,16 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/flowkit/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/flowkit/SKILL.md",
+  "name": "scientific:flowkit",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "47c4dcb907dc6ec15daa4bdf1855e9c96860ef1a558507bef0084d79c2d1c57c",
+    "references/compensation-and-gating.md": "d9a84ff2a42a3148c8e90e50a8b39fbfd8a30e52852edb98103f66cc21db80f0",
+    "references/workspaces-and-results.md": "c864c2a5ff1c953e0374b6e44f162da59710c81edce50168547862d1fe034b7c",
+    "scripts/analyze_gates.py": "b186ca0b7c17bda61471dace814bbb60af001a06f66dacb801fb21f1bbf689f8",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

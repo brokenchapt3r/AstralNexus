@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-monitor-ingestion-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-monitor-ingestion-py/SKILL.md",
+  "name": "microsoft:azure-monitor-ingestion-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "e9686a6ef133b735704d1f677fb926857a056b8b1bb80e085d495d9136c52eae",
+    "references/capabilities.md": "d8638365a194e41c18c9ebadb5c035da72e2a34288b0ba5d9474967b59f97434",
+    "references/non-hero-scenarios.md": "6787e17dc0f14a370104bd588dc9158c55d1021070587c2c44ffd0d7eeaee55e",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

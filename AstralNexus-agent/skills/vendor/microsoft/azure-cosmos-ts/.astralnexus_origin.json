@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-typescript/skills/azure-cosmos-ts/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-typescript/skills/azure-cosmos-ts/SKILL.md",
+  "name": "microsoft:azure-cosmos-ts",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "352aefc8d088cdc851baf3a38d60124bbf77bc0f273c2522500967d5bd515da2",
+    "references/bulk-operations.md": "e2d4200634a435eec5822291b94a19a88a96ae2f3b5d6829abbfa2cddb394d9d",
+    "references/query-patterns.md": "16686b9e4f508f17f0037bb534563f77d9c1bf59016afaf772a5d503ca4117c3",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

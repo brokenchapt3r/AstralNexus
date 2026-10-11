@@ -1,0 +1,22 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/genomic-coordinates/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/genomic-coordinates/SKILL.md",
+  "name": "scientific:genomic-coordinates",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "da3eee43dfee06ee632388ddda0c38bb0bc57ec33420cbf26b14ce86be3c28a0",
+    "references/format-conventions.md": "d51bd8ab5156055f94c9e9bae02cd65fd1dd4e289c7c39dc9b445367f56de79d",
+    "references/reference-builds.md": "4c114bbb18b2c01b99f89ddd7b792a69090d39473d45df1cdff054ef6773be43",
+    "references/transcript-coordinates.md": "5a4d68fa2bce75c945b933cf980ddb1c91f6279dfded64afa4e1f700173836ac",
+    "references/variant-representation.md": "98656413c9f412a3c0749b6f2309762318593d3d670e6a1f39b90259998fa34a",
+    "scripts/audit_intervals.py": "fe28ca2f17546e4c11c9578d24fdb02db12cc2f9719a41d36e0358b9c1b3278a",
+    "scripts/check_contigs.py": "5f224c4d3e44281c8bb51c8a5bd2a921f2dab2c1714d5f5d11361a9f2d4cbb32",
+    "scripts/convert_coords.py": "190019868cd9ee2dc139ee838ae926ba2cd68dafc5f32b729769776d4201c6d2",
+    "scripts/normalize_variant.py": "c3652412549726b45bf954710ccf18b319c135092ef94768ecba20abfd9cd590",
+    "scripts/_common.py": "a777f11f9377c3db892af41012ad2fe12b33bae45f031ec1accae02fe4c24fc5",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

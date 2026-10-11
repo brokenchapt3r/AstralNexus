@@ -1,0 +1,16 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/skills/entra-agent-id/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/skills/entra-agent-id/SKILL.md",
+  "name": "microsoft:entra-agent-id-10656928",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "f002fdcfca1affe824a0e39dee0ebe000473a38663a4182d8b0484520ac36c38",
+    "references/known-limitations.md": "52675c4722fb3c838f7fa5c8490efc41a59373307639056696a645b54eb1a8d6",
+    "references/oauth2-token-flow.md": "a59d860504a560158b6d0eb66a706e2fb316374278abb0ad35446f7e42bf5d9b",
+    "references/sdk-sidecar.md": "d3c9b7946756c188a02682cf324fceacf7ba789b8af8dfecbbdc16706e5ee1de",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

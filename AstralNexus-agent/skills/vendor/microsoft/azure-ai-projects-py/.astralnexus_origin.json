@@ -1,0 +1,24 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-ai-projects-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-ai-projects-py/SKILL.md",
+  "name": "microsoft:azure-ai-projects-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "a44de7c651217482c7ed9321d24a6d77604869886e0038307eb4ea202178d4b4",
+    "references/agents.md": "9cd05044a0f4a11194bd2457de61991e9cdf0f96e709dc84f2e627c4bcb8212e",
+    "references/api-reference.md": "89ef33df496fb6b7c9fe1fb01fafe9e344e4131f33d35a01253b9c7cde85e090",
+    "references/async-patterns.md": "cce0e3738d8dd1e9a617bbb91a7a14dd2030f3b4d21db35af5768fc545427a75",
+    "references/built-in-evaluators.md": "12407200b755179be7e72399cfba331b7bd636f5a65f5bda273509465726eab0",
+    "references/connections.md": "aa4fcc89ddf11996a62348308727e4be58b8fdcb9400676bee8f67a11f6ee289",
+    "references/custom-evaluators.md": "df0705c5db26307d94de14bb30925b1d65020c19a3a3456925bec2772b81e234",
+    "references/datasets-indexes.md": "f8c6ed9062972718e3dde77de4392ee6cb1f5a112860c51ed25932e824c41b30",
+    "references/deployments.md": "b116d7e3887b8ec7406964efb9a4859ed89e8db36f0863de537c550ffb430ed8",
+    "references/evaluation.md": "7ed356464371df0e48f9a1d73ca8a3a4e3f8d728a4e3c652047c3e311b427674",
+    "references/tools.md": "9f045ee7ce75ebfe765337d72b5e1e53df2449046beaea812006ec884765ae91",
+    "scripts/run_batch_evaluation.py": "83f45d8e1248e2f1b1c969f44098d8f74d92d2ac09c09222f4542e2eba7aa46d",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

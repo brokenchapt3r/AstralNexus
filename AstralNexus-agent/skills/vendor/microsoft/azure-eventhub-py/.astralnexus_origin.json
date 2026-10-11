@@ -1,0 +1,16 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-eventhub-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-eventhub-py/SKILL.md",
+  "name": "microsoft:azure-eventhub-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "fd26cd3d54d9e92d3d8989b0c2be8f54ab140f41837ba1f4a03da40659f64d03",
+    "references/checkpointing.md": "a82569bf0a846a6bbc46ef6abc71eac7ec67d203400d9652fabe9f23603b69d9",
+    "references/partitions.md": "d78fdd2b8a94abaad138c2aa7bb117f5609afd792450bad269a91e4590c6823b",
+    "scripts/setup_consumer.py": "0e2df705c5df1dc6b7c943974c14edc876fb55e115624dd8a6fb81bc1ff1f706",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

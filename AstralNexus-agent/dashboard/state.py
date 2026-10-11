@@ -30,6 +30,12 @@ from .models import (
 class LiveRunState:
     """Task, population, topology, resource and metric projections."""
 
+    # Doc 17 第二批③: presentation-layer preview caps. The full text stays in
+    # the run events and execution ledger (audit/replay); the per-node detail
+    # endpoint still serves the complete (100KB-capped) record.
+    _SNAPSHOT_OUTPUT_PREVIEW_CHARS = 4_000
+    _SNAPSHOT_SUMMARY_PREVIEW_CHARS = 4_000
+
     def __init__(self, run_dir: Path):
         self.run_dir = Path(run_dir)
         self.nodes: dict[str, dict[str, Any]] = {}
@@ -86,6 +92,8 @@ class LiveRunState:
         node_id = node_id_of(payload)
         with self._lock:
             self.events.append(event)
+            if payload.get("trace_owner_valid") is False:
+                return  # Historical diagnostics stay visible, never current state.
             self.metrics.apply(event)
             self.last_updated = str(
                 event.get("recorded_at") or payload.get("recorded_at") or ""
@@ -164,7 +172,7 @@ class LiveRunState:
             "collapsible": bool(payload.get("collapsible", True)),
         }
         self.runtime_events.append(runtime_event)
-        node_id = runtime_event["node_id"]
+        node_id = str(runtime_event["node_id"] or "")
         if node_id:
             node = self.nodes.setdefault(
                 node_id, new_task_node(node_id, self.last_updated)
@@ -362,7 +370,7 @@ class LiveRunState:
             )
             self._merge_task_fields(node, item)
         for item in patch.get("cancel_nodes") or []:
-            item_id = item.get("node_id") if isinstance(item, dict) else item
+            item_id = str(item.get("node_id") if isinstance(item, dict) else item)
             if str(item_id) in self.nodes:
                 self.nodes[str(item_id)]["status"] = TaskStatus.CANCELLED.value
 
@@ -885,8 +893,24 @@ class LiveRunState:
         })
 
     def snapshot(self) -> dict[str, Any]:
+        from AstralNexus.runtime.authoritative_projection import read_current_projection
+        authority = read_current_projection(self.run_dir)
         with self._lock:
-            tasks = [dict(item) for item in self.nodes.values()]
+            if authority["source"] == "checkpoint":
+                tasks = []
+                for node in authority["graph"]["nodes"]:
+                    node_id = str(node["node_id"])
+                    item = dict(self.nodes.get(node_id) or new_task_node(node_id))
+                    item.update(node)
+                    item["id"] = node_id
+                    tasks.append(item)
+                edge_source = {(str(edge["source"]), str(edge["target"]), str(edge["edge_type"]))
+                               for edge in authority["graph"]["edges"]}
+            else:
+                tasks = [dict(item) for item in self.nodes.values()]
+                edge_source = self.edges
+                if authority["source"] == "unavailable":
+                    tasks = [{**item, "status": "unknown", "current_state_unavailable": True} for item in tasks]
             for task in tasks:
                 metadata = task.get("metadata") or {}
                 role = str(task.get("role") or "").lower()
@@ -895,10 +919,21 @@ class LiveRunState:
                     or metadata.get("plane")
                     or ("control" if role in {"user_intent", "planner", "governor"} else "execution")
                 )
+                # Bounded presentation projection: preview (tail = latest) +
+                # explicit truncation markers; never fabricate missing fields.
+                for key, cap in (
+                    ("output", self._SNAPSHOT_OUTPUT_PREVIEW_CHARS),
+                    ("summary", self._SNAPSHOT_SUMMARY_PREVIEW_CHARS),
+                ):
+                    value = task.get(key)
+                    if isinstance(value, str) and len(value) > cap:
+                        task[f"{key}_bytes"] = len(value)
+                        task[f"{key}_truncated"] = True
+                        task[key] = value[-cap:]
             agents = [item.to_dict() for item in self.agents.values()]
             task_edges = [
                 {"source": a, "target": b, "kind": k}
-                for a, b, k in sorted(self.edges)
+                for a, b, k in sorted(edge_source)
             ]
             task_role_map = {
                 str(item.get("id")): str(item.get("role") or "").lower()
@@ -915,7 +950,7 @@ class LiveRunState:
                     edge["kind"] = "governed_admission"
             display_tasks = tasks
             display_edges = task_edges
-            if self.original_request:
+            if self.original_request and authority["source"] == "trace_legacy":
                 input_node = next(
                     (
                         item for item in tasks
@@ -1268,8 +1303,8 @@ class LiveRunState:
             for node in tasks:
                 status = str(node.get("status") or "unknown")
                 status_counts[status] = status_counts.get(status, 0) + 1
-            effective_status = self.run_status
-            if tasks and all(
+            effective_status = str(authority.get("run_status") or self.run_status)
+            if authority["source"] == "trace_legacy" and tasks and all(
                 str(node.get("status") or "") in TERMINAL_TASK_STATES
                 for node in tasks
             ):
@@ -1338,13 +1373,23 @@ class LiveRunState:
             )
             terminal = effective_status in TERMINAL_TASK_STATES
             terminal_failed = effective_status == TaskStatus.FAILED.value
+            delivery_pending = (authority["source"] == "checkpoint" and effective_status == "running"
+                                and bool(tasks) and all(item.get("status") == "completed" for item in tasks))
             runtime_brief = {
                 "phase": (
+                    "当前状态不可读取" if authority["source"] == "unavailable" else
+                    "运行已暂停" if authority["source"] == "checkpoint" and effective_status == "paused" else
+                    "运行已阻塞" if authority["source"] == "checkpoint" and effective_status == "blocked" else
+                    "交付验收/发布处理中" if delivery_pending else
+                    "执行完成（交付状态另见发布门）" if authority.get("execution_only") else
                     "验收失败" if terminal_failed else "验收完成"
                     if terminal else str(latest_runtime.get("title") or effective_status)
                 ),
                 "summary": str(
-                    ("任务已经结束，所有运行中状态已关闭。" if terminal else "")
+                    (str(authority.get("ownership", {}).get("stop_reason") or "权威运行状态已暂停/阻塞")
+                     if authority["source"] == "checkpoint" and effective_status in {"paused", "blocked"} else "")
+                    or ("当前数据库状态不可读取；以下活动来自历史日志。" if authority["source"] == "unavailable" else "")
+                    or ("任务已经结束，所有运行中状态已关闭。" if terminal else "")
                     or latest_runtime.get("summary")
                     or "控制面正在等待下一项可观测运行事件。"
                 ),
@@ -1353,7 +1398,7 @@ class LiveRunState:
                         "id": item.get("id"),
                         "role": item.get("role"),
                         "action": (
-                            (item.get("current_activity") or {}).get("label")
+                            (activity.get("label") if isinstance(activity := item.get("current_activity"), dict) else None)
                             or item.get("goal")
                             or "执行节点契约"
                         ),
@@ -1361,6 +1406,7 @@ class LiveRunState:
                     for item in ([] if terminal else active_nodes[:8])
                 ],
                 "next_step": (
+                    "等待核心交付门及发布结果，节点完成不等于完整验收。" if delivery_pending else
                     "验收已结束；可查看交付目录与节点阶段报告。"
                     if terminal
                     else "等待运行中 Worker 提交结构化结果并进入 Verifier。"
@@ -1374,6 +1420,7 @@ class LiveRunState:
                 "output_dir": str(self.run_dir),
             }
             return {
+                "authority": {key: value for key, value in authority.items() if key not in {"graph", "cursor"}},
                 "run_dir": str(self.run_dir),
                 "run_status": effective_status,
                 "last_updated": self.last_updated,
@@ -1436,7 +1483,7 @@ class LiveRunState:
             "task.execution.completed": "节点执行完成",
             "orchestrator.completed": "运行完成",
         }
-        timeline = []
+        timeline: list[dict[str, Any]] = []
         for event in self.events:
             event_type = event_type_of(event)
             if event_type not in visible:
@@ -1621,9 +1668,13 @@ class LiveRunState:
 
     @classmethod
     def _parse_edges(
-        cls, items: list[Any], default_kind: str = "dependency"
+        cls, items: Any, default_kind: str = "dependency"
     ) -> set[tuple[str, str, str]]:
         result: set[tuple[str, str, str]] = set()
+        # Historical topology events also use semantic_edges for a count.
+        # Counts are metrics, not edge records, and must not crash replay.
+        if not isinstance(items, (list, tuple)):
+            return result
         for item in items:
             if isinstance(item, dict):
                 edge = cls._edge_from_payload(item, default_kind)

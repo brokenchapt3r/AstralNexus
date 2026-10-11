@@ -1,0 +1,16 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-dotnet/skills/azure-resource-manager-cosmosdb-dotnet/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-dotnet/skills/azure-resource-manager-cosmosdb-dotnet/SKILL.md",
+  "name": "microsoft:azure-resource-manager-cosmosdb-dotnet",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "d44c0e53406799c89d0bb75def5eb150b21447405aa8df6c5596e577678a7f3f",
+    "references/account-management.md": "7144527f2f98eca1fd03f87ec49b84babf557c52f7d0fba9921d4d6446f8afd7",
+    "references/sql-resources.md": "52347f7274eb0c895285ec4cc6f43242b4137778888c2186f9ff719cca639b53",
+    "references/throughput.md": "a9d871f6bbcebf3a12548e27549e0df8e633e6c66042e70f55cf83b5ad3e0b7b",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

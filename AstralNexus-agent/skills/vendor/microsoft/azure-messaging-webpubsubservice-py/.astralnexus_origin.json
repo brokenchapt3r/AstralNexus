@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-messaging-webpubsubservice-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-messaging-webpubsubservice-py/SKILL.md",
+  "name": "microsoft:azure-messaging-webpubsubservice-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "c44dffb388765c125899343027db5276366a5c11b5993b11b07acb06ce235527",
+    "references/capabilities.md": "74615b2b63545ebd74f19169c129b92d019b0c716bc5514edb721d5e5aabfd83",
+    "references/non-hero-scenarios.md": "792002288318bfaed6229a9896df6048a21a64f42eb0fdb2be90fd24b16f8182",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

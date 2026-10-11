@@ -1,0 +1,15 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/scikit-bio/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/scikit-bio/SKILL.md",
+  "name": "scientific:scikit-bio",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "4a7a5760adadf32782dc4694028371df13b25472ff8ffe4cef2b2fc564226f6c",
+    "references/api_reference.md": "941fa9f2fea0a6abf398c22fb031e251935fd6c7dac0d7398417e7f4d50d351f",
+    "references/review.md": "e4a3c3c37534f718238081807412e0fb4481d28516164130c14e999507f94fa4",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

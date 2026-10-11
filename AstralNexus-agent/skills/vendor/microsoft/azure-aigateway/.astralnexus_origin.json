@@ -1,0 +1,21 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/azure-aigateway/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/azure-aigateway/SKILL.md",
+  "name": "microsoft:azure-aigateway",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "05acd88e75ab23776d2876a1f91f6cfe2fd666c48f4f45176e7ea9d3d873b9be",
+    "references/auth-best-practices.md": "34f6fe88e2b5819c1a0f24aa3930a060d9504fee68ea4b363f0912a78daa5396",
+    "references/patterns.md": "7a701fc8bee643ec4a4a8f77e19fb45b5101ce830da7740ed6641233b3df4470",
+    "references/policies.md": "176a5bf61186a45e338dcc9ab6e9320a7b4ae3d8bb356f8613506533348b3b69",
+    "references/troubleshooting.md": "ebe564f5b4a5628887d49aa11699ccc967eba0c96e336c989c8ce28028e842e8",
+    "references/sdk/azure-ai-contentsafety-py.md": "21f78e6865a6c74ffb405ceeb2f91350e5b5ec24f17d236f8c9a7d996999a01f",
+    "references/sdk/azure-ai-contentsafety-ts.md": "556cad24ac915c99ad0d19bfcb153a8f9b2ac2750d8c4b78391d29b3d67f27d8",
+    "references/sdk/azure-mgmt-apimanagement-dotnet.md": "156cd0f2ad7fc73d1f07c13ead5a46f759746c08d9f9f6612d48a73615c0f258",
+    "references/sdk/azure-mgmt-apimanagement-py.md": "2096c2199a2861d4e6fad37b7850d32fabfd3e75c323436d51746565ef349949",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

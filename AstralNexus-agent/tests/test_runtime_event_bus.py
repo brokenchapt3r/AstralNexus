@@ -117,3 +117,36 @@ def test_trace_node_output_emits_artifact_events(tmp_path):
     public = [event for event in trace.event_bus.history() if event["event_type"] == "artifact.created"]
     assert len(public) == 2
     assert {event["payload"]["details"]["path"].split(".")[-1] for event in public} == {"json", "md"}
+
+
+def test_mixed_tool_batch_surfaces_failed_call(tmp_path):
+    bus = RuntimeEventBus(tmp_path)
+    events = bus.ingest_trace("llm.tool_batch", {"calls": [
+        {"name": "file_read", "status": "success"},
+        {"name": "python_exec", "status": "failed", "returncode": 1},
+    ]})
+    assert events[0]["payload"]["status"] == "failed"
+
+
+def test_node_execution_failure_survives_trace_projection(tmp_path):
+    trace = TraceRecorder(tmp_path)
+    trace.record_node_output("worker", {
+        "role": "coder", "execution_outcome": "failed", "content": "required tests failed",
+    })
+    events = [json.loads(line) for line in (tmp_path / "runtime_events.jsonl").read_text(encoding="utf-8").splitlines()]
+    activities = [event for event in events if event["event_type"] == "agent.activity"]
+    assert activities[-1]["payload"]["status"] == "failed"
+
+
+def test_optional_event_fields_accept_null(tmp_path):
+    bus = RuntimeEventBus(tmp_path)
+    for event_type, payload in [("agent.activity.changed", {"activity": None}), ("llm.tool_batch", {"calls": None}), ("interactive.run.summary", {"result": None, "status": "failed"})]:
+        assert bus.ingest_trace(event_type, payload)
+
+
+def test_single_tool_failure_survives_trace_projection(tmp_path):
+    trace = TraceRecorder(tmp_path)
+    trace.record_tool_complete("check", "python_exec", {}, {"status": "failed", "returncode": 1})
+    events = [json.loads(line) for line in (tmp_path / "runtime_events.jsonl").read_text(encoding="utf-8").splitlines()]
+    finished = [event for event in events if event["event_type"] == "tool.finished"]
+    assert finished[-1]["payload"]["status"] == "failed"

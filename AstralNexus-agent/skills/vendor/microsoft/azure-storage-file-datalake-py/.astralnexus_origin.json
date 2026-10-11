@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-storage-file-datalake-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-storage-file-datalake-py/SKILL.md",
+  "name": "microsoft:azure-storage-file-datalake-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "a8a7321f17a1097d0c418cf1e57b3c8758f25e986fb4f35f8de408f6d8c43d95",
+    "references/capabilities.md": "e4344ff6d4c9ae5008bdd43035bcf827c98ed3d84aa8a67c2ec6eaa8e99b2ead",
+    "references/non-hero-scenarios.md": "e9b1e3ab80d3d532c85bbc29710bca59ac92fe41342ae33b4c937d6ff03ecaed",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/primer-design/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/primer-design/SKILL.md",
+  "name": "scientific:primer-design",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "ea8bed0aa340a5f6538c206bb3d9fe503da6759e68a944a2bce564fa115d25e4",
+    "assets/assay-report-template.md": "62f3a9a292b7c176425a4a4c4ee10b45acd7bc1217bea33d6fd492f0cbd7bf1b",
+    "assets/demo-template.fasta": "a0d8982da90dba6608b40c10d48b4380eae5d815c36583a546b3eeef01dfd40c",
+    "assets/qpcr-config.json": "eba6ae9ab645501a429aaa2178d31bb81f6b0890061a6bcc3ea684f6d71bfe0e",
+    "assets/requirements.txt": "869df4503af0601aab43e7c177486df03b249da308934ed4ccc656b611824bdf",
+    "references/design-workflows.md": "75057ee4eed7866f530ed342ae2fd8bdc8cf103447e8f618774d8d3ca22b27ba",
+    "references/input-contract.md": "de977bfb771a5fe8e56739cbdb86ba63d043d2bcd37cb9d96c64a43aa0dbaa5f",
+    "references/sources.md": "4f4eb4d76141732e447c959b76d69f1c6f30ad5d6a77fd67a8467959c60a3268",
+    "references/specificity.md": "d081128b1764f40b4616a849701b3ece0f33bbd77e078f0fbeacdcd938139edc",
+    "references/thermodynamics.md": "6f11bb0a6bffee3e2ba1058fc260567590b542e6e2de0bf7ea5aed03095015c4",
+    "scripts/check_thermodynamics.py": "901ffe9850638686828408018ba9984bd6d91aaf01f9c6dc978163d849925b49",
+    "scripts/design_primers.py": "c09e7fe81f309d0ae2f3ce30721daf944fdfc976e23aa4ea98313a330f807c98",
+    "scripts/screen_specificity.py": "3aff33dfd4d0cf6670005469ac29bec66de397b74a354dd092dccbc20900b85f",
+    "scripts/_common.py": "35d1a9fa5f197e849ae65a69217fa2e337f715e2c6ae52d9fa1189e6a61e14eb",
+    "scripts/_specificity.py": "bb3bba39018038b5c39ef21047cf7504aee01bbb96f3c178b3725638dac6d142",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/microsoft-365-agents-toolkit/skills/declarative-agent-developer/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/microsoft-365-agents-toolkit/skills/declarative-agent-developer/SKILL.md",
+  "name": "microsoft:declarative-agent-developer",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "13d2af8dd44cca049c8ebf8a8880cca304fc3dc419c926ef146dba35b14df412",
+    "references/api-plugins.md": "9618131fe8c093ec78af2c1418e33b7c93ee28d0bd0985a525010cf01b3d7bb9",
+    "references/authentication.md": "53a9a03b6a89344b4b42d1eadc13358569efdcd14189872d59d6ace47e869228",
+    "references/best-practices.md": "2d9756ea91f5675337bd2ec510d9b65f5e448db632c283dee0a9aef9d276be2e",
+    "references/conversation-design.md": "4d978fa47cb4e96c614afe1bdf4ecb2798112c9c24c92cb7de187f7b2732ec0d",
+    "references/deployment.md": "6b13357eccb9354ca640ac3df58418a7d6fcef1dfd5409991c10f3ae4966c3ca",
+    "references/editing-workflow.md": "5ea8bea941d9890736442db009c61760413a5c5e1e1b66bf81715c0141395913",
+    "references/examples.md": "5faa73860bc1690ee430c461ede6df987b2f8b2c092d19c2cd227128bcafc4b0",
+    "references/instruction-review.md": "70455bc42a1083b9fe75a93787df7a35a5a38a17bacec18b71945ee5770a4597",
+    "references/localization.md": "5d84be4f63c62e3fd5fbcd52f9db65848ad3f6ee5e6d51d615c4a61b5a1dbca0",
+    "references/mcp-plugin.md": "dd89c4f2dc257c89097ecccf87bbe0f6e65a5b0e9573b68d86790a115dea488a",
+    "references/scaffolding-workflow.md": "fcc4934cea185f5b7fdb15892239ea3d32cdbe675dbc9cd289b483d6a0a1dc9c",
+    "references/schema.md": "7b8cff6225891e407df5f8ea3dfc2a5d8c38ba5dec241007c88ecaebce386d06",
+    "references/workspace-gates.md": "285b776af81635b5399c6fcdc70569e510c7b2f16242cf2b14d7025f58385985",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

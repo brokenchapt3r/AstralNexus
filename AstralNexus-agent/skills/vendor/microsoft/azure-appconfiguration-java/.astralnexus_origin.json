@@ -1,0 +1,14 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-java/skills/azure-appconfiguration-java/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-java/skills/azure-appconfiguration-java/SKILL.md",
+  "name": "microsoft:azure-appconfiguration-java",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "e50e155ebeb050ed77d8d3ed17bc0ddbec46bb09830fa926bca53b4cc4ac99bf",
+    "references/examples.md": "68598ecf43d56c5f77a21587111eb782e5bd44d5ddddecae23ce74fd1bb540ec",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

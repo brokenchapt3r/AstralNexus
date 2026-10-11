@@ -12,7 +12,7 @@ Key constraints:
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, TYPE_CHECKING
+from typing import Any, Dict, List, Optional, Protocol
 
 from AstralNexus.tools.tool_router import (
     discover_tools,
@@ -20,8 +20,11 @@ from AstralNexus.tools.tool_router import (
     filter_by_schema_budget,
 )
 
-if TYPE_CHECKING:
-    from AstralNexus.core.governor import Governor
+class ToolInjectionGovernor(Protocol):
+    def approve_tool_injection(
+        self, *, tool_name: str, node_goal: str, risk_level: str,
+        estimated_tokens: int,
+    ) -> bool: ...
 
 
 @dataclass
@@ -52,7 +55,7 @@ class ToolInjectionPipeline:
     
     def __init__(
         self,
-        governor: Governor,
+        governor: ToolInjectionGovernor,
         *,
         max_total_schema_tokens: int = 4000,
         require_governor_approval_for_high_risk: bool = True,

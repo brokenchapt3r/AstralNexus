@@ -1,0 +1,17 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/skills/kql/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/skills/kql/SKILL.md",
+  "name": "microsoft:kql",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "ffc1f17ed69d34dd5e8130cf1fc4adf9f3ea27410e8aa90f0cc1e5385f315ce2",
+    "references/advanced-patterns.md": "7c265cae0e78ac0804300b4b4c65377bfd9fd922395d967b1821390da816a6a5",
+    "references/discovery-queries.md": "4f2b2b8d8b80ae6ebe53f20f5f9749ce46c0c8d5889c965ecb87b7ac43bfa6a8",
+    "references/error-recovery.md": "3cbd921b8cae3c74a4948599d96db16eaeeced0972c920317e5792837268c388",
+    "references/query-templates.md": "c42fd83ccaaec22d45eebc3f313f34a1b10691561c9a6790c7f7058ffb384b7f",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

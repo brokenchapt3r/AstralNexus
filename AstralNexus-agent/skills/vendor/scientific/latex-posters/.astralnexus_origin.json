@@ -1,0 +1,29 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/latex-posters/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/latex-posters/SKILL.md",
+  "name": "scientific:latex-posters",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "4350dc80280fea210f9682991103445e97c58504ddd14e7a26f3d84e2fee5837",
+    "assets/baposter_template.tex": "05d52aa0bcc7d704525a3c09edb72c478f3ed5de29e1d8d751c046aa69649045",
+    "assets/beamerposter_template.tex": "79df337979df21b20c6852ada7860a6fe186d7189550bfe831db9a27513c0dbb",
+    "assets/poster_quality_checklist.md": "1d6fb4875798aa349180e07919e0dd2ad8b8cb8357a0fb5106e9914bdd0ea4db",
+    "assets/tikzposter_template.tex": "39ef6e3dc99240481e56a439d23d438f84a264b53933d5b8d3c713d5bf918d04",
+    "references/ai_graphics_for_posters.md": "a8090976bc9d195fac6e4ed115e64ab28a6a8c93412d5cd3185e5a73a5dc1d5a",
+    "references/compilation_and_quality_control.md": "2fdeabd760c2e56ee26be771a373cb5809655831a5a82d60010bbe3a22993fc6",
+    "references/latex_poster_packages.md": "d120828344c56093a5c71fe91d821c38e3768dcfd9e149c5412c6ff0af71eda6",
+    "references/latex_poster_reference.md": "beef5f9e5d931d43ebf41233e42413f07bf2bb235b19cc952e52e23227595ee1",
+    "references/poster_content_guide.md": "047f27c34c6a31673ce96dd0a08ca0ac8934ee7d4374da4b244782690e96d224",
+    "references/poster_design_principles.md": "53a1e16ddf7eb3f1e9e5cb47af02327b3ed21986334f8c7f7a3bb612da0324ad",
+    "references/poster_layout_design.md": "c7ef85b5620ea58cdf985bca99313a41a2cb762437209dad6333e0dd15fe018e",
+    "references/poster_patterns_and_presentation.md": "b465767303ddcd4d2e720dd82722bcafbb6d4948e9b614307cd3608b23e3f593",
+    "references/README.md": "c468139388159d4333d1118504d46df1518c6f9ae5051309f7207e24aa4d44ac",
+    "scripts/generate_schematic.py": "0c81ce099d5ab9aa3d3c486aa9bd3e81ee1117e18a54db14bb0a68de61eaa4bc",
+    "scripts/generate_schematic_ai.py": "7316f2df92f442b8c60a5dd2bd8b504e17449d4be89352e5af24be2239700046",
+    "scripts/review_poster.sh": "4bb2956a7920c58c5bdd9a20c3bd402c7b72432a7dbfeebe4d82f78250234bff",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

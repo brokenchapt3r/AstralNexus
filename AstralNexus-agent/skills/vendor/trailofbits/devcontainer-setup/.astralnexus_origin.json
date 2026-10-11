@@ -1,0 +1,22 @@
+{
+  "repo": "trailofbits/skills",
+  "commit": "82fe8226252622fa807643bdca1710901198553a",
+  "source_path": "plugins/devcontainer-setup/skills/devcontainer-setup/SKILL.md",
+  "source_url": "https://github.com/trailofbits/skills/blob/82fe8226252622fa807643bdca1710901198553a/plugins/devcontainer-setup/skills/devcontainer-setup/SKILL.md",
+  "name": "trailofbits:devcontainer-setup",
+  "namespace": "trailofbits",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "ef698feec8a76cf89f283c07632a2ce92378cb34e030f6c2ca13f312a7393e39",
+    "agents/openai.yaml": "089b238fdf4f28a07fe8ed18a82e0699303d38f9b2d84b8132bff27fe95905b8",
+    "assets/trail-of-bits-mark.svg": "4bf74c789b38dcf6ad762c136b6832363d27ae19fbaa9a18ec18d66ecce6ca05",
+    "references/dockerfile-best-practices.md": "78b9bdb7a9596f849ae69fec3042d6c3e6b65e0f3aea953e7656b89b7efedb1c",
+    "references/features-vs-dockerfile.md": "999ac17d8f0172fce5fb00906190a97980b6a1c94d42b4046255992a9aa8c88d",
+    "resources/.zshrc": "0788e061b87afde6d0e7243e1aa2b93952c1fcdc82125278f5ac503142a5bec2",
+    "resources/devcontainer.json": "0d3140742a2196b2f2eba1a756cb568c2732f9f09465dec2d9397aef7793e42f",
+    "resources/Dockerfile": "86653908049df668d9dfaaeefc7b05b839c1df77a55166398c32d441e86c882d",
+    "resources/install.sh": "022c145aef7e3890203f362460d87159b04f0835866d4610f32f1627de426822",
+    "resources/post_install.py": "7d37aabd6a6421df6ab6448548e852e5b42d3b3d2b2aa39c9d17c4ea40543419",
+    "UPSTREAM-LICENSE": "7abe19ec9bb73b36141b999b861d24ad855e808bafe0f81e84cce28556f6c297"
+  }
+}

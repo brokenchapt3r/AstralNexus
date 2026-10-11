@@ -1,0 +1,22 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/datamol/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/datamol/SKILL.md",
+  "name": "scientific:datamol",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "3a0d725456f37c650595a1bdf0cd104936acc5e2bf4146be6829d3fcd4ea6c59",
+    "references/conformers_module.md": "9af2cc31acb77aa703ac4da839175da002043abd50a55cc7e3ccd83f24dfe3a5",
+    "references/core_api.md": "b79d8668c7baacc11c83b4cfb4dd46d4ffcbebfd8d2a7773b20549d0c4113772",
+    "references/core_workflows.md": "f322bf91b377620db2ff8842eb66bb25fc0bfd8627fd7fe6b196e048f62a061c",
+    "references/descriptors_viz.md": "b728295888f173f19bc1155ca3d8595358e333b6cf8230437879cb4d070ef558",
+    "references/fragments_scaffolds.md": "b00ed48bb38ebf0a6135cfaa5aa6355c41184552ce8ee9e4426e440aed583bf4",
+    "references/io_module.md": "9351e472a952e6d8e372a5892f513c84e8c5097a53988c57326e0c80fa7ca317",
+    "references/reactions_data.md": "d17db50dee1225c4ad060a4f5274899c42a4e1adb47395fce20dd388e289e208",
+    "references/review.md": "bc066f602ea4d0bda473ddf715e9a51f7a8cb4240cb69c99ba31e9b32ce0082c",
+    "references/workflow_patterns.md": "bd84b971b4d60472fb0d5905c5fa5b6e2f8c11c092be5ee06de861b5206cfc51",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

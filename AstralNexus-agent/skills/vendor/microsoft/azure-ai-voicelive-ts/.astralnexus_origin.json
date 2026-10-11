@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-typescript/skills/azure-ai-voicelive-ts/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-typescript/skills/azure-ai-voicelive-ts/SKILL.md",
+  "name": "microsoft:azure-ai-voicelive-ts",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "d288827a7769dba34a4154b0981feee766ecefcd64ccd5e052f21d5e064d4d04",
+    "references/audio-streaming.md": "7fa9be894cc0043c427cc8c953d1b2891b49bef19ba3aacdaa3bcaccb5c02e11",
+    "references/function-calling.md": "900325ee0cdcfbee67075da41a6f1bd1358200dece473ee58ac904e19dab6d4c",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

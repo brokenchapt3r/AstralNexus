@@ -1,0 +1,21 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-cosmos-db-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-cosmos-db-py/SKILL.md",
+  "name": "microsoft:azure-cosmos-db-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "3dd01706390b4b1765ae1a7b3829878c4d0ba8485228f824e817287c4f8990d4",
+    "assets/conftest_template.py": "a5d91776fe91003b791b319bc77a159bd1132feb67561b1874b01555eb3956e8",
+    "assets/cosmos_client_template.py": "14334672c94bf4494927848369058bf88c445eb7f923ec2d059ab2b3af533c8d",
+    "assets/service_template.py": "ed619b14051241417c109b7cc038dbeaf739885e27d63ff6364609570037cab5",
+    "references/client-setup.md": "3f14bfabd628bd358dc0fb0eb7ac141fe233db0fdcbb236005a61c25a29cbfb6",
+    "references/error-handling.md": "daba3df814fa917e3640fb864c25012bf5fb7c6bf7df3fc2ae4b131b8fc9b5c4",
+    "references/partitioning.md": "23d285c72343f7bca0d0cbc352f2f0bfa1c141545e4149408884ac613a64fdac",
+    "references/service-layer.md": "002c9f30299457b625c493a9408aa004a483e10af1211bd494fa4a96854caaf3",
+    "references/testing.md": "94449b58a3c6b0f6fd7314a0de669bfb85fd5e84a5a8efd1683cdfaa5fe0514f",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "repo": "huggingface/skills",
+  "commit": "ca0325bb20b2d0a1b2efa893670c4c72f79e707b",
+  "source_path": "skills/huggingface-paper-publisher/SKILL.md",
+  "source_url": "https://github.com/huggingface/skills/blob/ca0325bb20b2d0a1b2efa893670c4c72f79e707b/skills/huggingface-paper-publisher/SKILL.md",
+  "name": "huggingface:huggingface-paper-publisher",
+  "namespace": "huggingface",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "04b59406cf88054ab365f5bbbc57fe2e2fcb369e942dff2841c4f4297318c353",
+    "examples/example_usage.md": "0cd5576c3f0f7d51c46d47398c7e3e62e4f2a249a008187cf9ef071f8cc26f4c",
+    "references/quick_reference.md": "efdde6fe96dcbb0909d1fc4f1cb8a2f520a5cf2bab707efc795a75bf9968436e",
+    "scripts/paper_manager.py": "94a4a662c0e9e13d5bb636527030ddfbd5489e9937e410d144d0276d326a9e05",
+    "templates/arxiv.md": "37bf032a324008fec59b3f1f10412ffb9de8933bdf9ed03668459a2035f7894b",
+    "templates/ml-report.md": "3c9d184cbafc5c66d4a8519502665ce300568762abb746d4ba14de03de99d872",
+    "templates/modern.md": "4fbe67f48898356bab2ccaae9f2a630aabdce75dde5faedd8203bba923397a2e",
+    "templates/standard.md": "a18e8d450b32d908aacfc626a19482920ea5d9ba470181d4352792d3600c0605",
+    "UPSTREAM-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}

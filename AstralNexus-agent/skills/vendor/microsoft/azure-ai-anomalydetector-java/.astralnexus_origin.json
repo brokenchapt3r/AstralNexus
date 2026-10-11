@@ -1,0 +1,14 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-java/skills/azure-ai-anomalydetector-java/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-java/skills/azure-ai-anomalydetector-java/SKILL.md",
+  "name": "microsoft:azure-ai-anomalydetector-java",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "e39cb5855a4e4240e037110b74abcc1b850e28761d95c668ac0568b64ca40d6e",
+    "references/examples.md": "17e01a855536f6112f5daa91a4bf5a9aa7167435853019daf1d1523292ce4df8",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

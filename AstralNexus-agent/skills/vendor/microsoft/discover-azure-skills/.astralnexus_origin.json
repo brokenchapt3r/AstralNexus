@@ -1,0 +1,16 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/discover-azure-skills/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/discover-azure-skills/SKILL.md",
+  "name": "microsoft:discover-azure-skills",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "ae2871d451c4958a1dd5eb22c22f0c230b927740accf669b85c78f8b1c0edcf3",
+    "references/install/claude-code.md": "f58386606530740d6f7300a97582cde938224bae49e527672c55d04bdef3b46d",
+    "references/install/copilot-cli.md": "ef837f8b37e834de2e02ee99fbd95461f3742eb44e34e911a2a4080cfb3c096a",
+    "references/install/other.md": "45455db9886cac4ef45cafa89c0e7910a909aa8d4d64dd9f91fa94ffa8d92267",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-cost/skills/cost-optimization/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-cost/skills/cost-optimization/SKILL.md",
+  "name": "microsoft:cost-optimization",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "e9cf29cb3c460ee01e105321f422e8471f8150aaeb3ae90aa52c4748cd22dded",
+    "references/commitments.md": "f7c71c2da83e24bf80b0c017e7f407fed496b87d59a14cce0af7e5b673f013fd",
+    "references/optimization.md": "7eddcf638d0b91eaaeddbe5d235399fb24a02e2b87df89da71587750c0c205f7",
+    "references/report-template.md": "2cae4dda527d77334f9ae78660334867894b6b5c8bc2ea8afaf888fd7ae8e66c",
+    "references/resource-graph.md": "5992af919d861fae5f661e29d3f0312bcbab6700c33c7b567ae279b298c3402f",
+    "references/tool-fallback.md": "024209413eb686d2e86ea1d4a5a2859e109d4e807b062e133b76270331906763",
+    "references/services/redis.md": "96e1dbd92d056867511cf2002dbe5934e2871854f8b670287df3a1146f835de0",
+    "references/services/storage-lifecycle.md": "adcffb7e59ca47cef5cf4d9028ed1604893e56c1331ae1f228a13ca9aa288408",
+    "references/services/storage.md": "bed92360a8ad777e31e497427839cd5400e27a796f1e210f9e346b40c6cf02c7",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

@@ -24,3 +24,5 @@ class GovernorPolicy:
     false_parallel_wide_acceptance: int = 3
     allow_safe_cycle_repair: bool = True
     max_cycle_repairs_per_patch: int = 8
+    initial_contract_min_output_criterion_coverage: float = 1.0
+    initial_contract_min_total_criterion_coverage: float = 1.0

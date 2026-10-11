@@ -1,0 +1,27 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/omero-integration/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/omero-integration/SKILL.md",
+  "name": "scientific:omero-integration",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "c75e73ba447bbf9530f6d3df4ba6224185f3c7728460b37938c8626dab664ad2",
+    "references/advanced.md": "e80234a7a024cda5460c677efa682875f5a2e9b931554201df513495aa93b860",
+    "references/connection.md": "743ecb32b5d332ac21c8de2f3f52ec85511791c874dcfaa501d43a9b2aa34be5",
+    "references/data_access.md": "17ffd87d6361eaa2fc8fe65d01af3d4b8e587e74dfdb5191bfbbef67c04053ab",
+    "references/image_processing.md": "75719aa560e7559bc4897461f6879076148b5653ddbf470082a6e7fdfe6864ef",
+    "references/metadata.md": "ca57a9c25c2818296591a0f24de1394b935f5d4dd824474a8f36d1ebaae95db7",
+    "references/rois.md": "3e29ab68ae28465ab2c335fff7c34c50d9f5fb34dc46daab9186d32eaf4cb281",
+    "references/scripts.md": "66d37a8b7fb4bc3ee0a3728c5d92c99901338ed810bb590ac1869bc11114d51e",
+    "references/sources.md": "6dbcfd6c72a9769aa69687ba48941ae37eec82accb426a17f4bdc026dd37ee77",
+    "references/tables.md": "50fc3d7b7c5c7b961f55ab4223b22ab89bebaf884e6f07d7beec1fb2fde4d21c",
+    "scripts/export_image_metadata.py": "a8762fd30db387ac437eaeec973b5be9ca218eab09c0c27fb4630c5ac254d174",
+    "scripts/inventory.py": "7f8986ecee7e8933b1f422b26bf19c494447d594708ec927eb1248fb7143f7b7",
+    "scripts/omero_common.py": "88e820f8d50426d409f2bd143c7f5f5f9a3d7d4aa72c28fc57aa3b1ba12cef05",
+    "scripts/plan_transfer.py": "6bbd7fa17e6716bd22fbf0852f1b59561f9735da182c5f01c588eb8aee867f16",
+    "scripts/validate_config.py": "6aa84d202401a684cb2dd12acf7104a76a75fa362be0c8a838c5e551333e54f3",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/scikit-learn/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/scikit-learn/SKILL.md",
+  "name": "scientific:scikit-learn",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "a1765797d072ab40094522abe68fb04505d0881f66b7dfceeb8582422dbe488d",
+    "references/common_workflows.md": "dfe19c80358acb5f418a21cea4de3b7e83733481441f3c76d0a2ead4420261de",
+    "references/core_capabilities.md": "c869d9c207fcfc345207d397021a289f3820492ddf0fcd0b3a56a336bd0e1453",
+    "references/model_evaluation.md": "e6f581c0ce2abffaac2f0bafc1a7bfbe86ec18f8969c6e9b91cc732a12a5fea5",
+    "references/pipelines_and_composition.md": "a1810cd67dc9141d962fa1972e11b06be6bd437213e10a563e5ec4256fb274a9",
+    "references/preprocessing.md": "098506f0ca83e57d0c7cccd166164d025552ad7310b79d1010f5ff34e1cc4818",
+    "references/quick_reference.md": "5401b75fdaa10bf393b024f3c559631011c7be233d2313da37a3f27d7389659a",
+    "references/supervised_learning.md": "d4e5911d175c3a349dd42e33c984b05cdafce230f264b6774996d0eeef36608a",
+    "references/unsupervised_learning.md": "cb476ef499fe35ee2c0416fdc31abad42384ac0110f6d3932901e99b039ae1b1",
+    "scripts/classification_pipeline.py": "46abbb2b11095147cc31314405910b211c313d142f2480599f8508d47e5809f3",
+    "scripts/clustering_analysis.py": "5d1f962a70e049907a39a75cd7a130000a5d3e3de5a4fa4889d07f007c052a17",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

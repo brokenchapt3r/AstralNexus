@@ -1,0 +1,16 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/ncats-arax/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/ncats-arax/SKILL.md",
+  "name": "scientific:ncats-arax",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "f15f9f9a149a942ab1eaed0115879afa399249e261d7118a6d19e3da834ba74c",
+    "references/output-schema.md": "232a1fdf71eb2c4003df645955dbe6ddf25f28dc6736c21eee60b356f7fb843c",
+    "references/query-contract.md": "d71e099626584a0e35520373c15ddb962713b7cf4ad05062fe068f0d6658a8b6",
+    "scripts/arax_client.py": "575249824725c92a0c3f644910b2556734cde667cde39aa2f1e3baee255e5e18",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/marine-carbonate-chemistry/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/marine-carbonate-chemistry/SKILL.md",
+  "name": "scientific:marine-carbonate-chemistry",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "03e58c7f9d7df75a323a6a8cf29ec18ae524cc308e5002c27fb5c65e1230f174",
+    "references/chemistry-decisions.md": "82ba976bf836d3d5e2cdad9a9c0caa088c48634619a56da3725fe9afd03890f9",
+    "references/input-and-results.md": "fc4e89c16225f7fbf01299294fd0afb95f82ff3366a7d6eeee2ae4b86c9412c3",
+    "scripts/solve_carbonate.py": "4071c07d17d932778833fca03153fc852003b22249a0da5a3a5b398e8a957c76",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

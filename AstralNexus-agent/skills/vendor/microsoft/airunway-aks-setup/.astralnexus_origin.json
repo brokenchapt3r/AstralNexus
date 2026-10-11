@@ -1,0 +1,23 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/airunway-aks-setup/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/airunway-aks-setup/SKILL.md",
+  "name": "microsoft:airunway-aks-setup",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "fff89af6c8c81005b48a073e470636f3b11ef3f991e55c109dae9f36105ffda7",
+    "references/gpu-profiles.md": "d9782a61870446dac17dc2b6c62049a586372ec14bfa18493d4926162b10807b",
+    "references/model-sizing.md": "00118f56befd015b53eb6df2572a8c5590fcaa3afd7f3b729c8d75fabfd8626f",
+    "references/powershell-notes.md": "82ee93effe3c62b87ff4b9520a06c814ccd42f8d25a620781865f8a564c91e81",
+    "references/troubleshooting.md": "e04601080a33e34bfad2aff51dfaa47c8410aed2a524366d156641837efd8ead",
+    "references/steps/step-1-verify.md": "1d8776309855462b47d1094bfef0d02f7105f3d03f6902eea6de0a57636bf94e",
+    "references/steps/step-2-controller.md": "5088d7b90881e35db3d2f9d7a128eca6661487924338aaf057cfc22109701e93",
+    "references/steps/step-3-gpu.md": "882f657390c9fc55a87d657da9ac1c6ae18bc0730c0f9d64683d174d7d2892a8",
+    "references/steps/step-4-provider.md": "3a618de715c5594d12ded0e08189cf66843239dc234d86c541df268ac9dcbcff",
+    "references/steps/step-5-deploy.md": "14ce2057fbeb21d419fd0d9ebba00e42305dbbb959d595d18e55dc1fdeb43179",
+    "references/steps/step-6-summary.md": "fe7c9a47b2786b4eaefef1f3cc08fc6d11925fe9514610b72b7f41ceed7a39e7",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

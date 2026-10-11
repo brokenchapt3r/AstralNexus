@@ -1,0 +1,25 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/python-appservice-deploy/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/python-appservice-deploy/SKILL.md",
+  "name": "microsoft:python-appservice-deploy",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "17a263999dfd82daf0c1aa826e5b7656c21a0dec5d9c458cbf2e32b9418100e3",
+    "references/create-app.md": "cee57397c4bf60bc45f039c402a606d028c0ecb71e3ac90b65d9cf5937295e78",
+    "references/deploy-azcli.md": "4bc99a3a09393cf3ab56edfcc1629de855d09b0ad85a73a8019fa93533c93893",
+    "references/deploy-azd.md": "6f98bde0a91407afaa6ec178752cef0186924468d6958e83bf06f9877612b3f8",
+    "references/detect.md": "318e1a2ccd214082c79aeb418f39471bdcf565c9adbb638e319101a356e1f4cf",
+    "references/errors.md": "ea478d6a8699cc1b6a85dc3de680f5155bb21f16ea3a5cab6cead3c63a71a18e",
+    "references/post-deploy-message.md": "f01c28c96a9ebe975d95bf0c526ebceeaab0fb21d0466e25c74d875b8643fc40",
+    "references/startup-commands.md": "567e075b812cb0e4a93a58f8c78588e150628142c1d53f8872f2eedc18728bcf",
+    "references/transient-retry.md": "a33c51f1b9277bb790ba9f58128f241a4ada1e0ea67b151318c1158af83ad5a7",
+    "scripts/generate-app-name.ps1": "879eccd020a3e7b90432e6b80ce32ad6a68045a63b9732801b386e0be798a9da",
+    "scripts/generate-app-name.sh": "06dd60528ab2870eaf38194d508c56efff2e77fd3c1979adcbc765134f0db183",
+    "scripts/retry-az-create.ps1": "432adb3d4d52a13360f8ac554cf9cb603848fee8ac0b9873a571e1d53f833d7b",
+    "scripts/retry-az-create.sh": "bf1b6f1bc07a96f3e2b8f1d95c7a1c870353289a4006fbf2cd4f0efd87f4f7af",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

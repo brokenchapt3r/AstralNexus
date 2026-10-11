@@ -10,7 +10,7 @@ import os
 
 import pytest
 
-from AstralNexus.agents.base import AgentContext, AgentResponse
+from AstralNexus.agents.base import AgentContext, AgentResponse, ExecutionOutcome
 from AstralNexus.agents.coder import Coder
 from AstralNexus.agents.memory_curator import MemoryCurator
 from AstralNexus.agents.planner import PlannerAgent
@@ -28,24 +28,25 @@ LIVE_LLM_ENABLED = os.environ.get("ASTRALNEXUS_RUN_LIVE_TESTS") == "1"
 
 
 @pytest.fixture
-def sample_context():
+def sample_context(tmp_path):
     return AgentContext(
         node_id="T-001",
         goal="实现一个排序算法",
         constraints=["时间复杂度O(n log n)", "支持自定义比较函数"],
-        artifacts=["requirements.txt"],
-        metadata={"priority": "high"},
+        artifacts=[],
+        metadata={"priority": "high", "run_dir": tmp_path},
     )
 
 
 @pytest.fixture
-def recovery_context():
+def recovery_context(tmp_path):
     return AgentContext(
         node_id="T-002",
         goal="恢复失败的任务",
         constraints=["不能丢失已完成工作"],
         artifacts=[],
         metadata={
+            "run_dir": tmp_path,
             "failure_info": {
                 "fault_type": "timeout",
                 "target": "T-001",
@@ -57,14 +58,26 @@ def recovery_context():
 
 def _assert_real_runtime_response(response: AgentResponse) -> None:
     assert isinstance(response, AgentResponse)
-    assert response.outcome in {"success", "failure", "partial"}
+    assert response.outcome == ExecutionOutcome.SUCCEEDED
     assert LEGACY_SYNTHETIC_KEY not in response.metrics
-    assert response.metrics.get("execution_path") in LIVE_PATHS
-    if response.outcome == "success":
-        assert response.metrics["execution_path"] == "runtime_llm_direct"
-        assert response.content
-    else:
-        assert response.metrics["execution_path"] == "runtime_llm_failed"
+    assert response.metrics.get("execution_path") == "runtime_llm_direct"
+    assert response.content
+
+
+def test_live_acceptance_rejects_runtime_failure():
+    with pytest.raises(AssertionError):
+        _assert_real_runtime_response(AgentResponse(
+            outcome=ExecutionOutcome.FAILED,
+            content="provider failed",
+            metrics={"execution_path": "runtime_llm_failed"},
+        ))
+
+
+def test_worker_package_is_in_installation_manifest():
+    from pathlib import Path
+    from setuptools import find_packages
+    root = Path(__file__).resolve().parents[1]
+    assert "agents" in find_packages(where=str(root))
 
 
 @pytest.mark.parametrize(

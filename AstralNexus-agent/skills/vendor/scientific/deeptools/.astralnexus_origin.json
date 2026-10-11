@@ -1,0 +1,22 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/deeptools/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/deeptools/SKILL.md",
+  "name": "scientific:deeptools",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "f09f32bad2d0c54f4a422cb7bcca7703466e653544b2b6e77a7492e6f29ccf8b",
+    "assets/quick_reference.md": "0b03f9e870899668599fc5a0c5f1bed5296dff91f99d8c56007083fa5f5a07c3",
+    "references/core_workflows.md": "4e68af06e4f8aeabff35c054167dc1b0b23978823d81fd7b289d53c6453caa2e",
+    "references/effective_genome_sizes.md": "a31066809448d5b7d331a2c2ee7d03154bfb2de681fd5862090c55084837164e",
+    "references/normalization_methods.md": "35803ccab1b5bbe87fb105e409c75bb62f55972525b9bd7ec8affed884ea8cde",
+    "references/review.md": "97b7d596f0425502a18b884d4c52311b5c62813cb223607a00208895eb4e0183",
+    "references/tools_reference.md": "10252f10461afddf8c8d3cf74655a6ae749aa382545cae51ddb2e1ee80a7cbde",
+    "references/workflows.md": "503f2e6332a3a01af8c96321d1de3dc584b75d55437ea0fa60c0e72c5eae4939",
+    "scripts/validate_files.py": "2b1349d8565b08ee72fc938d3506991aeb7c181ffb4e7ded7d6177e765610d77",
+    "scripts/workflow_generator.py": "9a6dc2a493c5cb5af5ed5ddc97628972ef0096b461395138c9ff1e6d1ec6313c",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

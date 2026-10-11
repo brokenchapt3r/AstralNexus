@@ -1,0 +1,26 @@
+{
+  "repo": "deepseek-ai/deepseek-harness",
+  "commit": "5badb15009ae1756c3afe0ae0cef1faafc290ccc",
+  "source_path": ".agents/skills/dsh-doc/SKILL.md",
+  "source_url": "https://github.com/deepseek-ai/deepseek-harness/blob/5badb15009ae1756c3afe0ae0cef1faafc290ccc/.agents/skills/dsh-doc/SKILL.md",
+  "name": "dsh:dsh-doc",
+  "namespace": "dsh",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "a0f5a09bf759a75d63d145d64899c640dcc240845e15eb5b87a3a2ab2eda65de",
+    "references/metadata-links-i18n.md": "279f79dec3a3f7dd29bb36722d1c7b176ed8409efa86ca7e2b1233d07eb1da1f",
+    "references/review.md": "81f5bb876ad13bd2e550953d7c4ff9962d47b5f73d57219932e968029a89a216",
+    "references/structure-hierarchy.md": "869ae393be457951c89175ed9a6f02957d013b7b4b9b44785efbbcfead40ca8e",
+    "references/style.md": "62600401bc7d771e17aaefd93748432153def0502cbc38b9176cdc15cc6167af",
+    "references/website-sync.md": "6ab2dc43aa43c964350a800304f53d51fcc6280ee882aac2a3223dff3e52bdfc",
+    "templates/package-bundle.md": "9f6751700f4886b85b2b7334f4caa6621dbe815e969d32e94e9af046bc3f2f51",
+    "templates/package-group.md": "53cb8a73b3d465e8cc318e530bcbd505f373c64b9f4bdb25d2253d2aab5d0e9a",
+    "templates/package-library.md": "e65883a53950806ec5322b06ebf6dedc43f0c9377f7145e9cdc21e5a60db3993",
+    "templates/package-reference.md": "b9e75748bd32b40960b51df2549afbe5ed4fb7454f235b134505e9b40d70f103",
+    "templates/persistence-change.md": "984451269be8f0d52ba0f533a5cb6b3c5df81296566cd4153c6b397ee3ef024d",
+    "templates/persistence-format.md": "8e2cfd248807a49feeb56cb50645812f57a0ac4c0bb8b2fdae63ab5d09fbd27d",
+    "templates/persistence-release.md": "641b2c8a78da2d880bcf6ca63773ecb95bd7239e4863cd271be79e6b8d1c0160",
+    "templates/upgrade-guide.md": "06ba6b63e6ccff6aad68f4aa11467cbc7786db880729a5eaf84c0fdf6d0c818f",
+    "UPSTREAM-LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+  }
+}

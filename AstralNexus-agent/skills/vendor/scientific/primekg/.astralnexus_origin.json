@@ -1,0 +1,15 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/primekg/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/primekg/SKILL.md",
+  "name": "scientific:primekg",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "b20698944fa51b287a13e7dc22ac033b83836b73614a21cff725ad7d6d807226",
+    "references/data-contract.md": "f6cacb8285f0fc3ff04e56b8f7fb64da384bb3ae660604623186d856dd35c72e",
+    "scripts/query_primekg.py": "20d80d19440ca3beb3cf2939f226b7d40dbc430fd2bf44e5fb21b3f868d49815",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

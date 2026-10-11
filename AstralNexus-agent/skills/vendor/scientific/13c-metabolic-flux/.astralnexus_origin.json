@@ -1,0 +1,28 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/13c-metabolic-flux/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/13c-metabolic-flux/SKILL.md",
+  "name": "scientific:13c-metabolic-flux",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "8318b1c785cc80bf095b8667a96061cd5f4b0b9c4e5fa77fd7f57fd8403f2c0f",
+    "assets/branch-fluxes.json": "4bcb97f2e4bfab43ca8e964183231fee197879f9d4b80d2ec8e05f92b8d95be4",
+    "assets/branch-identifiable.json": "9098ff048fc576046bfa13e100325e4e57e569cc46a642a539cb52584b21a469",
+    "assets/branch-model.json": "de2c4d4fe1cbb0f8b718a35a00ab17830a67e49a89ede1244aaaee8f7181c798",
+    "assets/branch-unresolved.json": "b0e777e66033817612f0dc48527d70d7e0ccb7fa533a751db992dce0f5c65e5f",
+    "assets/mfapy-license.txt": "645e233ceb2f6faa4d43a4c66ecd8e54ed2b7fa6a765fb6497a109b615b2e5d9",
+    "assets/requirements.txt": "537d5d44296de5cce4f909775e2299a589abd914b93705367587e98588bfcede",
+    "assets/tca-fluxes.json": "b362821e6cf8c14b692c4c41facd7c8aa1af87e20f0290960f0eaaddc69b1cb8",
+    "assets/tca-model.json": "49d98503f37865655aff81564c7705ae6fe612553c3c465675fd32360eb4b39a",
+    "assets/tca-reference-mdv.json": "3b6887a77419a80a5f6f2574fc24e0a2daf480f2b13899481cd645269cebdd47",
+    "assets/tca-tracer.json": "1ca97044dba0b66e30e2189356454e43f0a263cd65758dcdbfa8c047c68a585e",
+    "references/inference.md": "c060f550e700521dd1300e2ca790e3e9061bbfe54c8f0cad1ad34a99f29830dd",
+    "references/input-contract.md": "d724078414ff4d97c0335bbd6a6c52e12aeec0db56da23d12f90a47fd090031f",
+    "scripts/mfa.py": "ddf96e627beb8580616ef7f434a24ce5dbe39bcc7f8c90e0f0d2cb1a99f1584f",
+    "scripts/_mfa_fit.py": "6a7f4952d75364c62fec863268ed8e2c37088808e2fb0817c2f36c7d0703be9f",
+    "scripts/_mfa_model.py": "8be66dc18197e2173c059dd31bdce3033b6b4a64a703ddc495f51a7fb288b3ed",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

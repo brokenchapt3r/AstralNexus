@@ -1,0 +1,21 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-local-skills/skills/azure-local-multi-rack/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-local-skills/skills/azure-local-multi-rack/SKILL.md",
+  "name": "microsoft:azure-local-multi-rack",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "b544007ce978993de57d9d1a23b0667ef9c0b8f33120cc79f537586bcccd3768",
+    "references/cli-and-prereqs.md": "9c26e8b957cacffece3c7cd3a1430a0871b87127fc1b0ca8a438b89d6945c13b",
+    "references/docs-map.md": "e9d2734be7b0c03403d6907da6bd17f7eb5e648a2b51a8a55ee89d0c440c9857",
+    "references/resource-types.md": "9681f0900025b5a68568fc75229c82e6aca6ba7e04d246cade5d939156bc8a56",
+    "references/safety-rules.md": "a0a6c529fdc1573fb5f63355e18db8a134224476e6c2bb8f8a4d31ca65f803fb",
+    "workflows/networking/networking.md": "5b62e02ddb25c726715affa3d4417f2511f42a98b82934cb3f55e663510c5a23",
+    "workflows/operate-and-monitor/operate-and-monitor.md": "b8295ae2ea856a4160f6be10bda8d78be70865c1fd70cd27ad62df4f16ad4d33",
+    "workflows/plan-and-deploy/plan-and-deploy.md": "45e5dde2234d4d870f60456adfea2aba24613ab68d913882630d20a86ca58c68",
+    "workflows/workload-management/workload-management.md": "37dc818214502850f611b631a9c2e895cece5b5c289ab2221e8d208abf27e8a9",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

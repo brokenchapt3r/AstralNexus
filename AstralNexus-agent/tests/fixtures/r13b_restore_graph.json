@@ -1,0 +1,1244 @@
+[
+ {
+  "dependencies": [],
+  "input_artifacts": [],
+  "node_id": "U-001",
+  "output_artifacts": [],
+  "recovery_of": "",
+  "status": "completed"
+ },
+ {
+  "dependencies": [
+   "U-001"
+  ],
+  "input_artifacts": [],
+  "node_id": "P-001",
+  "output_artifacts": [],
+  "recovery_of": "",
+  "status": "completed"
+ },
+ {
+  "dependencies": [
+   "P-001",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:全栈设备维修工单协同平台开发与运行_txt",
+   "artifact:assets_csv",
+   "artifact:work_orders_csv",
+   "artifact:parts_csv",
+   "artifact:source_record_md"
+  ],
+  "node_id": "N-001",
+  "output_artifacts": [
+   "artifact:api-contract",
+   "artifact:domain-spec"
+  ],
+  "recovery_of": "",
+  "status": "completed"
+ },
+ {
+  "dependencies": [
+   "P-001",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:assets_csv",
+   "artifact:work_orders_csv",
+   "artifact:parts_csv",
+   "artifact:source_record_md"
+  ],
+  "node_id": "N-002",
+  "output_artifacts": [
+   "artifact:env-probe",
+   "artifact:fixture-audit"
+  ],
+  "recovery_of": "",
+  "status": "completed"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-002",
+   "P-001",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:fixture-audit",
+   "artifact:assets_csv",
+   "artifact:work_orders_csv",
+   "artifact:parts_csv",
+   "artifact:source_record_md"
+  ],
+  "node_id": "N-003",
+  "output_artifacts": [
+   "artifact:backend-source",
+   "artifact:sqlite-schema",
+   "artifact:seed-script",
+   "artifact:demo-db",
+   "artifact:requirements-txt",
+   "artifact:start-bat"
+  ],
+  "recovery_of": "",
+  "status": "superseded"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "P-001"
+  ],
+  "input_artifacts": [
+   "artifact:api-contract",
+   "artifact:domain-spec"
+  ],
+  "node_id": "N-004",
+  "output_artifacts": [
+   "artifact:index-html",
+   "artifact:frontend-source",
+   "artifact:frontend-assets"
+  ],
+  "recovery_of": "",
+  "status": "completed"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-003",
+   "P-001",
+   "PATCH-R001-BACKEND"
+  ],
+  "input_artifacts": [
+   "artifact:api-contract",
+   "artifact:backend-source",
+   "artifact:seed-script",
+   "artifact:start-bat",
+   "artifact:requirements-txt"
+  ],
+  "node_id": "N-005",
+  "output_artifacts": [
+   "artifact:api-test-suite",
+   "artifact:e2e-test-suite",
+   "artifact:test-report-json",
+   "artifact:pytest-output-log"
+  ],
+  "recovery_of": "",
+  "status": "completed"
+ },
+ {
+  "dependencies": [
+   "N-003",
+   "N-004",
+   "P-001",
+   "PATCH-R001-BACKEND"
+  ],
+  "input_artifacts": [
+   "artifact:start-bat",
+   "artifact:backend-source",
+   "artifact:index-html",
+   "artifact:requirements-txt"
+  ],
+  "node_id": "N-006",
+  "output_artifacts": [
+   "artifact:startup-log",
+   "artifact:healthcheck-evidence",
+   "artifact:api-curl-evidence",
+   "artifact:frontend-load-evidence"
+  ],
+  "recovery_of": "",
+  "status": "completed"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-003",
+   "N-004",
+   "P-001",
+   "PATCH-R001-BACKEND"
+  ],
+  "input_artifacts": [
+   "artifact:api-contract",
+   "artifact:start-bat",
+   "artifact:backend-source",
+   "artifact:seed-script"
+  ],
+  "node_id": "N-007",
+  "output_artifacts": [
+   "artifact:e2e-http-record",
+   "artifact:persistence-evidence"
+  ],
+  "recovery_of": "",
+  "status": "superseded"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-003",
+   "N-005",
+   "P-001",
+   "PATCH-R001-BACKEND"
+  ],
+  "input_artifacts": [
+   "artifact:api-contract",
+   "artifact:backend-source",
+   "artifact:start-bat",
+   "artifact:test-report-json",
+   "artifact:pytest-output-log"
+  ],
+  "node_id": "N-008",
+  "output_artifacts": [
+   "artifact:rejection-evidence",
+   "artifact:idempotency-evidence",
+   "artifact:test-authenticity-check"
+  ],
+  "recovery_of": "",
+  "status": "superseded"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-003",
+   "N-004",
+   "N-005",
+   "N-006",
+   "N-007",
+   "N-008",
+   "P-001",
+   "PATCH-R001-BACKEND",
+   "PATCH-R002-SEC",
+   "PATCH-R003-E2E",
+   "PATCH-R003-SEC",
+   "PATCH-R004-E2E",
+   "PATCH-R004-RUNTIME",
+   "PATCH-R004-SEC",
+   "PATCH-R006-E2E",
+   "PATCH-R006-RUNTIME",
+   "PATCH-R006-SEC",
+   "PATCH-R007-RUNTIME",
+   "PATCH-R008-RUNTIME",
+   "PATCH-R010-SERVE-ENTRY",
+   "PATCH-R012-SERVE-ENTRY-LEDGER-FREEZE",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:backend-source",
+   "artifact:sqlite-schema",
+   "artifact:frontend-source",
+   "artifact:test-report-json",
+   "artifact:startup-log",
+   "artifact:healthcheck-evidence",
+   "artifact:api-curl-evidence",
+   "artifact:r006-e2e-http-transcript",
+   "artifact:r006-persistence-record",
+   "artifact:r006-rejection-evidence"
+  ],
+  "node_id": "N-009",
+  "output_artifacts": [
+   "artifact:doc-requirements",
+   "artifact:doc-architecture",
+   "artifact:doc-database",
+   "artifact:doc-interface",
+   "artifact:doc-test-report",
+   "artifact:doc-deployment",
+   "artifact:doc-user-guide"
+  ],
+  "recovery_of": "",
+  "status": "completed"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-002",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:fixture-audit",
+   "artifact:env-probe",
+   "artifact:assets_csv",
+   "artifact:work_orders_csv",
+   "artifact:parts_csv",
+   "artifact:source_record_md"
+  ],
+  "node_id": "PATCH-R001-BACKEND",
+  "output_artifacts": [
+   "artifact:backend-source",
+   "artifact:sqlite-schema",
+   "artifact:seed-script",
+   "artifact:demo-db",
+   "artifact:requirements-txt",
+   "artifact:start-bat",
+   "artifact:backend-selfcheck"
+  ],
+  "recovery_of": "N-003",
+  "status": "completed"
+ },
+ {
+  "dependencies": [],
+  "input_artifacts": [
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:start-bat",
+   "artifact:backend-source",
+   "artifact:seed-script",
+   "artifact:requirements-txt",
+   "artifact:frontend-source",
+   "artifact:assets_csv",
+   "artifact:work_orders_csv",
+   "artifact:parts_csv"
+  ],
+  "node_id": "PATCH-R002-E2E",
+  "output_artifacts": [
+   "artifact:e2e-http-record",
+   "artifact:persistence-evidence",
+   "artifact:r002-e2e-flow-record",
+   "artifact:r002-e2e-http-transcript",
+   "artifact:r002-persistence-evidence",
+   "artifact:r002-e2e-result-json",
+   "artifact:r002-e2e-driver"
+  ],
+  "recovery_of": "N-007",
+  "status": "failed"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-005",
+   "PATCH-R001-BACKEND",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:start-bat",
+   "artifact:backend-source",
+   "artifact:seed-script",
+   "artifact:test-report-json",
+   "artifact:pytest-output-log",
+   "artifact:parts_csv",
+   "artifact:work_orders_csv"
+  ],
+  "node_id": "PATCH-R002-SEC",
+  "output_artifacts": [
+   "artifact:rejection-evidence",
+   "artifact:idempotency-evidence",
+   "artifact:test-authenticity-check",
+   "artifact:r002-rejection-evidence",
+   "artifact:r002-idempotency-evidence",
+   "artifact:r002-test-authenticity-check",
+   "artifact:r002-security-result-json",
+   "artifact:r002-security-driver"
+  ],
+  "recovery_of": "N-008",
+  "status": "superseded"
+ },
+ {
+  "dependencies": [],
+  "input_artifacts": [
+   "artifact:backend-source",
+   "artifact:start-bat",
+   "artifact:requirements-txt",
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:fixture-audit",
+   "artifact:env-probe",
+   "artifact:backend-selfcheck"
+  ],
+  "node_id": "PATCH-R003-RUNTIME",
+  "output_artifacts": [
+   "artifact:r003-launch-recipe",
+   "artifact:r003-runtime-selfcheck"
+  ],
+  "recovery_of": "",
+  "status": "failed"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-004",
+   "PATCH-R001-BACKEND",
+   "PATCH-R004-RUNTIME",
+   "PATCH-R010-SERVE-ENTRY",
+   "PATCH-R006-RUNTIME",
+   "PATCH-R007-RUNTIME",
+   "PATCH-R008-RUNTIME",
+   "PATCH-R009-APP-RUNTIME-CLEANUP",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:start-bat",
+   "artifact:backend-source",
+   "artifact:seed-script",
+   "artifact:requirements-txt",
+   "artifact:frontend-source",
+   "artifact:assets_csv",
+   "artifact:work_orders_csv",
+   "artifact:parts_csv"
+  ],
+  "node_id": "PATCH-R003-E2E",
+  "output_artifacts": [
+   "artifact:e2e-http-record",
+   "artifact:persistence-evidence",
+   "artifact:r002-e2e-flow-record",
+   "artifact:r002-e2e-http-transcript",
+   "artifact:r002-persistence-evidence",
+   "artifact:r002-e2e-result-json",
+   "artifact:r002-e2e-driver",
+   "artifact:r003-e2e-flow-record",
+   "artifact:r003-e2e-http-transcript",
+   "artifact:r003-e2e-result-json",
+   "artifact:r003-e2e-driver"
+  ],
+  "recovery_of": "PATCH-R002-E2E",
+  "status": "superseded"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-005",
+   "PATCH-R001-BACKEND",
+   "PATCH-R004-RUNTIME",
+   "PATCH-R010-SERVE-ENTRY",
+   "PATCH-R006-RUNTIME",
+   "PATCH-R007-RUNTIME",
+   "PATCH-R008-RUNTIME",
+   "PATCH-R009-APP-RUNTIME-CLEANUP",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:start-bat",
+   "artifact:backend-source",
+   "artifact:seed-script",
+   "artifact:test-report-json",
+   "artifact:pytest-output-log",
+   "artifact:parts_csv",
+   "artifact:work_orders_csv"
+  ],
+  "node_id": "PATCH-R003-SEC",
+  "output_artifacts": [
+   "artifact:rejection-evidence",
+   "artifact:idempotency-evidence",
+   "artifact:test-authenticity-check",
+   "artifact:r002-rejection-evidence",
+   "artifact:r002-idempotency-evidence",
+   "artifact:r002-test-authenticity-check",
+   "artifact:r002-security-result-json",
+   "artifact:r002-security-driver",
+   "artifact:r003-rejection-evidence",
+   "artifact:r003-idempotency-evidence",
+   "artifact:r003-test-authenticity-check",
+   "artifact:r003-security-result-json",
+   "artifact:r003-security-driver"
+  ],
+  "recovery_of": "PATCH-R002-SEC",
+  "status": "superseded"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-002",
+   "PATCH-R001-BACKEND"
+  ],
+  "input_artifacts": [
+   "artifact:backend-source",
+   "artifact:start-bat",
+   "artifact:requirements-txt",
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:env-probe",
+   "artifact:fixture-audit",
+   "artifact:backend-selfcheck"
+  ],
+  "node_id": "PATCH-R004-RUNTIME",
+  "output_artifacts": [
+   "artifact:r003-launch-recipe",
+   "artifact:r003-runtime-selfcheck",
+   "artifact:r004-headless-launcher",
+   "artifact:r004-requirements-txt",
+   "artifact:r004-start-bat",
+   "artifact:r004-launch-recipe",
+   "artifact:r004-runtime-selfcheck-log"
+  ],
+  "recovery_of": "PATCH-R003-RUNTIME",
+  "status": "superseded"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-004",
+   "PATCH-R001-BACKEND",
+   "PATCH-R004-RUNTIME",
+   "PATCH-R010-SERVE-ENTRY",
+   "PATCH-R006-RUNTIME",
+   "PATCH-R007-RUNTIME",
+   "PATCH-R008-RUNTIME",
+   "PATCH-R009-APP-RUNTIME-CLEANUP",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:backend-source",
+   "artifact:seed-script",
+   "artifact:start-bat",
+   "artifact:frontend-source",
+   "artifact:assets_csv",
+   "artifact:work_orders_csv",
+   "artifact:parts_csv"
+  ],
+  "node_id": "PATCH-R004-E2E",
+  "output_artifacts": [
+   "artifact:e2e-http-record",
+   "artifact:persistence-evidence",
+   "artifact:r002-e2e-flow-record",
+   "artifact:r002-e2e-http-transcript",
+   "artifact:r002-persistence-evidence",
+   "artifact:r002-e2e-result-json",
+   "artifact:r002-e2e-driver",
+   "artifact:r003-e2e-flow-record",
+   "artifact:r003-e2e-http-transcript",
+   "artifact:r003-e2e-result-json",
+   "artifact:r003-e2e-driver",
+   "artifact:r004-e2e-http-transcript",
+   "artifact:r004-e2e-flow-record",
+   "artifact:r004-persistence-record",
+   "artifact:r004-e2e-result-json",
+   "artifact:r004-e2e-driver"
+  ],
+  "recovery_of": "PATCH-R003-E2E",
+  "status": "superseded"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-005",
+   "PATCH-R001-BACKEND",
+   "PATCH-R004-RUNTIME",
+   "PATCH-R010-SERVE-ENTRY",
+   "PATCH-R006-RUNTIME",
+   "PATCH-R007-RUNTIME",
+   "PATCH-R008-RUNTIME",
+   "PATCH-R009-APP-RUNTIME-CLEANUP",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:backend-source",
+   "artifact:seed-script",
+   "artifact:test-report-json",
+   "artifact:pytest-output-log",
+   "artifact:parts_csv",
+   "artifact:work_orders_csv"
+  ],
+  "node_id": "PATCH-R004-SEC",
+  "output_artifacts": [
+   "artifact:rejection-evidence",
+   "artifact:idempotency-evidence",
+   "artifact:test-authenticity-check",
+   "artifact:r002-rejection-evidence",
+   "artifact:r002-idempotency-evidence",
+   "artifact:r002-test-authenticity-check",
+   "artifact:r002-security-result-json",
+   "artifact:r002-security-driver",
+   "artifact:r003-rejection-evidence",
+   "artifact:r003-idempotency-evidence",
+   "artifact:r003-test-authenticity-check",
+   "artifact:r003-security-result-json",
+   "artifact:r003-security-driver",
+   "artifact:r004-rejection-evidence",
+   "artifact:r004-idempotency-evidence",
+   "artifact:r004-test-authenticity-check",
+   "artifact:r004-security-result-json",
+   "artifact:r004-security-driver"
+  ],
+  "recovery_of": "PATCH-R003-SEC",
+  "status": "superseded"
+ },
+ {
+  "dependencies": [],
+  "input_artifacts": [
+   "artifact:backend-source",
+   "artifact:start-bat",
+   "artifact:requirements-txt",
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:env-probe",
+   "artifact:fixture-audit",
+   "artifact:backend-selfcheck"
+  ],
+  "node_id": "PATCH-R005-RUNTIME",
+  "output_artifacts": [
+   "artifact:r003-launch-recipe",
+   "artifact:r003-runtime-selfcheck",
+   "artifact:r004-headless-launcher",
+   "artifact:r004-requirements-txt",
+   "artifact:r004-start-bat",
+   "artifact:r004-launch-recipe",
+   "artifact:r004-runtime-selfcheck-log",
+   "artifact:r004-runtime-selfcheck"
+  ],
+  "recovery_of": "PATCH-R004-RUNTIME",
+  "status": "failed"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-002",
+   "PATCH-R001-BACKEND"
+  ],
+  "input_artifacts": [
+   "artifact:backend-source",
+   "artifact:start-bat",
+   "artifact:requirements-txt",
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:env-probe",
+   "artifact:fixture-audit",
+   "artifact:backend-selfcheck"
+  ],
+  "node_id": "PATCH-R006-RUNTIME",
+  "output_artifacts": [
+   "artifact:r003-launch-recipe",
+   "artifact:r003-runtime-selfcheck",
+   "artifact:r004-headless-launcher",
+   "artifact:r004-requirements-txt",
+   "artifact:r004-start-bat",
+   "artifact:r004-launch-recipe",
+   "artifact:r004-runtime-selfcheck-log",
+   "artifact:r004-runtime-selfcheck",
+   "artifact:r006-headless-launcher",
+   "artifact:r006-launch-recipe",
+   "artifact:r006-runtime-selfcheck",
+   "artifact:r006-freshness-manifest"
+  ],
+  "recovery_of": "PATCH-R005-RUNTIME",
+  "status": "superseded"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-004",
+   "N-006",
+   "PATCH-R001-BACKEND",
+   "PATCH-R006-RUNTIME",
+   "PATCH-R007-RUNTIME",
+   "PATCH-R008-RUNTIME",
+   "PATCH-R009-APP-RUNTIME-CLEANUP",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:backend-source",
+   "artifact:seed-script",
+   "artifact:start-bat",
+   "artifact:requirements-txt",
+   "artifact:frontend-source",
+   "artifact:assets_csv",
+   "artifact:work_orders_csv",
+   "artifact:parts_csv",
+   "artifact:startup-log",
+   "artifact:healthcheck-evidence"
+  ],
+  "node_id": "PATCH-R006-E2E",
+  "output_artifacts": [
+   "artifact:e2e-http-record",
+   "artifact:persistence-evidence",
+   "artifact:r002-e2e-flow-record",
+   "artifact:r002-e2e-http-transcript",
+   "artifact:r002-persistence-evidence",
+   "artifact:r002-e2e-result-json",
+   "artifact:r002-e2e-driver",
+   "artifact:r003-e2e-flow-record",
+   "artifact:r003-e2e-http-transcript",
+   "artifact:r003-e2e-result-json",
+   "artifact:r003-e2e-driver",
+   "artifact:r004-e2e-http-transcript",
+   "artifact:r004-e2e-flow-record",
+   "artifact:r004-persistence-record",
+   "artifact:r004-e2e-result-json",
+   "artifact:r004-e2e-driver",
+   "artifact:r006-e2e-http-transcript",
+   "artifact:r006-e2e-flow-record",
+   "artifact:r006-persistence-record",
+   "artifact:r006-e2e-result-json",
+   "artifact:r006-e2e-driver"
+  ],
+  "recovery_of": "PATCH-R004-E2E",
+  "status": "completed"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-005",
+   "N-006",
+   "PATCH-R001-BACKEND",
+   "PATCH-R006-RUNTIME",
+   "PATCH-R007-RUNTIME",
+   "PATCH-R008-RUNTIME",
+   "PATCH-R009-APP-RUNTIME-CLEANUP",
+   "PATCH-R010-PYTEST-EVIDENCE",
+   "PATCH-R010-SERVE-ENTRY",
+   "PATCH-R011-SERVE-ENTRY-LEDGER",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:backend-source",
+   "artifact:seed-script",
+   "artifact:start-bat",
+   "artifact:test-report-json",
+   "artifact:pytest-output-log",
+   "artifact:work_orders_csv",
+   "artifact:parts_csv",
+   "artifact:startup-log",
+   "artifact:healthcheck-evidence",
+   "artifact:r010-headless-entry-verified",
+   "artifact:r010-pytest-raw-rerun"
+  ],
+  "node_id": "PATCH-R006-SEC",
+  "output_artifacts": [
+   "artifact:rejection-evidence",
+   "artifact:idempotency-evidence",
+   "artifact:test-authenticity-check",
+   "artifact:r002-rejection-evidence",
+   "artifact:r002-idempotency-evidence",
+   "artifact:r002-test-authenticity-check",
+   "artifact:r002-security-result-json",
+   "artifact:r002-security-driver",
+   "artifact:r003-rejection-evidence",
+   "artifact:r003-idempotency-evidence",
+   "artifact:r003-test-authenticity-check",
+   "artifact:r003-security-result-json",
+   "artifact:r003-security-driver",
+   "artifact:r004-rejection-evidence",
+   "artifact:r004-idempotency-evidence",
+   "artifact:r004-test-authenticity-check",
+   "artifact:r004-security-result-json",
+   "artifact:r004-security-driver",
+   "artifact:r006-rejection-evidence",
+   "artifact:r006-idempotency-evidence",
+   "artifact:r006-test-authenticity-check",
+   "artifact:r006-security-result-json",
+   "artifact:r006-security-driver"
+  ],
+  "recovery_of": "PATCH-R004-SEC",
+  "status": "completed"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-002",
+   "PATCH-R001-BACKEND",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:backend-source",
+   "artifact:start-bat",
+   "artifact:requirements-txt",
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:env-probe",
+   "artifact:fixture-audit",
+   "artifact:assets_csv",
+   "artifact:work_orders_csv",
+   "artifact:parts_csv"
+  ],
+  "node_id": "PATCH-R007-RUNTIME",
+  "output_artifacts": [
+   "artifact:r003-launch-recipe",
+   "artifact:r003-runtime-selfcheck",
+   "artifact:r004-headless-launcher",
+   "artifact:r004-requirements-txt",
+   "artifact:r004-start-bat",
+   "artifact:r004-launch-recipe",
+   "artifact:r004-runtime-selfcheck-log",
+   "artifact:r004-runtime-selfcheck",
+   "artifact:r006-headless-launcher",
+   "artifact:r006-launch-recipe",
+   "artifact:r006-runtime-selfcheck",
+   "artifact:r006-freshness-manifest",
+   "artifact:r007-launch-recipe",
+   "artifact:r007-runtime-selfcheck",
+   "artifact:r007-runtime-log",
+   "artifact:r007-freshness-manifest",
+   "artifact:r007-runtime-driver"
+  ],
+  "recovery_of": "PATCH-R006-RUNTIME",
+  "status": "superseded"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-002",
+   "PATCH-R001-BACKEND",
+   "PATCH-R009-APP-RUNTIME-CLEANUP",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:backend-source",
+   "artifact:start-bat",
+   "artifact:requirements-txt",
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:fixture-audit",
+   "artifact:env-probe",
+   "artifact:assets_csv",
+   "artifact:work_orders_csv",
+   "artifact:parts_csv"
+  ],
+  "node_id": "PATCH-R008-RUNTIME",
+  "output_artifacts": [
+   "artifact:r003-launch-recipe",
+   "artifact:r003-runtime-selfcheck",
+   "artifact:r004-headless-launcher",
+   "artifact:r004-requirements-txt",
+   "artifact:r004-start-bat",
+   "artifact:r004-launch-recipe",
+   "artifact:r004-runtime-selfcheck-log",
+   "artifact:r004-runtime-selfcheck",
+   "artifact:r006-headless-launcher",
+   "artifact:r006-launch-recipe",
+   "artifact:r006-runtime-selfcheck",
+   "artifact:r006-freshness-manifest",
+   "artifact:r007-launch-recipe",
+   "artifact:r007-runtime-selfcheck",
+   "artifact:r007-runtime-log",
+   "artifact:r007-freshness-manifest",
+   "artifact:r007-runtime-driver",
+   "artifact:r008-headless-launcher",
+   "artifact:r008-runtime-driver",
+   "artifact:r008-launch-recipe",
+   "artifact:r008-runtime-selfcheck",
+   "artifact:r008-runtime-log",
+   "artifact:r008-freshness-manifest"
+  ],
+  "recovery_of": "PATCH-R007-RUNTIME",
+  "status": "superseded"
+ },
+ {
+  "dependencies": [
+   "PATCH-R001-BACKEND"
+  ],
+  "input_artifacts": [
+   "artifact:backend-source",
+   "artifact:sqlite-schema",
+   "artifact:seed-script",
+   "artifact:demo-db",
+   "artifact:start-bat",
+   "artifact:requirements-txt"
+  ],
+  "node_id": "PATCH-R009-APP-RUNTIME-CLEANUP",
+  "output_artifacts": [
+   "artifact:r003-launch-recipe",
+   "artifact:r003-runtime-selfcheck",
+   "artifact:r004-headless-launcher",
+   "artifact:r004-requirements-txt",
+   "artifact:r004-start-bat",
+   "artifact:r004-launch-recipe",
+   "artifact:r004-runtime-selfcheck-log",
+   "artifact:r004-runtime-selfcheck",
+   "artifact:r006-headless-launcher",
+   "artifact:r006-launch-recipe",
+   "artifact:r006-runtime-selfcheck",
+   "artifact:r006-freshness-manifest",
+   "artifact:r007-launch-recipe",
+   "artifact:r007-runtime-selfcheck",
+   "artifact:r007-runtime-log",
+   "artifact:r007-freshness-manifest",
+   "artifact:r007-runtime-driver",
+   "artifact:r008-headless-launcher",
+   "artifact:r008-runtime-driver",
+   "artifact:r008-launch-recipe",
+   "artifact:r008-runtime-selfcheck",
+   "artifact:r008-runtime-log",
+   "artifact:r008-freshness-manifest",
+   "artifact:r009-app-ownership-migration",
+   "artifact:r009-legacy-runtime-archive",
+   "artifact:r009-app-frozen-report"
+  ],
+  "recovery_of": "PATCH-R008-RUNTIME",
+  "status": "cancelled"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-002",
+   "PATCH-R001-BACKEND",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:backend-source",
+   "artifact:start-bat",
+   "artifact:requirements-txt",
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:env-probe",
+   "artifact:fixture-audit"
+  ],
+  "node_id": "PATCH-R010-SERVE-ENTRY",
+  "output_artifacts": [
+   "artifact:r003-launch-recipe",
+   "artifact:r003-runtime-selfcheck",
+   "artifact:r004-headless-launcher",
+   "artifact:r004-requirements-txt",
+   "artifact:r004-start-bat",
+   "artifact:r004-launch-recipe",
+   "artifact:r004-runtime-selfcheck-log",
+   "artifact:r004-runtime-selfcheck",
+   "artifact:r010-headless-entry-verified",
+   "artifact:r010-serve-entry-verify-log",
+   "artifact:r010-serve-entry-verify-json"
+  ],
+  "recovery_of": "PATCH-R005-RUNTIME",
+  "status": "superseded"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-005",
+   "PATCH-R001-BACKEND",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:api-contract",
+   "artifact:backend-source",
+   "artifact:seed-script",
+   "artifact:start-bat",
+   "artifact:requirements-txt",
+   "artifact:test-report-json",
+   "artifact:pytest-output-log"
+  ],
+  "node_id": "PATCH-R010-PYTEST-EVIDENCE",
+  "output_artifacts": [
+   "artifact:r010-pytest-raw-rerun",
+   "artifact:r010-pytest-evidence-audit"
+  ],
+  "recovery_of": "",
+  "status": "completed"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-002",
+   "PATCH-R001-BACKEND",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:backend-source",
+   "artifact:start-bat",
+   "artifact:requirements-txt",
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:env-probe",
+   "artifact:fixture-audit"
+  ],
+  "node_id": "PATCH-R011-SERVE-ENTRY-LEDGER",
+  "output_artifacts": [
+   "artifact:r003-launch-recipe",
+   "artifact:r003-runtime-selfcheck",
+   "artifact:r004-headless-launcher",
+   "artifact:r004-requirements-txt",
+   "artifact:r004-start-bat",
+   "artifact:r004-launch-recipe",
+   "artifact:r004-runtime-selfcheck-log",
+   "artifact:r004-runtime-selfcheck",
+   "artifact:r010-headless-entry-verified",
+   "artifact:r010-serve-entry-verify-log",
+   "artifact:r010-serve-entry-verify-json",
+   "artifact:r011-serve-entry-evidence-ledger"
+  ],
+  "recovery_of": "PATCH-R010-SERVE-ENTRY",
+  "status": "superseded"
+ },
+ {
+  "dependencies": [
+   "N-001",
+   "N-002",
+   "PATCH-R001-BACKEND",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:backend-source",
+   "artifact:start-bat",
+   "artifact:requirements-txt",
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:env-probe",
+   "artifact:fixture-audit"
+  ],
+  "node_id": "PATCH-R012-SERVE-ENTRY-LEDGER-FREEZE",
+  "output_artifacts": [
+   "artifact:r003-launch-recipe",
+   "artifact:r003-runtime-selfcheck",
+   "artifact:r004-headless-launcher",
+   "artifact:r004-requirements-txt",
+   "artifact:r004-start-bat",
+   "artifact:r004-launch-recipe",
+   "artifact:r004-runtime-selfcheck-log",
+   "artifact:r004-runtime-selfcheck",
+   "artifact:r010-headless-entry-verified",
+   "artifact:r010-serve-entry-verify-log",
+   "artifact:r010-serve-entry-verify-json",
+   "artifact:r011-serve-entry-evidence-ledger"
+  ],
+  "recovery_of": "PATCH-R011-SERVE-ENTRY-LEDGER",
+  "status": "completed"
+ },
+ {
+  "dependencies": [
+   "PATCH-R001-BACKEND",
+   "N-004",
+   "N-005",
+   "PATCH-R010-PYTEST-EVIDENCE",
+   "N-006",
+   "PATCH-R006-E2E",
+   "PATCH-R006-SEC",
+   "PATCH-R012-SERVE-ENTRY-LEDGER-FREEZE",
+   "N-009",
+   "U-001"
+  ],
+  "input_artifacts": [
+   "artifact:backend-source",
+   "artifact:start-bat",
+   "artifact:requirements-txt",
+   "artifact:index-html",
+   "artifact:frontend-source",
+   "artifact:api-test-suite",
+   "artifact:e2e-test-suite",
+   "artifact:test-report-json",
+   "artifact:startup-log",
+   "artifact:healthcheck-evidence",
+   "artifact:api-curl-evidence",
+   "artifact:r006-e2e-flow-record",
+   "artifact:r006-persistence-record",
+   "artifact:r006-rejection-evidence",
+   "artifact:r006-idempotency-evidence",
+   "artifact:r010-serve-entry-verify-json",
+   "artifact:r011-serve-entry-evidence-ledger",
+   "artifact:doc-requirements",
+   "artifact:doc-architecture",
+   "artifact:doc-database",
+   "artifact:doc-interface",
+   "artifact:doc-test-report",
+   "artifact:doc-deployment",
+   "artifact:doc-user-guide"
+  ],
+  "node_id": "PATCH-R013-FINAL-DELIVERY-VERIFY",
+  "output_artifacts": [
+   "artifact:final-delivery-verification-json",
+   "artifact:final-delivery-verification-md"
+  ],
+  "recovery_of": "",
+  "status": "completed"
+ },
+ {
+  "dependencies": [
+   "U-001",
+   "P-001",
+   "PATCH-R001-BACKEND",
+   "N-004",
+   "N-005",
+   "N-006",
+   "N-009",
+   "PATCH-R006-E2E",
+   "PATCH-R006-SEC",
+   "PATCH-R010-PYTEST-EVIDENCE",
+   "PATCH-R012-SERVE-ENTRY-LEDGER-FREEZE",
+   "PATCH-R013-FINAL-DELIVERY-VERIFY"
+  ],
+  "input_artifacts": [
+   "artifact:final-delivery-verification-json",
+   "artifact:final-delivery-verification-md",
+   "artifact:backend-source",
+   "artifact:sqlite-schema",
+   "artifact:seed-script",
+   "artifact:requirements-txt",
+   "artifact:start-bat",
+   "artifact:index-html",
+   "artifact:frontend-source",
+   "artifact:api-test-suite",
+   "artifact:e2e-test-suite",
+   "artifact:test-report-json",
+   "artifact:pytest-output-log",
+   "artifact:r010-pytest-raw-rerun",
+   "artifact:startup-log",
+   "artifact:healthcheck-evidence",
+   "artifact:api-curl-evidence",
+   "artifact:frontend-load-evidence",
+   "artifact:r006-e2e-flow-record",
+   "artifact:r006-e2e-http-transcript",
+   "artifact:r006-persistence-record",
+   "artifact:r006-e2e-result-json",
+   "artifact:r006-rejection-evidence",
+   "artifact:r006-idempotency-evidence",
+   "artifact:r006-test-authenticity-check",
+   "artifact:r010-serve-entry-verify-json",
+   "artifact:r011-serve-entry-evidence-ledger",
+   "artifact:doc-requirements",
+   "artifact:doc-architecture",
+   "artifact:doc-database",
+   "artifact:doc-interface",
+   "artifact:doc-test-report",
+   "artifact:doc-deployment",
+   "artifact:doc-user-guide"
+  ],
+  "node_id": "PATCH-R014-DELIVERY-MANIFEST",
+  "output_artifacts": [
+   "artifact:final-delivery-manifest-json",
+   "artifact:final-delivery-manifest-md"
+  ],
+  "recovery_of": "",
+  "status": "completed"
+ },
+ {
+  "dependencies": [
+   "PATCH-R013-FINAL-DELIVERY-VERIFY",
+   "PATCH-R014-DELIVERY-MANIFEST",
+   "U-001",
+   "PATCH-R012-SERVE-ENTRY-LEDGER-FREEZE",
+   "N-005",
+   "PATCH-R010-PYTEST-EVIDENCE",
+   "PATCH-R006-E2E",
+   "PATCH-R006-SEC",
+   "N-006",
+   "N-009"
+  ],
+  "input_artifacts": [
+   "artifact:final-delivery-verification-json",
+   "artifact:final-delivery-verification-md",
+   "artifact:final-delivery-manifest-json",
+   "artifact:final-delivery-manifest-md",
+   "artifact:r011-serve-entry-evidence-ledger",
+   "artifact:test-report-json",
+   "artifact:pytest-output-log",
+   "artifact:r010-pytest-raw-rerun",
+   "artifact:r006-e2e-flow-record",
+   "artifact:r006-persistence-record",
+   "artifact:r006-rejection-evidence",
+   "artifact:r006-idempotency-evidence",
+   "artifact:startup-log",
+   "artifact:healthcheck-evidence",
+   "artifact:api-curl-evidence",
+   "artifact:doc-requirements",
+   "artifact:doc-architecture",
+   "artifact:doc-database",
+   "artifact:doc-interface",
+   "artifact:doc-test-report",
+   "artifact:doc-deployment",
+   "artifact:doc-user-guide"
+  ],
+  "node_id": "PATCH-R015-GOAL-CONVERGENCE",
+  "output_artifacts": [
+   "artifact:goal-convergence-json",
+   "artifact:goal-convergence-md"
+  ],
+  "recovery_of": "",
+  "status": "completed"
+ },
+ {
+  "dependencies": [
+   "U-001",
+   "PATCH-R001-BACKEND",
+   "N-005",
+   "PATCH-R010-PYTEST-EVIDENCE",
+   "N-006",
+   "PATCH-R006-E2E",
+   "PATCH-R006-SEC",
+   "PATCH-R012-SERVE-ENTRY-LEDGER-FREEZE",
+   "PATCH-R013-FINAL-DELIVERY-VERIFY",
+   "PATCH-R015-GOAL-CONVERGENCE",
+   "N-001"
+  ],
+  "input_artifacts": [
+   "artifact:backend-source",
+   "artifact:sqlite-schema",
+   "artifact:seed-script",
+   "artifact:demo-db",
+   "artifact:start-bat",
+   "artifact:requirements-txt",
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:test-report-json",
+   "artifact:pytest-output-log",
+   "artifact:r010-pytest-raw-rerun",
+   "artifact:startup-log",
+   "artifact:healthcheck-evidence",
+   "artifact:api-curl-evidence",
+   "artifact:r006-e2e-flow-record",
+   "artifact:r006-persistence-record",
+   "artifact:r006-rejection-evidence",
+   "artifact:r006-idempotency-evidence",
+   "artifact:r011-serve-entry-evidence-ledger",
+   "artifact:final-delivery-verification-json",
+   "artifact:goal-convergence-json"
+  ],
+  "node_id": "PATCH-R016-FINAL-ACCEPTANCE-RERUN",
+  "output_artifacts": [
+   "artifact:r016-acceptance-rerun-json",
+   "artifact:r016-acceptance-rerun-log",
+   "artifact:r016-acceptance-driver"
+  ],
+  "recovery_of": "",
+  "status": "superseded"
+ },
+ {
+  "dependencies": [
+   "U-001",
+   "PATCH-R001-BACKEND",
+   "N-005",
+   "PATCH-R010-PYTEST-EVIDENCE",
+   "N-006",
+   "PATCH-R006-E2E",
+   "PATCH-R006-SEC",
+   "PATCH-R012-SERVE-ENTRY-LEDGER-FREEZE",
+   "PATCH-R013-FINAL-DELIVERY-VERIFY",
+   "PATCH-R015-GOAL-CONVERGENCE",
+   "N-001"
+  ],
+  "input_artifacts": [
+   "artifact:backend-source",
+   "artifact:sqlite-schema",
+   "artifact:seed-script",
+   "artifact:demo-db",
+   "artifact:start-bat",
+   "artifact:requirements-txt",
+   "artifact:api-contract",
+   "artifact:domain-spec",
+   "artifact:test-report-json",
+   "artifact:pytest-output-log",
+   "artifact:r010-pytest-raw-rerun",
+   "artifact:startup-log",
+   "artifact:healthcheck-evidence",
+   "artifact:api-curl-evidence",
+   "artifact:r006-e2e-flow-record",
+   "artifact:r006-persistence-record",
+   "artifact:r006-rejection-evidence",
+   "artifact:r006-idempotency-evidence",
+   "artifact:r011-serve-entry-evidence-ledger",
+   "artifact:final-delivery-verification-json",
+   "artifact:goal-convergence-json"
+  ],
+  "node_id": "PATCH-R017-FINAL-ACCEPTANCE-REPAIR",
+  "output_artifacts": [
+   "artifact:r016-acceptance-rerun-json",
+   "artifact:r016-acceptance-rerun-log",
+   "artifact:r016-acceptance-driver",
+   "artifact:r017-acceptance-driver",
+   "artifact:r017-acceptance-rerun-log",
+   "artifact:r017-acceptance-rerun-json"
+  ],
+  "recovery_of": "PATCH-R016-FINAL-ACCEPTANCE-RERUN",
+  "status": "running"
+ }
+]

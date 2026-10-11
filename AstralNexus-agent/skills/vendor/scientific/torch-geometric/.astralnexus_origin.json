@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/torch-geometric/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/torch-geometric/SKILL.md",
+  "name": "scientific:torch-geometric",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "89805e17cdbc64ed01426548442b3aa1bda8bcfdd4f9528f5c8dd6e0ea813c96",
+    "references/custom_datasets.md": "f15cc9bcefd152de2911e773e1870a54deab26cd7e61511ba32b9c798f6e88a1",
+    "references/explainability.md": "a0034a96a592dd3d4f56341b19ed3c0153e40065a56d23d42c241cb779396510",
+    "references/heterogeneous.md": "1d955ed7d1b98df468e7009dd0c1ada550fed50af02cd101052b83dd1d26af9f",
+    "references/link_prediction.md": "2e8ae7873868915416061fa7fbe32d0db3337e568490cc833738af24414f29ac",
+    "references/message_passing.md": "623248481516df52e603820303a3fd115a43eb0278ccd99c253f1e891001493e",
+    "references/review.md": "caeecac05a54d87f30276b15a6a196a82736c00bf4ba5682ac940d17bb962bad",
+    "references/scaling.md": "69680934b72104c20108e7747027a151451528b6a0ebc3102e60471a868c6213",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

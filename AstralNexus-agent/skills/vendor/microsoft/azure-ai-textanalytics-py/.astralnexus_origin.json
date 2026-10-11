@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-ai-textanalytics-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-ai-textanalytics-py/SKILL.md",
+  "name": "microsoft:azure-ai-textanalytics-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "6d4a9cbb3889a3dd6beca505dbc6c240454a7432f9460195c68f9b54f0a89396",
+    "references/capabilities.md": "59fe1f50cf5fcb1b160350844b0ee6771902819794a4118baeb3b264e59a3383",
+    "references/non-hero-scenarios.md": "4e86a27dff7e5fe01d10e6d4dcddd4c8c0bffdf24aa90136346df359bf5b587c",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

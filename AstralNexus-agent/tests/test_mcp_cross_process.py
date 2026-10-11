@@ -61,23 +61,33 @@ transport.close()
 '''
 
 
-def _run_client(source_root: Path, args: list[str]) -> dict:
+def _run_client(source_root: Path, args: list[str], workdir: Path) -> dict:
     env = os.environ.copy()
     env["NO_PROXY"] = "127.0.0.1,localhost"
     env["no_proxy"] = "127.0.0.1,localhost"
-    result = subprocess.run(
-        [sys.executable, "-c", CLIENT_CODE, *args],
-        cwd=source_root,
-        env=env,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    if result.returncode != 0:
+    # File-redirect capture (r17/§28.5 discipline): the sandbox refuses the
+    # anonymous pipes behind capture_output=True, and the capability under
+    # test here is the WebSocket transport plus cross-process session
+    # recovery — not the capture shape. Semantics and assertions unchanged.
+    stdout_path = workdir / ("client_stdout_%s.txt" % args[0])
+    stderr_path = workdir / ("client_stderr_%s.txt" % args[0])
+    with stdout_path.open("wb") as out_f, stderr_path.open("wb") as err_f:
+        returncode = subprocess.run(
+            [sys.executable, "-c", CLIENT_CODE, *args],
+            cwd=source_root,
+            env=env,
+            stdin=subprocess.DEVNULL,
+            stdout=out_f,
+            stderr=err_f,
+            check=False,
+        ).returncode
+    stdout_text = stdout_path.read_text(encoding="utf-8", errors="replace")
+    stderr_text = stderr_path.read_text(encoding="utf-8", errors="replace")
+    if returncode != 0:
         raise AssertionError(
-            f"MCP client process failed ({result.returncode}): {result.stderr.strip()}"
+            f"MCP client process failed ({returncode}): {stderr_text.strip()}"
         )
-    return json.loads(result.stdout.strip())
+    return json.loads(stdout_text.strip())
 
 
 def test_real_mcp_service_and_cross_process_session_recovery(tmp_path: Path):
@@ -87,28 +97,35 @@ def test_real_mcp_service_and_cross_process_session_recovery(tmp_path: Path):
     env = os.environ.copy()
     env["NO_PROXY"] = "127.0.0.1,localhost"
     env["no_proxy"] = "127.0.0.1,localhost"
-    server = subprocess.Popen(
-        [sys.executable, "-c", SERVER_CODE, str(port_file)],
-        cwd=source_root,
-        env=env,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-    )
+    server_stderr = tmp_path / "server_stderr.txt"
+    with server_stderr.open("wb") as err_f:
+        server = subprocess.Popen(
+            [sys.executable, "-c", SERVER_CODE, str(port_file)],
+            cwd=source_root,
+            env=env,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.DEVNULL,
+            stderr=err_f,
+            text=False,
+        )
     try:
         deadline = time.time() + 10
         while not port_file.exists() and time.time() < deadline:
             time.sleep(0.05)
-        assert port_file.exists(), "MCP service did not publish a listening port"
+        assert port_file.exists(), (
+            "MCP service did not publish a listening port: "
+            + server_stderr.read_text(encoding="utf-8", errors="replace")[:500]
+        )
         url = f"ws://127.0.0.1:{port_file.read_text(encoding='utf-8').strip()}"
 
-        first = _run_client(source_root, ["open", str(storage), url])
+        first = _run_client(source_root, ["open", str(storage), url], tmp_path)
         assert first["tools"]["tools"][0]["name"] == "echo"
         assert storage.exists()
 
         second = _run_client(
             source_root,
             ["resume", str(storage), url, first["session_id"]],
+            tmp_path,
         )
         assert second["session_id"] == first["session_id"]
         assert second["call"]["content"][0]["text"] == "echo:ok"

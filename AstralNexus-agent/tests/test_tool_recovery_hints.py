@@ -15,7 +15,14 @@ def test_tool_alternatives_are_registry_and_allowlist_bound():
 def test_tool_failure_contains_structured_recovery_hint(tmp_path, monkeypatch):
     monkeypatch.setenv("ASTRALNEXUS_WORKSPACE", str(tmp_path))
     result = json.loads(_file_read({"path": "missing.txt"}))
-    annotated = ToolExecutor._annotate_failure("file_read", result)
+    annotated = ToolExecutor(workspace_root=tmp_path)._annotate_failure("file_read", result)
     assert annotated["failure_class"] == "tool_execution_failed"
     assert annotated["next_action"] == "switch_tool_or_replan"
     assert annotated["alternative_tools"] == ["search_files"]
+
+
+def test_failure_hint_excludes_tools_not_in_this_execution(tmp_path):
+    executor = ToolExecutor(workspace_root=tmp_path, allowed_tools={"file_read"})
+    result = executor._annotate_failure("file_read", {"status": "error", "alternative_tools": ["search_files"]})
+    assert result["alternative_tools"] == []
+    assert executor._record_tool_error("file_read", FileNotFoundError("missing"))["alternative_tools"] == []

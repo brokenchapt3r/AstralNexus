@@ -6,7 +6,7 @@ from AstralNexus.core.governor import GlobalGovernor, GlobalBudget
 
 @pytest.fixture
 def governor():
-    budget = GlobalBudget(max_tokens=10000, max_time_seconds=600, max_parallel_slots=4)
+    budget = GlobalBudget(max_tokens=10000, max_time_seconds=600, max_parallel_slots=4, _clock=lambda: 0.0)
     trace_recorder = MagicMock()
     gov = GlobalGovernor.__new__(GlobalGovernor)
     gov.budget = budget
@@ -65,7 +65,8 @@ def test_record_task_end_multiple_tasks(governor):
     governor.record_task_end("task_3", actual_tokens=290, actual_time_seconds=1.8)
     assert governor.budget.active_parallel_tasks == 0
     assert governor.budget.used_tokens == 480 + 850 + 290
-    assert governor.budget.used_time_seconds == pytest.approx(2.1 + 4.3 + 1.8)
+    assert governor.budget.used_time_seconds == pytest.approx(4.3)
+    assert governor.budget.worker_time_seconds == pytest.approx(2.1 + 4.3 + 1.8)
 
 
 def test_record_task_end_timeout(governor):

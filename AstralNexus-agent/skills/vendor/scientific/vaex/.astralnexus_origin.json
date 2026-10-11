@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/vaex/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/vaex/SKILL.md",
+  "name": "scientific:vaex",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "a8ab5bcb0ab9c8d372b987e584b5c589a15b1e2b2f73457546d2888988d40b4f",
+    "references/core_dataframes.md": "4703eee22f1b2fa6635560f162c1f4c0b3c1ff30dc7dcbb38bbee0ccca419fd4",
+    "references/data_processing.md": "d9d8167532d9859a54098964cce1fa9cb062789cf9e333b4a34a1fc8a8b345a0",
+    "references/io_operations.md": "675e9c2bda6fa87214d47e4e7888faaa51dbc173c30cdce667417b91d8bdca88",
+    "references/machine_learning.md": "949bc57da3339971f1c5d3f161075c40f2f84279697f0e4344de802378760955",
+    "references/performance.md": "e5bec7956026b38471c48c1d546f666a151e6bff176d8330bee5a0374aeed65e",
+    "references/review.md": "0fcbb7428daa8652c2e7229086e7674e74971ef07974efd07f72c84047b54e17",
+    "references/visualization.md": "c04a5655f3262cf789c9d38579bab3282099d686acefe33e88cbacc1c1b8d458",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

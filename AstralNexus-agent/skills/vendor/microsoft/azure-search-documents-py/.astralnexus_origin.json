@@ -1,0 +1,18 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-search-documents-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-search-documents-py/SKILL.md",
+  "name": "microsoft:azure-search-documents-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "4a8d46e6e8def539b71987804fdc2d0946948e6e332c98ca831eeaea9e596401",
+    "references/agentic-retrieval.md": "4f11c80e8833130a2ecf85e475de8e9c3f1dbf645ed9d0b10bfb7dba98963091",
+    "references/semantic-ranking.md": "010b66e83c07e299f0d46d54b83cf281c498a5d7efecea5ff5ba95cbd7d78e1f",
+    "references/vector-search.md": "c8a5c4f990e9f72735b835ad249891fc43d7a44fc5b6a24bcf8ff438eb017a0f",
+    "scripts/setup_agentic_retrieval.py": "5b9353822db9c542fd5278d7d0dccd7933ceaa29ad1888e0d7f7235a02b74a3b",
+    "scripts/setup_vector_index.py": "c97810b42b0d26d73709a0070fe204280eb2c2345377d863fbcd82e6e71b1104",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

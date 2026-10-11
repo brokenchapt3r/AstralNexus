@@ -1,0 +1,18 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/onekgpd/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/onekgpd/SKILL.md",
+  "name": "scientific:onekgpd",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "6a7c0a90c42e899e818de866e843cf60d5434422fa69b910a7db9a06f25240e9",
+    "assets/kgpe.json": "51bce468b9c339e658305376ae338eac7912ac4b8ab31982f9ca640502b49e26",
+    "references/annotation_vocabularies.md": "be522e766f3be9c43edb3b1ab7f5a95898655278b3cb2acd93ac51d51756140e",
+    "references/onekgpd_commands.md": "d366798dca52a588fc990b2ab256024c1ce1a174f99f499474c538524fac26b8",
+    "scripts/onekgpd_api.py": "0f64544eed720953dbce6fb4c391d81aa4c16a62b8a360a639848717361119ff",
+    "scripts/onekgpd_meta.py": "177360630b7e8238da40a6c94ad56ca049aec1fe804780a577c3f1ae6ff98cb9",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

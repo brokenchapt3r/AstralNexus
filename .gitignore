@@ -38,6 +38,6 @@ logs/
 .idea/
 *.swp
 *.swo
+*.bak_*
 .DS_Store
 Thumbs.db
-

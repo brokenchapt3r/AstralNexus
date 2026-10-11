@@ -1,0 +1,21 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/get-available-resources/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/get-available-resources/SKILL.md",
+  "name": "scientific:get-available-resources",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "54044d598fce28fca2ce50e7895f44423b070493db2f9c96ff0445bee4d3689d",
+    "references/resource_semantics.md": "cb31d9340e5c7da72aac1728448de61e90ff9c6022735ab90976457f6d4dbd7c",
+    "references/snapshot_schema.md": "789dde9d5d1ce0225a5a205b0d300f4d9c7442bbe687ff26a7819d5349687fd8",
+    "references/sources.md": "4499cd3a7bbeb56ba1d00d9688450128b4eba541c8dc7683cc92a654632d1af7",
+    "scripts/accelerator_diagnostics.py": "0635a80fb128dbef7297b887ad4173f260193272e3b25ff43f14f9dad8f0f377",
+    "scripts/detect_resources.py": "91eed1feaabe1f254c1d2a0775295ed95eea710b9d3e5127b6a13310f49c49d4",
+    "scripts/plan_workload.py": "b89cfefe02422814b1b7df2942e1d4bafec24159c38b2765b869944bbe3a1a92",
+    "scripts/snapshot_tools.py": "596f7a214f5dd6f9f2a641c5ecf52cf9d851617460f2c8926318fcb5d40693f1",
+    "scripts/_common.py": "264d5ccb04790164d2c5ae53fa8b470704d2094fd17f687304ede14ba45aa1a5",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/depmap/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/depmap/SKILL.md",
+  "name": "scientific:depmap",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "893eb02a2dc8a77e61260dfb74b2acdf6c85e08f33028329d73657a23d398586",
+    "references/dependency_analysis.md": "4bf745e94ff70da89f8c3d67c3de625d2d06b24812012fe446fa9d9c2422cd96",
+    "scripts/depmap_data.py": "28604159f7c87d7e5a5002a0512af100a440d73f0fa5f2ba6794ccafce66ebfb",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

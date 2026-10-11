@@ -1,0 +1,15 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/cobrapy/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/cobrapy/SKILL.md",
+  "name": "scientific:cobrapy",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "b11365507e183d8e153dd415df3a85a00f34b068bcf8edbad28c0580253564db",
+    "references/api_quick_reference.md": "5cb2aae6ec45947e41e703fc25f2e0fc049001c3613c1da41b0c110b95e5c23c",
+    "references/workflows.md": "7af68f9a4afd6cd14f2df92743e7b0226debf778dede50627be071093767fbc3",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

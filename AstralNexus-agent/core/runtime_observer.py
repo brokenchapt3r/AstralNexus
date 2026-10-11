@@ -45,6 +45,8 @@ class RuntimeObserver:
                 else RunStatus.RUNNING.value
             ),
         )
+        if phase_value == RuntimePhase.COMPLETED.value and self.state_manager.state.delivery_status != "passed":
+            run_status = RunStatus.RUNNING.value  # Execution done, product terminal not committed.
         state = self.state_manager.observe(
             task_graph=owner.task_graph,
             global_goal=goal,

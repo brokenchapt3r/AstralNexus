@@ -1,0 +1,32 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/neurokit2/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/neurokit2/SKILL.md",
+  "name": "scientific:neurokit2",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "6f73a726bdea37723aa68bf7aaf896eb10322e875cbf3bc5ee96707643f1be35",
+    "references/bio_module.md": "d08660461674159fd9c2652e5158001eb2202d4e9018bd9554b4cec2c389c78d",
+    "references/complexity.md": "5fc180100a5f4d6fce6320a0b4da7c88e6ac675a52e292d843e1f607e732fcb3",
+    "references/ecg_cardiac.md": "e5bb14cc5d6ecbc1f44f461558def5982d76989b56251b361047d3b9c2f8e101",
+    "references/eda.md": "2487d5d2fef922acec4a7481bda564afef5504a01c3d80f15659b44488ef3c48",
+    "references/eeg.md": "f083054ff6c8563725a196f9ec61983e7b502db3b825f9956feadef64d59371d",
+    "references/emg.md": "76a45f6a51b2e428b8aed940c7643f28a61645a53025b69b5113f1c175a399d2",
+    "references/eog.md": "24cd6c79dd72db01952bf518a1c6a24253ab2b769496e7fe1d8e81577011e790",
+    "references/epochs_events.md": "f8eabe85a73898a43f12d8530ae9d7b3568cbc2190dc2da834c2438fb4092da4",
+    "references/hrv.md": "d1656759eb74b0924db8608be8bb06a5abc32c69a96d5277eba06526a5c61d6a",
+    "references/ppg.md": "d3b0382ac39f46f661c57358e838647ce9b2ce37429c1e4c814b481986c61a31",
+    "references/rsp.md": "5d7b0ee8e3e19af05f7fd7bc5e44ae2782ffec3985010a97e613eeabfbfa8b24",
+    "references/signal_processing.md": "743c0a22f00f180bbe62836db801787c31ce984105a36a22bce65118d315f565",
+    "scripts/ecg_hrv_pipeline.py": "3a1775acc9521c10f1fa14724df7c104bb6a1ee0c4b77aa74996bc2a74846524",
+    "scripts/eda_pipeline.py": "97f1eda0aaa279596ccf61e2a483bc8796f83580b95b07ccfb23a0f88cfada7d",
+    "scripts/generate_synthetic.py": "4b3dc08f50696cd13aab93bcf371c50b59d6f1332f8549f9dd13ee690ba47026",
+    "scripts/inspect_signal.py": "5cd0e5a28d4073f9d9e83a64c2bbabd9244990dfccd8d48b23a51dc9cca7d10c",
+    "scripts/plan_epochs.py": "4fd6e9338d7a8b6110eb96dc9692115f956983183e69497881292e1776edae91",
+    "scripts/validate_multimodal.py": "b3edd572846da05b99561423146957595db43f83b06c112317b83806f30e9d6d",
+    "scripts/_common.py": "db17455cf31addb8ab52761cdfd65406a9fbb83e8677a3802ace2138a1cb6a8c",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

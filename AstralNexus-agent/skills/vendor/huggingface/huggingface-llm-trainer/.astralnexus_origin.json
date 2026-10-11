@@ -1,0 +1,31 @@
+{
+  "repo": "huggingface/skills",
+  "commit": "ca0325bb20b2d0a1b2efa893670c4c72f79e707b",
+  "source_path": "skills/huggingface-llm-trainer/SKILL.md",
+  "source_url": "https://github.com/huggingface/skills/blob/ca0325bb20b2d0a1b2efa893670c4c72f79e707b/skills/huggingface-llm-trainer/SKILL.md",
+  "name": "huggingface:huggingface-llm-trainer",
+  "namespace": "huggingface",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "fb5c5e25103e38226e4d8ae28db84a01de42a11da4be1918fa72f833699f9d0d",
+    "references/gguf_conversion.md": "d341b8720e91a64e715cc76095b28a44d31319eb7d63df5bd7f93340804f89e0",
+    "references/hardware_guide.md": "01b3ba873c5a45214746a25111131a5d27cd484722bc00cbe9f43dcaebc6a28c",
+    "references/hub_saving.md": "ca3aacd6bad68ab149c007089c00cf4c72fd39b5c150c4fb7d192fda94ac838f",
+    "references/local_training_macos.md": "864619b791239093d33e2627bc9e61428dcbb15cb3e947e3f9b278b73f0c871b",
+    "references/reliability_principles.md": "189b40920184a64124a834ab4a0e3e99756a850b124add3e6cc5049036cd824f",
+    "references/trackio_guide.md": "8ea2d3128dd2b927eca477c9349ead33da080add2edeb00f3089e22a5e4a916e",
+    "references/training_methods.md": "10849c3f258ef571c576d3ec4779e7d01b625aec62891ecbc66be5356a7bf69d",
+    "references/training_patterns.md": "cae8248d52454a5a93f20c0da6d64017f32d36e3b2cbbe298762affc083f3923",
+    "references/troubleshooting.md": "1149767feca1e301197fcd8b7a91b75ec7ac101edb01c766770e687d6d02f6d7",
+    "references/unsloth.md": "ff6255c21bde78a3120e40b5d620758a4f910ce7b5e1f9f05eb07214da83dff2",
+    "scripts/convert_to_gguf.py": "7e882d67f4bee9ef8593c622eb3387fffc42c69d68252d45e6fcfaaffa83fc24",
+    "scripts/dataset_inspector.py": "a75f9840e1925f50d6525faf97a502ed0810538746121cd666e691784be816eb",
+    "scripts/estimate_cost.py": "7f69e6cd34f35a462a5e6e3cb9121fc785abf2f9cb84ed6c473a0b167556e64b",
+    "scripts/hf_benchmarks.py": "70524bfe1e897d03a6d43ef6db254fe1bb02c26d9bf1471a35277bcabae64e86",
+    "scripts/train_dpo_example.py": "de24eb7ab1e61adcc2387256ab40c10a6ca0648ad6db703d7e348ffd37e1d361",
+    "scripts/train_grpo_example.py": "a25888208b0410e2982aa92c8a96dd43a9fe9fcce45037a48215885c755a608d",
+    "scripts/train_sft_example.py": "29d1e6aa09c7d548158849c4ffa0bdaccaf7d205a79909b4c872abb9a7961284",
+    "scripts/unsloth_sft_example.py": "40174038a0f1b03014fe0f0d3099aec2f44fa6954920d90c628c2b5ed21dc84a",
+    "UPSTREAM-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}

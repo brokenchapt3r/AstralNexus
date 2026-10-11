@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-typescript/skills/react-flow-node-ts/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-typescript/skills/react-flow-node-ts/SKILL.md",
+  "name": "microsoft:react-flow-node-ts",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "f0a4f37df3e8e7ed9645e947c08470fd78483f18b9587ae8cd20720022110781",
+    "assets/template.tsx": "d3cfad93e265243c2ecb142d056272cdb5db94a0bb9835c3203f32bfdd0f90f5",
+    "assets/types.template.ts": "7766f607f7a640534372246ab93cf72329865724d75b4c187a1167e08ba432ef",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

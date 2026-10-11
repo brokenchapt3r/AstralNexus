@@ -1,0 +1,22 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/statsmodels/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/statsmodels/SKILL.md",
+  "name": "scientific:statsmodels",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "9e6c034bb4acbf0972fda18892d2feea907885ac5ad7194d220182d8810295a3",
+    "references/discrete_choice.md": "30422e14c2e05bfc4a3da924086c8f067b6e4eb9c1c828ec7f25ab79ed16d54e",
+    "references/glm.md": "dca241c58df3b08c05aa4f0a96e4efd8ebb24ce37c57dd23402c236f86db57e4",
+    "references/linear_models.md": "a14ce5ba795442bc8805f6d59e9a397efe9e6587b09b19dcaba40e88d3c4654c",
+    "references/modeling_capabilities.md": "7794c4a3d7c82e647f4705caa47614796f34cc07db9d11bc057dec2310e9787c",
+    "references/model_selection.md": "5666665df87dccdb82ddae0d2ffcf13c7e681fee6b410ea279a8edf4688ad75a",
+    "references/quick_start_guide.md": "202c61810e3bb59a72f1736c6624899c8ad0c2eabffbf11eff98a987f13eaa2d",
+    "references/review.md": "38d49c7d705d250376c013be489bc5dad2b94b9373e1c7aaa0afe51980af29da",
+    "references/stats_diagnostics.md": "23fd23d9b415b9060151409220f03f203cc1775d517b51d978d5ffe8edad009e",
+    "references/time_series.md": "29b97f1de7fedd5be582cd6e4168403978a5094f54211ccfc53b896f3bece04e",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

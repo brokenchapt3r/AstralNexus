@@ -1,0 +1,16 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/cantera/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/cantera/SKILL.md",
+  "name": "scientific:cantera",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "1dcb22bba51475a69dc93bbefa7d2581f3dfdb6a03a6fc55f8637e398f733a51",
+    "assets/hydrogen-ignition.json": "f26f46596235763c25efc27f6879e43d388a6fc1e58c284117b93d83cf3ca90e",
+    "references/interpretation.md": "57919a187c1f48d23c2fe5906ce0cf69b026ed7acf92823cf615d3d529f94d4f",
+    "scripts/ignition_delay.py": "a9e8d25fec9c2159e08b85db7f146955cbe7053e7d18171e27da4b399fa7f51b",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

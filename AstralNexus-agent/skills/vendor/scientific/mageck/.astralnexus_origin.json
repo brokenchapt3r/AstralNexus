@@ -1,0 +1,16 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/mageck/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/mageck/SKILL.md",
+  "name": "scientific:mageck",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "562d7e2cb2febef14ab722bc29cd33983b523da287fb02b64eadf18702d4a9d1",
+    "references/design.md": "d032d5ea5e02a54522c335e2f0537c9e3fed5ab872e7be6050c4ec116ba3a690",
+    "references/runtime.md": "b282ee7d96811deca4960897d4872a73bcb68ceeb07e88d2c858014baaf27b44",
+    "scripts/screen_analysis.py": "30aae75f86b1bc485584d479f9041ae7f2b500a350cf4320f9fb873e8f3f01ea",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

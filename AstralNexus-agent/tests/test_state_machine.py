@@ -218,8 +218,8 @@ class TestValidTransitions:
             "result_submitted", "ready", "failed", "blocked", "cancelled", "superseded"
         }
 
-    def test_verifying_has_five_targets(self):
-        """verifying can transition to completed, repair_pending, failed, cancelled, superseded."""
+    def test_verifying_can_requeue_after_a_transport_interruption(self):
+        """No-verdict transport cuts requeue verification without a failure verdict."""
         assert VALID_TRANSITIONS["verifying"] == {
-            "completed", "repair_pending", "failed", "cancelled", "superseded"
+            "result_submitted", "completed", "repair_pending", "failed", "cancelled", "superseded"
         }

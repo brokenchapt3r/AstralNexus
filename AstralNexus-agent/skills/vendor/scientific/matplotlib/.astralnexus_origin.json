@@ -1,0 +1,19 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/matplotlib/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/matplotlib/SKILL.md",
+  "name": "scientific:matplotlib",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "60b80aaa802e1a88db30729611789bf5ee92b3f2a7bb695502bac10dd255ee86",
+    "references/api_reference.md": "151dba633c9d92e5e3c446a927971f50893c1fee382e50d3780d01d0a33bdfdf",
+    "references/common_issues.md": "f614b7716637d18623a035653ac37fc608ff5be4d08250f7fbf66ae496c59df2",
+    "references/plot_types.md": "149479715344beb5f9f0e5b4bf19f694e0db1ef1ea1282aa633185ab38c5d1bc",
+    "references/styling_guide.md": "a2b84789e227bcbf5dcc99b142e4a9e6a45e5c6cff2252e96f53d0f9627ff6fc",
+    "scripts/plot_template.py": "88fe993c113b581cf7da41c6330a6528ba768afb3fdc2be8fa4e1681d7c1b943",
+    "scripts/style_configurator.py": "f6238b6de27046e3a094573714b3ecd8f856f1d4e2004f17cf4c87a0848a8993",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

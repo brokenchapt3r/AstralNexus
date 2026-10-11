@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from collections import deque
+from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
 import threading
@@ -10,6 +11,7 @@ from typing import Any, Callable
 import uuid
 
 from AstralNexus.core.artifacts import append_jsonl
+from AstralNexus.runtime.public_rationale import public_rationale
 
 
 PUBLIC_RUNTIME_EVENT_TYPES = frozenset(
@@ -75,7 +77,9 @@ class RuntimeEventBus:
 
     def history(self) -> list[dict[str, Any]]:
         with self._lock:
-            return [dict(item) for item in self._history]
+            # Payloads contain nested lists/dicts. A shallow copy lets a UI or
+            # diagnostic consumer rewrite the canonical replay history.
+            return deepcopy(list(self._history))
 
     def publish(
         self,
@@ -101,16 +105,18 @@ class RuntimeEventBus:
             "payload": public_payload,
         }
         with self._lock:
-            self._history.append(event)
+            self._history.append(deepcopy(event))
             subscribers = list(self._subscribers)
             if self.event_path is not None:
                 append_jsonl(self.event_path, event)
         for subscriber in subscribers:
             try:
-                subscriber(event)
+                # One callback may not mutate what later callbacks, history
+                # replay, or the publisher observe.
+                subscriber(deepcopy(event))
             except Exception:
                 continue
-        return event
+        return deepcopy(event)
 
     def ingest_trace(
         self,
@@ -165,6 +171,7 @@ def _map_trace_event(
     role = str(payload.get("role") or payload.get("worker_type") or "")
     actor = str(payload.get("agent_id") or role or "AstralNexus")
     common = {"node_id": node_id, "actor": actor, "role": role}
+    common.update({key: payload[key] for key in ("trace_owner_valid", "generation", "owner_id") if key in payload})
 
     if event_type == "task.source.loaded":
         request = str(payload.get("original_request") or payload.get("goal") or "").strip()
@@ -189,7 +196,8 @@ def _map_trace_event(
             "details": {"reason_codes": payload.get("reason_codes") or [], "node_count": count},
         })]
     if event_type == "agent.activity.changed":
-        activity = payload.get("activity") if isinstance(payload.get("activity"), dict) else {}
+        activity = payload.get("activity")
+        activity = activity if isinstance(activity, dict) else {}
         return [("agent.activity", {
             **common,
             "title": str(activity.get("label") or f"{role or 'Worker'} 正在工作"),
@@ -199,7 +207,8 @@ def _map_trace_event(
             "details": {"activity_type": activity.get("type"), "tool": activity.get("tool")},
         })]
     if event_type == "node.result_submitted":
-        succeeded = str(payload.get("status") or "").lower() not in {"failed", "failure"}
+        outcome = str(payload.get("execution_outcome") or payload.get("status") or "").lower()
+        succeeded = outcome not in {"failed", "failure", "error", "cancelled", "interrupted"}
         return [("agent.activity", {
             **common,
             "title": f"{role or 'Worker'} 阶段{'完成' if succeeded else '失败'}",
@@ -209,7 +218,8 @@ def _map_trace_event(
             "details": {"execution_id": payload.get("execution_id"), "attempt": payload.get("attempt")},
         })]
     if event_type in {"llm.tool_execution.start", "tool.call.started"}:
-        calls = payload.get("calls") if isinstance(payload.get("calls"), list) else []
+        calls = payload.get("calls")
+        calls = calls if isinstance(calls, list) else []
         tool_names = [str(item.get("name") or item.get("tool_name")) for item in calls if isinstance(item, dict)]
         if payload.get("tool_name"):
             tool_names.append(str(payload["tool_name"]))
@@ -221,15 +231,22 @@ def _map_trace_event(
             "details": {"tools": list(dict.fromkeys(tool_names))},
         })]
     if event_type in {"llm.tool_batch", "tool.call.completed"}:
-        calls = payload.get("calls") if isinstance(payload.get("calls"), list) else []
+        calls = payload.get("calls")
+        calls = calls if isinstance(calls, list) else []
         names = [str(item.get("name") or item.get("tool_name")) for item in calls if isinstance(item, dict)]
         if payload.get("tool_name"):
             names.append(str(payload["tool_name"]))
+        failed = any(
+            str(item.get("status", "")).lower() in {"failed", "failure", "error", "cancelled", "interrupted"}
+            or item.get("success") is False or bool(item.get("error"))
+            or item.get("returncode") not in (None, 0)
+            for item in [payload, payload.get("result"), *calls] if isinstance(item, dict)
+        )
         return [("tool.finished", {
             **common,
             "title": "工具调用完成",
             "summary": "、".join(dict.fromkeys(names)) or str(payload.get("summary") or "工具结果已返回"),
-            "status": str(payload.get("status") or "completed"),
+            "status": "failed" if failed else str(payload.get("status") or "completed"),
             "details": {"tools": list(dict.fromkeys(names)), "result_preview": payload.get("result_preview")},
         })]
     if event_type == "artifact.created":
@@ -258,7 +275,8 @@ def _map_trace_event(
             "status": "verifying",
         })]
     if event_type == "interactive.run.summary":
-        result = payload.get("result") if isinstance(payload.get("result"), dict) else {}
+        result = payload.get("result")
+        result = result if isinstance(result, dict) else {}
         status = str(payload.get("status") or result.get("status") or "completed").lower()
         completed = status == "completed"
         return [("task.completed" if completed else "task.failed", {
@@ -273,24 +291,9 @@ def _map_trace_event(
     return []
 
 
-def _public_rationale(*sources: dict[str, Any]) -> str:
-    """Extract only an explicitly public decision/execution explanation."""
-    for source in sources:
-        if not isinstance(source, dict):
-            continue
-        metrics = source.get("metrics") if isinstance(source.get("metrics"), dict) else {}
-        for key in (
-            "public_reasoning",
-            "planning_explanation",
-            "decision_rationale",
-            "execution_rationale",
-            "rationale",
-            "reason",
-        ):
-            value = source.get(key) or metrics.get(key)
-            if value:
-                return str(value).strip()[:4000]
-    return ""
+def _public_rationale(*sources: Any) -> str:
+    """Backward-compatible alias for the official public-rationale interface."""
+    return public_rationale(*sources)
 
 
 def _sanitize(value: Any) -> Any:

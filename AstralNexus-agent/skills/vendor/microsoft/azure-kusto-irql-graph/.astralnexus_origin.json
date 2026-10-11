@@ -1,0 +1,16 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-kusto-graph-skills/skills/azure-kusto-irql-graph/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-kusto-graph-skills/skills/azure-kusto-irql-graph/SKILL.md",
+  "name": "microsoft:azure-kusto-irql-graph",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "0de50b51c08581507b497152b4fc7ac02d2c72a12dfc33c6a9782b3131abcd66",
+    "references/DEPLOY_IRQL_FUNCTIONS.md": "5c325106ea5227213fc821239f34d206cf258f4e605d7edcbf70804cc5b767ba",
+    "references/EXAMPLES.md": "57fcd28911e3fa4e02b7aaef363430080bfcfcf127e7f0275279faf7facb5752",
+    "references/KUSTO_EXPLORER_LAUNCH.md": "e3702ebf9255d91279a85e4076c878c4178d8afe305c2ee13604f94b735b70eb",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

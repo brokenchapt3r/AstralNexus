@@ -222,20 +222,30 @@ class GraphPatchCommitter:
     ) -> list[str]:
         cancelled: list[str] = []
         with TaskGraphTransaction(self.task_graph):
-            for node in additions:
+            for node_spec in additions:
                 self.task_graph.add_node(TaskNode(
-                    node_id=node["node_id"],
-                    goal=str(node["goal"]),
-                    role=str(node.get("role", "governed_worker")),
-                    status=str(node.get("status", "admitted")),
-                    dependencies=list(node.get("dependencies", [])),
-                    constraints=[str(item) for item in node.get("constraints", [])],
+                    node_id=node_spec["node_id"],
+                    goal=str(node_spec["goal"]),
+                    role=str(node_spec.get("role", "governed_worker")),
+                    status=str(node_spec.get("status", "admitted")),
+                    dependencies=list(node_spec.get("dependencies", [])),
+                    constraints=[str(item) for item in node_spec.get("constraints", [])],
                     acceptance_criteria=[
                         str(item)
-                        for item in node.get("acceptance_criteria", [])
+                        for item in node_spec.get("acceptance_criteria", [])
                     ],
-                    resource_tier=str(node.get("execution_target", "cloud")),
-                    metadata=node["metadata"],
+                    inputs=[str(item) for item in node_spec.get("inputs", [])],
+                    outputs=[str(item) for item in node_spec.get("outputs", [])],
+                    owned_paths=[str(item) for item in node_spec.get("owned_paths", [])],
+                    input_artifacts=[
+                        str(item) for item in node_spec.get("input_artifacts", [])
+                    ],
+                    output_artifacts=[
+                        str(item) for item in node_spec.get("output_artifacts", [])
+                    ],
+                    handoff_contract=dict(node_spec.get("handoff_contract") or {}),
+                    resource_tier=str(node_spec.get("execution_target", "cloud")),
+                    metadata=node_spec["metadata"],
                 ))
             for raw in update_nodes:
                 node_id = remap(raw.get("node_id") or raw.get("task_id"))
@@ -246,6 +256,8 @@ class GraphPatchCommitter:
                     "goal", "role", "constraints", "acceptance_criteria",
                     "inputs", "outputs", "resource_tier",
                     "risk_level", "sensitivity",
+                    "owned_paths", "input_artifacts", "output_artifacts",
+                    "handoff_contract",
                 ):
                     if field_name in raw:
                         setattr(node, field_name, raw[field_name])

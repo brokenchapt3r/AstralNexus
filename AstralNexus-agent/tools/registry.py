@@ -28,16 +28,21 @@ Usage in tool files::
 """
 
 from __future__ import annotations
+from AstralNexus.runtime.run_context import get_env
 
 import ast
 import importlib
+import inspect
+import copy
+import sys
+from contextlib import contextmanager
 import json
 import logging
 import os
 import threading
 import time
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Set
+from typing import Any, Callable, Dict, List, Optional, Set, Iterator
 
 from AstralNexus.core.exceptions import (
     ToolError,
@@ -47,7 +52,16 @@ from AstralNexus.core.exceptions import (
 )
 from AstralNexus.tools.approval import consume_one_shot_grant, request_approval
 
+from .result_limits import limit_result
+
 logger = logging.getLogger(__name__)
+
+def _registry_error(error: Exception, name: str) -> str:
+    payload = json.loads(format_tool_error(error, name))
+    payload.setdefault("status", "error")
+    payload.setdefault("failure_class", "tool_execution_failed")
+    return json.dumps(payload, ensure_ascii=False)
+
 
 # TTL for check_fn cache results (seconds).
 _CHECK_FN_TTL = 30.0
@@ -56,40 +70,75 @@ _check_fn_cache: Dict[Callable, tuple[float, bool, float]] = {}
 _check_fn_cache_lock = threading.Lock()
 
 
-def _check_fn_cached(fn: Callable) -> bool:
-    """Return a cached availability result with a short last-good grace.
+_check_fn_flights: Dict[Callable, tuple[threading.Event, int]] = {}
+_check_fn_epoch = 0
+_disabled_config_lock = threading.Lock()
+_disabled_raw: Optional[str] = None
+_disabled_value: Optional[Set[str]] = None
 
-    AstralNexus keeps a recently working integration visible during transient
-    probe failures.  This prevents one DNS/TLS hiccup from making a tool
-    disappear from the next model request while still failing closed after
-    the grace period.
-    """
-    now = time.monotonic()
-    with _check_fn_cache_lock:
-        cached = _check_fn_cache.get(fn)
-        if cached is not None:
-            ts, value, last_good = cached
-            if now - ts < _CHECK_FN_TTL:
-                if value:
-                    return True
-                return bool(last_good and now - last_good < _CHECK_FN_FAILURE_GRACE)
+
+def _disabled_toolsets() -> Optional[Set[str]]:
+    """Invalid configuration disables registry tools, with one diagnostic."""
+    global _disabled_raw, _disabled_value
+    raw = get_env("ASTRALNEXUS_DISABLED_TOOLSETS", "[]")
+    with _disabled_config_lock:
+        if raw != _disabled_raw:
+            try:
+                parsed = json.loads(raw)
+                if not isinstance(parsed, list) or any(not isinstance(item, str) for item in parsed):
+                    raise ValueError("expected a list of strings")
+                _disabled_value = set(parsed)
+            except (ValueError, TypeError) as error:
+                _disabled_value = None
+                logger.warning("Invalid ASTRALNEXUS_DISABLED_TOOLSETS; registry tools disabled until corrected: %s", error)
+            _disabled_raw = raw
+        return None if _disabled_value is None else set(_disabled_value)
+
+
+def _check_fn_cached(fn: Callable) -> bool:
+    """One in-flight probe per function; invalidation fences old results."""
+    while True:
+        now = time.monotonic()
+        with _check_fn_cache_lock:
+            cached = _check_fn_cache.get(fn)
+            if cached is not None and now - cached[0] < _CHECK_FN_TTL:
+                return cached[1] or bool(cached[2] and now - cached[2] < _CHECK_FN_FAILURE_GRACE)
+            flight = _check_fn_flights.get(fn)
+            if flight is None:
+                event = threading.Event()
+                _check_fn_flights[fn] = (event, threading.get_ident())
+                epoch = _check_fn_epoch
+                break
+            if flight[1] == threading.get_ident():
+                logger.error("Recursive availability probe for %s", getattr(fn, "__name__", repr(fn)))
+                return False
+        flight[0].wait()
+    value = False
+    completed = False
+    last_good = 0.0
     try:
-        value = bool(fn())
-    except Exception:
-        value = False
-    with _check_fn_cache_lock:
-        previous = _check_fn_cache.get(fn)
-        last_good = now if value else (previous[2] if previous else 0.0)
-        _check_fn_cache[fn] = (now, value, last_good)
-    if not value and last_good and now - last_good < _CHECK_FN_FAILURE_GRACE:
-        return True
-    return value
+        try:
+            value = bool(fn())
+        except Exception as error:
+            logger.warning("Availability probe %s failed: %s", getattr(fn, "__name__", repr(fn)), error)
+        completed = True
+    finally:
+        now = time.monotonic()
+        with _check_fn_cache_lock:
+            previous = _check_fn_cache.get(fn)
+            last_good = now if value else (previous[2] if previous else 0.0)
+            if completed and epoch == _check_fn_epoch:
+                _check_fn_cache[fn] = (now, value, last_good)
+            _check_fn_flights.pop(fn, None)
+            event.set()
+    return value or bool(last_good and now - last_good < _CHECK_FN_FAILURE_GRACE)
 
 
 def invalidate_check_fn_cache() -> None:
-    """Drop all cached ``check_fn`` results."""
+    global _check_fn_epoch
     with _check_fn_cache_lock:
         _check_fn_cache.clear()
+        _check_fn_epoch += 1
 
 
 # ---------------------------------------------------------------------------
@@ -163,7 +212,9 @@ def _module_registers_tools(module_path: Path) -> bool:
 
 def discover_builtin_tools(tools_dir: Optional[Path] = None) -> List[str]:
     """Import self-registering tool modules and return their module names."""
-    tools_path = Path(tools_dir) if tools_dir is not None else Path(__file__).resolve().parent
+    tools_path = Path(__file__).resolve().parent
+    if tools_dir is not None and Path(tools_dir).resolve() != tools_path:
+        raise ValueError("discover_builtin_tools only supports the builtin package; external plugins must register explicitly")
     module_names = [
         f"AstralNexus.tools.{path.stem}"
         for path in sorted(tools_path.glob("*.py"))
@@ -173,11 +224,20 @@ def discover_builtin_tools(tools_dir: Optional[Path] = None) -> List[str]:
 
     imported: List[str] = []
     for mod_name in module_names:
+        modules_before = set(sys.modules)
+        staged: Optional[ToolRegistry] = None
         try:
-            importlib.import_module(mod_name)
+            with registry.registration_transaction() as staged:
+                importlib.import_module(mod_name)
             imported.append(mod_name)
         except Exception as exc:
-            logger.warning("Could not import tool module %s: %s", mod_name, exc)
+            rollback_modules = {mod_name}
+            if staged is not None:
+                rollback_modules.update(getattr(entry.handler, "__module__", "") for entry in staged._entries.values())
+            for module in rollback_modules - modules_before:
+                if module.startswith("AstralNexus.tools."):
+                    sys.modules.pop(module, None)
+            logger.warning("Could not import tool module %s; registrations rolled back: %s", mod_name, exc)
     return imported
 
 
@@ -189,11 +249,56 @@ class ToolRegistry:
     """Singleton registry that collects tool schemas and handlers."""
 
     def __init__(self) -> None:
-        self._tools: Dict[str, ToolEntry] = {}
-        self._toolset_checks: Dict[str, Callable] = {}
-        self._toolset_aliases: Dict[str, str] = {}
+        self._entries: Dict[str, ToolEntry] = {}
+        self._aliases: Dict[str, str] = {}
+        self._staging = threading.local()
         self._lock = threading.RLock()
-        self._generation: int = 0
+        self._version: int = 0
+
+    @property
+    def _tools(self) -> Dict[str, ToolEntry]:
+        staged = getattr(self._staging, "registry", None)
+        return staged._entries if staged is not None else self._entries
+
+    @property
+    def _toolset_aliases(self) -> Dict[str, str]:
+        staged = getattr(self._staging, "registry", None)
+        return staged._aliases if staged is not None else self._aliases
+
+    @property
+    def _generation(self) -> int:
+        staged = getattr(self._staging, "registry", None)
+        return staged._version if staged is not None else self._version
+
+    @_generation.setter
+    def _generation(self, value: int) -> None:
+        staged = getattr(self._staging, "registry", None)
+        if staged is not None:
+            staged._version = value
+        else:
+            self._version = value
+
+    @contextmanager
+    def registration_transaction(self) -> Iterator["ToolRegistry"]:
+        if getattr(self._staging, "registry", None) is not None:
+            raise RuntimeError("nested registration transactions are unsupported")
+        with self._lock:
+            staged = ToolRegistry()
+            staged._entries = dict(self._entries)
+            staged._aliases = dict(self._aliases)
+            staged._version = self._version
+            base = self._version
+        self._staging.registry = staged
+        try:
+            yield staged
+            with self._lock:
+                if self._version != base:
+                    raise RuntimeError("registry changed during discovery; retry import")
+                self._entries = staged._entries
+                self._aliases = staged._aliases
+                self._version = staged._version
+        finally:
+            self._staging.registry = None
 
     # -- registration -------------------------------------------------------
 
@@ -214,9 +319,13 @@ class ToolRegistry:
         override: bool = False,
     ) -> None:
         """Register a tool.  Called at module-import time by each tool file."""
+        if is_async or inspect.iscoroutinefunction(handler) or inspect.iscoroutinefunction(getattr(handler, "__call__", None)):
+            raise ValueError("Asynchronous handlers are unsupported by synchronous ToolRegistry.dispatch")
+        if max_result_size_chars is not None and (type(max_result_size_chars) is not int or max_result_size_chars <= 0):
+            raise ValueError("max_result_size_chars must be a positive integer")
         with self._lock:
             existing = self._tools.get(name)
-            if existing and existing.toolset != toolset and not override:
+            if existing and not override:
                 logger.error(
                     "Tool registration REJECTED: '%s' (toolset '%s') would shadow "
                     "existing tool from toolset '%s'.  Pass override=True to replace.",
@@ -224,14 +333,12 @@ class ToolRegistry:
                 )
                 return
             self._tools[name] = ToolEntry(
-                name=name, toolset=toolset, schema=schema, handler=handler,
-                check_fn=check_fn, requires_env=requires_env or [],
+                name=name, toolset=toolset, schema=copy.deepcopy(schema), handler=handler,
+                check_fn=check_fn, requires_env=list(requires_env or []),
                 is_async=is_async, description=description or schema.get("description", ""),
                 emoji=emoji, max_result_size_chars=max_result_size_chars,
-                requires_approval=requires_approval, schema_overrides=schema_overrides,
+                requires_approval=requires_approval, schema_overrides=copy.deepcopy(schema_overrides),
             )
-            if check_fn and toolset not in self._toolset_checks:
-                self._toolset_checks[toolset] = check_fn
             self._generation += 1
 
     def deregister(self, name: str) -> None:
@@ -240,18 +347,20 @@ class ToolRegistry:
             entry = self._tools.pop(name, None)
             if entry is None:
                 return
-            toolset_still_exists = any(
-                e.toolset == entry.toolset for e in self._tools.values()
-            )
-            if not toolset_still_exists:
-                self._toolset_checks.pop(entry.toolset, None)
             self._generation += 1
 
     # -- queries ------------------------------------------------------------
 
     def get_entry(self, name: str) -> Optional[ToolEntry]:
         with self._lock:
-            return self._tools.get(name)
+            entry = self._tools.get(name)
+            if entry is None:
+                return None
+            detached = copy.copy(entry)
+            detached.schema = copy.deepcopy(entry.schema)
+            detached.schema_overrides = copy.deepcopy(entry.schema_overrides)
+            detached.requires_env = list(entry.requires_env)
+            return detached
 
     def get_all_tool_names(self) -> List[str]:
         with self._lock:
@@ -263,7 +372,8 @@ class ToolRegistry:
 
     def get_tool_names_for_toolset(self, toolset: str) -> List[str]:
         with self._lock:
-            return sorted(e.name for e in self._tools.values() if e.toolset == toolset)
+            target = self._resolve_toolset(toolset)
+            return sorted(e.name for e in self._tools.values() if e.toolset == target)
 
     def get_tool_to_toolset_map(self) -> Dict[str, str]:
         with self._lock:
@@ -271,37 +381,52 @@ class ToolRegistry:
 
     def register_toolset_alias(self, alias: str, toolset: str) -> None:
         with self._lock:
+            if alias == toolset:
+                raise ValueError("toolset alias cannot refer to itself")
+            previous = self._toolset_aliases.get(alias)
             self._toolset_aliases[alias] = toolset
+            if self._resolve_toolset(alias) is None:
+                if previous is None:
+                    self._toolset_aliases.pop(alias)
+                else:
+                    self._toolset_aliases[alias] = previous
+                raise ValueError("toolset alias cycle")
             self._generation += 1
 
     def get_toolset_alias_target(self, alias: str) -> Optional[str]:
         with self._lock:
             return self._toolset_aliases.get(alias)
 
-    def is_toolset_available(self, toolset: str) -> bool:
+    def _resolve_toolset(self, toolset: str) -> Optional[str]:
         with self._lock:
-            check = self._toolset_checks.get(toolset)
-        if not check:
-            return True
-        try:
-            if not all(os.environ.get(name) for name in self._required_env_for_toolset(toolset)):
-                return False
-            return bool(_check_fn_cached(check))
-        except Exception:
-            return False
+            seen: Set[str] = set()
+            while toolset in self._toolset_aliases:
+                if toolset in seen:
+                    return None
+                seen.add(toolset)
+                toolset = self._toolset_aliases[toolset]
+            return toolset
 
-    def _required_env_for_toolset(self, toolset: str) -> List[str]:
+    def _entry_available(self, entry: ToolEntry) -> bool:
+        disabled = _disabled_toolsets()
+        if disabled is None:
+            return False
+        if any(self._resolve_toolset(name) == entry.toolset for name in disabled):
+            return False
+        if any(not get_env(key) for key in entry.requires_env):
+            return False
+        return entry.check_fn is None or _check_fn_cached(entry.check_fn)
+
+    def is_toolset_available(self, toolset: str) -> bool:
+        """A toolset is usable when at least one current member is usable."""
+        target = self._resolve_toolset(toolset)
         with self._lock:
-            return sorted({name for entry in self._tools.values()
-                           if entry.toolset == toolset for name in entry.requires_env})
+            entries = [entry for entry in self._tools.values() if entry.toolset == target]
+        return any(self._entry_available(entry) for entry in entries)
 
     def is_tool_available(self, name: str) -> bool:
         entry = self.get_entry(name)
-        if entry is None:
-            return False
-        if any(not os.environ.get(key) for key in entry.requires_env):
-            return False
-        return not entry.check_fn or _check_fn_cached(entry.check_fn)
+        return entry is not None and self._entry_available(entry)
 
     # -- schema retrieval ---------------------------------------------------
 
@@ -309,17 +434,17 @@ class ToolRegistry:
         """Return OpenAI-format tool schemas for the requested tool names."""
         result = []
         with self._lock:
-            snapshot = {e.name: e for e in self._tools.values()}
+            snapshot = {name: self.get_entry(name) for name in self._tools}
 
         for name in sorted(tool_names):
             entry = snapshot.get(name)
             if not entry:
                 continue
-            if not self.is_tool_available(name):
+            if not self._entry_available(entry):
                 if not quiet:
                     logger.debug("Tool %s unavailable (check failed)", name)
                 continue
-            schema_with_name = {**entry.schema, "name": entry.name}
+            schema_with_name = {**copy.deepcopy(entry.schema), "name": entry.name}
             if entry.schema_overrides:
                 schema_with_name.update(entry.schema_overrides)
             schema_with_name["description"] = entry.description
@@ -340,10 +465,10 @@ class ToolRegistry:
         """Execute a tool handler by name, returning a JSON string."""
         entry = self.get_entry(name)
         if not entry:
-            return format_tool_error(ToolNotFoundError(f"Unknown tool: {name}"), name)
+            return _registry_error(ToolNotFoundError(f"Unknown tool: {name}"), name)
         try:
-            if not self.is_tool_available(name):
-                return format_tool_error(ToolExecutionError(
+            if not self._entry_available(entry):
+                return _registry_error(ToolExecutionError(
                     f"Tool unavailable: {name}"), name)
             # Registry governance metadata must never leak into business
             # handlers, which conventionally accept only ``args``.
@@ -360,12 +485,14 @@ class ToolRegistry:
                         "approval": decision.to_dict(),
                     }, ensure_ascii=False)
             result = entry.handler(args, **kwargs)
-            if entry.max_result_size_chars and isinstance(result, str) and len(result) > entry.max_result_size_chars:
-                result = result[:entry.max_result_size_chars] + "\n[tool result truncated by registry]"
-            return result
+            if inspect.isawaitable(result):
+                if inspect.iscoroutine(result):
+                    result.close()
+                raise ToolExecutionError("Handler returned an awaitable to synchronous dispatch")
+            return limit_result(result, entry.max_result_size_chars)
         except Exception as exc:
             logger.exception("Tool %s dispatch error: %s", name, exc)
-            return format_tool_error(ToolExecutionError(str(exc)), name)
+            return _registry_error(ToolExecutionError(str(exc)), name)
         finally:
             if entry.requires_approval:
                 consume_one_shot_grant(name)

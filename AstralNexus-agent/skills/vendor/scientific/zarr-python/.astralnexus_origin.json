@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/zarr-python/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/zarr-python/SKILL.md",
+  "name": "scientific:zarr-python",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "1edaabfc3fc618d4c3a16bd70c589c039a3cb3a26683f02bca0ccc140d3c9c4d",
+    "references/api_reference.md": "cae3f3d04560d7443694c2ddc6d8ec845932f66bdf8a4288cd1da6559eaf6b23",
+    "references/chunking_and_compression.md": "f35187bf6584171b800e5bdeae474e7c3680969c717fa77fbe8d76852d440843",
+    "references/integration.md": "7eb3df9e64673cb8cc8cd991980e20138add108541d5fe3224710f01777ee62c",
+    "references/performance_and_patterns.md": "39e1887400b3f5f7d912293ded8d78fa33ab2a6de9bc765cb5da15d4223f72fd",
+    "references/review.md": "2760cdb7cc1d5b621655f92ffb090fc40c08320cfcf8454ec867696d43218a92",
+    "references/storage_backends.md": "7bdb667451cef86a94a996b6331cec3cd7e4b421da833805cd6bdb4362750272",
+    "references/v3_migration.md": "b1016328d4a83b414fa12381201aa4fde7f2c4147b8774aafb2405b7fbbafc3c",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

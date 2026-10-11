@@ -1,0 +1,14 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-java/skills/azure-ai-agents-persistent-java/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-java/skills/azure-ai-agents-persistent-java/SKILL.md",
+  "name": "microsoft:azure-ai-agents-persistent-java",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "02ddb9920cf6432b1bac4ff90564365878a1b7341cda4afa989e795458e6978c",
+    "references/examples.md": "93e4bdca6f4c48825d123b643ad351e05dacf8a2ff2faf25e700fa925456f317",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

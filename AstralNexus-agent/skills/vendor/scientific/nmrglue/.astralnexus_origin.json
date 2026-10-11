@@ -1,0 +1,16 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/nmrglue/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/nmrglue/SKILL.md",
+  "name": "scientific:nmrglue",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "358b5a5d64d20092e8631aeb8f4a06f11634a9fdeb8c594a93e6c1282b04b10b",
+    "assets/processing.json": "127f6796efaf47a8349f1061c01f31202b34fe20fd4baba13d4f4dc8982feb1b",
+    "references/acquisition-and-validation.md": "0d220724cff854d39aeabdab4fa20ae7b9c73f38fe7a1aa653082985e9fae736",
+    "scripts/process_1d.py": "8268bd1b0b445c373e4d105faae6485dee1b41506d09cec9cd7ba8c307e6c81d",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

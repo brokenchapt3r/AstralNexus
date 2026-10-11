@@ -1,0 +1,27 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/protocolsio-integration/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/protocolsio-integration/SKILL.md",
+  "name": "scientific:protocolsio-integration",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "4439249ba8cd35a8507463f8be84db511abc23daa00be3f892c47d847d2aeda5",
+    "assets/protocol-snapshot.schema.json": "ce4b4a13bbbab7e96f2e8048afd2d55fef916b6ed70156d4f3b9962f01b360c4",
+    "references/additional_features.md": "0555eadb168f027af951c23149f3e7f478172438f5ca0fc12b1fe968161177e4",
+    "references/authentication.md": "266835e7ed8453500b25e10bf1a174234babf4be3b47a3f856b0809d2caba46f",
+    "references/discussions.md": "0d56b48fa7a537680ffbfe23658cbc7cf92594ceb9a61b747d425736d0985a3e",
+    "references/file_manager.md": "d35a37ee35f1ba62a76c34d0cef100556f3ef70ab91a21ff9a7f1ffc7f2c0231",
+    "references/protocols_api.md": "e354f4cf23b2d933b9bd211d233c5cab6d084fe8af176e4f8e5c1d8ec1268792",
+    "references/workspaces.md": "b0667735e5e389f918281727f9c52f89dd8be89a753c0ecbdb01997d5521c2bc",
+    "scripts/pagination_helper.py": "90bb406939f562223c91306738a1abf57c06a2d3933272a77a881f53ec696d41",
+    "scripts/plan_write_request.py": "d95cbfd6aff26da5337f0d4a3b10e6a7293dce87f164269e5c5127e927659601",
+    "scripts/protocols_read.py": "f31f6531e9974bdcd35886f76d0996bad109f123d520a59100072cc4ac57fb25",
+    "scripts/validate_auth_config.py": "fb3e49f7bda0f38889f79fc198232e19d3dda8bea3ea843670d508d1202eef95",
+    "scripts/validate_protocol_json.py": "817837d3c3a55013487e5fdee84dc49cc8fbf8486e15cfa08010e39133e63ca6",
+    "scripts/_common.py": "16198664bfec4862e1044e5c9132084ceb7703e3f8b5236ac6942451fb80b9c9",
+    "scripts/__init__.py": "9a90481692132a90b81854de4e6380dee81e7769b5adb57ffde2cd9cb36abcf2",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

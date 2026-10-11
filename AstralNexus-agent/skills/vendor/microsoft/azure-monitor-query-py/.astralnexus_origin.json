@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-monitor-query-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-monitor-query-py/SKILL.md",
+  "name": "microsoft:azure-monitor-query-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "02a36d349fa9ce1b194f032975ad82cd04d95598059f6d14902872162688edbd",
+    "references/capabilities.md": "34bae8188f7a80b55d852633f95e86e30448386e4003b8a4ecdb444670abbc16",
+    "references/non-hero-scenarios.md": "0a34c80f2b7525a4ec0d504701e8b075cb630121c83c9b4761b82e8ad0f91e5b",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

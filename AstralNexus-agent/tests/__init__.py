@@ -5,21 +5,21 @@ import unittest
 # Import test modules - only import modules that actually exist
 # to avoid pytest collection failures
 try:
-    from tests.test_task_graph import TestTaskGraph
+    from .test_task_graph import TestTaskGraph
     _has_task_graph = True
 except ImportError:
     _has_task_graph = False
 
 try:
-    from tests.test_router import TestRouter
+    from .test_router import TestRouter
     _has_router = True
 except ImportError:
     _has_router = False
 
 # Note: Other test modules (test_memory, test_resource_scheduler, etc.)
 # are not yet implemented. Add them here when created:
-# from tests.test_memory import TestMemoryFederation
-# from tests.test_resource_scheduler import TestResourceScheduler
+# from .test_memory import TestMemoryFederation
+# from .test_resource_scheduler import TestResourceScheduler
 # ... etc.
 
 

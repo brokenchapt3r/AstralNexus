@@ -1,0 +1,16 @@
+{
+  "repo": "trailofbits/skills",
+  "commit": "82fe8226252622fa807643bdca1710901198553a",
+  "source_path": "plugins/trailmark/skills/audit-augmentation/SKILL.md",
+  "source_url": "https://github.com/trailofbits/skills/blob/82fe8226252622fa807643bdca1710901198553a/plugins/trailmark/skills/audit-augmentation/SKILL.md",
+  "name": "trailofbits:audit-augmentation",
+  "namespace": "trailofbits",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "164ab881bfc63e77c782cfc6b67b2bb6887695425d3654c6c4d498004392b1f7",
+    "agents/openai.yaml": "74c9300c455544a458ff6c4ec6f6409af1acfb1a2319b1eeef02044c72210aa5",
+    "assets/trail-of-bits-mark.svg": "4bf74c789b38dcf6ad762c136b6832363d27ae19fbaa9a18ec18d66ecce6ca05",
+    "references/formats.md": "6cd3a692beab075ecf8aff4a2f3b5bfb25372b16be2ac796eb23b9881667ab0d",
+    "UPSTREAM-LICENSE": "7abe19ec9bb73b36141b999b861d24ad855e808bafe0f81e84cce28556f6c297"
+  }
+}

@@ -87,6 +87,7 @@ class RunProgressReporter:
             self.last_event_at = now
             node_id = str(event.get("node_id") or "")
 
+            node: _NodeProgress | None
             if event_type == "task.received":
                 self.phase = "任务接收"
             elif event_type == "planning.started":
@@ -418,7 +419,9 @@ class RunProgressReporter:
 
     def _safe_sink(self, event: dict[str, Any]) -> None:
         try:
-            self.sink(dict(event))
+            sink = self.sink
+            if sink is not None:
+                sink(dict(event))
         except Exception:
             return
 

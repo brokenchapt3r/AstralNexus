@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-ai-translation-document-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-ai-translation-document-py/SKILL.md",
+  "name": "microsoft:azure-ai-translation-document-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "6dd015ac34065253ff022f579a3c5af02aed4e495a587895acbe7a33f1c8205d",
+    "references/capabilities.md": "97f6b6c08edfa43b336d10e897b65c1c4e21b45adb40c40b1988d1e63073f5b2",
+    "references/non-hero-scenarios.md": "72f8fd3bc91b42aafec125c3d0e17964368de338d0b98d09f015de2f8e15de59",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

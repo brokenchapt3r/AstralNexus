@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/pydantic-models-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/pydantic-models-py/SKILL.md",
+  "name": "microsoft:pydantic-models-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "a0d914a4de405961e793895e027c43f34ef9306dc544de14ed5d17570c01a315",
+    "assets/template.py": "bc589a21973eeca69d8f0cf08bca4671af01dec0bac2c0f1738f445392104ab3",
+    "references/capabilities.md": "058b0c69796b409f2e8aa174f7fc3978c078eabdd9f2a2e0534a40d9ed824ba1",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

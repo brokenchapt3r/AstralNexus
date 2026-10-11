@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/bulk-rnaseq/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/bulk-rnaseq/SKILL.md",
+  "name": "scientific:bulk-rnaseq",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "e945e970268505368e20d9ddc0c135de469e86626d67565ae9047fb05f70cdbf",
+    "references/counts-and-handoff.md": "1e2583f8a8906e6e7739f71ebe2486b4c2e0e89718bc7dfdf51875e6bab79d39",
+    "references/design-and-qc.md": "fd416ee212c785b6ab5e242000e651780ba9a268869b1c82624474b5a6e1c236",
+    "references/upstream-manual.md": "02b53631e73c916889e34c80392d85687dd60c93bc143385071970dd6e83d9aa",
+    "references/upstream-nfcore.md": "d4c4fc8e8e5d199175af51fa571605179811a92c1e8293687e81c95ebe44001f",
+    "scripts/build_counts_matrix.py": "76b79c1426ae4c90c143b6b8a04a04d72cfd1f2c90cfeab56a655820776eda84",
+    "scripts/validate_samplesheet.py": "de46d3ea873b272fdb1aa8f54512d23ff5e1f0f147f9ccc3f6bbe0eb72ef5c4a",
+    "scripts/_tabular.py": "6f6f5e58a3fe870197e24d24c74eb033eee16145d74517388f69961a658c80dc",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

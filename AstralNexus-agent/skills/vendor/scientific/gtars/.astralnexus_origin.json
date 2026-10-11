@@ -1,0 +1,27 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/gtars/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/gtars/SKILL.md",
+  "name": "scientific:gtars",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "c3586bcfa1e8d89a2abb23d74496d41e68daec5e7a8af6cefb9080a0ed469161",
+    "references/cli.md": "283fe599ead858f9e6c8e43bf7083cd545d55865fd0b9f1d3287d6fb10f8ed08",
+    "references/coverage.md": "11eb4671cee717b1768c3efef1fd4eee1978d8ecc0506f195e99bc6408045a96",
+    "references/overlap.md": "be3f6af18d554f5a6fcbf1d073825aa4d3fd132c1bfa7fdf347a9e78a595cb54",
+    "references/python-api.md": "0a546b43334e8667f1be1c349b3fe262002725d031678924b2394b6a9094038d",
+    "references/refget.md": "b9cbb899ba9de6379136ef30e3c4bcdb8ca6d94f65b6c27ea6444aa800fd268c",
+    "references/tokenizers.md": "52391fac7bcee48d64cb9458893c8c0797a3a8eac511f0b0860be770cbf87b1e",
+    "scripts/artifact_inspector.py": "fb05c91bd3c2fddf238ddaf44342e9117251c476404c5bd8412d793d63714603",
+    "scripts/bed_validator.py": "1ab6f216a7a3047a8b0612990e7485dfe147c96a14d7c54153bde0f7ee47e791",
+    "scripts/coverage_preflight.py": "021d6eb1fe29e42d84e0b9d40f3fc101789ebaa020bc3788564132801957c9fc",
+    "scripts/execution_plan.py": "b7d3fce77d3f199098fed08f4daf45151f2634bfb9d0b128a84c4defa64d1e8f",
+    "scripts/refget_digest_plan.py": "c804bfa7796c6b8a39a73928a9dde274df6073ccce4d7c2aab7f57725d3dd299",
+    "scripts/tokenizer_manifest.py": "87dec07c6d2e0daec5568e953da78beea1170e21521a041122bc71db7f522c05",
+    "scripts/_common.py": "d6972b81f9897407741be59714aa2f3c69736095008f78b83896bac2c5f7172f",
+    "scripts/__init__.py": "ad3f0f0e13877aa22ac08ee94dca3c1a353a0c43b9a6e516a653698881e6970d",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

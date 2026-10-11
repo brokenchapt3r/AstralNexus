@@ -1,0 +1,18 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/rowan/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/rowan/SKILL.md",
+  "name": "scientific:rowan",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "d631f00ae0f9325aa58912bb571b7eb43bc42c553498e4c97f4d65a1683c8599",
+    "references/access_and_pricing.md": "17509f5c4f9de6830297ac6d7a58e1f6eaa0eee5cf55e3c21f8db7f4bed720a3",
+    "references/batch_and_webhooks.md": "23db22ce9b76acd18b1fae33137f42ad9f8a85729ea3f5d2ac608cc37a82bd4e",
+    "references/end_to_end_example.md": "5e83a545e024878216aec81e5a7a875be2268c51ce4386a5900fed53d5343995",
+    "references/troubleshooting.md": "8b1840d7ce5652014bac3e78c31a3fd77117f46a5aaf208c031afe11fa52759c",
+    "references/workflow_catalog.md": "eb3c5ccbefa809dcaaabfcf17531087243dc2634fc4f9f1ba5a9f862d95e8f40",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

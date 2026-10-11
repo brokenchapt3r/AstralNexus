@@ -1,0 +1,14 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-java/skills/azure-ai-vision-imageanalysis-java/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-java/skills/azure-ai-vision-imageanalysis-java/SKILL.md",
+  "name": "microsoft:azure-ai-vision-imageanalysis-java",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "ea209e06fc0dc906227ed226f6ea7a73c2352ae0aac251c9e1f30bbc0455ae37",
+    "references/examples.md": "63ae8aa36a41e956d5721fba66fee1d0c14eaca2210984cd09cdef4b207aa2c3",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

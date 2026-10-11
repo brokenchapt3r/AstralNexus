@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-mgmt-botservice-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-mgmt-botservice-py/SKILL.md",
+  "name": "microsoft:azure-mgmt-botservice-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "39f0df196360a96e17b32f32481c696943e1176f19e8ec1f8de4942299db82c2",
+    "references/capabilities.md": "4b58e52b13d3ddf96e2df47c7b6cef7f137940bba0a414cc10eea457c7d3167b",
+    "references/non-hero-scenarios.md": "69056c37c243e48b74cf50558793c5b9a36b07bcde5056aeba65b812bafa27f7",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

@@ -141,7 +141,7 @@ class SessionResetManager:
 
     def _cleanup_archives(self, session_id: str) -> List[str]:
         """Clean expired conversation archives per policy."""
-        cleaned = []
+        cleaned: list[str] = []
         archive_dir = self.home_dir / "conversation_archives" / session_id
         if not archive_dir.exists():
             return cleaned
@@ -222,7 +222,7 @@ class SessionResetManager:
 
     def get_stats(self) -> Dict[str, Any]:
         with self._lock:
-            actions = {}
+            actions: dict[str, int] = {}
             for r in self._reset_history:
                 actions[r.action] = actions.get(r.action, 0) + 1
             return {

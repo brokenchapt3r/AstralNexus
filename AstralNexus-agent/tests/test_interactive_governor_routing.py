@@ -97,8 +97,8 @@ def test_active_run_converts_new_governed_work_to_requirement_change(tmp_path: P
 class ControllerStub:
     def __init__(self, decision: InteractiveRouteDecision):
         self.decision = decision
-        self.started = []
-        self.injected = []
+        self.started: list[tuple[str, object]] = []
+        self.injected: list[str] = []
 
     def set_event_callback(self, callback):
         self.callback = callback
@@ -129,7 +129,7 @@ def test_interactive_boundary_starts_governed_run() -> None:
         needs_verification=True,
         reasoning="complex",
     ))
-    history = []
+    history: list[dict] = []
 
     consumed = _govern_interactive_turn(
         "构建并测试一个服务",

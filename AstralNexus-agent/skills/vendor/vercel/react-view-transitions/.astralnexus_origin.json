@@ -1,0 +1,21 @@
+{
+  "repo": "vercel-labs/agent-skills",
+  "commit": "063bee94c3f4df8453406c830b0a7df0f2860278",
+  "source_path": "skills/react-view-transitions/SKILL.md",
+  "source_url": "https://github.com/vercel-labs/agent-skills/blob/063bee94c3f4df8453406c830b0a7df0f2860278/skills/react-view-transitions/SKILL.md",
+  "name": "vercel:react-view-transitions",
+  "namespace": "vercel",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "AGENTS.md": "83fd29aec273cf4318a4f428ed2725f2cd3b6adbd76640e495c31f0a2521c702",
+    "metadata.json": "b1a5ae09f3904dc83dab79f518d033bd98f1e2f55caabfdb5beeeaaf0ca5e4c2",
+    "README.md": "aba31b4ac31c1b13d2a8054179604abd4498b0d7324746635ff0e3b0aea9d608",
+    "SKILL.md": "1520343c8814c972fee001cac6d6185976d6eb3f4edcac33afe95c10f3b3228b",
+    "references/css-recipes.md": "f4a5b92a7aad6befd2779e498ab04311277f179b240d2170f0a68a1444024d51",
+    "references/implementation.md": "87687de5fa2f775a6b5134ee02863ebede9ee6bc42ea8ed99bd53aa5325e78f4",
+    "references/nextjs.md": "f926a645d5e4c62fcc2d5832be0f3ad048f2ee1d17f8476324e2bc407e4b3a07",
+    "references/patterns.md": "da24d7f37c7e6b8ecbcf05525ef613d8f5be94655c233d6fa62833c8a746604f",
+    "references/troubleshooting.md": "aa6811d276dcf06dcc9aba90d1e11e1d0a29146604bf7c89a9e93a6fa8883c7a",
+    "UPSTREAM-README.md": "7c02f64b08fc6c4eef03c01d64f3e2ed478193ccfcbd14edba379abe23304651"
+  }
+}

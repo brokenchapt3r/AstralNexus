@@ -1,0 +1,17 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/agent-framework-azure-ai-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/agent-framework-azure-ai-py/SKILL.md",
+  "name": "microsoft:agent-framework-azure-ai-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "d79a8fefd6753474846e72b926437d7bbcddef5cd3f4fb89fb7c03f38ac4434e",
+    "references/advanced.md": "668490db8d62ffcd5a75ab657a96d1b2986d1811626c1975a3b8217e428a1282",
+    "references/mcp.md": "bf8a6075f84f1496200b64692c555dfcd6ff62cc57ae81694ec4427cad461907",
+    "references/threads.md": "8e83cb3f805747e04c257b04ae3667fa1cba07182fbb76bba3127f61d88b422b",
+    "references/tools.md": "a9f45871f4fdbdd7097afd3e47a7ab13590ab044e41ce6d74a64fa56cab54155",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/pacsomatic/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/pacsomatic/SKILL.md",
+  "name": "scientific:pacsomatic",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "config.yaml": "c8a88b938fee1f4ddae7c01ee49426fb1c168b71e22dddc2bb85b96bfe1bd3c5",
+    "LICENSE": "bd75c6ca96dbf29c56c1735066bbb7e2898a19701a8e5cd674bd46b27451b64c",
+    "SKILL.md": "5425319387beb29684ae5148cba33bd3a6c4306651ba574d47c76a8dc390d45d",
+    "references/agent-playbook.md": "e57f8d5b5fb87102ca06889edbf39da6375794aac540d3b2d8c35f8b1d7e8b4e",
+    "references/config-and-output.md": "6a8e29b8b1337834d438ee9db1c21da06274c3f5205ba57d02d4e7e1775c8b5e",
+    "references/pacsomatic_guide.md": "1e274439b7ee61ad15a81e72bd60549fd1c416bd6cca9d7442b3a79907b9bca5",
+    "scripts/run_pacsomatic.py": "853ad31703bf8a71183ae461909c874441a73ef0a165105d29e82bbfee60ee6f",
+    "UPSTREAM-LICENSE": "bd75c6ca96dbf29c56c1735066bbb7e2898a19701a8e5cd674bd46b27451b64c"
+  }
+}

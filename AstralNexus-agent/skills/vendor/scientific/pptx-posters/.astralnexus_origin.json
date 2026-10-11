@@ -1,0 +1,33 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/pptx-posters/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/pptx-posters/SKILL.md",
+  "name": "scientific:pptx-posters",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "bb4923ec520ac5175f837e75c8b600344cc1eb71490b1fa9c809ac65e64f1fb9",
+    "assets/generation_dependencies.json": "49a5cfa05452a2f0705564403bc2a5112715c9930d6e2bc7ccd5f6a739719a94",
+    "assets/poster_manifest_template.json": "89a90c38b843132c303844d311a525eade912a746e800ff933513f31b6e17930",
+    "assets/poster_quality_checklist.md": "80652cf483e62b806fe93a72a62350532f9b60b4bdcb91f0f5cfb5b55f9b90e3",
+    "references/manifest_spec.md": "e0cfd7cff23044eac88778250b405d90c82b52877eda8ad6ac3b33edb5d2d16c",
+    "references/poster_content_guide.md": "dea961f67f1da228da3deb873770f61780789108183450d84f93078d40884a63",
+    "references/poster_design_principles.md": "7fac4022b656ad9dc529a7a9fc192b88818db7217798941fbb1a4ca3beb6ed4c",
+    "references/poster_layout_design.md": "1de74eb36dad66918b625861406f0d939d6c50a2c03035f1e6c53481412310de",
+    "references/pptx_security.md": "a349556e4be4db69153a3ca6a00a1cd8212b218e5d38b0861929cb2be9fd2fed",
+    "references/security_validation.md": "7816362599697b0e01d4b01861711d6a212d1d09d358282c272d856f12632f00",
+    "references/source_ledger.md": "95f151df546050a949b5364d145227da0030bfb97abcb40b41a4a17ca1658deb",
+    "scripts/check_layout.py": "d49588b8c9658abe3e621b2ddbbf9fd7253e3b2f0e01185eb145a1c8d23d9d5b",
+    "scripts/check_palette.py": "f9bfc91cfc9c95461acb6c7ade5c4cf60fa76ebf2e2cdd818ed4b9a13ced6b32",
+    "scripts/generate_poster.py": "b8ce6011c1a17191b62f73e2563e2b2d65f85d74a91c9b62650fa43b0f42b34c",
+    "scripts/inspect_pptx.py": "76b504075af984436db03b7d093cc80a373c3388c993cda7c4a2be4668aebafc",
+    "scripts/inventory_images.py": "07c6df85ca9f05510224c4e976b344d46a218d1843d9f31196adae31d975ed82",
+    "scripts/plan_export.py": "e428f3b29b584898508cf1571a5515155c603b5b3d5276be5c92de23a1237e86",
+    "scripts/validate_manifest.py": "e888bc04fca0e326091e6be509fa31d9b5097127aaf42bb045aa337320237c33",
+    "scripts/_common.py": "9e3ccb3dd3ad34802a3b79f0c5b12d7c82f32fa7513bf3a7d340707f3ed0846c",
+    "scripts/_manifest.py": "14188676f811c23cadaecf85ec9fc2c27f21b22ba9bd35a82480ad9f4253940c",
+    "scripts/_pptx.py": "7c350c4aa56db63ae2789c499ad8b48a037a0847d4d0408adfe99a0054ad0394",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

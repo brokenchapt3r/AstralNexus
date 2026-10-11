@@ -1,0 +1,29 @@
+{
+  "repo": "deepseek-ai/deepseek-harness",
+  "commit": "5badb15009ae1756c3afe0ae0cef1faafc290ccc",
+  "source_path": "packages/preset/agent-preset/skills/cordis-plugin-development/SKILL.md",
+  "source_url": "https://github.com/deepseek-ai/deepseek-harness/blob/5badb15009ae1756c3afe0ae0cef1faafc290ccc/packages/preset/agent-preset/skills/cordis-plugin-development/SKILL.md",
+  "name": "dsh:cordis-plugin-development",
+  "namespace": "dsh",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "83561b4d4fed0dd8051b3e998c6f567a5676a43b7321eecd12c255f4c0478ecf",
+    "references/host-plugin.md": "1d5b6ee648b5dd04462fb29075167a5dc570a8f4fd162b3c94ad40a78f2f627a",
+    "references/mcp-bundle.md": "944b431411ba50582d690f03aa239044556d7a1395d50d3db69cff3920f61ff3",
+    "references/practices.md": "e41e15e6062b6e382dd500f066bde5e458142d2ecccfb4655fdffbdc41c8f7ae",
+    "references/ui-plugin.md": "830a1710af97e3930ba5f29062e46ff78f7be3337995fbb20e85867f80339e23",
+    "references/user-actions.md": "ecc7f1226536584d781af8f1f9dee30d7262943dada67bfd997eb7902b34a9be",
+    "references/verification.md": "a28f7b91d0ec4592533360d11fd8a65dc2f103058e2ebf2f7e1497ad90afa9e2",
+    "templates/decoration/client.js": "bb17be70ae65f05d2cb26dd18f54448d706a89a1ba4da7ee3fe46ed46ac89f69",
+    "templates/decoration/cordis.patch.yml": "542639675b704bbdfa7c6694011c6e57d05c403e4499baa35731902a9063e7fc",
+    "templates/decoration/icon.svg": "4adcba5c2950e778c213101265820e287ed6b6248ba58e22840eef7690960935",
+    "templates/decoration/index.js": "87edbe4014ee569545ade02f7aa1915f2d2135ffebad84016a247d4542d6f39a",
+    "templates/decoration/package.json": "08a8d23db9b417c706bd57084b99781631a95f9fd556558da0a3920ac7fa7690",
+    "templates/decoration/locale/en.json": "38e7b64efc9c510ac98199baf79c5195560e7ab222692c27dacd0b4aaababa20",
+    "templates/mcp/cordis.patch.yml": "9a828bb02bd1aa07a6f873d823b725e85279b7ddf4bebbba40aa391ac501e9b5",
+    "templates/mcp/icon.svg": "3afa45f14c22ab9f88075411708861bc35fc54bcffd0cbed7c508d2b4a0f6d1a",
+    "templates/mcp/package.json": "592eb1cc8b7072ab06ca96afefefe444a9dfb519877a225a076966aae37082cc",
+    "templates/mcp/locale/en.json": "3f78c51e20992541807f3cd2686b742dfd8d17d284845d5c75e781e85c444b82",
+    "UPSTREAM-LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+  }
+}

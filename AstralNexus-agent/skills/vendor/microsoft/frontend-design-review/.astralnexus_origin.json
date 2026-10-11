@@ -1,0 +1,17 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/skills/frontend-design-review/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/skills/frontend-design-review/SKILL.md",
+  "name": "microsoft:frontend-design-review",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "639b68cdc6f9b4cdd66a111851555afee2eb82d4de37bf9cbad3be845bb00c2d",
+    "references/pattern-examples.md": "072f2a647de304d5e777b9cdfd48e4bc3ec26a822dd6145995f8a9f7c197e8f2",
+    "references/quick-checklist.md": "8043fd995ae8d10cdf1b387d856d2c63ef962758c088cc5873405a8bed3fd1ab",
+    "references/review-output-format.md": "0735f13a4eff99ff1745564ba07d8fd3c263894b464320608e9604207702e3f4",
+    "references/review-type-modifiers.md": "a8e2347d41954640c2f1aba14bd04baed91696fd5a6854d4d84735a358191c59",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

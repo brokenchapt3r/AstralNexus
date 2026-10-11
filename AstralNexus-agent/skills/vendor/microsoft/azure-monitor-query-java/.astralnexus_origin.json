@@ -1,0 +1,14 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-java/skills/azure-monitor-query-java/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-java/skills/azure-monitor-query-java/SKILL.md",
+  "name": "microsoft:azure-monitor-query-java",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "924066d2c6056b8e528fc8b7654b91646c4c37717dd10a96e7545fe244733a06",
+    "references/examples.md": "3e61a7983db87e90b23c6aab3bb7ab5e1dbcdb8a33a4227832e9bd82e51571ab",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/microsoft-foundry/models/deploy-model/customize/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/microsoft-foundry/models/deploy-model/customize/SKILL.md",
+  "name": "microsoft:customize",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "EXAMPLES.md": "f1476b98fe34a8a4e414703f674ed497f2182267810218911035fc3a55bb104f",
+    "SKILL.md": "d0a25090ffc3e139ff2eaeca5f814a83aa61d596571d267f6a7ad534c153ba68",
+    "references/customize-guides.md": "28132d05c5db1f40618d74e6cde43bcab241c97d6f6e15d8866f61481b26b2a0",
+    "references/customize-workflow.md": "9b7881474c34d46b58678bc6c88e9254248cedd4c177ab83b61d04d8f83b06f6",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

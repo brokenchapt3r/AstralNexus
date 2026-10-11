@@ -1,0 +1,20 @@
+{
+  "repo": "huggingface/skills",
+  "commit": "ca0325bb20b2d0a1b2efa893670c4c72f79e707b",
+  "source_path": "skills/transformers-js/SKILL.md",
+  "source_url": "https://github.com/huggingface/skills/blob/ca0325bb20b2d0a1b2efa893670c4c72f79e707b/skills/transformers-js/SKILL.md",
+  "name": "huggingface:transformers-js",
+  "namespace": "huggingface",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "241ef15a39acbdf1d610acab683c0f76500d7c021c9c0303e6bb2c751ac3d395",
+    "references/CACHE.md": "8f71ede1889bb16fcc3ef62aa803dc721a77a92fbfbdd5f1ab0c818db86f0c37",
+    "references/CONFIGURATION.md": "095273cf0d43faa3005eaa399411cdc04e48a1408888c026d43ce1f948bb6f6f",
+    "references/EXAMPLES.md": "3ba8931d4ef306f3942d338488153c928b426460efc5810f8c5bd8fbffe64d1c",
+    "references/MODEL_ARCHITECTURES.md": "5c2a5d83d9ba5826cc3a34ab99870692de215d7dfc9810e5af8188c8eab10c2b",
+    "references/MODEL_REGISTRY.md": "1baca18045eaeb09249e34a01abf0599f7e37e48cfcd877eeab12b22b93245b2",
+    "references/PIPELINE_OPTIONS.md": "808fcd24e24e29f0d5fb4abda5922ad0189ee7429c53fea2dff0a06e39007526",
+    "references/TEXT_GENERATION.md": "84382abc32a02ac96b8ceee989cef56b87ed8ab20328114e3de188de4cbf5c00",
+    "UPSTREAM-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}

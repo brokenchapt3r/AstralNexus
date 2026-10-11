@@ -1,0 +1,28 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/azure-compliance/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/azure-compliance/SKILL.md",
+  "name": "microsoft:azure-compliance",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "f5ef52fa1c810d80ffb89d1dd0cc427f43f88849a6aa32fd7a6ee358e8d1eef4",
+    "references/auth-best-practices.md": "34f6fe88e2b5819c1a0f24aa3930a060d9504fee68ea4b363f0912a78daa5396",
+    "references/azqr-recommendations.md": "3f3630229cbca3a7734a1c7a0b3e8d6631ce16233a24ae2488dd34ef118a8051",
+    "references/azqr-remediation-patterns.md": "30380928a7932ec44efc026002aa313abe9df0642623eb70b72a9c4969be8244",
+    "references/azure-keyvault-expiration-audit.md": "76bd37d85865a0e70990274f7c153456f748d193e3c041a7481f295e3cde9cf4",
+    "references/azure-quick-review.md": "abf2578f34b6bafa53d32794e71b09980a8223cbfe535f1e6d06bb0f3b8a0f63",
+    "references/azure-resource-graph.md": "e98e39c01ac8965fffc15d46dc2d96c18b2c435a55d2e1a9076f3232cdaea944",
+    "references/sdk/azure-keyvault-certificates-rust.md": "c2b1ea2c7a6370c7692e517aa35cbc981dbb6195dcbdf66d05a11db658ebd56a",
+    "references/sdk/azure-keyvault-keys-rust.md": "002349d349accc158aa5022a30066cc1ac8a82bc3a32bb9f26d87bd1d2999f4f",
+    "references/sdk/azure-keyvault-keys-ts.md": "fc843c39d6f2f80c0af8e18ae75f12b1fdf7ff8848f4c87dfc50a2e8f90cb507",
+    "references/sdk/azure-keyvault-py.md": "27f350103a537eeeadf57e88dc6159283313d1e01c803d2f547f4bc4047035bc",
+    "references/sdk/azure-keyvault-secrets-rust.md": "e1839f9399e3b45fb459312b17f6d4ba3f0879463ba143abf273f48a3cefc5f2",
+    "references/sdk/azure-keyvault-secrets-ts.md": "1245bf5652e351813290fee3e6d244b16aeba20f7c91ac62163a39743c4edccf",
+    "references/sdk/azure-security-keyvault-keys-dotnet.md": "fb5051f172d728a48e751365d20bd2c381a5c39167056aa3fc83f00f60a88064",
+    "references/sdk/azure-security-keyvault-keys-java.md": "3f6582cb928e399b79ed2a52e0ba0543cb039895175d640c91c4a6965095b541",
+    "references/sdk/azure-security-keyvault-secrets-java.md": "692aed42d62a19492b9b85717b9133a6e9e24f1d4684c1a796218a1c7b59e8af",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

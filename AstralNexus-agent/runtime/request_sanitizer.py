@@ -12,6 +12,7 @@ import json
 import os
 from typing import Any
 
+from AstralNexus.core.token_utils import estimate_provider_input_tokens
 from AstralNexus.tools.schema_sanitizer import sanitize_schema
 
 
@@ -30,9 +31,8 @@ def _text(value: Any) -> str:
 
 
 def _token_estimate(chars: int) -> int:
-    # Chinese and JSON are usually denser than English prose. This is a
-    # safety estimate, not a billing value.
-    return max(0, (chars + 2) // 3)
+    # Keep request admission aligned with ContextCompressor's trigger estimate.
+    return estimate_provider_input_tokens(chars)
 
 
 def sanitize_messages(messages: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -110,7 +110,11 @@ def sanitize_tools(tools: list[dict[str, Any]] | None, *, max_chars: int) -> tup
 
 
 def prepare_request(messages: list[dict[str, Any]], tools: list[dict[str, Any]] | None = None) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
-    cleaned_messages = sanitize_messages(messages)
+    # Doc 17 第二批: project superseded write bodies out of the REQUEST COPY
+    # before sanitization; originals (conversation/receipts/ledger) stay intact.
+    from .request_budget import elide_superseded_write_bodies
+    projected_messages, budget_stats = elide_superseded_write_bodies(messages)
+    cleaned_messages = sanitize_messages(projected_messages)
     input_budget = max(1_000, int(os.environ.get("ASTRALNEXUS_INPUT_TOKEN_BUDGET", DEFAULT_INPUT_BUDGET)))
     tool_budget = max(1_000, int(os.environ.get("ASTRALNEXUS_TOOL_SCHEMA_CHAR_BUDGET", DEFAULT_TOOL_BUDGET)))
     cleaned_tools, tool_stats = sanitize_tools(tools, max_chars=tool_budget)
@@ -124,5 +128,5 @@ def prepare_request(messages: list[dict[str, Any]], tools: list[dict[str, Any]] 
         )
     stats = {"message_count": len(cleaned_messages), "message_chars": message_chars,
              "tool_chars": tool_chars, "estimated_input_tokens": estimated_tokens,
-             **tool_stats}
+             **tool_stats, **budget_stats}
     return cleaned_messages, cleaned_tools, stats

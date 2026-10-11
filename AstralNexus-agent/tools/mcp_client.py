@@ -12,6 +12,7 @@ import json
 import subprocess
 import threading
 import time
+import queue
 from urllib.request import Request, urlopen
 from typing import Any, Callable, Dict, List, Optional, Protocol
 
@@ -26,11 +27,23 @@ class MCPTransport(Protocol):
     def close(self) -> None: ...
 
 
+class WebSocketConnection(Protocol):
+    def send(self, data: str) -> object: ...
+
+    def recv(self) -> str | bytes: ...
+
+    def close(self) -> None: ...
+
+
 class StdioTransport:
     """Line-delimited JSON-RPC transport for a local MCP server process."""
 
-    def __init__(self, command: list[str]):
+    def __init__(self, command: list[str], *, timeout: float = 60,
+                 cwd: str | None = None, env: Dict[str, str] | None = None):
         self.command = command
+        self.timeout = timeout
+        self.cwd = cwd
+        self.env = env
         self._lock = threading.RLock()
         self._process: subprocess.Popen | None = None
         self.reconnect()
@@ -46,23 +59,67 @@ class StdioTransport:
                 text=True,
                 encoding="utf-8",
                 bufsize=1,
+                creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0),
+                cwd=self.cwd,
+                env=self.env,
             )
+            self._incoming: queue.Queue[str | None] = queue.Queue()
+            process, incoming = self._process, self._incoming
+            def read_output() -> None:
+                assert process.stdout is not None
+                try:
+                    for line in process.stdout:
+                        incoming.put(line)
+                finally:
+                    incoming.put(None)
+            threading.Thread(target=read_output, daemon=True).start()
+
+    def notify(self, method: str, params: Dict[str, Any] | None = None) -> None:
+        with self._lock:
+            if self._process is None or self._process.poll() is not None:
+                raise ConnectionError('MCP stdio server is not running')
+            assert self._process.stdin is not None
+            self._process.stdin.write(json.dumps({'jsonrpc': '2.0', 'method': method, 'params': params or {}}) + '\n')
+            self._process.stdin.flush()
 
     def send(self, message: Dict[str, Any]) -> Dict[str, Any]:
         with self._lock:
             if self._process is None or self._process.poll() is not None:
-                self.reconnect()
+                raise ConnectionError('MCP stdio connection lost; explicitly reconnect and initialize')
             assert self._process is not None and self._process.stdin and self._process.stdout
             self._process.stdin.write(json.dumps(message, ensure_ascii=False) + "\n")
             self._process.stdin.flush()
-            line = self._process.stdout.readline()
-            if not line:
-                raise ConnectionError("MCP stdio server closed its output")
-            return json.loads(line)
+            deadline = time.monotonic() + self.timeout
+            while True:
+                try:
+                    line = self._incoming.get(timeout=max(0, deadline - time.monotonic()))
+                except queue.Empty as exc:
+                    self.close()
+                    raise TimeoutError('MCP response deadline exceeded') from exc
+                if line is None:
+                    raise ConnectionError("MCP stdio server closed its output")
+                response = json.loads(line)
+                if 'method' in response:
+                    if 'id' in response:
+                        self._process.stdin.write(json.dumps({'jsonrpc': '2.0', 'id': response['id'],
+                            'error': {'code': -32601, 'message': 'Client capability not supported'}}) + '\n')
+                        self._process.stdin.flush()
+                    continue  # Progress/log notifications are not RPC results.
+                if response.get('id') != message.get('id'):
+                    raise ConnectionError('MCP response ID mismatch')
+                return response
 
     def close(self) -> None:
         if self._process is not None:
             self._process.terminate()
+            try:
+                self._process.wait(timeout=3)
+            except subprocess.TimeoutExpired:
+                self._process.kill()
+                self._process.wait(timeout=3)
+            for stream in (self._process.stdin, self._process.stdout):
+                if stream is not None:
+                    stream.close()
             self._process = None
 
 
@@ -137,7 +194,7 @@ class WebSocketTransport:
         self.reconnect_attempts = reconnect_attempts
         self.reconnect_delay = reconnect_delay
         self.heartbeat_interval = heartbeat_interval
-        self._ws = None
+        self._ws: WebSocketConnection | None = None
         self._lock = threading.RLock()
         self._pending: Dict[int, Dict[str, Any]] = {}
         self._notifications: List[Dict[str, Any]] = []
@@ -162,7 +219,7 @@ class WebSocketTransport:
                             f"WebSocket MCP reconnect failed after {self.reconnect_attempts} attempts"
                         )
 
-    def _connect(self):
+    def _connect(self) -> WebSocketConnection:
         """Establish WebSocket connection using websocket-client or stdlib."""
         try:
             import websocket
@@ -237,23 +294,23 @@ class WebSocketTransport:
                     else:
                         self._notifications.append(resp)
             except Exception:
-                self._ws = None
+                self._close_ws()
                 raise
 
     def _ws_send(self, data: str) -> None:
-        if hasattr(self._ws, "send"):
-            self._ws.send(data)
-        else:
-            self._ws.send_text(data)
+        ws = self._ws
+        if ws is None:
+            raise ConnectionError("MCP WebSocket is not connected")
+        ws.send(data)
 
     def _ws_recv(self) -> str:
-        if hasattr(self._ws, "recv"):
-            result = self._ws.recv()
-            if isinstance(result, bytes):
-                return result.decode("utf-8")
-            return result
-        else:
-            return self._ws.recv_text()
+        ws = self._ws
+        if ws is None:
+            raise ConnectionError("MCP WebSocket is not connected")
+        result = ws.recv()
+        if isinstance(result, bytes):
+            return result.decode("utf-8")
+        return result
 
     def get_notifications(self) -> List[Dict[str, Any]]:
         with self._lock:
@@ -374,11 +431,15 @@ class MCPClient:
 
     def initialize(self, client_info: Dict[str, Any]) -> Dict[str, Any]:
         self.client_info = dict(client_info)
-        return self._request("initialize", {
+        result = self._request("initialize", {
             "protocolVersion": "2025-06-18",
             "capabilities": {},
             "clientInfo": client_info,
         })
+        notify = getattr(self.transport, 'notify', None)
+        if callable(notify):
+            notify('notifications/initialized')
+        return result
 
     def list_tools(self) -> Dict[str, Any]:
         if not self.session.authorize("tools/list") and "mcp" not in self.session.capabilities:
@@ -392,6 +453,9 @@ class MCPClient:
 
     def close(self) -> None:
         self.sessions.close(self.session.session_id, owner=self.session.owner)
+        close = getattr(self.transport, 'close', None)
+        if callable(close):
+            close()
 
     def heartbeat(self) -> Dict[str, Any]:
         return self._request("ping")

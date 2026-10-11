@@ -1,0 +1,14 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/adaptyv/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/adaptyv/SKILL.md",
+  "name": "scientific:adaptyv",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "5de115067c118609dc096f9d582c687fdf331150e3f21c54eedb2ade24d12846",
+    "references/api-endpoints.md": "d613b0f33425ac4a2703c47c58773525cf5e850c0fde04f7d6eb0a7bddc3bdf3",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

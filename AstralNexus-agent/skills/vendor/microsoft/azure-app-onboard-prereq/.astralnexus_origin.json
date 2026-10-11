@@ -1,0 +1,28 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/azure-app-onboard-prereq/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/azure-app-onboard-prereq/SKILL.md",
+  "name": "microsoft:azure-app-onboard-prereq",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "2d2ef1ec0cec686f511eae7004890e44969845c79598b6f9c4a264956a0361f8",
+    "references/build-check.md": "cd9f1ad5c09ed043a06d37d9eac48c6f1fbfb0307f07dbab2f1bd1aefd60bd29",
+    "references/cloud-sdk-migration.md": "f9bf62edbd0fe9a0b3cf3836c3a646af5b43522b53a3fc3bfea361e729dfc4da",
+    "references/completeness-check.md": "38c650084cc75b3ef16fdda6355e57d0dbd80835d20c05606d8f3db2c5304d60",
+    "references/component-mapping.md": "506220c1a2aa9a6bc3fe733a2b2f5dc6aa72e3da8b2823fcc62fe1ea34d58158",
+    "references/dependency-compatibility.md": "ef220bc5beaa118f93c93e9f78e318d4fe2c8e4984a068fc472408646c8dc808",
+    "references/deployability-check.md": "de85c9475a7c75055988ad098fd4b128ccb74eaf6b7e4d58b664fec2b357ebce",
+    "references/prereq-artifacts.md": "156966f4513314e6f181cb4206742ccba01e04e462d71257651deb383ed81531",
+    "references/prereq-schemas.ts": "68ab054880cdd5405aee434fba81bd7ed2dc34a06235876db5219bdc0dd647e1",
+    "references/readiness-gate.md": "4bc149e36a9c0490ed8b590e2251088a44b3177665a0e9bff8fc137304aa0af5",
+    "references/remediation-protocol.md": "f214373fcb01eda159ebf60e92f83b200e88c8240d66e529637796d7fe418ad5",
+    "references/session-protocol.md": "2ce773528f34ee3027135e8ba3b9af1f408dd66b3d471523e1ba31350de77199",
+    "references/session-schemas.ts": "490334a85094a57c479c5667411ee05c35e5a873401326ce75626140068bdd0a",
+    "references/subagent-starter-scaffold.md": "d943a7b3e4d04deaaa22637f5f7c911fa4a8bbf001ba54ee59035445e7f299a4",
+    "references/subscription-resolution.md": "3430f1ddf59a0c124e97e8e1841d67fb4961a40073ccf01260e688f0c06fa78b",
+    "references/zero-code-path.md": "5979cfd1a7a76d36b290621cebfb13cb6815a8cc5996edbe72f22c5edffbf443",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

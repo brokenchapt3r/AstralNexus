@@ -23,6 +23,7 @@ def test_sqlite_store_lists_and_updates_runs(tmp_path: Path):
 
 def test_sqlite_store_facts_round_trip_and_seed_memory(tmp_path: Path):
     store = SQLiteTaskGraphStore(tmp_path / "graph.sqlite")
+    store.create_run("durable-facts", "fact persistence", [])
     store.add_fact(Fact(
         fact_id="fact-1",
         text="SQLite is the durable fact source.",
@@ -30,9 +31,9 @@ def test_sqlite_store_facts_round_trip_and_seed_memory(tmp_path: Path):
         confidence=0.95,
         recorded_at="2026-07-29T00:00:00+00:00",
         metadata={"kind": "observed"},
-    ))
+    ), run_id="durable-facts")
 
-    with Orchestrator(run_dir=tmp_path / "run", graph_store=store) as orchestrator:
+    with Orchestrator(run_dir=tmp_path / "run", graph_store=store, run_id="durable-facts") as orchestrator:
         facts = orchestrator.memory_federation.get_all_facts()
 
     assert len(facts) == 1

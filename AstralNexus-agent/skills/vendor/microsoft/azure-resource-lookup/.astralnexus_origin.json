@@ -1,0 +1,14 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/azure-resource-lookup/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/azure-resource-lookup/SKILL.md",
+  "name": "microsoft:azure-resource-lookup",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "932029f4b71ec59213a538549d8a30b5bb9161479a6b2cd6d2cd6a1e9be224e1",
+    "references/azure-resource-graph.md": "0cb6fb725c75d5a9958ffecf110bb4b092ab83601a1e7f53b85f295176c48c9a",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-monitor-opentelemetry-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-monitor-opentelemetry-py/SKILL.md",
+  "name": "microsoft:azure-monitor-opentelemetry-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "5f3da3c631f76fe4a52a159c8eb055e54819eb6fd5269803b4106773a70f98fd",
+    "references/capabilities.md": "a77bb9ba1d178a1543689630c2ec13a66597b51224513dc2c50eef38f4e48f37",
+    "references/non-hero-scenarios.md": "69fb0a7db8cb2d54955df1175e6363b252ce06d3b99382054488565b5966953d",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

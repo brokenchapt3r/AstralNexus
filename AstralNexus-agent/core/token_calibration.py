@@ -11,7 +11,27 @@ from __future__ import annotations
 
 import time
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, TypedDict
+
+
+class TokenMeasurementData(TypedDict):
+    timestamp: float
+    estimated_tokens: int
+    real_prompt_tokens: int
+    real_completion_tokens: int
+    model: str
+    correlation: float
+
+
+class TokenCalibrationData(TypedDict):
+    model: str
+    sample_count: int
+    mean_correlation: float
+    min_correlation: float
+    max_correlation: float
+    std_dev: float
+    correction_factor: float
+    last_updated: float
 
 
 @dataclass
@@ -24,7 +44,7 @@ class TokenMeasurement:
     model: str
     correlation: float  # estimated / real_prompt_tokens
 
-    def to_dict(self) -> Dict[str, float]:
+    def to_dict(self) -> TokenMeasurementData:
         return {
             "timestamp": self.timestamp,
             "estimated_tokens": self.estimated_tokens,
@@ -56,7 +76,7 @@ class TokenCalibrationStats:
             return 1.0 / self.mean_correlation
         return 1.0
 
-    def to_dict(self) -> Dict[str, float]:
+    def to_dict(self) -> TokenCalibrationData:
         return {
             "model": self.model,
             "sample_count": self.sample_count,
@@ -161,9 +181,9 @@ class TokenCalibrator:
     def get_all_stats(self) -> Dict[str, TokenCalibrationStats]:
         """Get calibration statistics for all models."""
         return {
-            model: self.get_stats(model)
+            model: stats
             for model in self._measurements.keys()
-            if self.get_stats(model) is not None
+            if (stats := self.get_stats(model)) is not None
         }
 
     def reset(self, model: Optional[str] = None) -> None:

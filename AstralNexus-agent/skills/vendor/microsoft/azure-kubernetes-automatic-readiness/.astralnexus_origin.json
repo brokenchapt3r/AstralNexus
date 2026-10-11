@@ -1,0 +1,17 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/azure-kubernetes/azure-kubernetes-automatic-readiness/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/azure-kubernetes/azure-kubernetes-automatic-readiness/SKILL.md",
+  "name": "microsoft:azure-kubernetes-automatic-readiness",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "bc3ebaf7b6b8148d322e4155e9a490ad01985265deaa4d669ef0dfd1b19d4d43",
+    "references/common-fixes.md": "6197c9fdbc3efcc26ef8984803b8a1bcc464443a7b84420c8800e884602befd0",
+    "references/constraint-spec-v1.yaml": "51f67a31dab3fcc1bd3b1d82200439451c8f7acf93a4418d423a0c637c874bda",
+    "references/mcp-integration.md": "77da9a1a84ba0e48e91c3798772d97791227235b9eeda2fca8cfb9f523eb0737",
+    "references/migration-guide-summary.md": "81e555345e5b75c7bb9107e97f8a26206a02510378f05e0c1012d4df828244ce",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

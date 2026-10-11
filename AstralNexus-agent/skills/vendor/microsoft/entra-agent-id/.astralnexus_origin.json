@@ -1,0 +1,19 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/entra-agent-id/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/entra-agent-id/SKILL.md",
+  "name": "microsoft:entra-agent-id",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "ae56d3b42323dd25ed5ab7988fad3810487d3fbadfcb348b086182305d4e0784",
+    "references/known-limitations.md": "afd31e03e69d73f09e9e59e1c24128d270fe0f68c358c547d629f17e3b65c3ae",
+    "references/oauth2-token-flow.md": "0e3b591a474fa998109ad965d72f6664de127a01fe56e92ef0a8fb7f379227ec",
+    "references/obo-blueprint-setup.md": "83aa3208ced36e82d899a68ad39aef94e95747d04ffea6a653cc6f5cb8e834e2",
+    "references/runtime-token-exchange.md": "a25ed3eadc700253f17f360d83fc7cc0e798c839d5102f0b55198f3a88a6e960",
+    "references/sdk-sidecar-deployment.md": "30a606488ef0a989521332cac3473eefd8b6ab3f2db2a3413f99013e9fc60fde",
+    "references/sdk-sidecar.md": "ca709e93fe7cbffe2251102edeb4edb9046d7dc71da693cd7cc486909024ebc7",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

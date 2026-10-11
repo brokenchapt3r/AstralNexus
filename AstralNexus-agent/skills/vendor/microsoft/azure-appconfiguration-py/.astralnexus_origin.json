@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-appconfiguration-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-appconfiguration-py/SKILL.md",
+  "name": "microsoft:azure-appconfiguration-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "4ac56c42ed0d45adf51f98f4b4150290ab98c22c2f5b7fe367f8746d48e670f3",
+    "references/capabilities.md": "a9250ecce4162dfea5a4afa20bba138b69e8e9ebbfee88ded452cffae80bd98b",
+    "references/non-hero-scenarios.md": "b3f8c49acab1f099f06da52684490aec1eef6921bcfded032c443c83ee277343",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

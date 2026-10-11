@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/cirq/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/cirq/SKILL.md",
+  "name": "scientific:cirq",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "6ab4c57fd133d21013ac0a8cfdbb2235dcc461d6fc82445693ea475c3d5d6bc1",
+    "references/building.md": "74171648fe77d9e917f0ce8883575439b0a8bcd4f35e59996e4dd176c1c521e4",
+    "references/experiments.md": "c5f90d9de156ea93c32eff191b1bb526bf282c7ec6cc53e723bc722778b0e538",
+    "references/hardware.md": "34a05865707bedaa1b63e14b052f190d1a1d57ea588db2d0698487bec7bc66b1",
+    "references/noise.md": "3ac62117f56980e3741d76c204dd44893b1ae5c524de0b593486a827d166a4d2",
+    "references/review.md": "a8822f8f8afd52d1b4b661c5b66f38f1f1fcd74b49812b1890424165286b46d7",
+    "references/simulation.md": "70a3ab8f6fc192f2f883e26a27d9248b60a04eae30a852527aebe9040eed7ef8",
+    "references/transformation.md": "6255d29e6f7c8d62f3e9027004b94e9eb490b1c9cc44f06e8c0a7f4f54b5605f",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

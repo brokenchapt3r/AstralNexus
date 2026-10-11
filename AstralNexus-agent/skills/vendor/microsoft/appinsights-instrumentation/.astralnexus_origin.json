@@ -1,0 +1,25 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/appinsights-instrumentation/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/appinsights-instrumentation/SKILL.md",
+  "name": "microsoft:appinsights-instrumentation",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "LICENSE.txt": "cacacf3e9ede21a9237d9fdef6728ebe7a27d489f6df08cbf946f622ad9b834c",
+    "SKILL.md": "f46e9dd4d4bef33ca78b32980eb06d6667d1c68bf0c1690eef26ea90ca0ae4fa",
+    "examples/appinsights.bicep": "35793f28333b37b4639f866b2204a48eebcab343f0e52ab44128a618a28eaacb",
+    "references/aspnetcore.md": "29986d08a27b4d7a9086e89c1d56f9cc9b4e27bfd88ef65517f8bed641c7f636",
+    "references/auto.md": "8a0a447289e232dc54909017b4a490b46ca5fc1eb90099645eeb99b1b9a8a732",
+    "references/container-apps.md": "66a7eaa29c8257abb33c7637ce2500356515f434f0f0262b3764409c08e69aae",
+    "references/nodejs.md": "6b36d0a8a1d2bb64ce8d0e7d51ddaac282c7bf180124c988e2c956e3c467bc1a",
+    "references/python.md": "fa5785231dde00eaad3a6f141211dfe291e82a44a24163eca3f4a3285e6e1742",
+    "references/sdk/azure-monitor-opentelemetry-exporter-java.md": "f525e167b23bd98062600c9aa422df359a90342054f30cba1ef98642af3fb250",
+    "references/sdk/azure-monitor-opentelemetry-exporter-py.md": "4394ed04bcc4c99bc5f584fdccbdd08592c07d14ebebe37dee56488f457cbc1e",
+    "references/sdk/azure-monitor-opentelemetry-py.md": "2d8cab0440063297890e686c2f1cd58c3a21dc291937858abc915fb4a5740977",
+    "references/sdk/azure-monitor-opentelemetry-ts.md": "648599ce299edc3c765f4fc8daa356b9e90f71026a42682cff5da39641cae487",
+    "scripts/appinsights.ps1": "69e1ccdf00b138e9f7a245e8da1d28d0ac00112f2a6a05c76d4432cc16fe9919",
+    "UPSTREAM-LICENSE.txt": "cacacf3e9ede21a9237d9fdef6728ebe7a27d489f6df08cbf946f622ad9b834c"
+  }
+}

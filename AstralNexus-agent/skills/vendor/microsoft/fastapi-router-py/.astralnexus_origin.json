@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/fastapi-router-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/fastapi-router-py/SKILL.md",
+  "name": "microsoft:fastapi-router-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "a8c5911b2c67af768af99d0a1972e16c364ddd8194506d574ae90f375dca6bdf",
+    "assets/template.py": "07b9d0fcd49887f17109441bce7fa3aac872c1751a566355085ddc5c432cb96c",
+    "references/capabilities.md": "fce023b29fd31ca6d44e0f197f04a3e65af8e29e78355dfce1fbd1636b126a96",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

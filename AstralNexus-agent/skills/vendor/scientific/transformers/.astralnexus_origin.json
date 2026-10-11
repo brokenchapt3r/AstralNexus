@@ -1,0 +1,19 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/transformers/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/transformers/SKILL.md",
+  "name": "scientific:transformers",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "584d1c35d513f87616df9bcf7ddc8c48ab38cfbfad18d55c8481578d1c0d6f1a",
+    "references/generation.md": "86249b51bcbae468ba36ced4685f09b20282986413733d547f6bdec248fd5d5d",
+    "references/models.md": "b9926cc003e3c625ec1dc47a7058fc4a16611ad89c8a9f0d0a714e83a97f79ba",
+    "references/pipelines.md": "0319356fc1a14050072e5506ac0413921ac6a715b44fcebea3dbbbaf5dcdb2a5",
+    "references/review.md": "289bec219e4952e508a4ecd59dbacfd11b723471463fdcf03dc65d9eafc580cc",
+    "references/tokenizers.md": "a001db31cdcd78e596f9de9a0cbe1c758eb32d6e73d4b729ab6a7731d15c7434",
+    "references/training.md": "11388a58d8f2c8c22c85a871e787273251a8799647f814f6d96c77fb132a2666",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

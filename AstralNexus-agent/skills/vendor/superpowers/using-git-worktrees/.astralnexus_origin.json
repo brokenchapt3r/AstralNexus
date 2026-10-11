@@ -1,0 +1,13 @@
+{
+  "repo": "obra/superpowers",
+  "commit": "8ca22dba9a94f28898bbce59f2537ff4d87c747d",
+  "source_path": "skills/using-git-worktrees/SKILL.md",
+  "source_url": "https://github.com/obra/superpowers/blob/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/using-git-worktrees/SKILL.md",
+  "name": "superpowers:using-git-worktrees",
+  "namespace": "superpowers",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "8cfb86f121269e8f7f12361e6795c4f6738828340e28964c9229d365666c9edd",
+    "UPSTREAM-LICENSE": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400"
+  }
+}

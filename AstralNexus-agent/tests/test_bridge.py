@@ -4,6 +4,7 @@ Validates the low-entropy communication protocol bridge (天枢方案书 §5.3).
 """
 
 from __future__ import annotations
+from AstralNexus.core.state_machine import TaskStatus
 
 import pytest
 
@@ -49,7 +50,7 @@ def sample_message() -> StructuredMessage:
     return StructuredMessage(
         node_id="T-001",
         role="coder",
-        status="result_submitted",
+        status=TaskStatus.RESULT_SUBMITTED,
         summary="排序算法实现完成",
         claims=[
             {"text": "代码已通过所有测试", "evidence": ["test.py"], "confidence": 0.95},
@@ -212,7 +213,7 @@ class TestMessageToContext:
         msg = StructuredMessage(
             node_id="T-001",
             role="researcher",
-            status="result_submitted",
+            status=TaskStatus.RESULT_SUBMITTED,
             summary="研究结果",
             claims=[
                 {"text": "高置信度发现", "evidence": [], "confidence": 0.95},
@@ -228,7 +229,7 @@ class TestMessageToContext:
         msg = StructuredMessage(
             node_id="T-001",
             role="coder",
-            status="result_submitted",
+            status=TaskStatus.RESULT_SUBMITTED,
             summary="done",
             claims=[],
             metadata={"goal": "test"},

@@ -29,11 +29,25 @@ def sanitize_schema(schema: dict[str, Any]) -> dict[str, Any]:
             return [clean(item, depth + 1) for item in value[:32]]
         if not isinstance(value, dict):
             return value
-        result = {key: clean(item, depth + 1) for key, item in value.items()
-                  if key in _ALLOWED_KEYS}
+        result: dict[str, Any] = {}
+        for key, item in value.items():
+            if key not in _ALLOWED_KEYS:
+                continue
+            if key == "properties":
+                # Property names are user-defined identifiers, not JSON Schema
+                # keywords. Filter each property's schema, never its name.
+                result[key] = {
+                    name: clean(child, depth + 1)
+                    for name, child in item.items()
+                } if isinstance(item, dict) else {}
+            elif key in {"default", "examples", "enum"}:
+                # These contain instance data, not nested schemas.
+                result[key] = item
+            else:
+                result[key] = clean(item, depth + 1)
         if result.get("type") == "object":
             properties = result.get("properties")
-            result["properties"] = clean(properties if isinstance(properties, dict) else {}, depth + 1)
+            result["properties"] = properties if isinstance(properties, dict) else {}
             if "additionalProperties" not in result:
                 result["additionalProperties"] = False
             required = result.get("required")
@@ -46,4 +60,3 @@ def sanitize_schema(schema: dict[str, Any]) -> dict[str, Any]:
         normalized = {"type": "object", "properties": {"value": normalized}, "required": ["value"]}
     normalized.setdefault("properties", {})
     return normalized
-

@@ -39,3 +39,27 @@ def test_empty_user_message_is_rejected():
         assert "user message" in str(exc)
     else:
         raise AssertionError("empty user request was accepted")
+
+
+def test_wire_schema_preserves_parameter_names_through_repeated_preparation():
+    from AstralNexus.tools.schema_sanitizer import sanitize_schema
+    schema = {
+        "type": "object", "required": ["path", "options"],
+        "properties": {
+            "path": {"type": "string", "unsupported": True},
+            "options": {"type": "array", "items": {
+                "type": "object", "properties": {"encoding": {"type": "string"}},
+                "required": ["encoding"],
+            }},
+        },
+        "default": {"path": "receipt.json"},
+    }
+    expected = sanitize_schema(schema)
+    assert expected["properties"]["path"] == {"type": "string"}
+    assert expected["properties"]["options"]["items"]["properties"]["encoding"] == {"type": "string"}
+    assert expected["default"] == {"path": "receipt.json"}
+    tools = [{"type": "function", "function": {"name": "file_read", "parameters": schema}}]
+    messages = [{"role": "user", "content": "Read receipt.json"}]
+    for _ in range(3):
+        messages, tools, _ = prepare_request(messages, tools)
+        assert tools[0]["function"]["parameters"] == expected

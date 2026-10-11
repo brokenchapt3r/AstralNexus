@@ -1,0 +1,16 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-servicebus-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-servicebus-py/SKILL.md",
+  "name": "microsoft:azure-servicebus-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "6d1905fe12c4c84a3e4520ee6c03d21b205111b0c394c14e4a0d5bb322c94435",
+    "references/dead-letter.md": "9213e789c05b55575e9cce342aaabd1b65ec6dc8a1d5c4ca77720b7852dbd611",
+    "references/patterns.md": "5f046b927a52f311b9b6baec8af14eb74bfe4621c07554f1d2fb46a7990e883e",
+    "scripts/setup_servicebus.py": "5f982ff5bd7b7c1eef0cad121879c6351174f3caec3bcc8f4d8f4b8486175048",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

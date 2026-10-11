@@ -1,0 +1,28 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/azure-app-onboard/deploy/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/azure-app-onboard/deploy/SKILL.md",
+  "name": "microsoft:deploy",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "86b19f6b6a29773d1bceb7ea568bcec97be96fe8ad64a5798fc5036a5023b1b3",
+    "references/approval-gate-template.md": "ca0b2b5b86c0463f8bbb5972438013fe9a5237dd225953fb89e627769898e049",
+    "references/blocked-patterns.md": "e6b1604901a625d6784d8ef5f800ef9591e67eeae61dbdeb88d9c0a3d3ba73ea",
+    "references/code-deployment-appservice.md": "ca1c3fc7ed97c7aabc679eca8835767b6f53155b472df1134c126f58ea82f4fc",
+    "references/code-deployment-container-apps.md": "a7300c3ed2d9a044f0a8c9fca07593f35b0644251d3d3322b6117362d7db584c",
+    "references/code-deployment-swa.md": "3cf183ab4d1a788a9e063b335602755958225577db09d2783a10e4875c430c94",
+    "references/database-post-deploy.md": "227bd245c716c32ad201bcb7e3b6cbf130d2ab6c583fd7050f7166f833a7a8ad",
+    "references/deploy-checklist-template.md": "84dd7ad98d9194014fcb093f150ba53a800dfe83cbbbbefb5f67a661d63dca09",
+    "references/deploy-safety.md": "c7a9fc8669e8bd134488f816a3d499ade8e9e18dcc0e6fb3632422d4a723964c",
+    "references/deploy-schemas.ts": "32c37b488d8054601aecf18b03b4cf1982e51e85732d9ab2392bc29d7809ab5a",
+    "references/error-classification.md": "dbacfa7bb8674fb0c510ac260cc82268b12e1b08b72ccb3ac87d7730ae0dee4f",
+    "references/health-check-patterns.md": "d44b87ea191f3bd539cb083fafc1b7ed6fc268e85525f3fc69d3f6be53fd852a",
+    "references/mcp-tools.md": "6d5474a43c7aa0797bd1117ffa7cff0d14b0eb40f9fce58de26d92aca24a3b6e",
+    "references/portal-links.md": "3f2757e00183a785ad99fcc2c252e5e57d9e664e7bd1fa08a63f651d6f5d9f9e",
+    "references/preflight-checks.md": "108ff629c06825d48ec3b7eb73f2dd185216234f71da9dd54f441b359cc10e83",
+    "references/subagent-preflight.md": "0affd48076ec76a9665eb99ee9181698265c03936eb6bdf0d519023e4dbf4d01",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

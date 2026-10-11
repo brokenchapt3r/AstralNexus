@@ -1,0 +1,20 @@
+{
+  "repo": "huggingface/skills",
+  "commit": "ca0325bb20b2d0a1b2efa893670c4c72f79e707b",
+  "source_path": "skills/huggingface-tool-builder/SKILL.md",
+  "source_url": "https://github.com/huggingface/skills/blob/ca0325bb20b2d0a1b2efa893670c4c72f79e707b/skills/huggingface-tool-builder/SKILL.md",
+  "name": "huggingface:huggingface-tool-builder",
+  "namespace": "huggingface",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "2846b591259b134a5978073e4da477a06275d7a10893ce1383a0a3920c3ff1e1",
+    "references/baseline_hf_api.py": "f1b999d1e655881c3e601e7050501130aee4a6af6b8f4206510a30f4e32fb079",
+    "references/baseline_hf_api.sh": "e907072abecb84fadbc08fc5f6f970aedf04a22a06e6a0892a1ff1f8fb17dd6b",
+    "references/baseline_hf_api.tsx": "d96f939f974e64f22a167c54aa4687f711a8c765d8320eef6d556767cd07ca30",
+    "references/find_models_by_paper.sh": "4723961e173aaa5ac1f4a7196b06f1637768b9b73e992163586f0dd2bbe5e2d2",
+    "references/hf_enrich_models.sh": "bd30e29cf0c868a19c960264c25723b3fd26a031fcb71a432d0691dc051333f3",
+    "references/hf_model_card_frontmatter.sh": "32e3d372a8dba24a8065f2b2d641b1f3fd69c00f6259aa49e713e80a6310f94d",
+    "references/hf_model_papers_auth.sh": "8dc349a00091fab9f32df1acbe81f6ad39b6676d3bbdefe06497a5f7da7148df",
+    "UPSTREAM-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}

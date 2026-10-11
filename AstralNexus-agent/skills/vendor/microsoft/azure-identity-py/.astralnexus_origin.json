@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-identity-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-identity-py/SKILL.md",
+  "name": "microsoft:azure-identity-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "b10709c8cadc23134bfee415010f9f0292e39f06c216df3f3dd6fc826897414c",
+    "references/capabilities.md": "294c3cb8b688c5a435acfd5633ecea51cd07845363fc893fa29efcc418f597b0",
+    "references/non-hero-scenarios.md": "3c3fdd62c8a3bc43e71b7bd4010a51d8d2809b5458eb898426523e28466bbdd1",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

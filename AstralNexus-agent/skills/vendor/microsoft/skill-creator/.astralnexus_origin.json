@@ -1,0 +1,19 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/skills/skill-creator/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/skills/skill-creator/SKILL.md",
+  "name": "microsoft:skill-creator",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "15ce951aec071c813150e6794628664725c164223108792e15bd3db18e959da0",
+    "references/azure-sdk-patterns.md": "1be5f8b256d0c73defa2b3dfc88342018859ffeaeb77a320b440217703bd289a",
+    "references/output-patterns.md": "b9e4284e89c75d7b9eb3613130a6272ab531a60f0f22f4ccda12d67bf5d4f27c",
+    "references/workflows.md": "34b9b4fc5d40000b8042be8ca7b2365f16a735827402046a858c2c7854e140e1",
+    "scripts/init_skill.py": "0bba250b94caa4cb2b28b15dad26fdcf371aeda4c9797b8120e55c2e33e0c73c",
+    "scripts/package_skill.py": "b31fbcb3e362d5c5308e99255ff8e83cde3a513e0636953964a648494ca10931",
+    "scripts/quick_validate.py": "381ab2d3d1fd5ec32371016413063eff99d0d48c415747085c61517e967dbb87",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

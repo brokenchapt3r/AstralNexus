@@ -1,0 +1,17 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/arboreto/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/arboreto/SKILL.md",
+  "name": "scientific:arboreto",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "38ff6f24b8fd4a86e2a57ae7bb7669fe4ce401f7375efcc82a6c004f4c51d344",
+    "references/algorithms.md": "4fe3e34ac04d1a01017c5beb0a36626785aa99910baafa13d08cc3d49a4a5f15",
+    "references/basic_inference.md": "9a52ced456c30eb8ff8d59f0d3e1faa4446f7298aa56f83adeeeee18b974b7eb",
+    "references/distributed_computing.md": "e2cc1724aeb569cf3725b25e576e61f1baf962bffa170282387aebd7753e8476",
+    "scripts/basic_grn_inference.py": "830a0e474a83d7f8fe5acd465d75b0ca5eed49858dd8cbedd34113222fea7944",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

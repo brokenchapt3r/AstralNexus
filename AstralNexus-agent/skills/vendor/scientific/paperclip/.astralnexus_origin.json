@@ -1,0 +1,19 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/paperclip/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/paperclip/SKILL.md",
+  "name": "scientific:paperclip",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "4f6fc05346aefdf5685b11d6d34fbe5b9782fc5156d69702c00dd8c71bf63473",
+    "references/cli-reference.md": "a1cbbce454df57aea224185d7e5e1402bd4864f4c1d38438199e18044d73963b",
+    "references/installation.md": "b0ce9c46d95402030183a159dced52cce289cc49c2205d36b0bbc9e3d6244d9e",
+    "references/map-reduce.md": "f2ca2e32e802273d6fbb19f803842e81a4cfe6cff26f34d3f79e991a258f7c31",
+    "references/python-sdk.md": "5a87d7468e96ec5acb15efa8b15aa84bcb66c1207e5cb8a7c6d5cebda9dab258",
+    "references/repos-and-workspace.md": "b668989880b3e06a020c5d2103756f7e4d6a18a21b060305ab3930f43d33c2d9",
+    "references/search-and-retrieval.md": "2ae8353cb8050246cc4401b8c3095ae2457caa5c0393e3fb0a113d9367de509f",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

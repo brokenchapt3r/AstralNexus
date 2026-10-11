@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-keyvault-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-keyvault-py/SKILL.md",
+  "name": "microsoft:azure-keyvault-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "5300434b6d8025604bfb4e16514b27d1e380255f0a587c65d000cbdf59248ce1",
+    "references/capabilities.md": "46d0a786957f19e87e0e1ade56bd94e1e77cfb6db20421ad53438d80bbc58377",
+    "references/non-hero-scenarios.md": "1f2fb0a97eff30cbabe4e5af479e9edba42dc7517480b1a82a147652c3071359",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

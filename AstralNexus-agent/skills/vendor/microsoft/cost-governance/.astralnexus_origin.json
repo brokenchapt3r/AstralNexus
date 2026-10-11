@@ -1,0 +1,17 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-cost/skills/cost-governance/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-cost/skills/cost-governance/SKILL.md",
+  "name": "microsoft:cost-governance",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "4241add12fefc5e51afc1a925426dd5f7d3494e642753fedb03273a3f2fcd30a",
+    "references/budget-health.md": "030c325cea12c45a8639e4c4f3157c84290c0259f03b79c7a56b3b0376564744",
+    "references/budget-setup.md": "4979e9c1b8cc33cb7f7aac3c1b29e612c25f6a3d7d6271d57ad1d4ceba8aede9",
+    "references/guardrails.md": "72d1c6a57cb23294ad137325bec66f41bde4d6b8a267d9e9e33960e8bb303207",
+    "references/tool-fallback.md": "6e4183a2dac2ff0d8b64b2112713620c097f54b0311cc66e213fa27146fd0076",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

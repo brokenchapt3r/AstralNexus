@@ -1,0 +1,17 @@
+{
+  "repo": "huggingface/skills",
+  "commit": "ca0325bb20b2d0a1b2efa893670c4c72f79e707b",
+  "source_path": "skills/hf-cloud-sagemaker-iam-preflight/SKILL.md",
+  "source_url": "https://github.com/huggingface/skills/blob/ca0325bb20b2d0a1b2efa893670c4c72f79e707b/skills/hf-cloud-sagemaker-iam-preflight/SKILL.md",
+  "name": "huggingface:hf-cloud-sagemaker-iam-preflight",
+  "namespace": "huggingface",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "a4ff26c2af2c0ce82a4ab34c5cf5eadce5db4573ed2525745c4ee7b21f1773e4",
+    "references/minimum-permissions.json": "100c4dc345e69f5a7afc3104a17591d126ddff808a648cd3e84fd0a4054beb09",
+    "references/trust-policy.json": "bbc7c7b5775c8bb26d3e3d5eb4240d7e55f2d728a81c3b97ee42155f6a4746de",
+    "scripts/check_role.py": "567af89033ca686c8189302bc853b5c2ec0fc72d371ff86d0984a2de5541a962",
+    "scripts/create_role.py": "eb9e9b68f2f2020b9b87ec07fd862b5bb98b5e02bc2088f1194bffdc845a631a",
+    "UPSTREAM-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}

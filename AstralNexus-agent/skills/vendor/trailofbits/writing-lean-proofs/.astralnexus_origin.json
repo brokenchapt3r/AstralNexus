@@ -1,0 +1,21 @@
+{
+  "repo": "trailofbits/skills",
+  "commit": "82fe8226252622fa807643bdca1710901198553a",
+  "source_path": "plugins/writing-lean-proofs/skills/writing-lean-proofs/SKILL.md",
+  "source_url": "https://github.com/trailofbits/skills/blob/82fe8226252622fa807643bdca1710901198553a/plugins/writing-lean-proofs/skills/writing-lean-proofs/SKILL.md",
+  "name": "trailofbits:writing-lean-proofs",
+  "namespace": "trailofbits",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "fb2ad9c463ac5185a014892ce33202460b3423d64405024b95b534f0d3b4d3e0",
+    "references/anti-patterns.md": "58f1bc88b4882db7a606f606e61adf44b4cb08466e17687619561728e5e91ed3",
+    "references/library-design.md": "23310d7a0f1d7aef86d1c4e333ec97b5569b344bf9f26c61e958ca00d0f23f99",
+    "references/linting.md": "0ec7a48f8ffba4de4fe06d3eeb2202ca4c9a3be1bb738a33ada869afade48818",
+    "references/llm-techniques.md": "65e4b40ebb78075cc7d383716687983fbb99f2d44933af6f70797e3d3935e112",
+    "references/naming-conventions.md": "0b32766eff8f3ca2c4c72b20337be9ece046aad8e267f2d27b815412eadd7c6d",
+    "references/performance.md": "f108a3e8dc1882684759ddbbad0ca5a521c84a80493246256acc82d8250e395b",
+    "references/proof-style.md": "d631ddb9dc607229e025a53807e8dca63a9865f59e2f67b265d36888a0c39424",
+    "references/tactics.md": "68786c8dc7dc4ad0f0743717c72472efb6179d3f78cbbfc16a980e96a6d8db0e",
+    "UPSTREAM-LICENSE": "7abe19ec9bb73b36141b999b861d24ad855e808bafe0f81e84cce28556f6c297"
+  }
+}

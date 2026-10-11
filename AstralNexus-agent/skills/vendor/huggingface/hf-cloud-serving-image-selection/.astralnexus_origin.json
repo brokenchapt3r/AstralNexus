@@ -1,0 +1,15 @@
+{
+  "repo": "huggingface/skills",
+  "commit": "ca0325bb20b2d0a1b2efa893670c4c72f79e707b",
+  "source_path": "skills/hf-cloud-serving-image-selection/SKILL.md",
+  "source_url": "https://github.com/huggingface/skills/blob/ca0325bb20b2d0a1b2efa893670c4c72f79e707b/skills/hf-cloud-serving-image-selection/SKILL.md",
+  "name": "huggingface:hf-cloud-serving-image-selection",
+  "namespace": "huggingface",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "6af6adfe1cdcf7bcc061ee11e1e2cf88bae9fbb08bf79d16945ce748839c1d76",
+    "references/model-to-image.md": "49ab6db136a53c6336ded2b92619d8057eb7ed85e6baa9bb1cde8eb2f592318d",
+    "scripts/mirror_image.py": "994fb2ed93243114baa2c33ba4805565e1a4fda15d3d6b800e28f018bcb411de",
+    "UPSTREAM-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}

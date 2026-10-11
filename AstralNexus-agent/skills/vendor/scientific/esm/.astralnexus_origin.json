@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/esm/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/esm/SKILL.md",
+  "name": "scientific:esm",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "49da3c6f5c81359d48b7c0b4416a212e7106f777b4c7174b2b42ce0c02bd95f6",
+    "references/biohub-platform.md": "a2aad56b7801c393b8db4e0348dbdd121b7a43277a7f258237ae7b15e976c735",
+    "references/esm-c-api.md": "7d99506dc1fe931f1ad80dc6a07e80b5b5c8cd199b683c49da822606837e8444",
+    "references/esm3-api.md": "e279f167ef136a8b16e27687086a108e9f5785eb0330edaef78e96b84b505edf",
+    "references/forge-api.md": "5adf748a4b60b06fdb2236f2d473d2bd4d9ac4ab63d0bdf9e68e99cc7b7541ae",
+    "references/review.md": "a8685316dc695ac878bcb5c6d27730d989b6e8fe0748350de71e1c8edc7a391b",
+    "references/workflows.md": "8dfd67723fc2ad01aba912bb3522bcaa7706b315ffaf554337d477625f38c41d",
+    "scripts/esm_embeddings.py": "3047f16e784730fd730010e98d0ce5b02643958f2224109df1fe1ba9606c0ada",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

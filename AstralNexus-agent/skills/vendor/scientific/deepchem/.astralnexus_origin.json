@@ -1,0 +1,22 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/deepchem/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/deepchem/SKILL.md",
+  "name": "scientific:deepchem",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "2965735ee473cf70d63c6170f1c8867bd533539809d4535c162acacc07d0b17d",
+    "references/api_reference.md": "486d7070eba75919fb501389fff0df8394e10fcc27296d96ef6ab89fa24d1611",
+    "references/core_capabilities.md": "e9e808dd57b55c8d326f94ed2f7feddec0463f97d5f59f71fb5711daf312f555",
+    "references/review.md": "0934d78d899d47a6180b2f351d8843308d641fa3c0b13b264f87369c59baa845",
+    "references/typical_workflows.md": "3a072edc8b262ecf000ac665f6f59fa5354c26d71949433a07f43746889074c9",
+    "references/workflows.md": "327707341e5e4e18dfa6aee1e7860935c30ef56ba77653e07b01683dd3259c4a",
+    "scripts/graph_neural_network.py": "2f3be84ad1ded9a3cd2d55257f9ab31e77f2df4ca623186b5def07a43076694a",
+    "scripts/predict_solubility.py": "df8364ba832f7fe04cc401ef4fe3413714683fabdf7c8cf5f530a02c16b10c4b",
+    "scripts/transfer_learning.py": "7d1d866b6320f19177cd90ae9edde15e711d838cbfb23479afd9766551f52aee",
+    "scripts/_common.py": "61fb1c4ac183953eb08b163296e809295a7242349ada274f1db254efb7b43ac1",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

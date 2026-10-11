@@ -1,0 +1,14 @@
+{
+  "repo": "deepseek-ai/deepseek-harness",
+  "commit": "5badb15009ae1756c3afe0ae0cef1faafc290ccc",
+  "source_path": "packages/sandbox/sandbox-windows-acl/assets/diagnose-windows-sandbox-acl/SKILL.md",
+  "source_url": "https://github.com/deepseek-ai/deepseek-harness/blob/5badb15009ae1756c3afe0ae0cef1faafc290ccc/packages/sandbox/sandbox-windows-acl/assets/diagnose-windows-sandbox-acl/SKILL.md",
+  "name": "dsh:diagnose-windows-sandbox-acl",
+  "namespace": "dsh",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "9c616c78892daeaea864a9b2d6baaea91ff133cf83cde0b725c6caee2d4933cb",
+    "scripts/diagnose-windows-sandbox-acl.ps1": "adba89f3b10692302723d231d003cdf365311effaff996d32416f9531e3b63d9",
+    "UPSTREAM-LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+  }
+}

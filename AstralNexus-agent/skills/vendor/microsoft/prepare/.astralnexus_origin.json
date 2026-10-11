@@ -1,0 +1,25 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/azure-app-onboard/prepare/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/azure-app-onboard/prepare/SKILL.md",
+  "name": "microsoft:prepare",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "aec53f71f62ce668d72e77054a2ddeef2ec866afa6d68cec2b8e7497eac7e58a",
+    "references/deploy-strategy.md": "d7187f4c835de32af25da72c3cf7211a9163ffce478d1908880c3d0dca8aba45",
+    "references/mcp-tools.md": "0ba0aacdedd6da1e2f706ee8b11c38c6bf3bbcf7451c86f2cd6ae9ae856bb84c",
+    "references/naming-patterns.md": "df747fb9d3ab90181243d9cf88425ffc20d06f03558e6dbb1c14a398477ab5f1",
+    "references/prepare-schemas.ts": "903e00912e04f5764349d92f8ed460efcada7b5de64ce213c505bd25326b5a1c",
+    "references/pricing-guide-services.md": "1a4a4594b9032a46136d200d989408ba49c5e89c215495a974e19e6d6a9494b7",
+    "references/pricing-guide.md": "1000c4d89e090d954c42bf3abe31b13676bf493a4c7bc12269077cca95ce8d8f",
+    "references/service-mapping.md": "15f3723589af3af99bfa7ca20d5a6ebc2fcbd21129373428adfb549e8870a051",
+    "references/sku-matrix.md": "6c6f3d8c07978a230c833a9cd758cc536bdee68b4c8b6066b7aa6f01ea9934fb",
+    "references/sku-quota-validation.md": "13e469471317b395f25c841450842cf232158d35e05cc4c5593caf6435def14c",
+    "references/subagent-pricing.md": "26ade5773c8cbf9e391dea31fe62885e183885624b5530be8f23110b8ba406a9",
+    "references/subagent-quota.md": "cb1a9f14716955c494fda1b38665618154e0eb580e54948a47a0b6ec70985516",
+    "references/validation-rubric.md": "9f36164b9aa58fe3c4571cf8e375e7f67ab73490c6bb7afdadaf97a4ac09df56",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

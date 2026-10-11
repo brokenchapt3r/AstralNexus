@@ -1,0 +1,14 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-java/skills/azure-communication-callingserver-java/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-java/skills/azure-communication-callingserver-java/SKILL.md",
+  "name": "microsoft:azure-communication-callingserver-java",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "15e43981fbfcc9b9da3ca63e55a6953a5201626c7135fee578fc3224825440ea",
+    "references/examples.md": "6588c0ca75d41645f10111e96909f9b0b89770795a67963686e4f1c8a9f8112c",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

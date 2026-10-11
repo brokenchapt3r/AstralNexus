@@ -41,7 +41,7 @@ class AgentInstance:
     metadata: Dict[str, Any] = field(default_factory=dict)
     error_message: Optional[str] = None
     iteration_count: int = 0
-    token_usage: Dict[str, int] = field(default_factory=dict)
+    token_usage: Dict[str, int | float] = field(default_factory=dict)
 
     def transition(
         self,
@@ -250,7 +250,7 @@ class AgentLifecycleManager:
         agent_id: str,
         *,
         iteration_count: Optional[int] = None,
-        token_usage: Optional[Dict[str, int]] = None,
+        token_usage: Optional[Dict[str, int | float]] = None,
     ) -> bool:
         """Update agent metrics (iterations, token usage)."""
         with self._lock:
@@ -362,7 +362,7 @@ class AgentLifecycleManager:
         with self._lock:
             by_state: Dict[str, int] = {}
             by_role: Dict[str, int] = {}
-            total_tokens = 0
+            total_tokens: float = 0
 
             for agent in self.agents.values():
                 by_state[agent.state.value] = by_state.get(agent.state.value, 0) + 1
@@ -418,7 +418,7 @@ class AgentLifecycleManager:
         if not agent:
             return {"healthy": False, "reason": "agent not found"}
 
-        uptime = 0
+        uptime = 0.0
         if agent.started_at:
             start_ts = datetime.fromisoformat(agent.started_at).timestamp()
             uptime = time.time() - start_ts

@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-data-tables-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-data-tables-py/SKILL.md",
+  "name": "microsoft:azure-data-tables-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "e28e8908e2a19511abab4ede57bfb967e75dba99b92b242c97c0eb23d729cc7a",
+    "references/capabilities.md": "85f71185bb124f051c6c2213c12512155670d516a3270be35db032677d73e7c4",
+    "references/non-hero-scenarios.md": "33485310a13b17feab2f2d5e5be4cd48f6c287680a431334170dcbebb9b0682c",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

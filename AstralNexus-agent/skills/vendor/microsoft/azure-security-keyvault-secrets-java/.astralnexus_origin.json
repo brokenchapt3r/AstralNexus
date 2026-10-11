@@ -1,0 +1,14 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-java/skills/azure-security-keyvault-secrets-java/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-java/skills/azure-security-keyvault-secrets-java/SKILL.md",
+  "name": "microsoft:azure-security-keyvault-secrets-java",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "2684f5cb2ee3ee30f225451c6d0d99245b82d95ca10bb8897d3902a0819ebf17",
+    "references/examples.md": "8ff99554d7d79477be2711659aa142d1a1ae9f66dea8175799174063b3633f64",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

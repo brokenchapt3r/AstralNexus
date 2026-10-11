@@ -5,7 +5,7 @@ import json
 import os
 import shlex
 from pathlib import Path
-from typing import List, Optional
+from typing import Any, List, Optional
 
 
 def _default_home() -> Path:
@@ -47,15 +47,17 @@ def _args(**values):
 
 def _write_config_value(path: Path, key: str, value: str) -> None:
     import yaml
-    data = {}
+    data: dict[str, Any] = {}
     if path.exists():
         data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     if key == "model":
-        model = data.get("model") if isinstance(data.get("model"), dict) else {}
+        raw_model = data.get("model")
+        model = raw_model if isinstance(raw_model, dict) else {}
         model["default"] = value
         data["model"] = model
     elif key == "provider":
-        provider = data.get("provider") if isinstance(data.get("provider"), dict) else {}
+        raw_provider = data.get("provider")
+        provider = raw_provider if isinstance(raw_provider, dict) else {}
         provider["default"] = value
         data["provider"] = provider
     else:
@@ -96,6 +98,7 @@ class CommandDef:
 # Command registry
 COMMAND_REGISTRY: List[CommandDef] = [
     # Session commands
+    CommandDef("goal", "显式设置完成条件；最多继续8次，2次无进展停止", "Session", args_hint="<objective>", session_owned=True),
     CommandDef("new", "开始新的任务会话", "Session", aliases=("n",), args_hint="[goal]", session_owned=True),
     CommandDef("resume", "恢复之前的任务会话", "Session", aliases=("r",), args_hint="<session-id>", argparse_owned=True, session_owned=True),
     CommandDef("list", "列出最近的任务会话", "Session", aliases=("ls",)),
@@ -113,6 +116,7 @@ COMMAND_REGISTRY: List[CommandDef] = [
     CommandDef("stream", "流式调用当前模型", "Execution", args_hint="<prompt>", argparse_owned=True),
     CommandDef("eval", "运行评估基准", "Execution", args_hint="<benchmark>", argparse_owned=True),
     CommandDef("report", "生成报告", "Execution", args_hint="<run-id>", argparse_owned=True),
+    CommandDef("verify-delivery", "离线复验已有交付结果", "Execution", args_hint="<run-dir>", argparse_owned=True),
     CommandDef("dashboard", "启动仪表板", "Execution", args_hint="[run-id]", argparse_owned=True),
     
     # Fault injection commands
@@ -209,6 +213,7 @@ def _command_handlers() -> dict:
         "help": _handle_help,
         "version": _handle_version,
         "info": _handle_info,
+        "goal": _handle_goal,
         "new": _handle_new,
         "resume": _handle_resume,
         "status": _handle_status,
@@ -222,6 +227,7 @@ def _command_handlers() -> dict:
         "stream": _handle_stream,
         "eval": _handle_eval,
         "report": _handle_report,
+        "verify-delivery": _handle_verify_delivery,
         "dashboard": _handle_dashboard,
         "inject-fault": _handle_inject_fault,
         "inject-requirement": _handle_inject_requirement,
@@ -265,7 +271,7 @@ def _handle_help(args: List[str], **kwargs) -> int:
     print("\n可用命令:")
     print("=" * 60)
     
-    categories = {}
+    categories: dict[str, list[CommandDef]] = {}
     for cmd in COMMAND_REGISTRY:
         if cmd.category not in categories:
             categories[cmd.category] = []
@@ -458,6 +464,8 @@ def _handle_resume(args: List[str], *, home: Optional[Path] = None) -> int:
             model=None,
             provider=None,
             max_parallel=None,
+            user_resume=True,
+            authorization_source="interactive:/resume",
         ),
         home or _default_home(),
     )
@@ -610,6 +618,17 @@ def _handle_report(args: List[str], *, home: Optional[Path] = None) -> int:
     return cli_main._generate_report(_args(run_id=run_id, output=None), home or _default_home())
 
 
+def _handle_verify_delivery(args: List[str], *, home: Optional[Path] = None) -> int:
+    """离线复验已有交付结果。"""
+    if not args:
+        print("用法: /verify-delivery <run-dir>")
+        return 1
+    from AstralNexus.cli import main as cli_main
+    return cli_main._verify_existing_delivery(_args(
+        run_dir=args[0], candidate=None, output=None,
+    ))
+
+
 def _handle_dashboard(args: List[str], *, home: Optional[Path] = None) -> int:
     """启动仪表板"""
     run_id = args[0] if args else "latest"
@@ -683,3 +702,17 @@ def _handle_quit(args: List[str], **kwargs) -> int:
     """退出程序"""
     print("\n再见!")
     raise SystemExit(0)
+
+
+def _handle_goal(args: List[str], *, home: Optional[Path] = None) -> int:
+    if not args:
+        print("用法: /goal <完成条件>")
+        return 1
+    from AstralNexus.cli.session_controller import _InteractiveRunController
+    controller = _InteractiveRunController(home or _default_home())
+    if not controller.start_text("/goal " + " ".join(args)):
+        return 1
+    while controller.status()["running"]:
+        if controller.thread:
+            controller.thread.join(timeout=0.2)
+    return int(controller.last_result or 0)

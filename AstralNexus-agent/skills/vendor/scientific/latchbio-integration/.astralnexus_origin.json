@@ -1,0 +1,23 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/latchbio-integration/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/latchbio-integration/SKILL.md",
+  "name": "scientific:latchbio-integration",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "0f01df45ed4aecb81d672a5576820aee37c32864b4fe84bb4d049471a14d3e5c",
+    "references/data-management.md": "ebf84cc2c89efde3197931ecd03fe5df0cdee32f2e2bbb1adac3a353ba9ce7c4",
+    "references/latch-mcp.md": "cdac8dbc81d4c741c80f644c6680ce07e4ecec10531b968e4bc6c169c3a60100",
+    "references/nextflow-snakemake.md": "57a414b365f7748b363d290cf87c14a1ad705440c732bec84c1039052fed20aa",
+    "references/operations-and-debugging.md": "0f50e19345e0d783b7abca1915a79f7955314ee8b798f4581a4554326a342a47",
+    "references/registry.md": "aba14f42f224f81108a654b42d5d4a9ad63148d99bdacd80a6668056d1c3e1ae",
+    "references/resource-configuration.md": "c6d1c5d4638cb108e289a222e7a09f1586c71fde886b27c66ddca37b45ceeab5",
+    "references/ui-and-automation.md": "6e2289e697bfe5ad2f9da45f99190dba5e1a7b30cc402dc0cf23ef9601774c96",
+    "references/verified-workflows.md": "0d9859f8a33889d3b9f7d55dd445f0037e926068f1718894f0f084d8a85f77a4",
+    "references/workflow-creation.md": "4be31ac20fa562c082a89db56ce6c23aac5a51bf694c7059b161eea9888ed2ea",
+    "scripts/inspect_latch_sdk.py": "b81764ac0efb6d6302e3c50b22a0ca06fe45a6b11fd6c102d0e3f60ec674496c",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

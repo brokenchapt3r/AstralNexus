@@ -103,7 +103,10 @@ def _skills_cli_package() -> str:
         try:
             version = subprocess.run([node, "--version"], capture_output=True, text=True,
                                      encoding="utf-8", errors="replace", timeout=10, check=False)
-            major = int(re.search(r"v?(\d+)", version.stdout or "").group(1))
+            match = re.search(r"v?(\d+)", version.stdout or "")
+            if match is None:
+                return "skills@1.4.0"
+            major = int(match.group(1))
             if major < 22:
                 return "skills@1.4.0"
         except (OSError, ValueError, AttributeError, subprocess.SubprocessError):
@@ -303,11 +306,17 @@ def _skills_list(args: dict[str, Any]) -> str:
     toolsets = args.get("toolsets")
     available_set = set(map(str, available)) if isinstance(available, list) else None
     toolset_set = set(map(str, toolsets)) if isinstance(toolsets, list) else None
-    entries = skill_manifest(home, limit=max(1, min(int(args.get("limit", 200)), 500)),
+    all_entries = discover_skills(home,
                              query=str(args.get("query") or "").strip() or None,
                              enabled_only=bool(args.get("enabled_only", True)),
                              available_tools=available_set, toolsets=toolset_set)
+    offset = max(0, int(args.get('offset', 0)))
+    limit = max(1, min(int(args.get('limit', 50)), 200))
+    entries = [{k: item[k] for k in ('name', 'description', 'category', 'path', 'platforms')}
+               for item in all_entries[offset:offset + limit]]
     return tool_result({"status": "success", "count": len(entries), "skills": entries,
+                        "total": len(all_entries), "offset": offset,
+                        "next_offset": offset + len(entries) if offset + len(entries) < len(all_entries) else None,
                         "disclosure": "metadata_only", "next": "Use skill_view to read one file."})
 
 
@@ -451,7 +460,7 @@ def _skill_update(args: dict[str, Any]) -> str:
 registry.register(name="find_skills", toolset="skills", schema={"name": "find_skills", "description": "Search the open Skill ecosystem for reusable agent skills and return candidates with sources and install commands.", "parameters": {"type": "object", "properties": {"query": {"type": "string"}, "limit": {"type": "integer"}, "timeout": {"type": "integer"}}, "required": ["query"]}}, handler=_find_skills)
 registry.register(name="skill_install", toolset="skills", schema={"name": "skill_install", "description": "Install a Governor-approved skill through the official skills CLI, then audit SKILL.md and source files.", "parameters": {"type": "object", "properties": {"package": {"type": "string"}, "home": {"type": "string"}, "approved_by_governor": {"type": "boolean"}}, "required": ["package"]}}, handler=_skill_install)
 registry.register(name="skill_list", toolset="skills", schema={"name": "skill_list", "description": "List installed AstralNexus skills and their audit status.", "parameters": {"type": "object", "properties": {"home": {"type": "string"}}}}, handler=_skill_list)
-registry.register(name="skills_list", toolset="skills", schema={"name": "skills_list", "description": "List the compact runtime Skill catalog without loading full instructions.", "parameters": {"type": "object", "properties": {"query": {"type": "string"}, "limit": {"type": "integer"}, "home": {"type": "string"}, "enabled_only": {"type": "boolean"}, "available_tools": {"type": "array", "items": {"type": "string"}}, "toolsets": {"type": "array", "items": {"type": "string"}}}}}, handler=_skills_list)
+registry.register(name="skills_list", toolset="skills", schema={"name": "skills_list", "description": "List the compact runtime Skill catalog without loading full instructions.", "parameters": {"type": "object", "properties": {"query": {"type": "string"}, "limit": {"type": "integer"}, "offset": {"type": "integer", "minimum": 0}, "home": {"type": "string"}, "enabled_only": {"type": "boolean"}, "available_tools": {"type": "array", "items": {"type": "string"}}, "toolsets": {"type": "array", "items": {"type": "string"}}}}}, handler=_skills_list)
 registry.register(name="skill_view", toolset="skills", schema={"name": "skill_view", "description": "Read one SKILL.md or safe supporting file after selecting a Skill from the catalog.", "parameters": {"type": "object", "properties": {"name": {"type": "string"}, "relative_path": {"type": "string"}, "home": {"type": "string"}, "max_bytes": {"type": "integer"}}, "required": ["name"]}}, handler=_skill_view)
 registry.register(name="skill_audit", toolset="skills", schema={"name": "skill_audit", "description": "Audit an installed skill before enabling it in the execution graph.", "parameters": {"type": "object", "properties": {"name": {"type": "string"}, "home": {"type": "string"}}, "required": ["name"]}}, handler=_skill_audit)
 registry.register(name="skill_update", toolset="skills", schema={"name": "skill_update", "description": "Check the open Skill installation for available updates through the official CLI.", "parameters": {"type": "object", "properties": {"approved_by_governor": {"type": "boolean"}}}}, handler=_skill_update)

@@ -1,0 +1,17 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/azure-quotas/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/azure-quotas/SKILL.md",
+  "name": "microsoft:azure-quotas",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "3bce38d6df08def03e5934469313e5cd532607a6f5087d08f75712e286550ae2",
+    "references/advanced-commands.md": "8dedb79dd9ed6468bbec7a92f4dadfd9d87e794317424818ba1c635250b6dfed",
+    "references/commands.md": "8c5d3df832a20322ed8e94be757ef2fe49fdd39a781aaddd69fe5b6867a3a627",
+    "scripts/check-quota.ps1": "426ff42da18d06e2ca9f382b2342b1434cf27e998b70b60a700bfc82fdc3ed23",
+    "scripts/check-quota.sh": "35cd93d7b8665fa1803a5253da8da326c9dae532ea7e1501b413ecf11f72542b",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

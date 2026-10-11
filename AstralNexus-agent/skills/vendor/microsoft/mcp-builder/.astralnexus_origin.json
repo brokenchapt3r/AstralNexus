@@ -1,0 +1,22 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/skills/mcp-builder/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/skills/mcp-builder/SKILL.md",
+  "name": "microsoft:mcp-builder",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "621e771c22224140752ddf933923467b2d1148580194ad59d3f1f21f9f27bdc9",
+    "reference/evaluation.md": "8c99479f8a2d22a636c38e274537aac3610879e26f34e0709825077c4576f427",
+    "reference/mcp_best_practices.md": "0101c57aa61782a24ea81087c208643e7db9195af7c0852586b0021f2c4b9a07",
+    "reference/microsoft_mcp_patterns.md": "41a1ee03edfc3bda496cf9e448065c5ce17ed44491424553c25f7e0b2f8bb4e2",
+    "reference/node_mcp_server.md": "47fed0116f47a09d10203704e0af527315d1f4cf52adf444413e322720799466",
+    "reference/python_mcp_server.md": "9296d8b1966ebf8547b8ded64745a625237f281c8c4dc808c675630213d04c55",
+    "scripts/connections.py": "9403668a2041568772082a8b334122c1f88daf0541fb393af4522d0094a47a6e",
+    "scripts/evaluation.py": "49ed1d17cdce5da101b210197740713f49b935c29d4f339542a14b132658e6f7",
+    "scripts/example_evaluation.xml": "9272b348ddcc4b06ba562367ccd0770e018158c0068ac5116d5e34aaeff8777a",
+    "scripts/requirements.txt": "d5d7558b2368ecea9dfeed7d1fbc71ee9e0750bebd1282faa527d528a344c3c7",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

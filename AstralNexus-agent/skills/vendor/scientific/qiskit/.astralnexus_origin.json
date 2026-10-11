@@ -1,0 +1,27 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/qiskit/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/qiskit/SKILL.md",
+  "name": "scientific:qiskit",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "538e5db262e7c237cff2bac191480f81688b8679167740af7405fcda1340511e",
+    "references/algorithms.md": "acec675bb12f312b0b67c1340d8c22433c636921eb71eaaaec7ae5d5c6b12f6e",
+    "references/backends.md": "4ee9f8f1d131771e2c9cf4ca8de285f3f09de804fd34221b45b56ee113e79f26",
+    "references/circuits.md": "718928b7b035896eb1935f1d413d0283a635d9f67246adf48fdb4a10ba515e3f",
+    "references/migration.md": "21f03b720febf8c14d3e1d47587d2a94ee614d65c3258eb52aa933b8c353a932",
+    "references/patterns.md": "855a5b9e8e3f1bcfdee62bf4c65aa4ddd4e5761ae13cfee007d3cc1f07036741",
+    "references/primitives.md": "157b593170ebd017a16811f29f15e85980adfaa9bd403735a68b89082501cf6a",
+    "references/setup.md": "95837d16a98732e27f4830cbb87049adaf02b89ba35cfaffde8d572512ebed34",
+    "references/sources.md": "798158b51cbd3d92120b4885d855fa08db229cfc25559e66f4091d4fc77430d1",
+    "references/testing.md": "c822562f67492dff3cf94e66d6bb4850c00e49ef04cb6dd1a2f01ca16dbdd98a",
+    "references/transpilation.md": "7293f678d169ea4a1e82b40c35d1d4eadf48b27b40879bca25691e3804996793",
+    "references/visualization.md": "552b453d819816a3fd787f30ae7bc6e11556195136556fe75417ebfa7c0db8ab",
+    "scripts/check_environment.py": "ccb435d02760d6a6a304f4d6556e0c4abcd5dd6f26527d3813426f3a85dd03ed",
+    "scripts/inspect_runtime.py": "0a128fea865e8a199388bee0e29d73923aded34d7ee9f153d145fc34fa07233e",
+    "scripts/run_local_primitives.py": "61ef52d46597ef21c47d7228b8dfcb53a4e5ab0cdbc16ff5c433012d17dfa765",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

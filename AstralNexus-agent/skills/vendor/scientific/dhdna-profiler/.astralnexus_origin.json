@@ -1,0 +1,14 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/dhdna-profiler/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/dhdna-profiler/SKILL.md",
+  "name": "scientific:dhdna-profiler",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "55cbc0e142ec3e6e6427c601391aeb38b8de6a83897082f46154f5c8273ccf50",
+    "references/advanced-profiling.md": "b9cec781d2899e31092ef3cb6533922063a415a80d853a5da62e1406a6b46b3a",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

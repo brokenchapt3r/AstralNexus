@@ -1,0 +1,16 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-dotnet/skills/azure-mgmt-apimanagement-dotnet/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-dotnet/skills/azure-mgmt-apimanagement-dotnet/SKILL.md",
+  "name": "microsoft:azure-mgmt-apimanagement-dotnet",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "71718aef3ae2343f90c9db33dee8ed9cbe146e66128c624cac069bf23d2083fe",
+    "references/apis-operations.md": "32c71f3d84f0cb57b3e70c66f7e4ae1de1ba8d3b291f726f2b932121d13d0159",
+    "references/products-subscriptions.md": "23fb160d2162d66de9305804b6584f7f5fe3123df2ed523b48cbac2cbb11ce3f",
+    "references/service-management.md": "f569a0e7fe61e90feb47f5b3c722f9e2a36afc4cb28462dbfb1908e658df1790",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

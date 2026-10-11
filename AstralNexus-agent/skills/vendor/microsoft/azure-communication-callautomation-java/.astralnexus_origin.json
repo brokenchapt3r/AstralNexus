@@ -1,0 +1,14 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-java/skills/azure-communication-callautomation-java/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-java/skills/azure-communication-callautomation-java/SKILL.md",
+  "name": "microsoft:azure-communication-callautomation-java",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "2b0a220f3ec73a263cdddb7748943b445b2a10efa5385f950d0fc6730bafadc8",
+    "references/examples.md": "f12d662deddea9a771020c8aa10cc94a7521b0ad01b71dbab5f0c39fd318aff8",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

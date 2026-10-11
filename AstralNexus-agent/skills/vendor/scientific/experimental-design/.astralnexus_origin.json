@@ -1,0 +1,19 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/experimental-design/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/experimental-design/SKILL.md",
+  "name": "scientific:experimental-design",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "db2de0f3d29b7729776a91e923c9c83801298f5ad8e88fe44570045fbefcc248",
+    "references/design_types.md": "1f36f14160bc9895773a2922402869202866410c9130f2b32c5a54e5f5a6e71b",
+    "references/factorial_and_doe.md": "a59fa2279c439c096a66955b4923ad68c00d6046570665e6f6d36e807fa1de63",
+    "references/randomization_and_blocking.md": "fabcfae913397fb8c3018b959b67ddf8fe47322b40cbf4155d898fa11738e9ae",
+    "references/sequential_and_adaptive.md": "83085e2cde0942de23670d3aabb30768fb576a6aa99c2e4ac6f7790b00977051",
+    "scripts/doe_designs.py": "916996b5e6a5dbb9a408aa1e755a95800af70231e46d12c8c5efddb9e3e30683",
+    "scripts/randomization.py": "c7c2eab469618a4b27548058b924ec3f4aafaf635d3797af920b9058e700bce4",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

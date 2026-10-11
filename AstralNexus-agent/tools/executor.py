@@ -5,19 +5,21 @@ approval-aware dispatch, and execution.
 """
 
 from __future__ import annotations
+from AstralNexus.runtime.run_context import get_env
 
 import logging
 import threading
 import traceback
 import os
 import json
+import re
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional
 
-from AstralNexus.tools.registry import registry, discover_builtin_tools
+from AstralNexus.tools.registry import ToolEntry, registry, discover_builtin_tools
 from AstralNexus.tools.tool_router import alternative_tools
-from AstralNexus.tools.context import tool_workspace
+from AstralNexus.tools.context import get_tool_owned_paths, tool_owned_paths, tool_workspace, resolve_tool_path
 
 logger = logging.getLogger(__name__)
 
@@ -64,7 +66,7 @@ def _path_scope(call: Dict[str, Any]) -> Optional[Path]:
     # This protects against case-insensitive collisions, junction points,
     # short (8.3) Windows paths, and relative path ambiguity.
     try:
-        resolved = path.resolve(strict=False)
+        resolved = resolve_tool_path(path)
     except (OSError, RuntimeError):
         resolved = Path(os.path.abspath(str(path)))
     return resolved
@@ -101,13 +103,66 @@ def _paths_overlap(left: Path, right: Path) -> bool:
     names all collapse to the same identity before the string comparison.
     """
     try:
-        left_resolved = left.resolve(strict=False)
-        right_resolved = right.resolve(strict=False)
+        left_resolved = resolve_tool_path(left)
+        right_resolved = resolve_tool_path(right)
     except (OSError, RuntimeError):
         left_resolved, right_resolved = left, right
     left_parts, right_parts = left_resolved.parts, right_resolved.parts
     common = min(len(left_parts), len(right_parts))
     return bool(left_parts and right_parts and left_parts[:common] == right_parts[:common])
+
+
+# Fix AS ---------------------------------------------------------------------
+# The ownership guard extracts "explicit workspace paths" from tool payloads.
+# Its pattern was ``[A-Z]:[\\/]``, which matches the tail of any URL scheme:
+# ``http://127.0.0.1:8291/health`` contains ``p://127.0.0.1:8291/health``, and
+# ``Path()`` turns that into the Windows path ``p:\127.0.0.1:8291\health``.
+#
+# Live r13b, PATCH-R017-FINAL-ACCEPTANCE-REPAIR seq 2940: the worker finally
+# issued the real acceptance run -- subprocess launch of serve.py, isolated DB
+# copy, stop-file, urllib probe -- and the call was refused with
+#
+#   python_exec references a workspace path outside the Worker owned_paths
+#   contract: p:\127.0.0.1:8291\health
+#
+# A node whose entire contract is "start the service and hit it over HTTP"
+# therefore could not do its job: any script that both writes a file and names
+# a localhost URL was rejected. Two generations of this node produced
+# null-valued acceptance reports because of it.
+#
+# The guard itself is kept. Only its notion of "this text is a filesystem path"
+# is corrected, each rule for a stated reason:
+#   1. URL literals are removed before scanning (a URL is not a path claim).
+#   2. A drive letter must not follow a word character (kills ``...http:`` and
+#      ``fooC:\``); a real drive letter stands alone.
+#   3. A candidate whose components carry characters Windows forbids in a file
+#      name (``: * ? " < > |``) is not a path (kills ``127.0.0.1:8291``).
+#   4. A drive followed by a single escape letter (``R:\n`` from ``print("R:\n")``)
+#      is source-text escaping, not a path. Observed live at seq 2972.
+_URL_LITERAL = re.compile(r"(?i)\b[a-z][a-z0-9+.\-]*://[^\s\"'`)\]}>,;|]*")
+_PATH_CLAIM = re.compile(
+    r"(?i)(?:(?<![A-Za-z0-9_])[A-Z]:[\\/][^\"'\r\n;|]+|(?:\.\.[\\/])+[^\"'\r\n;| ]+)"
+)
+_WINDOWS_FORBIDDEN = set(':*?"<>|')
+_ESCAPE_LETTERS = set("nrtbfav0")
+
+
+def _extract_path_claims(payload: str) -> List[str]:
+    """Path-looking substrings of a tool payload, with URLs and escapes excluded."""
+    text = _URL_LITERAL.sub(" ", payload or "")
+    claims: List[str] = []
+    for match in _PATH_CLAIM.findall(text):
+        candidate = match.strip().rstrip(")]}>,")
+        if not candidate:
+            continue
+        remainder = candidate[2:] if re.match(r"(?i)^[A-Z]:[\\/]", candidate) else candidate
+        parts = [part for part in re.split(r"[\\/]", remainder) if part]
+        if any(set(part) & _WINDOWS_FORBIDDEN for part in parts):
+            continue
+        if len(parts) == 1 and len(parts[0]) == 1 and parts[0].lower() in _ESCAPE_LETTERS:
+            continue
+        claims.append(candidate)
+    return claims
 
 
 class ToolExecutor:
@@ -125,6 +180,7 @@ class ToolExecutor:
     # Sized to match the global tool semaphore so we never have more
     # threads waiting than available concurrency slots.
     _SHARED_POOL: Optional[ThreadPoolExecutor] = None
+    _SCOPED_POOLS: Dict[str, ThreadPoolExecutor] = {}
     _POOL_LOCK = threading.Lock()
     _POOL_SHUTDOWN = False
 
@@ -133,7 +189,7 @@ class ToolExecutor:
         """Get or create the shared thread pool for tool execution."""
         with cls._POOL_LOCK:
             if cls._SHARED_POOL is None:
-                max_workers = max(1, int(os.environ.get("ASTRALNEXUS_MAX_TOOL_CONCURRENCY", "32")))
+                max_workers = max(1, int(get_env("ASTRALNEXUS_MAX_TOOL_CONCURRENCY", "32")))
                 cls._SHARED_POOL = ThreadPoolExecutor(
                     max_workers=max_workers,
                     thread_name_prefix="AstralNexus-Tool",
@@ -164,13 +220,57 @@ class ToolExecutor:
         """Check if the global pool is shutdown."""
         return cls._POOL_SHUTDOWN
 
-    def __init__(self, trace_recorder=None, workspace_root: Optional[str | Path] = None):
+    def _get_run_pool(self) -> ThreadPoolExecutor:
+        root = getattr(self.trace_recorder, "run_dir", None) or self.workspace_root
+        if root is None:
+            return self._get_shared_pool()
+        key = os.path.normcase(str(resolve_tool_path(Path(root))))
+        with self._POOL_LOCK:
+            pool = self._SCOPED_POOLS.get(key)
+            if pool is None:
+                pool = ThreadPoolExecutor(max_workers=max(1, int(get_env("ASTRALNEXUS_MAX_TOOL_CONCURRENCY", "32"))),
+                                          thread_name_prefix="AstralNexus-RunTool")
+                self._SCOPED_POOLS[key] = pool
+            return pool
+
+    @classmethod
+    def shutdown_run_pool(cls, run_dir: str | Path, *, wait: bool = True) -> None:
+        key = os.path.normcase(str(resolve_tool_path(Path(run_dir))))
+        with cls._POOL_LOCK:
+            pool = cls._SCOPED_POOLS.pop(key, None)
+        if pool is not None:
+            pool.shutdown(wait=wait, cancel_futures=not wait)
+
+    def __init__(self, trace_recorder=None, workspace_root: Optional[str | Path] = None,
+                 owned_paths: Optional[list[str]] = None, approval_identity: str = "", allowed_tools: Optional[set[str]] = None):
         self.trace_recorder = trace_recorder
+        self.allowed_tools = frozenset(allowed_tools) if allowed_tools is not None else None
+        from AstralNexus.runtime.presentation import current_presentation
+        self.presentation = current_presentation()
+        from AstralNexus.core.agent_registry import get_agent_registry
+        self.agent_catalog = get_agent_registry()
+        from AstralNexus.runtime.run_context import current_run_context
+        self.run_context = current_run_context()
+        from AstralNexus.runtime.workspace_review import current_review
+        self.workspace_review = current_review()
+        from AstralNexus.runtime.execution_fence import current_execution_fence, current_execution_identity
+        if workspace_root is None and self.run_context is not None:
+            workspace_root = self.run_context.run_dir
+        self.execution_fence_provider = current_execution_fence(Path(workspace_root)) if workspace_root is not None else None
+        self.execution_identity = current_execution_identity(Path(workspace_root)) if workspace_root is not None else ''
+        if self.execution_identity:
+            self.presentation = None  # Delegated workers never inherit lead presentation authority.
+        self.result_observer: Optional[Callable[[Dict[str, Any], Dict[str, Any]], None]] = None
         self.workspace_root = (
-            Path(workspace_root).expanduser().resolve()
+            resolve_tool_path(Path(workspace_root))
             if workspace_root is not None and str(workspace_root).strip()
             else None
         )
+        self.owned_paths = tuple(str(item).replace("\\", "/").strip() for item in (owned_paths or []) if str(item).strip())
+        from AstralNexus.tools.approval import _get_provider
+        root = getattr(trace_recorder, "run_dir", None) or self.workspace_root
+        self.approval_identity = approval_identity or (self.run_context.approval_identity if self.run_context else "") or (os.path.normcase(str(resolve_tool_path(Path(root)))) if root else f"executor:{id(self)}")
+        self.approval_provider = _get_provider(self.approval_identity)
         self._registry_tools_loaded = False
         self._load_tools()
 
@@ -189,6 +289,14 @@ class ToolExecutor:
             logger.warning("Tool auto-discovery failed: %s", exc)
 
     def execute_tool(self, tool_name: str, params: Dict[str, Any]) -> Dict[str, Any]:
+        if self.allowed_tools is not None and tool_name not in self.allowed_tools:
+            return {"status": "error", "error": "tool is not available to this agent", "guard_reason": "tool_not_allowed", "executed": False}
+        from AstralNexus.runtime.run_context import run_context_scope
+        from AstralNexus.runtime.presentation import presentation_scope
+        with run_context_scope(self.run_context), presentation_scope(self.presentation):
+            return self._execute_tool_with_context(tool_name, params)
+
+    def _execute_tool_with_context(self, tool_name: str, params: Dict[str, Any]) -> Dict[str, Any]:
         """Execute a centrally registered tool by name.
 
         Dispatch priority:
@@ -207,7 +315,7 @@ class ToolExecutor:
         # This limits the total concurrent tool executions across all
         # ToolExecutor instances and all workers in the orchestrator.
         acquired = _TOOL_SEMAPHORE.acquire(timeout=float(
-            os.environ.get("ASTRALNEXUS_TOOL_ACQUIRE_TIMEOUT", "60")
+            get_env("ASTRALNEXUS_TOOL_ACQUIRE_TIMEOUT", "60")
         ))
         if not acquired:
             return {
@@ -220,13 +328,51 @@ class ToolExecutor:
             # The context is installed inside the worker thread as well as
             # on the caller thread.  This keeps parallel tool batches scoped
             # to the same run without mutating process-global environment.
-            with tool_workspace(self.workspace_root):
+            from AstralNexus.tools.approval import approval_scope
+            with tool_workspace(self.workspace_root), tool_owned_paths(self.owned_paths), approval_scope(
+                self.approval_identity, provider=self.approval_provider, bind_provider=True,
+            ):
+                self._guard_execution(tool_name)
+                def invoke():
+                    # A review snapshot can take time; recheck immediately
+                    # before the operation rather than trusting the old check.
+                    self._guard_execution(tool_name)
+                    return self._execute_tool_inner(tool_name, params)
+                if self.workspace_review is not None:
+                    return self.workspace_review.execute(tool_name, params, self.workspace_root, invoke, self.owned_paths)
                 return self._execute_tool_inner(tool_name, params)
         finally:
             _TOOL_SEMAPHORE.release()
 
+    def _guard_execution(self, tool_name: str) -> None:
+        if self.workspace_root is None: return
+        from AstralNexus.runtime.execution_fence import guard_active_execution, guard_execution_fence
+        guard_active_execution(self.workspace_root, self.execution_identity)
+        if self.execution_fence_provider is not None or tool_name in {
+                'file_write', 'file_replace', 'file_edit', 'file_patch', 'terminal_exec', 'python_exec', 'pytest_run'}:
+            guard_execution_fence(self.workspace_root, self.execution_fence_provider)
+
     def _execute_tool_inner(self, tool_name: str, params: Dict[str, Any]) -> Dict[str, Any]:
         """Inner dispatch after concurrency slot is held."""
+        params = dict(params)
+        if tool_name == "file_write":
+            violation = self._write_scope_violation(params)
+            if violation:
+                return {
+                    "status": "error",
+                    "error": violation,
+                    "failure_class": "owned_path_violation",
+                    "next_action": "replan_with_disjoint_output_contract",
+                }
+        if tool_name in {"terminal_exec", "python_exec"}:
+            violation = self._prepare_owned_process_scope(tool_name, params)
+            if violation:
+                return {
+                    "status": "error",
+                    "error": violation,
+                    "failure_class": "owned_path_violation",
+                    "next_action": "use_the_worker_owned_path_or_request_a_graph_patch",
+                }
         # Record tool start
         if self.trace_recorder:
             self.trace_recorder.record(
@@ -249,6 +395,192 @@ class ToolExecutor:
                 "tool.error", {"tool_name": tool_name, "error": error_msg}
             )
         return {"status": "error", "error": error_msg}
+
+    def _write_scope_violation(self, params: Dict[str, Any]) -> Optional[str]:
+        """Reject file writes outside the Worker-owned namespace."""
+        owned = get_tool_owned_paths()
+        if not owned:
+            return None
+        raw_path = str(params.get("path", "")).strip()
+        if not raw_path:
+            return "file_write requires a path"
+        from AstralNexus.runtime.presentation import mapped_user_path
+        candidate = mapped_user_path(raw_path) or Path(raw_path).expanduser()
+        if not candidate.is_absolute() and self.workspace_root is not None:
+            candidate = self.workspace_root / candidate
+        try:
+            candidate = resolve_tool_path(candidate)
+        except (OSError, RuntimeError):
+            candidate = Path(os.path.abspath(str(candidate)))
+        for raw_root in owned:
+            root = Path(raw_root)
+            if not root.is_absolute() and self.workspace_root is not None:
+                root = self.workspace_root / root
+            try:
+                root = resolve_tool_path(root)
+                candidate.relative_to(root)
+                return None
+            except (ValueError, OSError, RuntimeError):
+                continue
+        return f"file_write path is outside the Worker owned_paths contract: {candidate}"
+
+    def _owned_roots(self) -> List[Path]:
+        roots: List[Path] = []
+        for raw in get_tool_owned_paths():
+            root = Path(raw).expanduser()
+            if not root.is_absolute() and self.workspace_root is not None:
+                root = self.workspace_root / root
+            try:
+                roots.append(resolve_tool_path(root))
+            except (OSError, RuntimeError):
+                roots.append(Path(os.path.abspath(str(root))))
+        return roots
+
+    @staticmethod
+    def _path_is_within(candidate: Path, roots: List[Path]) -> bool:
+        for root in roots:
+            try:
+                candidate.relative_to(root)
+                return True
+            except ValueError:
+                continue
+        return False
+
+    def _prepare_owned_process_scope(
+        self, tool_name: str, params: Dict[str, Any]
+    ) -> Optional[str]:
+        """Bind process tools to the Worker namespace and reject explicit escapes.
+
+        This is a contract guard, not an OS sandbox.  ``terminal_exec`` remains
+        approval-gated because a command can construct paths dynamically.
+        """
+        roots = self._owned_roots()
+        if not roots:
+            return None
+
+        # A file ownership contract is not a process working directory.
+        # Workers that verify or consume another node's outputs must be able
+        # to run commands from those input directories.  Keep file_write
+        # checks against the original roots, while process tools remain
+        # bounded by this isolated run workspace.
+        directory_roots = [root.parent if root.is_file() or (not root.is_dir() and root.suffix) else root for root in roots]
+        process_roots = [self.workspace_root] if self.workspace_root is not None else directory_roots
+        raw_cwd = str(params.get("cwd", "")).strip()
+        cwd = Path(raw_cwd).expanduser() if raw_cwd else (self.workspace_root or directory_roots[0])
+        if not cwd.is_absolute() and self.workspace_root is not None:
+            cwd = self.workspace_root / cwd
+        try:
+            cwd = resolve_tool_path(cwd)
+        except (OSError, RuntimeError):
+            cwd = Path(os.path.abspath(str(cwd)))
+        if not self._path_is_within(cwd, process_roots):
+            return f"{tool_name} cwd is outside the Worker owned_paths contract: {cwd}"
+        if self.workspace_root is not None and not self._path_is_within(cwd, [self.workspace_root]):
+            return f"{tool_name} cwd is outside the run workspace: {cwd}"
+        cwd.mkdir(parents=True, exist_ok=True)
+        params["cwd"] = str(cwd)
+
+        payloads: List[str] = []
+        if tool_name == "python_exec":
+            payloads.append(str(params.get("code", "")))
+        else:
+            command = params.get("command", [])
+            payloads.extend(command if isinstance(command, list) else [str(command)])
+
+        # Reject explicit workspace paths that target another Worker's tree.
+        # The executable itself may be an absolute system path, so only paths
+        # rooted under this run's workspace participate in ownership checks.
+        workspace = resolve_tool_path(self.workspace_root) if self.workspace_root else None
+        for payload in payloads:
+            for raw_match in _extract_path_claims(str(payload)):
+                raw_match = raw_match.strip().rstrip(")]}>,")
+                # Fix AW (2026-09-17): remember how the claim was *spelled*.
+                # An absolute claim that resolves outside the run workspace is
+                # not a claim on another Worker's tree (see the writes branch).
+                absolute_claim = bool(re.match(r"(?i)^(?:[A-Z]:[\\/]|\\\\)", raw_match))
+                candidate = Path(raw_match).expanduser()
+                if not candidate.is_absolute():
+                    candidate = cwd / candidate
+                try:
+                    candidate = resolve_tool_path(candidate)
+                except (OSError, RuntimeError):
+                    candidate = Path(os.path.abspath(str(candidate)))
+                # Check explicit writes before exempting external executable
+                # paths. Otherwise ../ from the run root bypasses ownership
+                # checks precisely because it resolves outside the workspace.
+                writes_payload = bool(re.search(
+                    r"(?i)(write_text|write_bytes|open\s*\([^)]*['\"][wax]|>>|>[^=])",
+                    str(payload),
+                ))
+                if writes_payload and not self._path_is_within(candidate, roots):
+                    if absolute_claim and workspace is not None:
+                        # The executable itself may be an absolute system path.
+                        # Live r13b, PATCH-R017-FINAL-ACCEPTANCE-REPAIR round 97:
+                        # a script that spawned a specific interpreter and also
+                        # wrote its own output was refused with
+                        #
+                        #   python_exec references a workspace path outside the
+                        #   Worker owned_paths contract:
+                        #   C:\...\Programs\Python\Python310\python.exe
+                        #
+                        # Naming a toolchain is a program selection, not ownership
+                        # of a path, and nothing this guard protects lives outside
+                        # the workspace -- so an absolutely-spelled claim out there
+                        # is skipped.  Relative claims keep the strict treatment:
+                        # "..\..\x" escapes the workspace while still naming a path
+                        # inside it, which is what the ordering above guards.
+                        try:
+                            candidate.relative_to(workspace)
+                        except ValueError:
+                            continue
+                    return (
+                        f"{tool_name} references a workspace path outside the Worker "
+                        f"owned_paths contract: {candidate}"
+                    )
+                if workspace is not None:
+                    try:
+                        candidate.relative_to(workspace)
+                    except ValueError:
+                        continue
+                if not self._path_is_within(candidate, process_roots):
+                    return (
+                        f"{tool_name} references a workspace path outside the run "
+                        f"workspace: {candidate}"
+                    )
+        return None
+
+    def execute_model_calls(
+        self, tool_calls: List[Dict[str, Any]],
+        blocked_results: Optional[Dict[str, Dict[str, Any]]] = None,
+    ) -> List[Dict[str, Any]]:
+        """One receipt boundary for executed and rejected model calls.
+
+        A rejected call is a sequential barrier: preserve model order and
+        observe its outcome without invoking the handler. Observe each real
+        call at execution time, before a later mutation changes its premises.
+        Observer failures propagate; missing durable evidence is not success.
+        """
+        blocked_results = blocked_results or {}
+        results: List[Dict[str, Any]] = []
+        pending: List[Dict[str, Any]] = []
+
+        def flush() -> None:
+            if pending:
+                results.extend(self.execute_tool_calls(list(pending)))
+                pending.clear()
+
+        for call in tool_calls:
+            call_id = str(call.get("id") or "")
+            if call_id not in blocked_results:
+                pending.append(call)
+                continue
+            flush()
+            result = dict(blocked_results[call_id])
+            if self.result_observer is not None:
+                self.result_observer(call, result)
+            results.append(result)
+        flush()
+        return results
 
     def execute_tool_calls(self, tool_calls: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Execute one model tool batch with AstralNexus-style safety segments.
@@ -306,13 +638,13 @@ class ToolExecutor:
                         "tools": [_call_name(call) for call in calls],
                     })
                 # Use shared pool instead of creating a new one each time
-                pool = self._get_shared_pool()
+                pool = self._get_run_pool()
                 futures = [pool.submit(self.execute_tool, _call_name(call), _call_args(call)) for call in calls]
                 # Never let a single parallel tool hold the LLM conversation
                 # forever.  The handler itself has a process timeout, while
                 # this second boundary protects registry tools and third-party
                 # handlers that do not honor it.
-                future_timeout = max(1.0, float(os.environ.get(
+                future_timeout = max(1.0, float(get_env(
                     "ASTRALNEXUS_TOOL_BATCH_TIMEOUT", "150"
                 )))
                 values = []
@@ -336,9 +668,16 @@ class ToolExecutor:
                             "next_action": "switch_tool_or_replan",
                         })
             else:
-                values = [self.execute_tool(_call_name(call), _call_args(call)) for call in calls]
+                for call in calls:
+                    value = self.execute_tool(_call_name(call), _call_args(call))
+                    results[positions[id(call)]] = value
+                    if self.result_observer is not None:
+                        self.result_observer(call, value)
+                continue
             for call, value in zip(calls, values):
                 results[positions[id(call)]] = value
+                if self.result_observer is not None:
+                    self.result_observer(call, value)
         return [value or {"status": "error", "error": "tool result missing"} for value in results]
 
     def _dispatch_registry_tool(
@@ -352,14 +691,14 @@ class ToolExecutor:
         retryable = any(token in tool_name.lower() for token in (
             "read", "search", "fetch", "parse", "test", "pytest", "query", "monitor"
         ))
-        max_attempts = 1 + (max(0, int(os.environ.get("ASTRALNEXUS_TOOL_RETRIES", "1"))) if retryable else 0)
+        max_attempts = 1 + (max(0, int(get_env("ASTRALNEXUS_TOOL_RETRIES", "1"))) if retryable else 0)
         last_error = None
         for attempt in range(max_attempts):
             try:
                 # All execution now passes through the registry policy layer:
                 # availability, approval gates, and result limits stay
                 # consistent for LLM workers and direct callers.
-                if registry.get_entry(tool_name) is entry:
+                if isinstance(entry, ToolEntry) or registry.get_entry(tool_name) is entry:
                     raw_result = registry.dispatch(
                         tool_name, params, caller="tool_executor",
                         approval_basis="role_worker_tool_policy",
@@ -388,10 +727,13 @@ class ToolExecutor:
             if isinstance(raw_result, str):
                 try:
                     result = _json.loads(raw_result)
-                except _json.JSONDecodeError:
-                    result = {"status": "success", "data": raw_result}
+                except _json.JSONDecodeError as exc:
+                    return self._record_tool_error(tool_name, ValueError(
+                        f"Registered tool returned invalid JSON: {exc}"))
             else:
                 result = raw_result
+            if isinstance(result, dict) and result.get("error") and "status" not in result:
+                result["status"] = "error"
             result = self._annotate_failure(tool_name, result)
 
             if self.trace_recorder:
@@ -415,18 +757,22 @@ class ToolExecutor:
                     "traceback": traceback.format_exc(),
                 },
             )
-        result = {
+        result: Dict[str, Any] = {
             "status": "error",
             "error": error_msg,
             "traceback": traceback.format_exc(),
             "failure_class": "tool_exception",
             "next_action": "switch_tool_or_replan",
         }
-        result["alternative_tools"] = alternative_tools(tool_name)
+        result["alternative_tools"] = self._available_alternatives(tool_name)
         return result
 
-    @staticmethod
-    def _annotate_failure(tool_name: str, result: Any) -> Any:
+    def _available_alternatives(self, tool_name: str) -> list[str]:
+        return [name for name in alternative_tools(tool_name)
+                if (self.allowed_tools is None or name in self.allowed_tools)
+                and registry.is_tool_available(name)]
+
+    def _annotate_failure(self, tool_name: str, result: Any) -> Any:
         """Attach a recovery hint without changing successful results."""
         if not isinstance(result, dict) or str(result.get("status", "")).lower() not in {
             "error", "failed", "failure", "approval_pending"
@@ -436,9 +782,12 @@ class ToolExecutor:
             result.setdefault("failure_class", "approval_required")
             result.setdefault("next_action", "request_approval")
             return result
+        if isinstance(result.get("error"), bool):
+            result["error_flag"] = result["error"]
+            result["error"] = str(result.get("message") or "Tool execution failed")
         result.setdefault("failure_class", "tool_execution_failed")
         result.setdefault("next_action", "switch_tool_or_replan")
-        result.setdefault("alternative_tools", alternative_tools(tool_name))
+        result["alternative_tools"] = self._available_alternatives(tool_name)
         return result
 
     def list_tools(self) -> List[str]:
@@ -466,9 +815,10 @@ class ToolExecutor:
         # If profile specified, filter by profile capabilities
         if profile:
             try:
-                from AstralNexus.agent.registry import get_profile_capabilities
-                capabilities = get_profile_capabilities(profile)
-                allowed_tools = set(capabilities.get("allowed_tools", []))
+                role = self.agent_catalog.get_role(profile)
+                if role is None:
+                    raise KeyError(f"Unknown worker profile: {profile}")
+                allowed_tools = set(role.default_tools)
                 # Intersection: only tools in both registry and profile
                 filtered_tools = all_tools & allowed_tools
                 if not filtered_tools:

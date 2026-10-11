@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/lamindb/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/lamindb/SKILL.md",
+  "name": "scientific:lamindb",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "00f1246a7f59b6ec11ca119687ccc3ff384547f40d44f2140f557ac3ddd01b35",
+    "references/annotation-validation.md": "a6b0a32ca06aaa560e9b225cc2c280258a0122ad8a9d312a1cac77f82710e813",
+    "references/core-concepts.md": "8c7fcfbb000010bb0d2758e65397d7b3a78177b15c4500e93c1cb0017932ad7e",
+    "references/data-management.md": "ffbffabd27df464458a58b32918e2331d98e49c12291293f8a81484f14e33e60",
+    "references/integrations.md": "438b8366afd333cc3629a7ac769af0fe0f5e19a8dfe2f7f6fe82d900af18f014",
+    "references/ontologies.md": "cc25dd4276232decd0facc7e84b8f3804a074d76fb4fed228ac6bc3c703ad1b8",
+    "references/setup-deployment.md": "87136f6a1af049a9d34de257efd12239b362d82e5dd482fde77abaa0fd050215",
+    "references/sources.md": "3f9aeb054b1e6559cc7d0ce4f17f2ba5928b45d66edbaab537747df95631d6dd",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

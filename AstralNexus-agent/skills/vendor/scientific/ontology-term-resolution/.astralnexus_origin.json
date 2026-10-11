@@ -1,0 +1,24 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/ontology-term-resolution/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/ontology-term-resolution/SKILL.md",
+  "name": "scientific:ontology-term-resolution",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "db310515a230a47023169be207f654458789377c98b30fa593ee420738e4eefb",
+    "references/companion-apis.md": "1f5d3aa7027fc4d144c838d17645f2665a54793ead7d59ef7f10aa7fd369573a",
+    "references/curation-rules.md": "3f5a7fa7eafb4b0bd40cebfe53df6886705ae788454f378f3f22e1238d67bd69",
+    "references/ols4-api.md": "5587c100ac32e5c0889c1f1940987002619c7b1f48a26f61337d4228b75d3260",
+    "references/ontology-registry.md": "87db030511c7ffbde8e049e1219bd98113fa3d87d95bd454aedec097c0e8125c",
+    "scripts/id_client.py": "37f9be001d3472a72d0a338e84635f575b442b325170854daaaa36597491d8dc",
+    "scripts/lookup_prefix.py": "be91630513617fe271b2173e208ca7669474b6a764da34284af91b2692275893",
+    "scripts/map_terms.py": "db3b73918c2df8509b15caf7d9e308c569eeb3499557656347e64be701eff361",
+    "scripts/ols_client.py": "95c5d02dc17580c62f02afbd4e5c5756007a9c57769ef19d838581da04d7fc5d",
+    "scripts/resolve_terms.py": "84e39155511dd6f8101260de27e5164d38747bd81701be2ba42e8b95c6ac191d",
+    "scripts/validate_terms.py": "34374eac5dcbe6b56061bc7f2929e6457e8728fbb85827c5811d09e9a4d641dc",
+    "scripts/zooma_client.py": "647dfd7f92554370fa5e2d8ac5c4964a2dd567020bf151cccfacf69052d03f11",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

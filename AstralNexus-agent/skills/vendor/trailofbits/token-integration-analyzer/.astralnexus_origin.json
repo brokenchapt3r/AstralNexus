@@ -1,0 +1,17 @@
+{
+  "repo": "trailofbits/skills",
+  "commit": "82fe8226252622fa807643bdca1710901198553a",
+  "source_path": "plugins/building-secure-contracts/skills/token-integration-analyzer/SKILL.md",
+  "source_url": "https://github.com/trailofbits/skills/blob/82fe8226252622fa807643bdca1710901198553a/plugins/building-secure-contracts/skills/token-integration-analyzer/SKILL.md",
+  "name": "trailofbits:token-integration-analyzer",
+  "namespace": "trailofbits",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "4b7f5cb3c52f9b45e2216963a49458e1f23f5a279a0296e702fd9d8df268b301",
+    "agents/openai.yaml": "08d464486ef3598d69d683ec669277da6c839f4804606a2f46c6f31896f5a3a3",
+    "assets/trail-of-bits-mark.svg": "4bf74c789b38dcf6ad762c136b6832363d27ae19fbaa9a18ec18d66ecce6ca05",
+    "resources/ASSESSMENT_CATEGORIES.md": "bf1313e59c960688cc73bda5b7a98579336a277c521b9b37937aa1cda3a122a7",
+    "resources/REPORT_TEMPLATES.md": "77dc2195901cbca8f0a04687e6ac51347520b6320cfe2ca7c39d9725ffae1177",
+    "UPSTREAM-LICENSE": "7abe19ec9bb73b36141b999b861d24ad855e808bafe0f81e84cce28556f6c297"
+  }
+}

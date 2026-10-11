@@ -1,0 +1,18 @@
+{
+  "repo": "trailofbits/skills",
+  "commit": "82fe8226252622fa807643bdca1710901198553a",
+  "source_path": "plugins/building-secure-contracts/skills/code-maturity-assessor/SKILL.md",
+  "source_url": "https://github.com/trailofbits/skills/blob/82fe8226252622fa807643bdca1710901198553a/plugins/building-secure-contracts/skills/code-maturity-assessor/SKILL.md",
+  "name": "trailofbits:code-maturity-assessor",
+  "namespace": "trailofbits",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "a5e1427ae04cb0ed32b003c332becc0c8adb8e382d8d1d489edc997148b57ab1",
+    "agents/openai.yaml": "b3b5badfebd66eedfaae9b5ad1c867ce6a6a82215f92be5224f62f6351955fc3",
+    "assets/trail-of-bits-mark.svg": "4bf74c789b38dcf6ad762c136b6832363d27ae19fbaa9a18ec18d66ecce6ca05",
+    "resources/ASSESSMENT_CRITERIA.md": "0ffe131842b209de7910cc2ac77fc1e2cdea1e16455bfba79505c8ba8179009f",
+    "resources/EXAMPLE_REPORT.md": "47f37a7460cf281cb4ca2aeb3abced762ce4b7dd4db21e7b12772b2202e4fc42",
+    "resources/REPORT_FORMAT.md": "28474cce17be996e839353978fc06a830ac3fbd1219efbacc914de567fcdd7dc",
+    "UPSTREAM-LICENSE": "7abe19ec9bb73b36141b999b861d24ad855e808bafe0f81e84cce28556f6c297"
+  }
+}

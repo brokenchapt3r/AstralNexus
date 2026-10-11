@@ -1,0 +1,4 @@
+recursive-include skills *
+recursive-exclude skills __pycache__/* *.pyc
+recursive-include dashboard *.html
+recursive-include contracts *.json

@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-ai-vision-imageanalysis-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-ai-vision-imageanalysis-py/SKILL.md",
+  "name": "microsoft:azure-ai-vision-imageanalysis-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "b6bcdb76e29ccc125741a75a07f0f65ee971086749a72a87d0b83c20bf9f6ea5",
+    "references/capabilities.md": "960a7fbd228256952991c2a27c904b992d100b7810567186e7c17e287e190771",
+    "references/non-hero-scenarios.md": "9a173f9a41c90c274fb1d09b1175ceebdea69cf5a5c0be7964a93d45800d4458",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

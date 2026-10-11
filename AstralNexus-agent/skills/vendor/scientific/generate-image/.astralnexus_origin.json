@@ -1,0 +1,15 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/generate-image/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/generate-image/SKILL.md",
+  "name": "scientific:generate-image",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "42438be890c5ba875ddee1bbbf505e623433886a2b180f21b2012f72d038f92a",
+    "references/models.md": "fcce8823d585de4274a6126dacd26c4591a3c4c07981c012c3c6354844bb3b23",
+    "scripts/generate_image.py": "977b40ddc398a6e62f13e61482237363251b5d4b17b9997e947e2ef87fb12a6a",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "repo": "trailofbits/skills",
+  "commit": "82fe8226252622fa807643bdca1710901198553a",
+  "source_path": "plugins/trailmark/skills/crypto-protocol-diagram/SKILL.md",
+  "source_url": "https://github.com/trailofbits/skills/blob/82fe8226252622fa807643bdca1710901198553a/plugins/trailmark/skills/crypto-protocol-diagram/SKILL.md",
+  "name": "trailofbits:crypto-protocol-diagram",
+  "namespace": "trailofbits",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "11e665a8180bfc5dcac16cb4baa01100f83d6875b2d38dcd54ad6866f9b04dbc",
+    "agents/openai.yaml": "15d2dad004d37e2b8cbcfe5bb11a2841942d62aecf4b65e344463ec029f51de2",
+    "assets/trail-of-bits-mark.svg": "4bf74c789b38dcf6ad762c136b6832363d27ae19fbaa9a18ec18d66ecce6ca05",
+    "examples/simple-handshake/expected-output.md": "d1b782cf4181e6af43efa74b907a86d2cb3332842027160350518121979b06ed",
+    "examples/simple-handshake/protocol.py": "bb0cdf0534372bfb05ab078dd8d9b163dd3469c03b43caeaf96c121fc8a04318",
+    "examples/simple-proverif/expected-output.md": "1f8f409ac8c70600f771b24c58b76bd5cb80ab2458be4c08d9d2478536ed6933",
+    "examples/simple-proverif/model.pv": "ded2b83e2a6fc5b85db40f50d7932b66e397472aa3542ce24eabf6bd9be48b32",
+    "references/ascii-sequence-diagram.md": "3eebba0a3fbfe4205f7f165c5030e42b45d0277d4b33fa979469ead0565cd7b1",
+    "references/mermaid-sequence-syntax.md": "a7fad0d407bf498e5fed25fbf0e14431b3c0e178b9c788d9fd9e8cf56ed5c8d8",
+    "references/protocol-patterns.md": "73b20f76afc1f9e06028e821f1c49bc69ca279ce622a76294a9f7c438966fb96",
+    "references/spec-parsing-patterns.md": "0be275fc4015a21538985213531800827860c8a3cec8c303c60a5ec0a3a6088d",
+    "UPSTREAM-LICENSE": "7abe19ec9bb73b36141b999b861d24ad855e808bafe0f81e84cce28556f6c297"
+  }
+}

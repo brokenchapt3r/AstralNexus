@@ -1,0 +1,16 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-kusto-graph-skills/skills/azure-kusto-graph/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-kusto-graph-skills/skills/azure-kusto-graph/SKILL.md",
+  "name": "microsoft:azure-kusto-graph",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "6878ae49f9bdc1ed9ada3ef9c59e83450bc96751da73d44c4bfe5a1a47e14bde",
+    "references/EXAMPLES.md": "f1bd8ed3e960f3b1c0af8a96a9e9a12fdd8d3d30bd0e575f4ecbffd67298395b",
+    "references/KUSTO_EXPLORER_LAUNCH.md": "e3702ebf9255d91279a85e4076c878c4178d8afe305c2ee13604f94b735b70eb",
+    "references/SCENARIOS.md": "127ea22c9b46fa6b0196f68dba104ad215ad065666eb1ae9cc4510f369e26b33",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

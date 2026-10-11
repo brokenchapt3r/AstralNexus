@@ -501,12 +501,12 @@ class ImpactAnalyzer:
         Returns:
             Set of invalidated fact IDs
         """
-        invalidated = set()
+        invalidated: set[str] = set()
         if not new_constraints:
             return invalidated
         
         # Extract keywords from new constraints
-        constraint_keywords = set()
+        constraint_keywords: set[str] = set()
         for constraint in new_constraints:
             words = constraint.lower().split()
             constraint_keywords.update(w for w in words if len(w) > 3)
@@ -699,6 +699,10 @@ class RecoveryExecutor:
         target = action.get("target")
         
         try:
+            if action_type == "restore_facts":
+                return self._restore_facts(action.get("details", {}))
+            if not isinstance(target, str) or not target:
+                raise ValueError("Recovery action requires a non-empty target node ID")
             if action_type == "replan":
                 return self._replan_node(target, action.get("details", {}))
             elif action_type == "retry":
@@ -819,6 +823,18 @@ class RecoveryExecutor:
         """
         node = self.task_graph.get_node(node_id)
         if node:
+            # Fix P5#15 (r17 crash): never rearm a leased, actively executing
+            # node — the running->ready clobber desyncs graph state from the
+            # live worker and the later ready->failed bookkeeping crashed the
+            # whole run.  Skip with an honest event; the recovery loop can
+            # target something else.
+            if str(node.status) == "running":
+                self.trace_recorder.record("recovery.action.skip_running_node", {
+                    "node_id": node_id,
+                    "action": "retry",
+                    "reason": "node is leased and executing; rearm would clobber running state",
+                })
+                return False
             if not self._request_node_repair(node_id):
                 return False
             self.task_graph.update_node_status(node_id, "ready")
@@ -848,6 +864,14 @@ class RecoveryExecutor:
         node = self.task_graph.get_node(node_id)
         if not node:
             return False
+        # Fix P5#15 (r17 crash): same leased-node clobber guard as _retry_node.
+        if str(node.status) == "running":
+            self.trace_recorder.record("recovery.action.skip_running_node", {
+                "node_id": node_id,
+                "action": "reassign",
+                "reason": "node is leased and executing; rearm would clobber running state",
+            })
+            return False
         
         # Step 1: Determine current assignment
         current_resource = node.metadata.get("assigned_resource", "default")
@@ -859,6 +883,14 @@ class RecoveryExecutor:
             raise ValueError(
                 "reassign action requires Governor-approved resource_tier or worker_type"
             )
+        if (node.metadata.get("reassigned")
+                and (not next_worker or next_worker == node.metadata.get("approved_worker_type"))
+                and (not next_tier or next_tier == node.resource_tier)):
+            self.trace_recorder.record("recovery.action.reassign_no_change", {
+                "node_id": node_id, "worker_type": next_worker,
+                "resource_tier": next_tier, "action_required": "replan_or_change_assignment",
+            })
+            return False
         
         # Step 3: Update node assignment
         self._request_node_repair(node_id)

@@ -1,0 +1,20 @@
+{
+  "repo": "huggingface/skills",
+  "commit": "ca0325bb20b2d0a1b2efa893670c4c72f79e707b",
+  "source_path": "skills/huggingface-lora-space-builder/SKILL.md",
+  "source_url": "https://github.com/huggingface/skills/blob/ca0325bb20b2d0a1b2efa893670c4c72f79e707b/skills/huggingface-lora-space-builder/SKILL.md",
+  "name": "huggingface:huggingface-lora-space-builder",
+  "namespace": "huggingface",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "7192d4a44172609eb073334e0410aff1d3b9134f82b94f1329435ca7fcfa0ad2",
+    "references/adapting-to-the-lora.md": "57baf45d4551ca2ba454b1e3bb5230f58ebf43558d61da848213cb9bb4f44f2b",
+    "references/creative-mode.md": "860384cadd377ec54ceb782931cbb43edae67567e8b8c3dc84035725cb4e1119",
+    "references/tasks.md": "536d92b873d4af78eb9e68af227d933e5e261468600df9767aae996abe49e529",
+    "references/zerogpu-and-publishing.md": "816d948fadcb0591f81714ae029198b5440633c00281240a2d7ef4ab0afc248d",
+    "references/base-models/krea-2.md": "aa53bb8abbbd954dc30cc8855ed09d36a36f739d9b1383be85a6e331eadf1ae4",
+    "references/base-models/ltx.md": "d6098a1cd094a62d2fb7e30cb034c24e2efe480cf8524a8d041b3f162bec9a8d",
+    "references/base-models/qwen-image.md": "47191d568572ce9118b57b40f4d5086a2d51429bc231eabd12ca14413ecab0c2",
+    "UPSTREAM-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}

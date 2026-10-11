@@ -1,0 +1,15 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/deepspot-m/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/deepspot-m/SKILL.md",
+  "name": "scientific:deepspot-m",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "a917434c523e136ddc1ce45b54acbef8c28398dd293314f72faa278431e67418",
+    "references/api.md": "2b0276f106e381ec6ac76a705935c54a31b50e6a882e379033e66a5c76b7fe4b",
+    "references/whole_slide.md": "cafe149c1b03f712676257898e87986aa14eca557c3950877de44caa66176db0",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

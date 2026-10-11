@@ -1,0 +1,16 @@
+{
+  "repo": "huggingface/skills",
+  "commit": "ca0325bb20b2d0a1b2efa893670c4c72f79e707b",
+  "source_path": "skills/huggingface-trackio/SKILL.md",
+  "source_url": "https://github.com/huggingface/skills/blob/ca0325bb20b2d0a1b2efa893670c4c72f79e707b/skills/huggingface-trackio/SKILL.md",
+  "name": "huggingface:huggingface-trackio",
+  "namespace": "huggingface",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "540f52974f4f77c2455a7b37ed983da0dbfb0f5af3d2c482e4736f14f1cc8724",
+    "references/alerts.md": "4065538fd2d090a145cdb66b7b84019d448becd3038740c87708b8fa1bdaef08",
+    "references/logging_metrics.md": "238849c975496dad8b6b7816d8d0ef1868c1a61456e0063c6a88db390ea89b29",
+    "references/retrieving_metrics.md": "fa1339a8f6a7f88d2d83b191324eb8412d80ee837e9779fbc70cda81408e5e90",
+    "UPSTREAM-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}

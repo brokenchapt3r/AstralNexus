@@ -269,7 +269,7 @@ class EvaluationReporter:
             return {"error": "No task graph available for analysis"}
         
         # Count nodes by status
-        status_counts = {}
+        status_counts: dict[str, int] = {}
         for node in self.task_graph.nodes.values():
             canonical_status = normalize_status(node.status)
             status_counts[canonical_status] = status_counts.get(canonical_status, 0) + 1
@@ -293,13 +293,13 @@ class EvaluationReporter:
         total_recovery_actions = len(recovery_events)
         
         # Analyze recovery action types
-        action_type_counts = {}
+        action_type_counts: dict[str, int] = {}
         for event in recovery_events:
             event_type = event.get("event_type", "unknown")
             action_type = event_type.replace("recovery.action.", "")
             action_type_counts[action_type] = action_type_counts.get(action_type, 0) + 1
         
-        report = {
+        report: dict[str, Any] = {
             "summary": {
                 "total_nodes": total_nodes,
                 "completed_nodes": completed_nodes,

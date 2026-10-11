@@ -1,0 +1,30 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/geomaster/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/geomaster/SKILL.md",
+  "name": "scientific:geomaster",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "README.md": "857e8bcd6d77f2b805b60bf5277bd9a11e96e2933e4d02cdd90ef953baaee560",
+    "SKILL.md": "7b3b88f13f0094285372dfcc25a000fb7e74e5fc4b67c1b6999543fff3cadde8",
+    "references/advanced-gis.md": "3e96895b000f7ba9eff6db3063e6d0b674fba6934f1f4cf861c599d0ec9c8dea",
+    "references/big-data.md": "68e4f0d7f523c1b27518895d3e7a9634fce46e06c77948c553a7abcb5a386320",
+    "references/code-examples.md": "158dc22b87f3ee5d717f84b34a8500dadf69f803cea97e1a5ce4db859ed9bf74",
+    "references/coordinate-systems.md": "926811c999d3974a499cf7050b76fdc792924373a3774fdf636f506d6f61a89e",
+    "references/core-libraries.md": "8e69ef54c192cd009d21b1657c13847a7c58bdda79abe28f65794c69458db1a9",
+    "references/data-sources.md": "47d149592a34c73ac8d42b10f2a6862d78f8c651f225865dc022fdd746012684",
+    "references/gis-software.md": "ff8a3386ebe9b2336591cc623288f177e6541af939c651d833644ce7eb387331",
+    "references/industry-applications.md": "11734459a8c8dbb252a6ac17be0ea9b401b89f583000fa50c8e8d1c417fbe610",
+    "references/machine-learning.md": "33be2d79df3c8275e681b475c610b655b71cde87c80f492b0af3260745cefe59",
+    "references/programming-languages.md": "9b23081242a6fe86e54c9060f8d6051866d721d61c329a090c801a3492c26b2f",
+    "references/remote-sensing.md": "aba9c556aed8eada36f646ac988730484ba5f2323b9b32157768d6ddf5622438",
+    "references/review.md": "d66d7943321b24b9dfcdb856287ac5b0adbdad60a1fe8a0853f6c5849280a20f",
+    "references/scientific-domains.md": "8d42bd1463beeac8db7c7a85777881b8709a8d1eb949c3ca4df4c632414c56ef",
+    "references/specialized-topics.md": "418091a59ed796dce2b52e7a21345084a37e6cd3cd375187c927432372e1724a",
+    "references/troubleshooting.md": "f6179065efbdd9906450ea10f3b875d65050256cc5591957ddc31ebf9dc1d0d7",
+    "scripts/raster_workflows.py": "084a14749d8d42863051ae7a92fc67d87c75c2c3eb680cf06243aa61c57dd8de",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

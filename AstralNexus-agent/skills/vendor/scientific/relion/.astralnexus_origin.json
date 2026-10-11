@@ -1,0 +1,16 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/relion/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/relion/SKILL.md",
+  "name": "scientific:relion",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "3f80369ef73ccb8c20e2e49ad2b9bd71da3ffa4a819c035691ca4a5b26cb8399",
+    "references/acquisition-and-restarts.md": "0d69ce1609182c9a5ca2758294db26de3a93022a62a63b7b973c9e2afa958b77",
+    "references/runtime-and-validation.md": "777970158870b98a757a9e1896357d1e5d019a0b18f9939c08760f6fd85eb2be",
+    "scripts/spa_workflow.py": "119270dd08e0afac7916657a9fd0532db4c0ae787819c14210f981afb9c85547",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

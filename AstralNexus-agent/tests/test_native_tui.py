@@ -6,6 +6,18 @@ from types import SimpleNamespace
 from AstralNexus.cli import native_tui
 
 
+def test_installed_bundle_is_used_without_nonexistent_source_files(monkeypatch, tmp_path):
+    package = tmp_path / 'site' / 'AstralNexus'
+    bundle = package / 'tui_assets' / 'entry.mjs'
+    bundle.parent.mkdir(parents=True)
+    bundle.write_text('console.log("packaged")', encoding='utf-8')
+    monkeypatch.setattr(native_tui, '__file__', str(package / 'cli' / 'native_tui.py'))
+    monkeypatch.setattr(native_tui, 'source_root', lambda: tmp_path / 'site')
+    assert native_tui.bundle_path() == bundle
+    assert native_tui._tui_source_paths() == []
+    assert not native_tui.bundle_is_stale()
+
+
 def test_resolve_node_prefers_explicit_astralnexus_node(monkeypatch, tmp_path: Path) -> None:
     node = tmp_path / "node.exe"
     node.write_bytes(b"node")
@@ -69,6 +81,10 @@ def test_launch_uses_primary_buffer_and_native_mouse(monkeypatch, tmp_path: Path
 
 
 def test_launch_clears_inline_viewport_after_child_exit(monkeypatch, tmp_path: Path) -> None:
+    def _capture_callback(value):
+        writes.append(value)
+        return len(value)
+
     node = tmp_path / "node.exe"
     bundle = tmp_path / "entry.js"
     node.write_bytes(b"node")
@@ -87,7 +103,7 @@ def test_launch_clears_inline_viewport_after_child_exit(monkeypatch, tmp_path: P
     monkeypatch.setattr(
         native_tui.sys.stdout,
         "write",
-        lambda value: writes.append(value) or len(value),
+        _capture_callback,
     )
     monkeypatch.setattr(native_tui.sys.stdout, "flush", lambda: None)
 

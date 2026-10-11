@@ -1,0 +1,21 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/diffdock/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/diffdock/SKILL.md",
+  "name": "scientific:diffdock",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "5fafc5d9f53fa35a47c498f1cf3bad20fbee7404f248226e76e62bb327749912",
+    "assets/batch_template.csv": "fa759ceb9e93d6be7c972bb0150987230e1bab1cc7ca215c7f3411b9b9f5aa15",
+    "assets/custom_inference_config.yaml": "2fc8591df8808d025468483f00743c66dc8bad341b70a02b092e2e93df57e67d",
+    "references/confidence_and_limitations.md": "766668ff5c653e42f44de6d8409cc12a68e9dc5f1bb7bfc4e47a02902a2a4d58",
+    "references/parameters_reference.md": "c7e5cc0c71f89f5620de973f967095eb76119d4716400d776bf4e11d155e4906",
+    "references/workflows_examples.md": "dcc1444c0090fcca35b4563897a505b506ac93e2168c311e1ce226e5e041b322",
+    "scripts/analyze_results.py": "c19179691697c87fae5dee610dbf83b0c7cee93ac2a3340274786af0c67ecfe5",
+    "scripts/prepare_batch_csv.py": "237c8b851c0967905c9af14c8abc0190ea929924f827d53afc0a44170890a5f7",
+    "scripts/setup_check.py": "f3b8207c947516020fce95dd109f987cd901aa623b71a9a22cc83c802ab0becc",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

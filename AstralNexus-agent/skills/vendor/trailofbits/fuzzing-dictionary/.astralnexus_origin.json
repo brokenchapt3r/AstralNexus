@@ -1,0 +1,15 @@
+{
+  "repo": "trailofbits/skills",
+  "commit": "82fe8226252622fa807643bdca1710901198553a",
+  "source_path": "plugins/testing-handbook-skills/skills/fuzzing-dictionary/SKILL.md",
+  "source_url": "https://github.com/trailofbits/skills/blob/82fe8226252622fa807643bdca1710901198553a/plugins/testing-handbook-skills/skills/fuzzing-dictionary/SKILL.md",
+  "name": "trailofbits:fuzzing-dictionary",
+  "namespace": "trailofbits",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "b71fa7cab36ca466647123efa07c665c1968661f6d5060d9ac0cbb7f7599f7e0",
+    "agents/openai.yaml": "97e12eb1aab9cb4196c5b3a3bc603094563c4898996479acf48d0dacb014ea3b",
+    "assets/trail-of-bits-mark.svg": "4bf74c789b38dcf6ad762c136b6832363d27ae19fbaa9a18ec18d66ecce6ca05",
+    "UPSTREAM-LICENSE": "7abe19ec9bb73b36141b999b861d24ad855e808bafe0f81e84cce28556f6c297"
+  }
+}

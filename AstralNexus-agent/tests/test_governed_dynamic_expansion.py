@@ -3,6 +3,38 @@ import json
 
 from AstralNexus.core.governor import TaskGraphPatch
 from AstralNexus.core.orchestrator import Orchestrator
+import pytest
+
+
+@pytest.mark.parametrize('same_failure', [False, True])
+def test_planner_distinguishes_progressive_reference_fixes(tmp_path, monkeypatch, same_failure):
+    from AstralNexus.core.exceptions import RealLLMRequiredError
+    with Orchestrator(tmp_path, run_id='planner-reference-progress') as orchestrator:
+        root_id = orchestrator.initialize_task_graph('build verified delivery', [])
+        orchestrator.governor.llm_matching_enabled = True
+        orchestrator.governor.llm_client = object()
+        proposal = TaskGraphPatch(add_nodes=[{
+            'node_id': 'design', 'goal': 'design architecture', 'dependencies': [root_id],
+            'required_capabilities': ['system_architecture'],
+        }])
+        monkeypatch.setattr(orchestrator.governor, 'plan_task_graph_patch', lambda *args, **kwargs: proposal)
+        monkeypatch.setattr(orchestrator.governor, 'replan_rejected_task_graph_patch', lambda *args, **kwargs: proposal)
+        apply = orchestrator.governor.apply_task_graph_patch
+        attempts = []
+        def progressively_apply(*args, **kwargs):
+            attempts.append(1)
+            if len(attempts) <= 3:
+                artifact = 'schema' if same_failure else ['schema', 'requirements', 'database'][len(attempts)-1]
+                raise ValueError(f'graph patch references unknown input artifact: artifact:{artifact} (design)')
+            return apply(*args, **kwargs)
+        monkeypatch.setattr(orchestrator.governor, 'apply_task_graph_patch', progressively_apply)
+        if same_failure:
+            with pytest.raises(RealLLMRequiredError, match='same error repeated'):
+                orchestrator.plan_task_decomposition(root_id)
+            assert len(attempts) == 3
+        else:
+            assert orchestrator.plan_task_decomposition(root_id) == ['design']
+            assert len(attempts) == 4
 
 
 def test_governor_planner_persists_real_root_input_and_output(tmp_path: Path):
@@ -10,7 +42,7 @@ def test_governor_planner_persists_real_root_input_and_output(tmp_path: Path):
     root_id = orchestrator.initialize_task_graph("build verified delivery", [])
     orchestrator.governor.llm_matching_enabled = True
     orchestrator.governor.llm_client = object()
-    orchestrator.governor.plan_task_graph_patch = lambda *args, **kwargs: TaskGraphPatch(
+    setattr(orchestrator.governor, "plan_task_graph_patch", lambda *args, **kwargs: TaskGraphPatch(
         add_nodes=[{
             "node_id": "N-ARCH",
             "goal": "design system architecture",
@@ -19,7 +51,7 @@ def test_governor_planner_persists_real_root_input_and_output(tmp_path: Path):
         }],
         reason_codes=["TEST_DYNAMIC_PLAN"],
         reasoning="separate architecture before implementation",
-    )
+    ))
 
     added = orchestrator.plan_task_decomposition(root_id)
 
@@ -40,6 +72,7 @@ def test_background_candidates_become_canonical_task_nodes(tmp_path: Path):
     orchestrator = Orchestrator(tmp_path)
     root_id = orchestrator.initialize_task_graph("完成可验证交付", [])
     parent = orchestrator.task_graph.get_node(root_id)
+    assert parent is not None
     parent.metadata["background_candidates"] = [
         {
             "goal": "并行核验关键事实",
@@ -78,6 +111,7 @@ def test_background_candidate_value_rejection_does_not_create_hidden_execution(
     orchestrator = Orchestrator(tmp_path)
     root_id = orchestrator.initialize_task_graph("完成可验证交付", [])
     parent = orchestrator.task_graph.get_node(root_id)
+    assert parent is not None
     parent.metadata["background_candidates"] = [
         {
             "goal": "低价值重复任务",
@@ -95,8 +129,12 @@ def test_background_candidate_value_rejection_does_not_create_hidden_execution(
     assert {
         node.node_id for node in orchestrator.task_graph.nodes.values()
     } == {"U-001", "P-001"}
-    assert orchestrator.task_graph.get_node("U-001").status == "completed"
-    assert orchestrator.task_graph.get_node("P-001").role == "planner"
+    checked_node = orchestrator.task_graph.get_node("U-001")
+    assert checked_node is not None
+    assert checked_node.status == "completed"
+    checked_node = orchestrator.task_graph.get_node("P-001")
+    assert checked_node is not None
+    assert checked_node.role == "planner"
     events = [
         event
         for event in orchestrator.trace_recorder.events
@@ -111,7 +149,7 @@ def test_fault_injection_uses_governed_pipeline_and_canonical_checkpoint(
 ):
     orchestrator = Orchestrator(tmp_path, run_id="fault-run")
     root_id = orchestrator.initialize_task_graph("执行故障恢复验收", [])
-    orchestrator.governor.plan_fault_recovery = lambda **kwargs: {
+    setattr(orchestrator.governor, "plan_fault_recovery", lambda **kwargs: {
         "strategy": "retry_failed_node",
         "actions": [
             {
@@ -122,7 +160,7 @@ def test_fault_injection_uses_governed_pipeline_and_canonical_checkpoint(
             }
         ],
         "reasoning": "test",
-    }
+    })
 
     result = orchestrator.inject_fault(
         "node_failure",
@@ -133,7 +171,10 @@ def test_fault_injection_uses_governed_pipeline_and_canonical_checkpoint(
     assert result["target"] == root_id
     assert result["recovery_attempted"] is True
     restored = orchestrator.graph_store.load_task_graph("fault-run")
-    assert restored.get_node(root_id).status in {"ready", "repair_pending"}
+    assert restored is not None
+    checked_node = restored.get_node(root_id)
+    assert checked_node is not None
+    assert checked_node.status in {"ready", "repair_pending"}
 
 
 def test_router_communication_edge_is_committed_by_governor(tmp_path: Path):

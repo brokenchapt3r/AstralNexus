@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/stable-baselines3/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/stable-baselines3/SKILL.md",
+  "name": "scientific:stable-baselines3",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "8383ae480e27163b9dbe1d9af822e05f0e85dd05b5bab1f6444588d57f569837",
+    "references/algorithms.md": "e576c5d4dbdb28177291f8e52f15fe038a2950ab783a80f1e9f4249b6fc1f9f7",
+    "references/callbacks.md": "33b2111f4fad75cb125ec21dbc41ede137fa32c324efdf988dc065aac547e4ee",
+    "references/custom_environments.md": "0ceef4d36ec142d29ee8311a98ac99faa9904de3c382c22d3de8031ac6e8590f",
+    "references/vectorized_envs.md": "5a5e81fe25f3ed14a9f28eae82d9fbf604f548f6943bc5c61ad61135afeae0c3",
+    "scripts/custom_env_template.py": "1dae2d6aca61541bfd994b1b3375c3f70bb6b6418d3eedbb6f5b60eb3f97c6b7",
+    "scripts/evaluate_agent.py": "47bd2d49165946abcbeccdcce1790945528174de64c01009bb9064f792fc7484",
+    "scripts/train_rl_agent.py": "349b8f98669424884c2210bba34185f4dfa51f1b8f96451e973c91e938ba16af",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

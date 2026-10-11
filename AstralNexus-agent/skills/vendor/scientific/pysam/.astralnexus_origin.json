@@ -1,0 +1,26 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/pysam/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/pysam/SKILL.md",
+  "name": "scientific:pysam",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "afc275bbeb084553cd6507c4ffee848c46bef94dcd24c3b8a58d8b14d021ea09",
+    "references/alignment_files.md": "f7577248277849f36dcfea68a6bf38b92113369cfddeecd46bb670ba1b358790",
+    "references/api_reference.md": "019b24b516f5cd964d68d8782f7c364f5de3b71a864d56ca8806a6692905bc49",
+    "references/common_workflows.md": "ed2247dc745fe635dd7818ec6103eeec269efe9503c0f20c4946ba0be6e670de",
+    "references/coordinates_and_indexing.md": "9cfcb78a05d6b9bb8a28f5464c6d0cc83625a99994c23a710d26b909dd2fe57d",
+    "references/cram_and_performance.md": "f7a15b37e1b7ca3039ed5183ff13f6d5903d835baebf1d19a6a9c3bcc2e699ba",
+    "references/migration_to_0_24.md": "9f258110e9e959aedaf0a1997deb790d5833c730a6c1dcc9b5a6d8ea86a8033a",
+    "references/sequence_files.md": "2e1d901500e1c202e86f8e92d254d913aabb804505f75455ee19bdb63748f2a6",
+    "references/sources.md": "75f4efa0870a3c5448f9e292cd8a876a27bc199fec4326bde464c6d3fc07d7ae",
+    "references/variant_files.md": "7d961e738272ffb98c39c78e21886fe774139a99948f7f1a3cc2bc77384212d3",
+    "scripts/alignment_qc.py": "6cb6084fd467bcd3a6048ffa6f2cb3865f87d62f01699e026cf43e13a75a314c",
+    "scripts/filter_alignments.py": "ef80dca3d48e5b713f49fdd87c52b58e933a9aad1e4bf0dfbf994f08e931b7ef",
+    "scripts/inspect_hts.py": "1db21bbae44d00554076c8a326c78be0a19ba53ead7e2db191615d2f0c329546",
+    "scripts/variant_summary.py": "79bad44cd398e1dc227b920de26433284c75bfc9865441a413248a7b19861731",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

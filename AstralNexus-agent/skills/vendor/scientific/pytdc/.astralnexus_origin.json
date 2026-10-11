@@ -1,0 +1,23 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/pytdc/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/pytdc/SKILL.md",
+  "name": "scientific:pytdc",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "b7df3f50c1c618a47a81e994b2863ddd8adf695e795aa495c3a8fef5e78a0493",
+    "references/datasets.md": "a056e9e0cd4ce0d29f21f66c01bd76e6dc9f0ffcd0dcfebcea9756d84cdbda9f",
+    "references/oracles.md": "bb2dfa8f0a3924d86317873a0b6f4b23560bffb60226d11816d3bf9b611035f5",
+    "references/sources.md": "452714c37a4b65da76f50d3749934f67106093910149572c0aea8fb4b9b0a21f",
+    "references/utilities.md": "cc3c0ab067029e7dff37c5480b483092387993555567aa3b0fe1b7df88f6c95f",
+    "scripts/benchmark_evaluation.py": "821c3f05b0752ecc93852251c2e72d6e5e066c7d14fb1e9975d0d41cc5ed667c",
+    "scripts/cache_audit.py": "8525adb221fe0a5cdf87475f10db1317bc74015ee5719e34de0a2c2b92523db9",
+    "scripts/discover_metadata.py": "e761eb71b2c7c131db661920e252d88ef72402004e3445055487a344dace1e0f",
+    "scripts/load_and_split_data.py": "dff84d0a97fa83e809e0033c440c3574452feeeed18daffd6604f0952503873e",
+    "scripts/molecular_generation.py": "128701240a4f5d5258cf6ab12d6ac96166353551f6fb914c060da3eee4f2bbd2",
+    "scripts/_common.py": "5400062833084d7dfbe6fa603901d2d931689c1d2ad587c9ae67052f50b98791",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

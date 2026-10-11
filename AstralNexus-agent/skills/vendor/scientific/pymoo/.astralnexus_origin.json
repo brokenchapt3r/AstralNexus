@@ -1,0 +1,26 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/pymoo/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/pymoo/SKILL.md",
+  "name": "scientific:pymoo",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "942573e5b8099717487b45cf84798348fb2128516791dcafe2d76aa1bdfed117",
+    "references/algorithms.md": "c60fac31687128d0b12719a01c6a24ebe18966f3ade34b45714ffb8ae2c45020",
+    "references/constraints_mcdm.md": "ad257ccf535479d9b90126c5e5a631bc37beaaf7295b0605d81bdccfb44e169c",
+    "references/lifecycle.md": "652a89b856d92557dba427e677399328a617d4598f2b4303a844256189013912",
+    "references/operators.md": "6dca5b73eed994a8fdaa24be71c87299cd7d2422bdf930f24da0ebbe77357da7",
+    "references/parallelization.md": "e805bbb21a5280e1a6b079617df1a40953ced7a0d11748b28c2dbff0d6623433",
+    "references/problems.md": "8047432597222b4c2bfa62d922ab12c40b56d57428745fe7a74ed22b5f829102",
+    "references/quick_start_workflows.md": "5a097ef9475a33ca8a0d37c07d98bcd93212cae72d4c7d725ed5d35d4b3fb908",
+    "references/visualization.md": "1e799c45a7cf1fb01a7c86cf959c9561b82497921d45165326e5de66fbd2d5e4",
+    "scripts/custom_problem_example.py": "d3e20ca36e019b6de5cda28fe8f0e05ad79abcd43821f4ae6171fd6db1212b3a",
+    "scripts/decision_making_example.py": "95b03a494d9397be16d1c41fe09de825984d880a55b49ec4e0efc29e703c948a",
+    "scripts/many_objective_example.py": "4f6053cb0c00c44c31ab91c72e82555936ef81bcc7c9f356b813f5def9ff426b",
+    "scripts/multi_objective_example.py": "57b9cb1a7084ab3fcbae81b41f0639af61c2b13f66f89028ab587895928709e8",
+    "scripts/single_objective_example.py": "324bf358fc7049c07149b9154f201016e22d9ebe8115886f7756686c55f27582",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

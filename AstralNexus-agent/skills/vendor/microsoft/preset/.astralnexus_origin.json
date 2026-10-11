@@ -1,0 +1,16 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-skills/skills/microsoft-foundry/models/deploy-model/preset/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-skills/skills/microsoft-foundry/models/deploy-model/preset/SKILL.md",
+  "name": "microsoft:preset",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "EXAMPLES.md": "a13e5072e0f1f2d1f10fa4b193d9566feea9451fda3e545c4a60cf9ca474778a",
+    "SKILL.md": "a2bab6b973292e2e0833b47257cfdb7354777dbdff5669db67ea6874c453bd09",
+    "references/preset-workflow.md": "81af3221959d89f565c2eadd800841817bba373ed79df8f62568a9f9c30bb071",
+    "references/workflow.md": "fd7c06e54cf7f1dc437b6e30683550f2511e9138f7038e67b7c382730a0c83e2",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

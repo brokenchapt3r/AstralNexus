@@ -1,0 +1,20 @@
+{
+  "repo": "huggingface/skills",
+  "commit": "ca0325bb20b2d0a1b2efa893670c4c72f79e707b",
+  "source_path": "skills/hf-cloud-sagemaker-production-defaults/SKILL.md",
+  "source_url": "https://github.com/huggingface/skills/blob/ca0325bb20b2d0a1b2efa893670c4c72f79e707b/skills/hf-cloud-sagemaker-production-defaults/SKILL.md",
+  "name": "huggingface:hf-cloud-sagemaker-production-defaults",
+  "namespace": "huggingface",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "6a8c1aff465e548ac4476d56831f864621af83b6a0f54544637601f3ecc44f9e",
+    "references/deployment-template.md": "c5d65eb2c667f002d92b3a33f69958d1d734a96a7b13dcb1561e51f5c3bdbcbc",
+    "scripts/deploy.py": "0299f3857409b8f7a7a57efd74602bf7e8364237c4252e5c09468831dfb81223",
+    "scripts/deploy_async.py": "37ef561fbb19db5f11eb7fe53ef1681d31b5c5ddc64f0009359d2b11b6eeb60e",
+    "scripts/deploy_ic.py": "eed165a57034937027c50622e9d0c7e356fd085abbd0a695f1a3ca7f82207fd0",
+    "scripts/invoke_endpoint.py": "559173501af510e257156f27990e27c23d2cc3bede1f1ecb1a767de4b5b960e9",
+    "scripts/teardown.py": "640c35eca572c492ab3dae016ed227d192f7db878dbb11e72dd2b550da8d220d",
+    "scripts/_common.py": "698f166212a005a5420b774ebdff1569e54244d14ee4d90bb8653ee8696d508d",
+    "UPSTREAM-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}

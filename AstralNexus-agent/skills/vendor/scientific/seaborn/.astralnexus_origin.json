@@ -1,0 +1,20 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/seaborn/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/seaborn/SKILL.md",
+  "name": "scientific:seaborn",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "d1500d1e3d9db1db4c72cd272861378d1b98b0b5a5a98e8a3fca5a45bc0c6b2e",
+    "references/examples.md": "9ac123a232f3aca67a71e0d8132e2b9bd60ba0adcd8871e0368aea9dfc494577",
+    "references/function_reference.md": "0b667b9154898ce9d6096cd6bc7af72ca9e50f8f55a7dbcc4d0c03a3f05ff08a",
+    "references/grids_and_levels.md": "03831ff54cc1885934c9bb51223fded6f6ff282f23c56653b35641c8c073f27a",
+    "references/objects_interface.md": "c3ddb1b2f97d77d9c70c1f079c99b9355b3d8c18874912522032be14d653ea17",
+    "references/palettes_and_theming.md": "d7b8767e1533c5753d2b8792bcc2edff21c28f116f6e05bb200a2b3b1a0799c5",
+    "references/patterns_and_troubleshooting.md": "65c6afdc6551f8ec240a8b3316f2f4739a4734b59267b9c3f486ad6428458cac",
+    "references/plotting_functions.md": "9a3e88895a33a2d9329b365987491981a695226fb9ed97ccb91f334d28c56385",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-typescript/skills/frontend-ui-dark-ts/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-typescript/skills/frontend-ui-dark-ts/SKILL.md",
+  "name": "microsoft:frontend-ui-dark-ts",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "ae89e5f7592c2ec2c279bac49b85c0eac2c269eb6331a45a33eea185a46e172b",
+    "assets/foundry-logo-dark.png": "1674fc8017d1cc7459f5e8af47c1265144a2d79c190238cfcaa9fd40f487a303",
+    "assets/foundry-logo-light.png": "8d6957281b18404128d3228a23a55a03a6ffb7419a3b4edb05e7d5f536208e57",
+    "assets/Segoe UI Bold Italic.ttf": "ed64852ff384964b0245a9ec1c2ab7353daaeda472fcb704ef1d7fe801052f54",
+    "assets/Segoe UI Bold.ttf": "3084cb39c0f24d7dfa6b576014ec75d0c3b9e852e1a545eaa96253e087f02a2b",
+    "assets/Segoe UI Italic.ttf": "4d5c77f910244d031803790c13f480e814701ba67662f6873f65caa7606e5621",
+    "assets/Segoe UI.ttf": "3745c347d168dd938971aed573ab2140b6a766f658c4f353f06ddc05e976ff7a",
+    "references/components.md": "53cd260faffd99aed9ba28a3f54eab442596d322feb0e5e1acb3c962b277b86f",
+    "references/design-tokens.md": "d8b30ce52b279affab68f4bec62bda2e237cb2837c47a50dfd6eb496d96a856c",
+    "references/patterns.md": "912f3bfe0d176b6506c769d975268e135d752c033abb349078190fa9547b86bb",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

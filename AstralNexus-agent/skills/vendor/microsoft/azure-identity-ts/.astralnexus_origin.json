@@ -1,0 +1,15 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-typescript/skills/azure-identity-ts/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-typescript/skills/azure-identity-ts/SKILL.md",
+  "name": "microsoft:azure-identity-ts",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "779d1684a34a4a051e23835b99ce51909d4485d88db44df9508e3a4debdf729b",
+    "references/browser-auth.md": "ae12c4dfb043b5122cbc0ce7789dfda130b8688f94963dd1a298537de6e9c9a9",
+    "references/credential-types.md": "88a305a18093f1a825b378251b6ab74cb556fdb8086c6691eadef0c4d7655a2e",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

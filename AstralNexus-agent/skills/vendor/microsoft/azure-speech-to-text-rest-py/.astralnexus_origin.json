@@ -1,0 +1,14 @@
+{
+  "repo": "microsoft/skills",
+  "commit": "ce7edea90860e0c69fa36db164584c87908e09f5",
+  "source_path": ".github/plugins/azure-sdk-python/skills/azure-speech-to-text-rest-py/SKILL.md",
+  "source_url": "https://github.com/microsoft/skills/blob/ce7edea90860e0c69fa36db164584c87908e09f5/.github/plugins/azure-sdk-python/skills/azure-speech-to-text-rest-py/SKILL.md",
+  "name": "microsoft:azure-speech-to-text-rest-py",
+  "namespace": "microsoft",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "e19f62d6ccb67623f28c72715cab0b8ee8b378b9d2a2bcd0d848241c8b3af5df",
+    "references/pronunciation-assessment.md": "b4c6560cf5cb805f705ab79caf7590791ee153660f8ef1747da27b7ef9d8a05f",
+    "UPSTREAM-LICENSE": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+  }
+}

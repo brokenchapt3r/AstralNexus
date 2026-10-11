@@ -1,12 +1,24 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from copy import deepcopy
 from enum import Enum
 from datetime import datetime, timezone
 from threading import RLock
+from functools import wraps
 from typing import Any, Dict, List, Optional
 
 from AstralNexus.core.state_machine import TaskStatus, assert_transition, normalize_status
+from AstralNexus.core.edge_collection import EdgeCollection
+from AstralNexus.core.contract_metadata import ContractMetadata, CONTRACT_FIELDS, LegacyDefaultList, LegacyDefaultDict
+
+
+def synchronized_graph(function):
+    @wraps(function)
+    def wrapped(self, *args, **kwargs):
+        with self._mutation_lock:
+            return function(self, *args, **kwargs)
+    return wrapped
 
 
 class ArtifactAcceptanceStatus(str, Enum):
@@ -44,7 +56,17 @@ class TaskNode:
     
     # Outputs produced by this task
     outputs: List[str] = field(default_factory=list)
+
+    # Explicit data-plane contract.  These fields are intentionally separate
+    # from free-form metadata so scheduling and validation cannot lose the
+    # producer/consumer boundary between graph patches and Workers.
+    owned_paths: List[str] = field(default_factory=LegacyDefaultList)
+    input_artifacts: List[str] = field(default_factory=LegacyDefaultList)
+    output_artifacts: List[str] = field(default_factory=LegacyDefaultList)
+    handoff_contract: Dict[str, Any] = field(default_factory=LegacyDefaultDict)
     
+    expected_outputs: List[Any] = field(default_factory=LegacyDefaultList)
+
     # Risk level of the task
     risk_level: str = "low"  # low, medium, high
     
@@ -76,9 +98,54 @@ class TaskNode:
         """
         if name == "status" and value is not None:
             value = normalize_status(value)
+        if name in CONTRACT_FIELDS:
+            if isinstance(value, (LegacyDefaultList, LegacyDefaultDict)):
+                self.__dict__.setdefault('_legacy_contract_defaults', set()).add(name)
+                value = CONTRACT_FIELDS[name]()
+            else:
+                self.__dict__.get('_legacy_contract_defaults', set()).discard(name)
+            if not isinstance(value, CONTRACT_FIELDS[name]):
+                raise ValueError(f'node {name} must be {CONTRACT_FIELDS[name].__name__}')
+            super().__setattr__(name, value)
+            metadata = self.__dict__.get('metadata')
+            if isinstance(metadata, ContractMetadata):
+                dict.__setitem__(metadata, name, value)
+                contract = metadata.get('task_contract')
+                if isinstance(contract, ContractMetadata): dict.__setitem__(contract, name, value)
+            return
+        if name == 'metadata':
+            previous = self.__dict__.get('metadata')
+            if isinstance(previous, ContractMetadata) and previous is value:
+                return  # |= already updated the active projection.
+            metadata = ContractMetadata(value or {}, owner=self)
+            legacy_defaults = self.__dict__.pop('_legacy_contract_defaults', set())
+            legacy_defaults.update(key for key in CONTRACT_FIELDS if key not in self.__dict__)
+            ignored_legacy = {}
+            for key, factory in CONTRACT_FIELDS.items():
+                canonical = getattr(self, key, factory())
+                # One-time legacy metadata import. Subsequent writes through
+                # either compatibility face target the canonical attribute.
+                if key in legacy_defaults and key in metadata:
+                    canonical = metadata[key]
+                    if not isinstance(canonical, factory): raise ValueError(f'invalid legacy node {key}')
+                elif key in metadata and metadata[key] != canonical:
+                    ignored_legacy[key] = deepcopy(metadata[key])
+                super().__setattr__(key, canonical)
+                dict.__setitem__(metadata, key, canonical)
+            self._ignored_legacy_contracts: dict[str, Any] = ignored_legacy
+            if isinstance(metadata.get('task_contract'), dict):
+                metadata['task_contract'] = metadata['task_contract']
+            if isinstance(previous, ContractMetadata): previous.detach()
+            value = metadata
         super().__setattr__(name, value)
+
+    def __setstate__(self, state: dict[str, Any]) -> None:
+        self.__dict__.update(state)
+        self.metadata = state.get('metadata') or {}
+        if state.get('_ignored_legacy_contracts') and not self._ignored_legacy_contracts:
+            self._ignored_legacy_contracts = state['_ignored_legacy_contracts']
     
-@dataclass
+@dataclass(frozen=True)
 class TaskEdge:
     """Represents a relationship between task nodes."""
     
@@ -133,8 +200,8 @@ class Artifact:
     # Unique identifier
     artifact_id: str
     
-    # Responsible node
-    node_id: str
+    # Responsible node; None for run-level artifacts.
+    node_id: str | None
     
     # Type of artifact
     artifact_type: str
@@ -168,8 +235,8 @@ class Metric:
     # Unique identifier
     metric_id: str
     
-    # Associated node
-    node_id: str
+    # Associated node; None for run-level metrics.
+    node_id: str | None
     
     # Name of the metric
     name: str
@@ -222,12 +289,17 @@ class TaskGraph:
             nodes: Optional initial TaskNode objects.
             edges: Optional initial TaskEdge objects.
         """
+        self._mutation_lock = RLock()
+        self._edge_revision = 0
+        self._indexed_revision = -1
+        self._outgoing: Dict[str, List[TaskEdge]] = {}
+        self._incoming: Dict[str, List[TaskEdge]] = {}
+        self._edge_lookup: Dict[tuple[str, str, str], TaskEdge] = {}
         self.nodes: NodeList = NodeList()
-        self.edges: List[TaskEdge] = []
+        self.edges = []
         self.facts: Dict[str, Fact] = {}
         self.artifacts: Dict[str, Artifact] = {}
         self.metrics: Dict[str, Metric] = {}
-        self._mutation_lock = RLock()
         
         if nodes:
             for node in nodes:
@@ -243,6 +315,33 @@ class TaskGraph:
                 else:
                     self.add_edge(edge)
     
+    @property
+    def edges(self) -> List[TaskEdge]:
+        return self._edges
+
+    @edges.setter
+    def edges(self, values: List[TaskEdge]) -> None:
+        with self._mutation_lock:
+            self._edges = EdgeCollection(values, self._mutation_lock, self._edges_changed)
+            self._edges_changed()
+
+    def _edges_changed(self) -> None:
+        self._edge_revision += 1
+
+    def _ensure_edge_indexes(self) -> None:
+        if self._indexed_revision == self._edge_revision:
+            return
+        self._outgoing, self._incoming, self._edge_lookup = {}, {}, {}
+        for edge in self.edges:
+            self._index_edge(edge)
+        self._indexed_revision = self._edge_revision
+
+    def _index_edge(self, edge: TaskEdge) -> None:
+        self._outgoing.setdefault(edge.source, []).append(edge)
+        self._incoming.setdefault(edge.target, []).append(edge)
+        self._edge_lookup[(edge.source, edge.target, edge.edge_type)] = edge
+
+    @synchronized_graph
     def add_node(self, node_data) -> TaskNode:
         """Add a node to the task graph.
         
@@ -291,6 +390,7 @@ class TaskGraph:
         """
         return list(self.nodes.values())
     
+    @synchronized_graph
     def update_node_status(self, node_id: str, status: str) -> bool:
         """Update the status of a node with state machine enforcement.
         
@@ -318,6 +418,7 @@ class TaskGraph:
             return True
         return False
     
+    @synchronized_graph
     def add_edge(self, edge_or_source, target=None, edge_type=None, metadata=None) -> TaskEdge:
         """Add an edge between two nodes.
         
@@ -348,17 +449,13 @@ class TaskGraph:
         if edge.target not in self.nodes:
             raise ValueError(f"Target node {edge.target} does not exist")
 
-        for existing in self.edges:
-            if (existing.source == edge.source and
-                existing.target == edge.target and
-                existing.edge_type == edge.edge_type):
-                existing.metadata.update(edge.metadata)
-                if (
-                    edge.edge_type in {"dependency", "depends_on"}
-                    and edge.source not in self.nodes[edge.target].dependencies
-                ):
-                    self.nodes[edge.target].dependencies.append(edge.source)
-                return existing
+        self._ensure_edge_indexes()
+        existing = self._edge_lookup.get((edge.source, edge.target, edge.edge_type))
+        if existing is not None:
+            existing.metadata.update(edge.metadata)
+            if edge.edge_type in {"dependency", "depends_on"} and edge.source not in self.nodes[edge.target].dependencies:
+                self.nodes[edge.target].dependencies.append(edge.source)
+            return existing
 
         if edge.edge_type in {"dependency", "depends_on"}:
             if self._would_create_cycle(edge.source, edge.target):
@@ -373,10 +470,14 @@ class TaskGraph:
             if edge.source not in target_node.dependencies:
                 target_node.dependencies.append(edge.source)
         self.edges.append(edge)
+        self._index_edge(edge)
+        self._indexed_revision = self._edge_revision
         return edge
     
+    @synchronized_graph
     def _would_create_cycle(self, source: str, target: str) -> bool:
         """Check if adding edge source->target would create a cycle."""
+        self._ensure_edge_indexes()
         # If source is reachable from target, source->target closes a cycle.
         visited = set()
         stack = [target]
@@ -388,8 +489,8 @@ class TaskGraph:
                 continue
             visited.add(node)
             # Follow outgoing edges
-            for edge in self.edges:
-                if edge.source == node and edge.edge_type in {"dependency", "depends_on"}:
+            for edge in self._outgoing.get(node, ()):
+                if edge.edge_type in {"dependency", "depends_on"}:
                     stack.append(edge.target)
         return False
     
@@ -402,7 +503,9 @@ class TaskGraph:
         Returns:
             List of outgoing edges
         """
-        return [edge for edge in self.edges if edge.source == node_id]
+        with self._mutation_lock:
+            self._ensure_edge_indexes()
+            return list(self._outgoing.get(node_id, ()))
     
     def get_incoming_edges(self, node_id: str) -> List[TaskEdge]:
         """Get all incoming edges to a node.
@@ -413,8 +516,11 @@ class TaskGraph:
         Returns:
             List of incoming edges
         """
-        return [edge for edge in self.edges if edge.target == node_id]
+        with self._mutation_lock:
+            self._ensure_edge_indexes()
+            return list(self._incoming.get(node_id, ()))
     
+    @synchronized_graph
     def add_fact(self, fact_data) -> Fact:
         """Add a fact to the task graph.
         
@@ -434,6 +540,7 @@ class TaskGraph:
         self.facts[fact.fact_id] = fact
         return fact
     
+    @synchronized_graph
     def add_artifact(self, artifact_data) -> Artifact:
         """Add an artifact to the task graph.
         
@@ -453,6 +560,7 @@ class TaskGraph:
         self.artifacts[artifact.artifact_id] = artifact
         return artifact
     
+    @synchronized_graph
     def add_metric(self, metric_data) -> Metric:
         """Add a metric to the task graph.
         
@@ -472,48 +580,85 @@ class TaskGraph:
         self.metrics[metric.metric_id] = metric
         return metric
     
-    def promote_waiting_nodes(self) -> List[str]:
-        """Promote nodes waiting for dependencies to ready status.
-        
-        Checks nodes with status "admitted" or "waiting_dependencies" and
-        promotes them to "ready" if all dependencies are satisfied.
-        
-        Returns:
-            List of node IDs that were promoted
+    def resolve_dependency(self, node_id: str) -> Optional[TaskNode]:
+        """Resolve one unambiguous producer; replacement is not completion.
+
+        Missing, cyclic or ambiguous replacement chains fail closed. Historical
+        artifacts from a superseded producer do not satisfy its successor.
         """
+        seen: set[str] = set()
+        while node_id not in seen:
+            seen.add(node_id)
+            node = self.nodes.get(node_id)
+            if node is None or node.status != "superseded":
+                return node
+            successors = [
+                candidate for candidate in self.nodes.values()
+                if candidate.status != "cancelled"
+                and str(candidate.metadata.get("recovery_of")
+                        or candidate.metadata.get("supersedes_node_id") or "") == node_id
+            ]
+            if len(successors) != 1:
+                return None
+            node_id = successors[0].node_id
+        return None
+
+    def dependency_available(self, consumer: TaskNode, node_id: str,
+                             *, for_verification: bool = False) -> bool:
+        producer = self.resolve_dependency(node_id)
+        if producer is None or producer.node_id == consumer.node_id:
+            return False
+        allowed = {"completed"}
+        if consumer.metadata.get("trigger") in {"verification_failure", "fault_recovery"}:
+            allowed.update({"repair_pending", "failed"})
+        if for_verification:
+            # Submitted evidence can be inspected before its lifecycle closes.
+            allowed.update({"result_submitted", "verifying", "repair_pending"})
+        return producer.status in allowed
+
+    def readiness_blockers(self, node: TaskNode) -> Dict[str, List[str]]:
+        """Explain readiness using the same dependency and evidence gate as scheduling."""
+        dependencies = []
+        for dep_id in node.dependencies:
+            if not self.dependency_available(node, dep_id):
+                dependencies.append(dep_id)
+
+        effective_producers = {
+            producer.node_id for dep_id in node.dependencies
+            if (producer := self.resolve_dependency(dep_id)) is not None
+        }
+        missing_artifacts = []
+        for required in node.input_artifacts:
+            normalized = str(required).replace("\\", "/")
+            matching = [
+                artifact for artifact_id, artifact in self.artifacts.items()
+                if (
+                    normalized == str(artifact_id).replace("\\", "/")
+                    or normalized == str(artifact.path).replace("\\", "/")
+                    or str(artifact.path).replace("\\", "/").endswith("/" + normalized)
+                )
+                and getattr(artifact.acceptance_status, "value", artifact.acceptance_status)
+                == ArtifactAcceptanceStatus.ACCEPTED.value
+                and (not node.dependencies or artifact.node_id in effective_producers)
+            ]
+            if not matching:
+                missing_artifacts.append(str(required))
+        return {
+            "unsatisfied_dependencies": dependencies,
+            "missing_input_artifacts": missing_artifacts,
+        }
+
+    @synchronized_graph
+    def promote_waiting_nodes(self) -> List[str]:
+        """Promote only nodes with satisfied dependencies and accepted handoffs."""
         promoted = []
         for node in self.nodes.values():
-            if node.status in ["admitted", "waiting_dependencies"]:
-                # Check if all dependencies are satisfied
-                deps_satisfied = True
-                for dep_id in node.dependencies:
-                    dep_node = self.nodes.get(dep_id)
-                    dependency_satisfied = bool(
-                        dep_node and dep_node.status in ["completed", "superseded"]
-                    )
-                    # Verification-repair workers consume the failed
-                    # parent's submitted result, so they may run while the
-                    # parent is repair_pending.  Ordinary downstream work
-                    # still requires a completed dependency.
-                    repair_worker = node.metadata.get("trigger") in {
-                        "verification_failure", "fault_recovery"
-                    }
-                    if (
-                        repair_worker
-                        and dep_node
-                        and dep_node.status in ["repair_pending", "failed"]
-                    ):
-                        dependency_satisfied = True
-                    if not dependency_satisfied:
-                        deps_satisfied = False
-                        break
-                
-                if deps_satisfied:
+            if node.status in {"admitted", "waiting_dependencies"}:
+                if not any(self.readiness_blockers(node).values()):
                     self.update_node_status(node.node_id, "ready")
                     promoted.append(node.node_id)
-        
         return promoted
-    
+
     def get_ready_nodes(self) -> List[TaskNode]:
         """Get all nodes that are ready to be executed.
         
@@ -545,7 +690,7 @@ class TaskGraph:
             List of downstream TaskNodes
         """
         downstream = []
-        for edge in self.edges:
+        for edge in self.get_outgoing_edges(node_id):
             if edge.source == node_id and edge.edge_type in {"depends_on", "dependency"}:
                 dependent = self.nodes.get(edge.target)
                 if dependent:
@@ -562,13 +707,14 @@ class TaskGraph:
             List of upstream TaskNodes
         """
         upstream = []
-        for edge in self.edges:
+        for edge in self.get_incoming_edges(node_id):
             if edge.target == node_id and edge.edge_type in {"depends_on", "dependency"}:
                 dependency = self.nodes.get(edge.source)
                 if dependency:
                     upstream.append(dependency)
         return upstream
     
+    @synchronized_graph
     def to_dict(self) -> Dict[str, Any]:
         """Convert the task graph to a dictionary representation.
         

@@ -32,6 +32,16 @@ def estimate_tokens(text: str) -> int:
     return max(1, len(text) // 4) if text else 0
 
 
+def estimate_provider_input_tokens(char_count: int) -> int:
+    """Use the conservative provider preflight estimate (three chars/token).
+
+    Context compression and request admission must agree on this estimate;
+    otherwise a prompt can appear below the compression threshold and then be
+    measured one third larger by the provider-request boundary.
+    """
+    return max(0, (max(0, int(char_count)) + 2) // 3)
+
+
 def rough_tokens_for_messages(messages: List[Dict[str, Any]]) -> int:
     """Estimate token count for a list of chat messages.
     
@@ -46,4 +56,4 @@ def rough_tokens_for_messages(messages: List[Dict[str, Any]]) -> int:
     """
     import json
     text = json.dumps(messages, ensure_ascii=False, separators=(",", ":"))
-    return max(0, (len(text) + 3) // 4)
+    return estimate_provider_input_tokens(len(text))

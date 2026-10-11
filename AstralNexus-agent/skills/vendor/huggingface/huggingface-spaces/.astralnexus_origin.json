@@ -1,0 +1,27 @@
+{
+  "repo": "huggingface/skills",
+  "commit": "ca0325bb20b2d0a1b2efa893670c4c72f79e707b",
+  "source_path": "skills/huggingface-spaces/SKILL.md",
+  "source_url": "https://github.com/huggingface/skills/blob/ca0325bb20b2d0a1b2efa893670c4c72f79e707b/skills/huggingface-spaces/SKILL.md",
+  "name": "huggingface:huggingface-spaces",
+  "namespace": "huggingface",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "README.md": "7d478e2dee162aadab87d57969b25f9fb16166324e727b73bf7c8e23f80bfb42",
+    "SKILL.md": "efa6506be823aaea03c31ef6cd06734485f7c451065aab43cfa5b5053c0df82b",
+    "references/3d-cuda-extensions.md": "9024bd891770d34c38c215e322bae1003859832e4edfb94a4d8acdfada327476",
+    "references/3d-generation.md": "884fd62a915bcd654959bc3ca1301fb5155826ddc8d45be9fa97518028bb843e",
+    "references/3d-gsplat.md": "323eb8dd108fb0bc2189f760194fca990dd8d7025e05b41f8a33f81c18ac218b",
+    "references/3d-models.md": "f472d6cac304ec903730ac3edc0ed921f396419b1e23cb7f9ffb0a5c406bcbe9",
+    "references/3d-outputs.md": "37d26a20e91c512d3061295c5671a8a890f017a42b6d0694c9ae7c40f7ac5334",
+    "references/buckets.md": "45a4faa48d5e04fe2255792da4d9c8b1f460eed1065605c56a3389d0a62dfe90",
+    "references/debugging.md": "98befd8ca23b178fefe93212888c9e1c0cf0399745a43e742a6d01919b37d95b",
+    "references/gradio.md": "ec341392222a05e903cf5c8a1419a64558e16c877af76646cd67d9abc525afe6",
+    "references/grants.md": "f87c6b70c075088fa3821c31bd658ef6530c92816ff183c97b543077d064e400",
+    "references/inference-providers.md": "c11c02f2c2679c1dccec684b9d5803493e912d45e44f11164c6cb8623ed73051",
+    "references/known-errors.md": "638cb9ea501c36695de31973b92674b5c97e40d1c0c02ca9373bb05a7de6229c",
+    "references/requirements.md": "556b834b6d31ed37fa2249e0bef34344ada98b75fe77078281846acc4f7b2385",
+    "references/zerogpu.md": "9364442337690bbf0d6f51276e57bed99e9ff12d51e79e0efd632a1de0abeb09",
+    "UPSTREAM-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}

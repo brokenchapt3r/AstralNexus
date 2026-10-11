@@ -5,6 +5,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 import json
+import uuid
+from contextlib import contextmanager
+from contextvars import ContextVar
+from threading import RLock
+import sqlite3
+from contextlib import closing
 
 from AstralNexus.core.artifacts import append_jsonl, write_json
 from AstralNexus.core.identity import CODE_NAME, PRODUCT_NAME
@@ -23,6 +29,7 @@ class TraceRecorder:
         default_node_id: str | None = None,
         event_callback: Callable[[dict[str, Any]], None] | None = None,
         event_bus: RuntimeEventBus | None = None,
+        owner_token_provider: Callable[[], dict[str, Any] | None] | None = None,
     ):
         self.run_dir = run_dir
         self.trace_path = run_dir / "trace.jsonl"
@@ -30,6 +37,14 @@ class TraceRecorder:
         self.layout.ensure_runtime_dirs()
         self.node_io_dir = self.layout.node_io_dir
         self.events: list[dict[str, Any]] = []
+        self._state_lock = RLock()
+        self._recorder_id = uuid.uuid4().hex
+        self._record_sequence = 0
+        self._owner_token_provider = owner_token_provider
+        self._last_owner: dict[str, Any] = {}
+        self._execution_context: ContextVar[dict[str, tuple[str, int, int, str]]] = ContextVar("trace_execution_context", default={})
+        self._recovery_context: ContextVar[str] = ContextVar("recovery_episode", default="")
+        self._recovery_attempt: ContextVar[int] = ContextVar("recovery_attempt", default=-1)
         self.graph_store = graph_store
         self.default_node_id = default_node_id
         self.event_callback = event_callback
@@ -38,9 +53,80 @@ class TraceRecorder:
         self._execution_counter = 0
         self._active_executions: dict[str, tuple[str, int, int, str]] = {}
 
+    @property
+    def recovery_operation_id(self) -> str:
+        context = getattr(self, "_recovery_context", None)
+        episode = str(context.get() or "") if context is not None else ""
+        attempt = self._recovery_attempt.get() if hasattr(self, "_recovery_attempt") else -1
+        return episode + (":attempt-%s" % attempt if episode and attempt >= 0 else "")
+
+    @contextmanager
+    def recovery_scope(self):
+        if not hasattr(self, "_recovery_context"):
+            self._recovery_context = ContextVar("recovery_operation", default="")
+        current = str(self._recovery_context.get() or "")
+        token = self._recovery_context.set(current or uuid.uuid4().hex)
+        if not hasattr(self, "_recovery_attempt"):
+            self._recovery_attempt = ContextVar("recovery_attempt", default=-1)
+        attempt_token = self._recovery_attempt.set(self._recovery_attempt.get())
+        try:
+            yield self.recovery_operation_id
+        finally:
+            self._recovery_attempt.reset(attempt_token)
+            self._recovery_context.reset(token)
+
+    def set_recovery_attempt(self, attempt: int) -> None:
+        self._recovery_attempt.set(int(attempt))
+
+    def _append_event(self, event: dict[str, Any]) -> None:
+        # Observers run after this boundary; callbacks may safely query state.
+        with self._state_lock:
+            self._record_sequence += 1
+            event["trace_recorder_id"] = self._recorder_id
+            event["trace_sequence"] = self._record_sequence
+            append_jsonl(self.trace_path, event)
+            self.events.append(event)
+
+    def _owner_info(self) -> dict[str, Any]:
+        if self._owner_token_provider is None:
+            return {}
+        try:
+            token = self._owner_token_provider()
+            if token is not None:
+                if token.get("runs_db_path"):
+                    with closing(sqlite3.connect(Path(token["runs_db_path"]).resolve().as_uri() + "?mode=ro", uri=True, timeout=1)) as database:
+                        current = database.execute(
+                            "SELECT 1 FROM runs WHERE run_id=? AND owner_id=? AND generation=? AND status='running'"
+                            " AND lease_expires_at IS NOT NULL AND lease_expires_at > ?",
+                            (token["run_id"], token["owner_id"], token["generation"], token["now_iso"]),
+                        ).fetchone()
+                    if current is None:
+                        token = None
+                if token is None:
+                    with self._state_lock:
+                        return {**self._last_owner, "trace_owner_valid": False, "trace_owner_error": "ownership_unavailable"}
+                info = {"trace_owner_valid": True, "generation": int(token["generation"]), "owner_id": str(token["owner_id"])}
+                with self._state_lock:
+                    self._last_owner = info
+                return info
+            error_type = "ownership_unavailable"
+        except Exception as error:
+            error_type = type(error).__name__
+        with self._state_lock:
+            return {**self._last_owner, "trace_owner_valid": False, "trace_owner_error": error_type}
+
+    def _require_node_io_owner(self) -> dict[str, Any]:
+        info = self._owner_info()
+        if info.get("trace_owner_valid") is False:
+            raise TraceOwnershipLost("cannot write node IO after ownership loss")
+        return info
+
     def record(self, event_type: str, payload: dict[str, Any] | None = None) -> dict[str, Any]:
         event_type = str(getattr(event_type, "value", event_type))
         normalized_payload = dict(payload or {})
+        normalized_payload.update(self._owner_info())
+        if self.recovery_operation_id:
+            normalized_payload.setdefault("recovery_operation_id", self.recovery_operation_id)
         metadata = normalized_payload.get("metadata")
         if not isinstance(metadata, dict):
             metadata = {}
@@ -53,16 +139,15 @@ class TraceRecorder:
             normalized_payload["node_id"] = str(node_id)
         normalized_payload.setdefault("reason_codes", [])
         normalized_payload.setdefault("artifact_refs", [])
-        event = {
+        event: dict[str, Any] = {
             "product": PRODUCT_NAME,
             "code_name": CODE_NAME,
             "event_type": event_type,
             "recorded_at": datetime.now(timezone.utc).isoformat(),
             "payload": normalized_payload,
         }
-        self.events.append(event)
-        append_jsonl(self.trace_path, event)
-        if self.graph_store is not None:
+        self._append_event(event)
+        if self.graph_store is not None and normalized_payload.get("trace_owner_valid") is not False:
             node_id = normalized_payload.get("node_id")
             if node_id:
                 self.graph_store.add_message(
@@ -102,8 +187,7 @@ class TraceRecorder:
             "recorded_at": str(public_event.get("recorded_at") or datetime.now(timezone.utc).isoformat()),
             "payload": payload,
         }
-        self.events.append(event)
-        append_jsonl(self.trace_path, event)
+        self._append_event(event)
         self._emit_display_event(event_type, payload, event)
 
     def _emit_display_event(
@@ -130,13 +214,20 @@ class TraceRecorder:
 
     def record_node_input(self, node_id: str, payload: dict[str, Any]) -> Path:
         """Persist full node input for real-time observability."""
+        owner = self._require_node_io_owner()
         task_version = int(payload.get("task_version") or payload.get("metadata", {}).get("task_version") or 1)
         attempt = int(payload.get("attempt") or payload.get("retry_count", 0) or 0) + 1
-        self._execution_counter += 1
-        execution_id = f"exec-{self._execution_counter:06d}"
-        stem = self.layout.execution_stem(execution_id, node_id, task_version, attempt)
-        self._active_executions[node_id] = (execution_id, task_version, attempt, stem)
+        with self._state_lock:
+            self._execution_counter += 1
+            execution_id = f"exec-{self._execution_counter:06d}-{self._recorder_id}"
+            stem = self.layout.execution_stem(execution_id, node_id, task_version, attempt)
+            active = (execution_id, task_version, attempt, stem)
+            self._active_executions[node_id] = active
+        local = dict(self._execution_context.get())
+        local[node_id] = active
+        self._execution_context.set(local)
         persisted = dict(payload)
+        persisted.update(owner)
         persisted.update({"execution_id": execution_id, "task_version": task_version, "attempt": attempt})
         path = self.layout.node_input(stem)
         _write_json_any(path, _with_recorded_at(persisted))
@@ -201,16 +292,19 @@ class TraceRecorder:
 
     def record_node_output(self, node_id: str, payload: dict[str, Any]) -> tuple[Path, Path]:
         """Persist full node output as machine-readable JSON and readable Markdown."""
-        active = self._active_executions.get(node_id)
-        if active is None:
-            task_version = int(payload.get("task_version") or 1)
-            attempt = int(payload.get("attempt") or 1)
-            self._execution_counter += 1
-            execution_id = f"exec-{self._execution_counter:06d}"
-            stem = self.layout.execution_stem(execution_id, node_id, task_version, attempt)
-        else:
-            execution_id, task_version, attempt, stem = active
+        owner = self._require_node_io_owner()
+        with self._state_lock:
+            active = self._execution_context.get().get(node_id) or self._active_executions.get(node_id)
+            if active is None:
+                task_version = int(payload.get("task_version") or 1)
+                attempt = int(payload.get("attempt") or 1)
+                self._execution_counter += 1
+                execution_id = f"exec-{self._execution_counter:06d}-{self._recorder_id}"
+                stem = self.layout.execution_stem(execution_id, node_id, task_version, attempt)
+            else:
+                execution_id, task_version, attempt, stem = active
         persisted = dict(payload)
+        persisted.update(owner)
         persisted.update({"execution_id": execution_id, "task_version": task_version, "attempt": attempt})
         persisted = _with_recorded_at(persisted)
         json_path = self.layout.node_output_json(stem)
@@ -222,6 +316,7 @@ class TraceRecorder:
             {"node_id": node_id, "execution_id": execution_id,
              "task_version": task_version, "attempt": attempt,
              "status": persisted.get("status"), "role": persisted.get("role"),
+             "execution_outcome": persisted.get("execution_outcome"),
              "summary": str(persisted.get("summary") or persisted.get("content", ""))[:600],
              "public_reasoning": str(
                  persisted.get("public_reasoning")
@@ -258,6 +353,13 @@ class TraceRecorder:
                     "description": "节点执行结果已持久化",
                 },
             )
+        with self._state_lock:
+            if self._active_executions.get(node_id) == active:
+                self._active_executions.pop(node_id, None)
+        local = dict(self._execution_context.get())
+        if local.get(node_id) == active:
+            local.pop(node_id, None)
+            self._execution_context.set(local)
         return json_path, md_path
 
     def get_events_by_type(self, event_type: str) -> list[dict[str, Any]]:
@@ -269,7 +371,9 @@ class TraceRecorder:
         """
         matches = []
         prefix = event_type + "."
-        for event in self.events:
+        with self._state_lock:
+            events = list(self.events)
+        for event in events:
             current_type = event.get("event_type", "")
             if current_type == event_type or current_type.startswith(prefix):
                 flattened = dict(event.get("payload", {}))
@@ -333,6 +437,7 @@ class TraceRecorder:
                 "arguments": args,
                 "result_preview": result_text[:800],
                 "result_chars": len(result_text),
+                "result": result if isinstance(result, dict) else None,
             },
         )
         if self.graph_store is not None:
@@ -421,16 +526,22 @@ class TraceRecorder:
         return metrics
 
     def summarize(self) -> dict[str, Any]:
-        counts = Counter(event["event_type"] for event in self.events)
+        with self._state_lock:
+            events = list(self.events)
+        counts = Counter(event["event_type"] for event in events)
         summary = {
             "product": PRODUCT_NAME,
             "code_name": CODE_NAME,
-            "event_count": len(self.events),
+            "event_count": len(events),
             "event_counts": dict(sorted(counts.items())),
             "trace_path": str(self.trace_path),
         }
         write_json(self.run_dir / "trace_summary.json", summary)
         return summary
+
+class TraceOwnershipLost(RuntimeError):
+    pass
+
 
 def _classify_tool_result(name: str, args: dict[str, Any], result_text: str) -> list[str]:
     lowered = name.lower()

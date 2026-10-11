@@ -1,0 +1,18 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/genomic-intelligence/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/genomic-intelligence/SKILL.md",
+  "name": "scientific:genomic-intelligence",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "cdb027004996d313d31b55f6b93306de45306a89b8a4a792e94c36cf2d1dea20",
+    "references/api-and-auth.md": "4644e9986e698fd0706d02d2e3e41cb7591e3e62bed8c4c9021e625d0496903e",
+    "references/mcp.md": "eaecc14ec4abd21d4b715341c58b9324ad8d2e10df000c43935be78b13be3c6c",
+    "references/review.md": "dfd1e491e566df6057a8fc0b8410223b17d806e30203e5c0127234641114f0a0",
+    "references/sequence-acquisition.md": "200d7f914c2a4b2cb39f0e27f359fbc6b2df46f36a775af6c0aaec66623b87f4",
+    "references/tasks.md": "094dc336002abd1d8396c48ccafb1c11b4ba5a19e5612d4ab14ead4b1d19fe18",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

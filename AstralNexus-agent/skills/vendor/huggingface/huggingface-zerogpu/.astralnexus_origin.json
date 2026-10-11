@@ -1,0 +1,17 @@
+{
+  "repo": "huggingface/skills",
+  "commit": "ca0325bb20b2d0a1b2efa893670c4c72f79e707b",
+  "source_path": "skills/huggingface-zerogpu/SKILL.md",
+  "source_url": "https://github.com/huggingface/skills/blob/ca0325bb20b2d0a1b2efa893670c4c72f79e707b/skills/huggingface-zerogpu/SKILL.md",
+  "name": "huggingface:huggingface-zerogpu",
+  "namespace": "huggingface",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "829659aec34224970fe7ed619729fdc7849fc5dd696e2000256c3ee0b517eff7",
+    "references/concurrency.md": "b53d9ee64596730dc7879ffe7b1d37ce2759345092ad711b33ad921b67d27c22",
+    "references/cuda-and-deps.md": "8a0461e7d46dd5b89bb66e34c7785f4279ba65a6e5a8dddbaba7bf6beb4d51c7",
+    "references/how-quota-works.md": "0d87d16e65cb2246fc1b1ef77f313f08356ed41526db73d2aaf4df0bd7338591",
+    "references/how-zerogpu-works.md": "649e2bfa6752d794452e76dfe9ce5a0127f8413e98eda80e9f70519443d7a7d0",
+    "UPSTREAM-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}

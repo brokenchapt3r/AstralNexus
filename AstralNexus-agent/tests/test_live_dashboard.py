@@ -4,6 +4,13 @@ from pathlib import Path
 from AstralNexus.dashboard.live_server import LiveDashboardServer, LiveRunState, resolve_run_dir
 
 
+def test_historical_edge_count_does_not_crash_replay(tmp_path):
+    state = LiveRunState(tmp_path)
+    state.apply({"event_type": "topology.updated", "payload": {"semantic_edges": 12}})
+    assert LiveRunState._parse_edges(12) == set()
+    assert LiveRunState._parse_edges([{"source": "A", "target": "B"}]) == {("A", "B", "dependency")}
+
+
 def test_dashboard_control_panel_uses_public_narrative_events():
     html_path = Path(__file__).parents[1] / "dashboard" / "live_dashboard.html"
     html = html_path.read_text(encoding="utf-8")

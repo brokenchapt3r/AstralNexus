@@ -1,0 +1,19 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/liteparse/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/liteparse/SKILL.md",
+  "name": "scientific:liteparse",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "02a789c7959670cb8898e329588a41d43fa7b270c768a70c22aed05031d042a4",
+    "references/api_reference.md": "2aa143daf3423f460a73c37d36441af782819d3aeae0bcf61023f8d340364973",
+    "references/choosing_a_parser.md": "12a2c9259fd057b7d981e8941a94f1331a78f38c42eae6bde6d8f1f8c4f75c5a",
+    "references/cli_reference.md": "29ea20076e374045d6bbc2219f6c5c946cc322dc43e5c60fa6d9f83a1efce158",
+    "references/ocr_and_formats.md": "406cefd0f561e6a42ec6f7851333edae07f39367498e8b099e05b93140e3d667",
+    "references/output_formats.md": "69478a672bc8312322f6a10484be98029f7ced378b5863be3b12696f2732d97f",
+    "scripts/batch_parse_dir.py": "e6250a342cd756eaf3da155cbfa3684f88cf8eedc476275e62466e299f726b93",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

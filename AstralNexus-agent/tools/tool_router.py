@@ -13,6 +13,7 @@ from typing import Any, Dict, Iterable, List, Optional
 
 from AstralNexus.tools.registry import registry
 from AstralNexus.tools.toolsets import resolve_toolset
+from AstralNexus.tools.development_profile import development_tool_priority
 
 
 _TOOL_HINTS = {
@@ -59,6 +60,7 @@ def discover_tools(
     max_tools: int | None = None,
     schema_budget: Optional[int] = None,
     governor_approval: bool = False,
+    profile_authorized: bool = False,
 ) -> List[Dict[str, Any]]:
     """Return an auditable, budgeted tool capability catalogue.
 
@@ -85,6 +87,7 @@ def discover_tools(
         candidates,
         required_tools=required_tools,
         max_tools=max_tools,
+        profile_authorized=profile_authorized,
     )
     
     # Apply schema budget filtering if specified
@@ -127,16 +130,22 @@ def select_tools(
     *,
     required_tools: Iterable[str] | None = None,
     max_tools: int | None = None,
+    profile_authorized: bool = False,
 ) -> List[str]:
     """Return the smallest useful registered tool set for a worker."""
     role_allow = set(resolve_toolset(role))
     available = set(registry.get_all_tool_names())
-    candidate_set = set(candidates or available)
-    allowed = (role_allow & candidate_set & available) if role_allow else (candidate_set & available)
+    candidate_set = set(candidates) if candidates is not None else (set() if profile_authorized else available)
+    # Governor-approved profiles define capabilities independently of the
+    # implementation role. Never expand an explicit empty allow-list.
+    allowed = candidate_set & available
+    if role_allow and not profile_authorized:
+        allowed &= role_allow
     if not allowed:
         return []
 
     query = _words(goal)
+    development_priority = development_tool_priority(goal)
     scored = []
     for name in allowed:
         name_words = _words(name.replace("_", " "))
@@ -179,6 +188,8 @@ def select_tools(
                 score += 15
             elif name == "search_files":
                 score -= 20
+        if name in development_priority:
+            score = 1000 - development_priority.index(name)
         scored.append((score, name))
     scored.sort(key=lambda item: (-item[0], item[1]))
 

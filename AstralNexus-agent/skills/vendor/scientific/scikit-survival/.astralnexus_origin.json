@@ -1,0 +1,25 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+  "source_path": "skills/scikit-survival/SKILL.md",
+  "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/scikit-survival/SKILL.md",
+  "name": "scientific:scikit-survival",
+  "namespace": "scientific",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "8f99860440f23312d9803d3ac65ae9eb65274597d59499f1021d59378adef2fb",
+    "references/competing-risks.md": "7bb078c3c794a4b7c156f5e2747dbbdaf202c2292ac2eb441adac9f4fc5da7d6",
+    "references/cox-models.md": "eadbd9ed66fbc91adc8204c6470aa65b2eb3490fde4943af93b975dad7c8459e",
+    "references/data-handling.md": "59e632901ac21fd22878bf7c710a1b768d19b6bea63d5bc2c27f60420a03b418",
+    "references/ensemble-models.md": "ea6091baf3a8d21e08376c57ec7cbec498b96d1911a790a4c2dbcea562ab6cfb",
+    "references/evaluation-metrics.md": "33a6c355f70e5fc03fe94cde0cd82ec9443ad8e34eb8a98009151153f2e284ad",
+    "references/svm-models.md": "b1a8e618ab6389374cd58789ce9c008e9b4806a350330edfa17be7b44eaaa92b",
+    "scripts/competing_risk_cif.py": "e4bd7b39cb487d996cbb11a502b5a01a3a4aa09912e8ddd2c7b79da9aea5ff5f",
+    "scripts/evaluate_survival_metrics.py": "f4cca8bc65a6f96b0450059f0b564f2524e31f70ea9431bb1963518b1d1de386",
+    "scripts/model_report.py": "ad7eb6c5a75c0d3c56e8b4dd85f4d63dcb5a42dd6e69784ea50a53875a23f7cd",
+    "scripts/train_survival_model.py": "77a3c472483198482c1a15bbff41068b71e05ac1aa89bfca24ed8411fc4c6cf1",
+    "scripts/validate_survival_csv.py": "10534388dcf7f7b7560dd4354f61b0c7061b17a3716215dffb643c2364f34f51",
+    "scripts/_common.py": "254c9c4f7f9946693fe52f3dbd21314bd4ca45d1f058c51422b3ab6bbe795711",
+    "UPSTREAM-LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+  }
+}

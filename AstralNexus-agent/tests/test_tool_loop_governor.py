@@ -3,6 +3,16 @@ import pytest
 from AstralNexus.core.governor import GlobalGovernor, EventType
 from AstralNexus.core.task_graph import TaskGraph
 from AstralNexus.runtime.trace import TraceRecorder
+from AstralNexus.tools.registry import discover_builtin_tools
+
+
+@pytest.fixture(autouse=True, scope="module")
+def _populated_registry():
+    # Isolation fix (2026-10-01): alternative_tools() filters by the global
+    # registry, so running this file alone (or first in a batch) used to fail
+    # switch_tool tests unless another test file had populated the registry
+    # as a side effect.  Same self-contained pattern as test_tool_router.py.
+    discover_builtin_tools()
 
 
 def _make_governor(tmp_path, max_active=10):

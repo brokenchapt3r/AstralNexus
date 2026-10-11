@@ -1,0 +1,24 @@
+{
+  "repo": "huggingface/skills",
+  "commit": "ca0325bb20b2d0a1b2efa893670c4c72f79e707b",
+  "source_path": "skills/huggingface-vision-trainer/SKILL.md",
+  "source_url": "https://github.com/huggingface/skills/blob/ca0325bb20b2d0a1b2efa893670c4c72f79e707b/skills/huggingface-vision-trainer/SKILL.md",
+  "name": "huggingface:huggingface-vision-trainer",
+  "namespace": "huggingface",
+  "status": "imported_not_execution_validated",
+  "files": {
+    "SKILL.md": "c7aba4de75fa6595ffdaf5c50136786e8346aba0c9ff0261eaee656af4a3b0d9",
+    "references/finetune_sam2_trainer.md": "0d8f2efe145ccb00b41f2f433c1881ad6773cc8c0d37eaf16be0f973e13a6737",
+    "references/hub_saving.md": "b4fc7120ba3874d5118a28d81b6279daa169fb90846c20032784704a90535c03",
+    "references/image_classification_training_notebook.md": "df702e1c21f8ee160621ed370002b294f0b492a9db00a32dbd17c0b41ebf34db",
+    "references/object_detection_training_notebook.md": "ae88afa3af1cabcfd76a81d08c084b80c0ddb1d9f5481054970fea905753942c",
+    "references/reliability_principles.md": "9818dd7fa84003d4b088e11aea9887b8aa910ab4aeada0ac40b6b3a83817ab0d",
+    "references/timm_trainer.md": "e7bdc0985d28c46181f830d7c096939b3ef380192e724148d9d10ffb03d37fbb",
+    "scripts/dataset_inspector.py": "e46216b3818cb5e26febc2beccfedd17f501dec27d33293b0eea011dd9617594",
+    "scripts/estimate_cost.py": "ff865018557045576570040589efcf796e56f222c4784c8b2b86ed883cac4fa7",
+    "scripts/image_classification_training.py": "08db90dc053724a750c2a8bc282aa8f31d04d4193ce732fd0f49f389f70fe07f",
+    "scripts/object_detection_training.py": "e5ad30d2681fa8572c2f7aafdd21129a9fd00c60a37b0fcccbf49c272664dde8",
+    "scripts/sam_segmentation_training.py": "a9880d7b233dd2e3c9bbbcccb9d8b8f6615fc5002d23f7e37c5ebdff73a6e1a7",
+    "UPSTREAM-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}

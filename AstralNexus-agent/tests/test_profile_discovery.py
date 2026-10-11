@@ -5,6 +5,7 @@ import json
 import os
 import tempfile
 from pathlib import Path
+from typing import Any
 
 import pytest
 
@@ -21,7 +22,7 @@ from AstralNexus.core.profile_discovery import (
 # ---------------------------------------------------------------------------
 
 def _make_profile(name: str, **overrides) -> WorkerProfileSpec:
-    defaults = dict(
+    defaults: dict[str, Any] = dict(
         name=name,
         description=f"Test profile {name}",
         capabilities=["generic"],

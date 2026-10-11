@@ -62,7 +62,7 @@ def main() -> int:
         output_dir.mkdir(parents=True, exist_ok=True)
         stdout_path = output_dir / "cli.stdout.log"
         stderr_path = output_dir / "cli.stderr.log"
-        record = {
+        record: dict[str, object] = {
             "task": task_dir.name,
             "task_file": str(task_file),
             "output_dir": str(output_dir),
