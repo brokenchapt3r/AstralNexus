@@ -4,7 +4,7 @@ from AstralNexus.runtime.run_context import get_env
 import math
 import os
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 
@@ -28,6 +28,14 @@ class LLMLoopBudget:
     requests: int = 0
     tokens: int = 0
     request_tokens: int = 0
+    started: float = field(default_factory=time.monotonic)
+    tool_rounds: int = 0
+
+    def snapshot(self) -> dict[str, Any]:
+        """Expose the actual session limits to progress guards without a second budget."""
+        return {"max_seconds": max(0.0, self.deadline - self.started),
+                "elapsed_seconds": max(0.0, time.monotonic() - self.started),
+                "max_tool_rounds": self.max_rounds, "tool_rounds_used": self.tool_rounds}
 
     @classmethod
     def from_environment(cls, rounds: int | None, retries: int = 0) -> LLMLoopBudget:
@@ -46,6 +54,7 @@ class LLMLoopBudget:
                      "tokens" if self.tokens >= self.max_tokens else "")
         if dimension:
             raise LLMLoopBudgetExceeded(f"LLM session budget exhausted: {dimension}")
+        self.tool_rounds = max(self.tool_rounds, tool_round)
         self.requests += 1
         self.request_tokens = 0
 

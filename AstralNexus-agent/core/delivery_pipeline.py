@@ -86,11 +86,29 @@ class FinalDeliveryPipeline:
                 "SELECT json_extract(payload, '$.tool'), COUNT(*) FROM receipts "
                 "WHERE json_extract(payload, '$.tool') IN ('terminal_exec','python_exec','pytest_run') "
                 "GROUP BY json_extract(payload, '$.tool')")}
-            for row in db.execute("SELECT payload FROM receipts ORDER BY CASE WHEN json_extract(payload, '$.tool') IN ('terminal_exec','python_exec','pytest_run') THEN 0 ELSE 1 END, seq DESC LIMIT 20"):
+            # Keep separate bounded lanes: read-only Python probes must not
+            # evict shell/test executions from the next repair handoff.
+            for row in db.execute("""WITH ranked AS (
+                SELECT payload, seq, json_extract(payload, '$.tool') AS tool,
+                       ROW_NUMBER() OVER (PARTITION BY json_extract(payload, '$.tool') ORDER BY seq DESC) AS ordinal
+                FROM receipts
+            ) SELECT payload FROM ranked
+              WHERE (tool IN ('terminal_exec','pytest_run','python_exec') AND ordinal <= 10)
+                 OR (tool = 'file_write' AND ordinal <= 2)
+              ORDER BY CASE tool WHEN 'pytest_run' THEN 0 WHEN 'terminal_exec' THEN 1
+                                WHEN 'python_exec' THEN 2 ELSE 3 END, seq DESC"""):
                 item = json.loads(row[0])
                 raw = item.get("raw_result") or {}
-                receipts.append({"tool": item.get("tool"), "arguments": item.get("arguments"), "status": item.get("status"),
-                    "returncode": item.get("returncode"), "stdout": str(raw.get("stdout") or item.get("stdout_tail") or "")[-600:],
+                if not isinstance(raw, dict):
+                    raw = {"content": str(raw)}
+                arguments = item.get("arguments")
+                if arguments is not None:
+                    arguments = str(arguments)
+                receipts.append({"receipt_id": item.get("receipt_id") or item.get("id") or item.get("call_id"),
+                    "execution_id": item.get("execution_id"), "tool": item.get("tool"),
+                    "arguments": arguments[:1200] if arguments else arguments,
+                    "arguments_truncated": bool(arguments and len(arguments) > 1200), "status": item.get("status"),
+                    "returncode": raw.get("returncode", item.get("returncode")), "stdout": str(raw.get("stdout") or item.get("stdout_tail") or "")[-600:],
                     "stderr": str(raw.get("stderr") or item.get("stderr_tail") or "")[-600:],
                     "content": str(raw.get("content") or "")[:600]})
         return {"assistant": answer[-4000:], "tools": receipts, "execution_receipt_counts": execution_summary,
@@ -196,7 +214,7 @@ class FinalDeliveryPipeline:
                 client.runtime_execution_id = execution
                 try:
                     answer = self._stream_turn(client, [
-                        {"role": "system", "content": "Continue the explicitly requested goal. Work sequentially in outputs only; use actual tools and present_files. Do not claim unobserved success. " + capability_guidance(continuation_tools)},
+                        {"role": "system", "content": "Continue the explicitly requested goal. Work sequentially in outputs only; use actual tools and present_files. Do not claim unobserved success. Preserve the execution evidence and confirmed diagnosis in visible_evidence. When an execution has failed with a concrete cause, inspect only the implicated code, make a targeted modification, then rerun the failed command. Do not spend the turn repeatedly rediscovering that same failure. Preserve assertions; never replace failures with success reports. " + capability_guidance(continuation_tools)},
                         {"role": "user", "content": json.dumps({"goal": goal, "blocker": verdict, "visible_evidence": visible}, ensure_ascii=False)},
                     ], tools=continuation_tools,
                        workspace_root=run_dir, owned_paths=["outputs"],

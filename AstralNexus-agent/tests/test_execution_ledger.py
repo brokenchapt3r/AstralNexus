@@ -28,6 +28,20 @@ def test_rejected_write_does_not_claim_artifact_or_execution_success(tmp_path):
     assert ledger.observations[0]["returncode"] is None
 
 
+def test_runtime_state_keeps_failed_command_through_diverse_python_reads(tmp_path):
+    ledger = ExecutionLedger(tmp_path, ["outputs"])
+    ledger.observe({"id": "failed-test", "function": {"name": "terminal_exec", "arguments": "python test_project.py"}},
+                   {"status": "failed", "returncode": 1, "stderr": "assertion failed"})
+    for index in range(20):
+        ledger.observe({"id": str(index), "function": {"name": "python_exec", "arguments": "read file %s" % index}},
+                       {"status": "success", "returncode": 0, "stdout": "inspection %s" % index})
+    data = json.loads(ledger.message()["content"].split("\n")[-1])
+    failed = next(item for item in data["recent_observations"] if item["call_id"] == "failed-test")
+    assert failed["returncode"] == 1 and failed["status"] == "failed"
+    assert "assertion failed" in failed["stderr_tail"]
+    assert len(data["recent_observations"]) == 5
+
+
 def test_command_evidence_snapshot_precedes_later_write_in_same_batch(tmp_path, monkeypatch):
     from AstralNexus.tools.executor import ToolExecutor
     source = tmp_path / "app.py"

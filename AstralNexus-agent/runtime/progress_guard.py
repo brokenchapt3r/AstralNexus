@@ -103,8 +103,11 @@ class WriteProgressGuard:
         nudge_fraction: float = 0.5,
         warn_fraction: float = 0.7,
         cap_fraction: float = 0.85,
+        rolling: bool = False,
     ) -> None:
         self.budget = budget
+        self.rolling = rolling
+        self._progress_fraction = 0.0
         self.nudge_fraction = min(1.0, max(0.01, float(nudge_fraction)))
         self.warn_fraction = min(1.0, max(self.nudge_fraction, float(warn_fraction)))
         self.cap_fraction = min(1.0, max(self.warn_fraction, float(cap_fraction)))
@@ -116,12 +119,13 @@ class WriteProgressGuard:
         self.actions_taken: list[str] = []
 
     @classmethod
-    def from_env(cls, budget: Any) -> "WriteProgressGuard":
+    def from_env(cls, budget: Any, *, rolling: bool = False) -> "WriteProgressGuard":
         return cls(
             budget,
             nudge_fraction=_env_fraction("ASTRALNEXUS_WRITE_PROGRESS_NUDGE", 0.5),
             warn_fraction=_env_fraction("ASTRALNEXUS_WRITE_PROGRESS_WARN", 0.7),
             cap_fraction=_env_fraction("ASTRALNEXUS_WRITE_PROGRESS_CAP", 0.85),
+            rolling=rolling,
         )
 
     def observe(self, files_version: Optional[str]) -> None:
@@ -138,6 +142,10 @@ class WriteProgressGuard:
             return
         if files_version != self._baseline_version:
             self._writes_observed = True
+            if self.rolling:
+                self._baseline_version = files_version
+                self._progress_fraction = self.budget_fraction()
+                self._nudged = self._warned = self._capped = False
 
     @property
     def writes_observed(self) -> bool:
@@ -158,22 +166,27 @@ class WriteProgressGuard:
         max_calls = int(snapshot.get("max_tool_calls") or 0)
         if max_calls > 0:
             fractions.append(int(snapshot.get("tool_calls_used") or 0) / max_calls)
+        max_rounds = int(snapshot.get("max_tool_rounds") or 0)
+        if max_rounds > 0:
+            fractions.append(int(snapshot.get("tool_rounds_used") or 0) / max_rounds)
         return min(1.0, max(fractions)) if fractions else 0.0
 
     def check(self) -> Optional[dict[str, Any]]:
         """One bounded escalation per threshold; None when nothing is due."""
-        if self._writes_observed or self.budget is None:
+        if (self._writes_observed and not self.rolling) or self.budget is None:
             return None
         fraction = self.budget_fraction()
+        if self.rolling:
+            fraction = max(0.0, fraction - self._progress_fraction) / max(0.001, 1.0 - self._progress_fraction)
         if fraction >= self.cap_fraction and not self._capped:
             self._capped = True
             self.actions_taken.append("cap_text_only")
             return {
                 "action": "cap_text_only",
-                "stop_reason": "zero_write_capped",
+                "stop_reason": "no_recent_write_capped" if self._writes_observed else "zero_write_capped",
                 "budget_fraction": round(fraction, 3),
-                "writes_observed": False,
-                "reason": "budget_burned_without_owned_file_writes",
+                "writes_observed": self._writes_observed,
+                "reason": "budget_burned_without_recent_owned_file_writes" if self._writes_observed else "budget_burned_without_owned_file_writes",
             }
         if fraction >= self.warn_fraction and not self._warned:
             self._warned = True
@@ -181,7 +194,7 @@ class WriteProgressGuard:
             return {
                 "action": "final_warning",
                 "budget_fraction": round(fraction, 3),
-                "writes_observed": False,
+                "writes_observed": self._writes_observed,
                 "reason": "budget_burned_without_owned_file_writes",
             }
         if fraction >= self.nudge_fraction and not self._nudged:
@@ -190,7 +203,7 @@ class WriteProgressGuard:
             return {
                 "action": "nudge",
                 "budget_fraction": round(fraction, 3),
-                "writes_observed": False,
+                "writes_observed": self._writes_observed,
                 "reason": "budget_burned_without_owned_file_writes",
             }
         return None
@@ -200,7 +213,15 @@ def write_progress_feedback(signal: dict[str, Any]) -> str:
     """Model-visible feedback text for a WriteProgressGuard signal."""
     percent = int(round(float(signal.get("budget_fraction") or 0.0) * 100))
     action = str(signal.get("action") or "")
+    if signal.get("writes_observed") and action != "cap_text_only":
+        return (f"自上次落盘改动后，剩余执行预算已消耗 {percent}%，没有新的文件修改。"
+                "请依据已有执行失败证据直接进行针对性修改并复验，避免重复调查；若没有可行修复，明确报告阻塞。")
     if action == "cap_text_only":
+        if signal.get("writes_observed"):
+            return (
+                f"自上次落盘改动后，剩余执行预算已消耗 {percent}%，没有新的文件修改。"
+                "工具已被收回（stop_reason=no_recent_write_capped）。如实总结已有修改、失败执行证据和未完成项；不得声称验收通过。"
+            )
         return (
             f"执行预算已消耗 {percent}%，但 owned 路径下没有任何经实测的落盘改动。"
             "工具已被收回（stop_reason=zero_write_capped）。请立即用纯文本如实总结："

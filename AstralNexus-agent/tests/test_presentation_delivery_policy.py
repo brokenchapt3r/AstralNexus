@@ -52,6 +52,30 @@ def test_goal_only_continues_recoverable_unmet_condition_and_has_no_progress_cap
     assert satisfied.active  # Delivery/terminal persistence must finish first.
 
 
+def test_goal_relayed_receipt_ids_do_not_reset_no_progress():
+    state = GoalState("repair")
+    verdict = {"satisfied": False, "blocker": "goal_not_met_yet", "relied_on_assumption": False}
+    for index, expected in enumerate(("continue", "continue", "goal_no_progress")):
+        evidence = {"outputs": {"outputs/app.py": ("same-content", 12, index)}, "tools": [{
+            "tool": "terminal_exec", "arguments": "python test_app.py", "status": "failed",
+            "returncode": 1, "stderr": "assertion failed", "receipt_id": str(index),
+            "execution_id": "execution-" + str(index), "recorded_at": str(index)}]}
+        assert state.decide(verdict, evidence) == expected
+
+
+def test_goal_real_repair_and_changed_execution_result_reset_no_progress():
+    state = GoalState("repair")
+    verdict = {"satisfied": False, "blocker": "goal_not_met_yet", "relied_on_assumption": False}
+    evidence = {"outputs": {"outputs/app.py": ("before", 12)}, "tools": [{
+        "tool": "terminal_exec", "arguments": "python test_app.py", "status": "failed", "returncode": 1}]}
+    state.decide(verdict, evidence)
+    state.decide(verdict, evidence)
+    repaired = {"outputs": {"outputs/app.py": ("after", 13)}, "tools": [{
+        "tool": "terminal_exec", "arguments": "python test_app.py", "status": "success", "returncode": 0}]}
+    assert state.decide(verdict, repaired) == "continue"
+    assert state.no_progress == 0
+
+
 class _Runtime:
     run_id = "R"
     def __init__(self): self.events=[]
@@ -468,3 +492,26 @@ def test_goal_evidence_keeps_execution_before_later_report_writes(tmp_path):
     assert visible["execution_receipt_counts"]=={"terminal_exec":1}
     assert visible["tools"][0]["tool"]=="terminal_exec"
     assert "Ran 5 tests" in visible["tools"][0]["stdout"]
+
+
+def test_goal_handoff_keeps_failed_test_after_python_inspection_flood(tmp_path):
+    from AstralNexus.core.delivery_pipeline import FinalDeliveryPipeline
+    store = ExecutionStore(tmp_path)
+    execution = store.begin("repair", {"owned_paths": [], "acceptance_criteria": []})
+    with store._connect() as db:
+        for index in range(61):
+            payload = {"call_id": str(index), "execution_id": execution,
+                       "tool": "terminal_exec" if index == 0 else "python_exec",
+                       "arguments": "test_e2e_fullstack.py" if index == 0 else "read source",
+                       "status": "failed" if index == 0 else "success",
+                       "raw_result": {"returncode": 1 if index == 0 else 0,
+                                      "stderr": "KeyError: reporter" if index == 0 else ""}}
+            db.execute("INSERT INTO receipts(id, execution_id, payload) VALUES(?,?,?)",
+                       (str(index), execution, json.dumps(payload)))
+    visible = FinalDeliveryPipeline(_Runtime())._visible_evidence(tmp_path, "repair pending")
+    assert len(visible["tools"]) == 11
+    failed = visible["tools"][0]
+    assert failed["tool"] == "terminal_exec"
+    assert failed["status"] == "failed" and failed["returncode"] == 1
+    assert failed["execution_id"] == execution and failed["receipt_id"] == "0"
+    assert "KeyError: reporter" in failed["stderr"]

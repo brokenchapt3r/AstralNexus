@@ -83,6 +83,61 @@ def test_call_budget_dimension_also_drives_the_fraction():
     assert signal["budget_fraction"] == round(45 / 80, 3)
 
 
+def test_rolling_guard_does_not_allow_one_early_write_to_hide_later_stall():
+    budget = _FakeBudget(seconds=0, max_seconds=100)
+    guard = WriteProgressGuard(budget, rolling=True)
+    guard.observe("before")
+    budget._snapshot["elapsed_seconds"] = 20
+    guard.observe("real-edit")
+    assert guard.check() is None
+    budget._snapshot["elapsed_seconds"] = 80
+    assert guard.check()["action"] == "final_warning"
+    budget._snapshot["elapsed_seconds"] = 90
+    signal = guard.check()
+    assert signal["action"] == "cap_text_only"
+    assert signal["stop_reason"] == "no_recent_write_capped"
+    assert "自上次落盘" in write_progress_feedback(signal)
+
+
+def test_rolling_guard_rearms_after_a_new_real_edit():
+    budget = _FakeBudget(seconds=0, max_seconds=100)
+    guard = WriteProgressGuard(budget, rolling=True)
+    guard.observe("before")
+    budget._snapshot["elapsed_seconds"] = 72
+    assert guard.check()["action"] == "final_warning"
+    guard.observe("fixed")
+    assert guard.check() is None
+
+
+def test_direct_goal_stream_uses_session_budget_without_node_budget(tmp_path, monkeypatch):
+    from AstralNexus.runtime.llm_client import LLMClient
+    client = LLMClient(model="deepseek-v4.1-flash", api_key="test-key", interactive=False)
+    requests = []
+    events = []
+
+    def stream(messages, **kwargs):
+        requests.append(kwargs)
+        if kwargs.get("tools") is None:
+            yield {"choices": [{"delta": {"content": "incomplete, capped"}},
+                               {"delta": {}, "finish_reason": "stop"}]}
+        else:
+            index = len(requests)
+            yield {"choices": [{"delta": {"tool_calls": [{"index": 0, "id": str(index),
+                "function": {"name": "file_read", "arguments": json.dumps({"path": "different-%s.txt" % index})}}]},
+                "finish_reason": "tool_calls"}]}
+
+    monkeypatch.setattr(client, "stream", stream)
+    monkeypatch.setattr("AstralNexus.tools.executor.ToolExecutor.execute_tool_calls",
+        lambda self, calls: [{"status": "success", "content": "different-" + c["id"]} for c in calls])
+    answer = client.stream_chat([{"role": "user", "content": "develop a project"}],
+        tools=[{"type": "function"}], workspace_root=tmp_path, owned_paths=["outputs"],
+        max_tool_rounds=8, event_callback=events.append)
+    assert answer == "incomplete, capped"
+    signals = [e for e in events if e.get("event_type") == "llm.write_progress_stalled"]
+    assert signals[-1]["action"] == "cap_text_only"
+    assert requests[-1]["tools"] is None
+
+
 def test_unbounded_budget_never_escalates():
     guard = WriteProgressGuard(_FakeBudget())
     guard.observe("v1")

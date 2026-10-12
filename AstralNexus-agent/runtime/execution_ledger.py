@@ -170,7 +170,9 @@ class ExecutionLedger:
             }
         recent = []
         # Keep recent executions independently of write volume, including failures.
-        executions = [item for item in self.observations if item["tool"] in {"python_exec", "terminal_exec", "pytest_run", "validation"}][-4:]
+        executions = []
+        for tool in ("terminal_exec", "pytest_run", "validation", "python_exec"):
+            executions.extend([item for item in self.observations if item["tool"] == tool][-4:])
         writes = [item for item in self.observations if item["tool"] == "file_write"][-2:]
         for item in executions + writes:
             recent.append({**{key: value for key, value in item.items() if key not in {"files", "raw_result"}},

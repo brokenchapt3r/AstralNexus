@@ -1655,8 +1655,9 @@ class LLMClient:
         # write-progress guard escalates nudge → final warning → tool
         # withdrawal as the budget burns without a single landed byte.
         write_progress_guard = (
-            WriteProgressGuard.from_env(task_execution_budget)
-            if ledger is not None and task_execution_budget is not None and owned_paths
+            WriteProgressGuard.from_env(task_execution_budget if task_execution_budget is not None else loop_budget,
+                                        rolling=task_execution_budget is None)
+            if ledger is not None and owned_paths
             else None
         )
         tool_round = 0

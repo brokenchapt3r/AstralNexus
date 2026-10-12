@@ -22,8 +22,13 @@ class GoalState:
         if verdict.get("blocker") != "goal_not_met_yet":
             return str(verdict.get("blocker") or "missing_evidence")
         # Model wording and duplicate calls are not new progress.
+        # Receipt/execution IDs identify observations, not new progress. The
+        # same command and result relayed by another execution must deduplicate.
+        semantic_tools = [{key: row[key] for key in (
+            "tool", "arguments", "status", "returncode", "stdout", "stderr", "content"
+        ) if key in row} for row in evidence.get("tools", [])]
         facts = {"outputs": {path: version[:2] for path, version in evidence.get("outputs", {}).items()},
-                 "tools": sorted({json.dumps(row, sort_keys=True, ensure_ascii=False) for row in evidence.get("tools", [])})}
+                 "tools": sorted({json.dumps(row, sort_keys=True, ensure_ascii=False) for row in semantic_tools})}
         signature = hashlib.sha256(json.dumps(facts, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
         self.no_progress = self.no_progress + 1 if signature == self.signature else 0
         self.signature = signature
@@ -38,7 +43,7 @@ class GoalState:
 def evaluate_goal(client: Any, objective: str, visible: dict[str, Any]) -> dict[str, Any]:
     from AstralNexus.core.governor import _parse_governor_json
     bounded = {"assistant": str(visible.get("assistant") or "")[-2000:],
-               "tools": visible.get("tools", [])[:10], "execution_receipt_counts": visible.get("execution_receipt_counts", {}), "outputs": dict(list(visible.get("outputs", {}).items())[:20])}
+               "tools": visible.get("tools", [])[:32], "execution_receipt_counts": visible.get("execution_receipt_counts", {}), "outputs": dict(list(visible.get("outputs", {}).items())[:20])}
     result = _parse_governor_json(client.chat([
         {"role": "system", "content": "Independently evaluate the explicitly requested goal ONLY from visible conversation/tool evidence. Do not reread files or run tools. Return JSON with satisfied:boolean, blocker:goal_not_met_yet|missing_evidence|needs_user_input|run_failed|external_wait, reason, evidence_summary, relied_on_assumption:boolean. Missing evidence cannot satisfy a goal; no business claim is proven by a delivery receipt. Use goal_not_met_yet when concrete work remains that the agent can perform (creating frontend, seed data, tests, reports, or executing verification). Reserve missing_evidence for evidence that cannot be obtained through further agent work, or invalid/uninterpretable observations. Incomplete development is not itself missing_evidence. Never mark failed tests as satisfied. Self-authored reports claiming tests passed are not test executions. Assess verification claims from execution tool receipts, not report prose; execution_receipt_counts is a runtime fact, not a model claim."},
         {"role": "user", "content": json.dumps({"objective": objective, "visible_evidence": bounded}, ensure_ascii=False)},
