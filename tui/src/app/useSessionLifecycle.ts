@@ -4,7 +4,6 @@ import type { ScrollBoxHandle } from '@astralnexus/ink'
 import { evictInkCaches } from '@astralnexus/ink'
 import { type RefObject, useCallback, useEffect, useRef } from 'react'
 
-import { buildSetupRequiredSections, SETUP_REQUIRED_TITLE } from '../content/setup.js'
 import { introMsg, toTranscriptMessages } from '../domain/messages.js'
 import { ZERO } from '../domain/usage.js'
 import { type GatewayClient } from '../gatewayClient.js'
@@ -14,14 +13,14 @@ import type {
   SessionCreateResponse,
   SessionInflightTurn,
   SessionResumeResponse,
-  SessionTitleResponse,
-  SetupStatusResponse
+  SessionTitleResponse
 } from '../gatewayTypes.js'
 import { asRpcResult } from '../lib/rpc.js'
 import type { Msg, PanelSection, SessionInfo, Usage } from '../types.js'
 
 import type { ComposerActions, GatewayRpc, StateSetter } from './interfaces.js'
 import { patchOverlayState } from './overlayStore.js'
+import { restoreSpawnHistory } from './spawnHistoryStore.js'
 import { turnController } from './turnController.js'
 import { patchTurnState } from './turnStore.js'
 import { getUiState, patchUiState } from './uiStore.js'
@@ -174,7 +173,7 @@ export function useSessionLifecycle(opts: UseSessionLifecycleOptions) {
     turnController.fullReset()
     setVoiceRecording(false)
     setVoiceProcessing(false)
-    patchUiState({ bgTasks: new Set(), info: null, sid: null, usage: ZERO })
+    patchUiState({ bgTasks: new Set(), info: null, sid: null, usage: ZERO, runProgress: '' })
     setHistoryItems([])
     setLastUserMsg('')
     setStickyPrompt('')
@@ -211,15 +210,6 @@ export function useSessionLifecycle(opts: UseSessionLifecycleOptions) {
 
   const startNewSession = useCallback(
     async (msg?: string, title?: string, keepCurrent = false) => {
-      const setup = await rpc<SetupStatusResponse>('setup.status', {})
-
-      if (setup?.provider_configured === false) {
-        panel(SETUP_REQUIRED_TITLE, buildSetupRequiredSections())
-        patchUiState({ status: 'setup required' })
-
-        return null
-      }
-
       const previousSid = getUiState().sid
 
       if (!keepCurrent) {
@@ -328,6 +318,7 @@ export function useSessionLifecycle(opts: UseSessionLifecycleOptions) {
           const running = Boolean(r.running || r.status === 'working' || r.status === 'waiting')
 
           resetSession()
+          restoreSpawnHistory(r.spawn_trees ?? [])
           setSessionStartedAt(r.started_at ? r.started_at * 1000 : Date.now())
           const transcript = [...toTranscriptMessages(r.messages), ...liveSessionInflightMessages(r.inflight)]
           setHistoryItems(info ? [introMsg(info), ...transcript] : transcript)
@@ -356,14 +347,6 @@ export function useSessionLifecycle(opts: UseSessionLifecycleOptions) {
       patchOverlayState({ sessions: false })
       patchUiState({ status: 'resuming…' })
 
-      rpc<SetupStatusResponse>('setup.status', {}).then(setup => {
-        if (setup?.provider_configured === false) {
-          panel(SETUP_REQUIRED_TITLE, buildSetupRequiredSections())
-          patchUiState({ status: 'setup required' })
-
-          return
-        }
-
         const previousSid = getUiState().sid
 
         gw.request<SessionResumeResponse>('session.resume', { cols: colsRef.current, session_id: id })
@@ -380,6 +363,7 @@ export function useSessionLifecycle(opts: UseSessionLifecycleOptions) {
             const running = Boolean(r.running || r.status === 'working' || r.status === 'waiting')
 
             resetSession()
+            restoreSpawnHistory(r.spawn_trees ?? [])
             setSessionStartedAt(r.started_at ? r.started_at * 1000 : Date.now())
 
             const resumed = [...toTranscriptMessages(r.messages), ...liveSessionInflightMessages(r.inflight)]
@@ -405,7 +389,6 @@ export function useSessionLifecycle(opts: UseSessionLifecycleOptions) {
             sys(`error: ${e.message}`)
             patchUiState({ status: 'ready' })
           })
-      })
     },
     [closeSession, colsRef, gw, panel, resetSession, rpc, scrollRef, setHistoryItems, setSessionStartedAt, sys]
   )

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import { clearSpawnHistory, getSpawnHistory, pushDiskSnapshot } from '../app/spawnHistoryStore.js'
+import { clearSpawnHistory, getSpawnHistory, pushDiskSnapshot, restoreSpawnHistory } from '../app/spawnHistoryStore.js'
 
 describe('spawnHistoryStore status normalization', () => {
   beforeEach(() => {
@@ -27,7 +27,7 @@ describe('spawnHistoryStore status normalization', () => {
     expect(statuses).toEqual(['timeout', 'error'])
   })
 
-  it('falls back unknown disk statuses to completed', () => {
+  it('keeps unknown disk statuses unknown', () => {
     pushDiskSnapshot(
       {
         finished_at: 1_700_000_011,
@@ -41,6 +41,15 @@ describe('spawnHistoryStore status normalization', () => {
 
     const status = getSpawnHistory()[0]?.subagents[0]?.status
 
-    expect(status).toBe('completed')
+    expect(status).toBe('unknown')
   })
+})
+
+
+it('restores only the selected session and excludes private reasoning', () => {
+  restoreSpawnHistory([{snapshot_id: 'one', session_id: 'old', subagents: [{id: 'old', status: 'completed'}]}])
+  restoreSpawnHistory([{snapshot_id: 'two', session_id: 'new', subagents: [{id: 'new', status: 'unknown', thinking: ['private']}]}])
+  expect(getSpawnHistory()).toHaveLength(1)
+  expect(getSpawnHistory()[0]?.sessionId).toBe('new')
+  expect(getSpawnHistory()[0]?.subagents[0]?.thinking).toEqual([])
 })

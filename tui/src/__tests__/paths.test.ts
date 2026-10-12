@@ -99,7 +99,7 @@ describe('fmtProjectCwdBranch', () => {
   })
 
   it('keeps the project visible when space is tight', () => {
-    expect(fmtProjectCwdBranch('/Users/bb/proj', 'main', 'astralnexus-agent', 12)).toBe('astralnexus-agent')
+    expect(fmtProjectCwdBranch('/Users/bb/proj', 'main', 'astralnexus-agent', 12)).toBe('astralnexus…')
   })
 })
 

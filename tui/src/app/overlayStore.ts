@@ -3,6 +3,7 @@ import { atom, computed } from 'nanostores'
 import type { OverlayState } from './interfaces.js'
 
 const buildOverlayState = (): OverlayState => ({
+  inspection: null,
   agents: false,
   agentsInitialHistoryIndex: 0,
   approval: null,
@@ -27,6 +28,7 @@ export const $isBlocked = computed(
   $overlayState,
   ({
     agents,
+    inspection,
     approval,
     billing,
     clarify,
@@ -44,6 +46,7 @@ export const $isBlocked = computed(
   }) =>
     Boolean(
       agents ||
+      inspection ||
       approval ||
       billing ||
       clarify ||
@@ -81,6 +84,7 @@ export const resetFlowOverlays = () =>
   $overlayState.set({
     ...buildOverlayState(),
     agents: $overlayState.get().agents,
+    inspection: $overlayState.get().inspection,
     agentsInitialHistoryIndex: $overlayState.get().agentsInitialHistoryIndex,
     journey: $overlayState.get().journey,
     modelPicker: $overlayState.get().modelPicker,

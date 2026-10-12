@@ -27,6 +27,7 @@ import { Banner, Panel, SessionPanel } from './branding.js'
 import { FpsOverlay } from './fpsOverlay.js'
 import { HelpHint } from './helpHint.js'
 import { Journey } from './journey.js'
+import { RunInspection } from './runInspection.js'
 import { MessageLine } from './messageLine.js'
 import { PetKitty, PetSprite } from './petSprite.js'
 import { QueuedMessages } from './queuedMessages.js'
@@ -465,6 +466,14 @@ const JourneyPane = memo(function JourneyPane() {
   return <Journey gw={gw} onClose={() => patchOverlayState({ journey: false })} t={ui.theme} />
 })
 
+const InspectionPane = memo(function InspectionPane() {
+  const {gw} = useGateway()
+  const ui = useStore($uiState)
+  const overlay = useStore($overlayState)
+  return overlay.inspection ? <RunInspection gw={gw} sessionId={ui.sid} kind={overlay.inspection}
+    onClose={() => patchOverlayState({inspection: null})} /> : null
+})
+
 const StatusRulePane = memo(function StatusRulePane({
   at,
   composer,
@@ -523,6 +532,7 @@ export const AppLayout = memo(function AppLayout({
   return (
     <Shell {...shellProps}>
       <Box flexDirection="column" flexGrow={1} position="relative">
+        {ui.runProgress && !overlay.inspection && <Text>{ui.runProgress.split('\n').slice(0, 2).join('\n')}</Text>}
         <Box flexDirection="row" flexGrow={1}>
           {overlay.agents ? (
             <PerfPane id="agents">
@@ -532,6 +542,8 @@ export const AppLayout = memo(function AppLayout({
             <PerfPane id="journey">
               <JourneyPane />
             </PerfPane>
+          ) : overlay.inspection ? (
+            <InspectionPane />
           ) : (
             <PerfPane id="transcript">
               <TranscriptPane actions={actions} composer={composer} progress={progress} transcript={transcript} />

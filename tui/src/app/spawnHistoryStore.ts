@@ -28,7 +28,8 @@ const KNOWN_SUBAGENT_STATUSES = new Set<SubagentStatus>([
   'interrupted',
   'queued',
   'running',
-  'timeout'
+  'timeout',
+  'unknown'
 ])
 
 const normalizeSubagentStatus = (status: unknown, fallback: SubagentStatus): SubagentStatus => {
@@ -148,12 +149,21 @@ function normaliseSubagent(raw: unknown): SubagentProgress {
     parentId: s(o.parentId) ?? null,
     reasoningTokens: n(o.reasoningTokens),
     startedAt: n(o.startedAt),
-    status: normalizeSubagentStatus(o.status, 'completed'),
+    status: normalizeSubagentStatus(o.status, 'unknown'),
     summary: s(o.summary),
     taskCount: typeof o.taskCount === 'number' ? o.taskCount : 1,
-    thinking: (arr<string>(o.thinking) ?? []).filter(x => typeof x === 'string'),
+    thinking: [],
     toolCount: typeof o.toolCount === 'number' ? o.toolCount : 0,
     tools: (arr<string>(o.tools) ?? []).filter(x => typeof x === 'string'),
     toolsets: arr<string>(o.toolsets)
+  }
+}
+
+/** Replace the previous session's passive history, without starting agents. */
+export const restoreSpawnHistory = (snapshots: (SpawnTreeLoadResponse & {snapshot_id: string})[]) => {
+  clearSpawnHistory()
+  clearDiffPair()
+  for (const snapshot of snapshots) {
+    pushDiskSnapshot(snapshot, `session:${snapshot.session_id ?? ''}:${snapshot.snapshot_id}`)
   }
 }

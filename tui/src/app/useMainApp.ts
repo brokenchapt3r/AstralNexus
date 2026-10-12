@@ -1,3 +1,4 @@
+import { supportsCapability } from './capabilities.js'
 import {
   forceRedraw,
   type ScrollBoxHandle,
@@ -45,7 +46,7 @@ import { createSlashHandler } from './createSlashHandler.js'
 import { planGatewayRecovery } from './gatewayRecovery.js'
 import { getInputSelection } from './inputSelectionStore.js'
 import { type GatewayRpc, type TranscriptRow } from './interfaces.js'
-import { $overlayState, patchOverlayState } from './overlayStore.js'
+import { $overlayState, getOverlayState, patchOverlayState } from './overlayStore.js'
 import { $goodVibesTick } from './petFlashStore.js'
 import { scrollWithSelectionBy } from './scroll.js'
 import { turnController } from './turnController.js'
@@ -676,7 +677,7 @@ export function useMainApp(gw: GatewayClient) {
 
   const paste = useCallback(
     (quiet = false) =>
-      rpc<ClipboardPasteResponse>('clipboard.paste', { session_id: getUiState().sid }).then(r => {
+      (supportsCapability('clipboard_images') ? rpc<ClipboardPasteResponse>('clipboard.paste', { session_id: getUiState().sid }) : Promise.resolve({message: '当前宿主不支持剪贴板图像；可直接粘贴文本。'} as ClipboardPasteResponse)).then(r => {
         if (!r) {
           return
         }
@@ -907,17 +908,22 @@ export function useMainApp(gw: GatewayClient) {
   slashRef.current = slash
 
   const respondWith = useCallback(
-    (method: string, params: Record<string, unknown>, done: () => void) => rpc(method, params).then(r => r && done()),
+    (method: string, params: Record<string, unknown>, done: () => void) => rpc(method, params).then(r => {
+      if (r && typeof r === 'object' && 'ok' in r && r.ok === false) return
+      if (r) done()
+    }),
     [rpc]
   )
 
   const answerApproval = useCallback(
-    (choice: string) =>
-      respondWith('approval.respond', { choice, session_id: ui.sid }, () => {
-        patchOverlayState({ approval: null })
+    (choice: string) => {
+      const requestId = getOverlayState().approval?.requestId
+      return respondWith('approval.respond', { choice, request_id: requestId, session_id: ui.sid }, () => {
+        if (getOverlayState().approval?.requestId === requestId) patchOverlayState({ approval: null })
         patchTurnState({ outcome: choice === 'deny' ? 'denied' : `approved (${choice})` })
         patchUiState({ status: 'running…' })
-      }),
+      })
+    },
     [respondWith, ui.sid]
   )
 

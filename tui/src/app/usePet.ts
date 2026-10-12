@@ -1,3 +1,4 @@
+import { supportsCapability } from './capabilities.js'
 import { useStdout } from '@astralnexus/ink'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -193,6 +194,7 @@ export function usePet(): PetRender {
   // config, so its `slug`/`enabled` are the source of truth.
   const sync = useCallback(
     async (state: PetState) => {
+      if (!supportsCapability('pets')) {setEnabled(false); return}
       try {
         const res = (await rpc('pet.cells', { graphics: IS_TTY, state })) as PetCellsResult | null
 

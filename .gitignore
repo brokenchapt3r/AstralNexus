@@ -41,3 +41,11 @@ logs/
 *.bak_*
 .DS_Store
 Thumbs.db
+
+# Machine-specific skill indices and runtime state
+.astralnexus_skill_manifest.json
+.astralnexus_state/
+.astralnexus_tool_outputs/
+.astralnexus_process_logs/
+.astralnexus/
+outputs/

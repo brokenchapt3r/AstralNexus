@@ -31,7 +31,7 @@ export interface RuntimeEventData {
   title: string
 }
 
-export type SubagentStatus = 'completed' | 'error' | 'failed' | 'interrupted' | 'queued' | 'running' | 'timeout'
+export type SubagentStatus = 'completed' | 'error' | 'failed' | 'interrupted' | 'queued' | 'running' | 'timeout' | 'unknown'
 
 export interface SubagentProgress {
   apiCalls?: number
@@ -103,6 +103,7 @@ export interface DelegationStatus {
 }
 
 export interface ApprovalReq {
+  requestId?: string
   // false when the backend won't honor a permanent allow (tirith warning) → hide "Always allow".
   allowPermanent?: boolean
   choices?: string[]
@@ -171,6 +172,8 @@ export interface ProjectInfo {
 }
 
 export interface SessionInfo {
+  credential_warning?: string
+  capabilities?: {images: boolean; clipboard_images: boolean; voice: boolean; pets: boolean}
   cwd?: string
   fast?: boolean
   install_warning?: string

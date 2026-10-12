@@ -1,0 +1,5 @@
+mypy==1.15.0
+types-setuptools==75.8.2.20250305
+types-PyYAML==6.0.12.20260906
+types-requests==2.33.0.20260906
+types-jsonschema==4.26.0.20260518

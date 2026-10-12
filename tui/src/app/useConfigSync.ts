@@ -255,7 +255,9 @@ export function useConfigSync({
     quietRpc<ConfigMtimeResponse>(gw, 'config.get', { key: 'mtime' }).then(r => {
       mtimeRef.current = Number(r?.mtime ?? 0)
     })
-    void hydrateFullConfig(gw, setBellOnComplete, setVoiceRecordKey)
+    void hydrateFullConfig(gw, setBellOnComplete, setVoiceRecordKey).then(cfg => {
+      if (cfg?.config?.capabilities?.voice === false) setVoiceEnabled(false)
+    })
   }, [gw, setBellOnComplete, setVoiceEnabled, setVoiceRecordKey, sid])
 
   useEffect(() => {
@@ -284,7 +286,9 @@ export function useConfigSync({
         quietRpc<ReloadMcpResponse>(gw, 'reload.mcp', { session_id: sid, confirm: true }).then(
           r => r && turnController.pushActivity('MCP reloaded after config change')
         )
-        void hydrateFullConfig(gw, setBellOnComplete, setVoiceRecordKey)
+        void hydrateFullConfig(gw, setBellOnComplete, setVoiceRecordKey).then(cfg => {
+      if (cfg?.config?.capabilities?.voice === false) setVoiceEnabled(false)
+    })
       })
     }, MTIME_POLL_MS)
 

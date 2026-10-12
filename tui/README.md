@@ -13,7 +13,7 @@ The client entrypoint is `src/entry.tsx`. It exits early if `stdin` is not a TTY
 `GatewayClient` spawns:
 
 ```text
-python -m tui_gateway.entry
+python -m AstralNexus.tui_gateway.entry
 ```
 
 Interpreter resolution order is: `ASTRALNEXUS_PYTHON` → `PYTHON` → `$VIRTUAL_ENV/bin/python` → `./.venv/bin/python` → `./venv/bin/python` → `python3` (or `python` on Windows).
@@ -21,7 +21,7 @@ Interpreter resolution order is: `ASTRALNEXUS_PYTHON` → `PYTHON` → `$VIRTUAL
 The transport is newline-delimited JSON-RPC over stdio:
 
 ```text
-ui-tui/src                  tui_gateway/
+tui/src                     AstralNexus.tui_gateway/
 -----------                 -------------
 entry.tsx                   entry.py
   -> GatewayClient            -> request loop
@@ -41,10 +41,10 @@ From the repo root, the normal path is:
 astralnexus --tui
 ```
 
-The CLI expects `ui-tui/dist/entry.js` to exist, or the whole source code available in which to run `npm install` and `npm run dev`.
+The CLI uses the sibling `tui/dist/entry.js` bundle or the installed package's TUI assets. Build the bundle from this repository's `tui/` directory before packaging.
 
 ```bash
-cd ui-tui
+cd tui
 npm install
 ```
 
@@ -328,7 +328,7 @@ Current color overrides:
 ## File map
 
 ```text
-ui-tui/
+tui/
   packages/astralnexus-ink/   forked Ink renderer (local dep)
   src/
     entry.tsx            TTY gate + render()

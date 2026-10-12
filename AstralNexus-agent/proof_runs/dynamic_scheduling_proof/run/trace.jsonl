@@ -1,8 +1,0 @@
-{"product": "天枢", "code_name": "AstralNexus", "event_type": "orchestrator.fault_recovery_engine.initialized", "recorded_at": "2026-07-16T08:21:44.909357+00:00", "payload": {}}
-{"product": "天枢", "code_name": "AstralNexus", "event_type": "governor.initialized", "recorded_at": "2026-07-16T08:21:44.910356+00:00", "payload": {"admission_threshold": 0.65, "max_active_tasks": 50, "max_total_tasks": 200}}
-{"product": "天枢", "code_name": "AstralNexus", "event_type": "verifier_mesh.initialized", "recorded_at": "2026-07-16T08:21:44.910356+00:00", "payload": {"pass_threshold": 0.7, "repair_threshold": 0.45}}
-{"product": "天枢", "code_name": "AstralNexus", "event_type": "orchestrator.conversation_loop.initialized", "recorded_at": "2026-07-16T08:21:44.917046+00:00", "payload": {}}
-{"product": "天枢", "code_name": "AstralNexus", "event_type": "orchestrator.fault_recovery_engine.initialized", "recorded_at": "2026-07-16T08:23:19.719355+00:00", "payload": {}}
-{"product": "天枢", "code_name": "AstralNexus", "event_type": "governor.initialized", "recorded_at": "2026-07-16T08:23:19.720358+00:00", "payload": {"admission_threshold": 0.65, "max_active_tasks": 50, "max_total_tasks": 200}}
-{"product": "天枢", "code_name": "AstralNexus", "event_type": "verifier_mesh.initialized", "recorded_at": "2026-07-16T08:23:19.720358+00:00", "payload": {"pass_threshold": 0.7, "repair_threshold": 0.45}}
-{"product": "天枢", "code_name": "AstralNexus", "event_type": "orchestrator.conversation_loop.initialized", "recorded_at": "2026-07-16T08:23:19.722682+00:00", "payload": {}}

@@ -1,3 +1,4 @@
+import type { SlashRunCtx } from '../types.js'
 import { forceRedraw, type MouseTrackingMode } from '@astralnexus/ink'
 
 import { DASHBOARD_TUI_MODE } from '../../../config/env.js'
@@ -14,6 +15,8 @@ import { configureDetectedTerminalKeybindings, configureTerminalKeybindings } fr
 import type { PanelSection } from '../../../types.js'
 import type { StatusBarMode } from '../../interfaces.js'
 import { patchUiState } from '../../uiStore.js'
+import { openAgentsOverlay } from '../../../components/agentsOverlay.js'
+import { patchOverlayState } from '../../overlayStore.js'
 import type { SlashCommand } from '../types.js'
 
 const flagFromArg = (arg: string, current: boolean): boolean | null => {
@@ -76,6 +79,70 @@ export const DASHBOARD_EXIT_DISABLED_MESSAGE =
   'exit is disabled in hosted dashboard chat — use /new to start a fresh session'
 
 export const coreCommands: SlashCommand[] = [
+  {
+    name: 'model', help: '选择当前会话的主模型',
+    run: (arg, ctx) => {
+      if (!arg.trim()) return patchOverlayState({modelPicker: true})
+      void ctx.gateway.rpc<ConfigSetResponse>('config.set', {key: 'model', value: arg, session_id: ctx.sid})
+        .then(result => ctx.transcript.sys(`主模型：${result?.value ?? '设置未完成'}`))
+        .catch(error => ctx.transcript.sys(`模型设置失败：${String(error)}`))
+    }
+  },
+  {
+    name: 'submodel', help: '设置子 Agent 模型；空值继承主模型',
+    run: (arg, ctx) => {
+      void ctx.gateway.rpc<{main_model: string}>('models.get', {session_id: ctx.sid}).then(current => {
+        if (!current) return
+        return ctx.gateway.rpc<{effective_sub: string}>('models.set', {
+          session_id: ctx.sid, main_model: current.main_model, sub_model: arg.trim()
+        }).then(result => ctx.transcript.sys(`子模型：${result?.effective_sub ?? '设置未完成'}`))
+      }).catch(error => ctx.transcript.sys(`子模型设置失败：${String(error)}`))
+    }
+  },
+  ...(['plan', 'evidence', 'delivery', 'changes'] as const).map(name => ({
+    name, help: '查看当前会话的计划、证据或交付门',
+    run: () => patchOverlayState({inspection: name, agents: false, journey: false})
+  })),
+  ...(['accept', 'reject'] as const).map(name => ({
+    name, help: name === 'accept' ? '接受指定文件版本（不改变测试结论）' : '拒绝并撤销指定文件修改',
+    run: (arg: string, ctx: SlashRunCtx) => {
+      if (!arg.trim()) return ctx.transcript.sys(`用法：/${name} <change-id>；/changes 查看修改记录`)
+      void ctx.gateway.rpc<{ok: boolean; path?: string}>(name === 'accept' ? 'changes.accept' : 'changes.restore', {
+        session_id: ctx.sid, change_id: arg.trim()
+      }).then(result => ctx.transcript.sys(result?.ok ? `${name === 'accept' ? '已接受文件版本' : '已撤销'}：${result.path ?? arg}` : '操作未执行'))
+        .catch(error => ctx.transcript.sys(`操作失败：${String(error)}`))
+    }
+  })),
+  {name: 'checkpoint', help: '建立文件与对话恢复点（仅已捕获改动）', run: (arg, ctx) => {
+    void ctx.gateway.rpc<{id: string}>('checkpoints.create', {session_id: ctx.sid, label: arg}).then(result =>
+      ctx.transcript.sys(result ? `恢复点：${result.id}；/restore --checkpoint ${result.id}` : '恢复点未建立')).catch(ctx.guardedErr)
+  }},
+  {name: 'checkpoints', help: '列出用户恢复点', run: (_arg, ctx) => {
+    void ctx.gateway.rpc<{checkpoints: unknown[]}>('checkpoints.list', {session_id: ctx.sid}).then(result =>
+      ctx.transcript.page(JSON.stringify(result?.checkpoints ?? [], null, 2), '用户恢复点')).catch(ctx.guardedErr)
+  }},
+  {
+    name: 'restore', help: '撤销指定文件修改（任务必须先停止）',
+    run: (arg, ctx) => {
+      if (arg.trim().startsWith('--checkpoint ')) {
+        const checkpointId = arg.trim().slice('--checkpoint '.length).trim()
+        void ctx.gateway.rpc<{ok: boolean; session_id: string}>('checkpoints.restore', {session_id: ctx.sid, checkpoint_id: checkpointId})
+          .then(result => {if (result?.ok) ctx.session.resumeById(result.session_id); else ctx.transcript.sys('恢复未执行')})
+          .catch(ctx.guardedErr)
+        return
+      }
+      if (!arg.trim()) return ctx.transcript.sys('用法：/restore <change-id> 或 /restore --checkpoint <id>；/changes 查看修改记录')
+      void ctx.gateway.rpc<{ok: boolean; path?: string}>('changes.restore', {
+        session_id: ctx.sid, change_id: arg.trim()
+      }).then(result => ctx.transcript.sys(result?.ok ? `已撤销：${result.path ?? arg}` : '撤销未执行'))
+        .catch(error => ctx.transcript.sys(`撤销失败：${String(error)}`))
+    }
+  },
+  {
+    name: 'agents',
+    help: '查看各节点的工具调用与阶段结果',
+    run: () => openAgentsOverlay()
+  },
   {
     help: 'list commands + hotkeys',
     name: 'help',
@@ -330,7 +397,7 @@ export const coreCommands: SlashCommand[] = [
   {
     help: 'attach clipboard image',
     name: 'paste',
-    run: (arg, ctx) => (arg ? ctx.transcript.sys('usage: /paste') : ctx.composer.paste())
+    run: (arg, ctx) => (ctx.ui.info?.capabilities?.clipboard_images === false ? ctx.transcript.sys('当前宿主不支持剪贴板图像；可直接粘贴文本。') : arg ? ctx.transcript.sys('usage: /paste') : ctx.composer.paste())
   },
 
   {

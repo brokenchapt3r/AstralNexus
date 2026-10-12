@@ -5,6 +5,9 @@ import type { SlashCommand } from './types.js'
 // Runtime, task, model, tool and session-lifecycle commands are supplied by
 // the Python command catalog and dispatched through the Gateway.
 export const FRONTEND_OWNED_COMMANDS = new Set([
+  'agents',
+  'plan', 'evidence', 'delivery', 'changes', 'restore', 'accept', 'reject', 'checkpoint', 'checkpoints',
+  'model', 'submodel',
   'help',
   'quit',
   'mouse',

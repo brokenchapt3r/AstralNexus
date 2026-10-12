@@ -58,6 +58,14 @@ const buildCtx = (appended: Msg[]) =>
   }) as any
 
 describe('createGatewayEventHandler', () => {
+  it('updates the fixed progress area without appending heartbeat messages', () => {
+    const appended: Msg[] = []
+    const onEvent = createGatewayEventHandler(buildCtx(appended))
+    onEvent({type: 'run.progress', payload: {text: '阶段一', phase: 'executing', run_dir: '/run'}})
+    onEvent({type: 'run.progress', payload: {text: '阶段二', phase: 'verifying', run_dir: '/run'}})
+    expect(getUiState().runProgress).toBe('阶段二')
+    expect(appended).toEqual([])
+  })
   beforeEach(() => {
     resetOverlayState()
     resetUiState()
@@ -362,7 +370,7 @@ describe('createGatewayEventHandler', () => {
     expect(appended[1]).toMatchObject({ role: 'assistant', text: 'final answer' })
   })
 
-  it('streams legacy thinking.delta into visible reasoning state', () => {
+  it('keeps legacy thinking.delta private while retaining busy liveness', () => {
     vi.useFakeTimers()
     const appended: Msg[] = []
     const streamed = 'short streamed reasoning'
@@ -373,9 +381,10 @@ describe('createGatewayEventHandler', () => {
       onEvent({ payload: { text: streamed }, type: 'thinking.delta' } as any)
       vi.runOnlyPendingTimers()
 
-      expect(getTurnState().reasoning).toBe(streamed)
-      expect(getTurnState().reasoningActive).toBe(true)
-      expect(getTurnState().reasoningTokens).toBe(estimateTokensRough(streamed))
+      expect(getTurnState().reasoning).toBe('')
+      expect(getTurnState().reasoningTokens).toBe(0)
+      expect(getUiState().busy).toBe(true)
+      expect(appended).toEqual([])
     } finally {
       vi.useRealTimers()
     }
@@ -402,7 +411,7 @@ describe('createGatewayEventHandler', () => {
     }
   })
 
-  it('preserves streamed reasoning as one completed thinking panel after segment flushes', () => {
+  it('does not retain private reasoning when public response segments flush', () => {
     const appended: Msg[] = []
     const streamed = 'first reasoning chunk\nsecond reasoning chunk'
 
@@ -413,11 +422,12 @@ describe('createGatewayEventHandler', () => {
     turnController.flushStreamingSegment()
     onEvent({ payload: { text: 'final answer' }, type: 'message.complete' } as any)
 
-    expect(appended.map(msg => msg.thinking).filter(Boolean)).toEqual([streamed])
+    expect(appended.map(msg => msg.thinking).filter(Boolean)).toEqual([])
+    expect(appended.some(msg => msg.text === 'Before edit.')).toBe(true)
     expect(appended[appended.length - 1]).toMatchObject({ role: 'assistant', text: 'final answer' })
   })
 
-  it('filters spinner/status-only reasoning noise from completed thinking', () => {
+  it('never promotes private reasoning containing plan-like prose into a public plan', () => {
     const appended: Msg[] = []
     const streamed = '(¬_¬) synthesizing...\nactual plan\n( ͡° ͜ʖ ͡°) pondering...\nnext step'
 
@@ -426,12 +436,12 @@ describe('createGatewayEventHandler', () => {
     onEvent({ payload: { text: streamed }, type: 'reasoning.delta' } as any)
     onEvent({ payload: { text: 'final answer' }, type: 'message.complete' } as any)
 
-    expect(appended[0]?.thinking).toBe(streamed)
-    expect(appended[0]?.text).toBe('')
+    expect(appended).toHaveLength(1)
+    expect(appended[0]?.thinking).toBeUndefined()
     expect(appended[appended.length - 1]).toMatchObject({ role: 'assistant', text: 'final answer' })
   })
 
-  it('shows verbose reasoning even when normal reasoning display is off', () => {
+  it('does not let verbose reasoning bypass the private reasoning contract', () => {
     vi.useFakeTimers()
     patchUiState({ showReasoning: false })
     const appended: Msg[] = []
@@ -443,14 +453,15 @@ describe('createGatewayEventHandler', () => {
       onEvent({ payload: { text: streamed, verbose: true }, type: 'reasoning.delta' } as any)
       vi.runOnlyPendingTimers()
 
-      expect(turnController.reasoningText).toBe(streamed)
-      expect(getTurnState().reasoning).toBe(streamed)
+      expect(turnController.reasoningText).toBe('')
+      expect(getTurnState().reasoning).toBe('')
+      expect(appended).toEqual([])
     } finally {
       vi.useRealTimers()
     }
   })
 
-  it('ignores fallback reasoning.available when streamed reasoning already exists', () => {
+  it('keeps both streamed and fallback private reasoning out of final history', () => {
     const appended: Msg[] = []
     const streamed = 'short streamed reasoning'
     const fallback = 'x'.repeat(400)
@@ -461,10 +472,9 @@ describe('createGatewayEventHandler', () => {
     onEvent({ payload: { text: fallback }, type: 'reasoning.available' } as any)
     onEvent({ payload: { text: 'final answer' }, type: 'message.complete' } as any)
 
-    expect(appended).toHaveLength(2)
-    expect(appended[0]?.thinking).toBe(streamed)
-    expect(appended[0]?.thinkingTokens).toBe(estimateTokensRough(streamed))
-    expect(appended[1]).toMatchObject({ role: 'assistant', text: 'final answer' })
+    expect(appended).toHaveLength(1)
+    expect(appended[0]?.thinking).toBeUndefined()
+    expect(appended[0]).toMatchObject({ role: 'assistant', text: 'final answer' })
   })
 
   it('renders moa.reference as a labelled thinking-style segment', () => {
@@ -991,6 +1001,15 @@ describe('createGatewayEventHandler', () => {
     expect(getOverlayState().approval).toMatchObject({ allowPermanent: true })
   })
 
+  it('expires only the identified approval and preserves the next queued request', () => {
+    const onEvent = createGatewayEventHandler(buildCtx([]))
+    onEvent({type: 'approval.request', payload: {request_id: 'second', command: 'write', description: 'second'}})
+    onEvent({type: 'approval.expire', payload: {request_id: 'first'}})
+    expect(getOverlayState().approval?.requestId).toBe('second')
+    onEvent({type: 'approval.expire', payload: {request_id: 'second'}})
+    expect(getOverlayState().approval).toBeNull()
+  })
+
   it('preserves allow_permanent=false on approval overlays (tirith warning)', () => {
     const onEvent = createGatewayEventHandler(buildCtx([]))
 
@@ -1071,7 +1090,7 @@ describe('createGatewayEventHandler', () => {
     expect(getTurnState().subagents.find(s => s.id === 'sa-error')?.status).toBe('error')
   })
 
-  it('normalizes unknown subagent.complete statuses to completed', () => {
+  it('keeps unknown subagent.complete statuses unknown', () => {
     const appended: Msg[] = []
     const onEvent = createGatewayEventHandler(buildCtx(appended))
 
@@ -1084,7 +1103,7 @@ describe('createGatewayEventHandler', () => {
       type: 'subagent.complete'
     } as any)
 
-    expect(getTurnState().subagents.find(s => s.id === 'sa-weird')?.status).toBe('completed')
+    expect(getTurnState().subagents.find(s => s.id === 'sa-weird')?.status).toBe('unknown')
   })
 
   it('nudges toward /agents on the first spawn_requested of a turn', () => {
@@ -1270,7 +1289,9 @@ describe('createGatewayEventHandler', () => {
       onEvent({ payload: {}, type: 'message.start' } as any)
       onEvent({ payload: { text: 'fresh' }, type: 'reasoning.delta' } as any)
 
-      expect(turnController.reasoningText).toBe('fresh')
+      expect(turnController.reasoningText).toBe('')
+      onEvent({payload: {text: 'fresh public response'}, type: 'message.delta'} as any)
+      expect(turnController.bufRef).toBe('fresh public response')
     } finally {
       // Drain pending fake timers BEFORE restoring real timers so a mid-
       // test assertion failure can't leak the interrupt-cooldown setTimeout

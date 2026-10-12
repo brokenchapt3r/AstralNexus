@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 
 import { findSlashCommand, FRONTEND_OWNED_COMMANDS, SLASH_COMMANDS } from '../app/slash/registry.js'
+import { getOverlayState, resetOverlayState } from '../app/overlayStore.js'
 
 type CommandRoute = 'fallback' | 'local' | 'native'
 
@@ -62,6 +63,20 @@ const classifyRoute = (name: string): CommandRoute => {
 }
 
 describe('slash parity matrix', () => {
+  it('opens the live agents panel through the advertised local command', () => {
+    resetOverlayState()
+    const command = findSlashCommand('agents')
+    expect(command).toBeDefined()
+    command!.run('', {} as any, 'agents')
+    expect(getOverlayState().agents).toBe(true)
+  })
+  it('opens real inspection views and exposes explicit restore', () => {
+    for (const name of ['plan', 'evidence', 'delivery', 'changes'] as const) {
+      findSlashCommand(name)!.run('', {} as any, name)
+      expect(getOverlayState().inspection).toBe(name)
+    }
+    expect(findSlashCommand('restore')).toBeDefined()
+  })
   if (commandRegistry.error) {
     it.skip(`Python command registry unavailable: ${skipReason}`, () => {})
   }
@@ -82,7 +97,7 @@ describe('slash parity matrix', () => {
   })
 
   it('does not expose backend-owned AstralNexus command implementations locally', () => {
-    for (const name of ['model', 'tools', 'skills', 'status', 'journey', 'subscription', 'topup']) {
+    for (const name of ['tools', 'skills', 'status', 'journey', 'subscription', 'topup']) {
       expect(findSlashCommand(name), `${name} must use the Gateway command catalog`).toBeUndefined()
     }
   })

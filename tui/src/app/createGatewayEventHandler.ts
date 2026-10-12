@@ -1,3 +1,4 @@
+import { supportsCapability } from './capabilities.js'
 import { STARTUP_IMAGE, STARTUP_QUERY } from '../config/env.js'
 import { STREAM_BATCH_MS } from '../config/timing.js'
 import { buildSetupRequiredSections, SETUP_REQUIRED_TITLE } from '../content/setup.js'
@@ -65,7 +66,8 @@ const KNOWN_SUBAGENT_STATUSES = new Set<SubagentStatus>([
   'interrupted',
   'queued',
   'running',
-  'timeout'
+  'timeout',
+  'unknown'
 ])
 
 const normalizeSubagentStatus = (status: unknown, fallback: SubagentStatus): SubagentStatus => {
@@ -287,6 +289,9 @@ export function createGatewayEventHandler(ctx: GatewayEventHandlerContext): (ev:
         return sys('startup query skipped: no active session')
       }
 
+      if (STARTUP_IMAGE && !supportsCapability('images')) {
+        return sys('启动请求未执行：当前宿主不支持图像附件。')
+      }
       if (STARTUP_IMAGE) {
         try {
           await rpc('image.attach', { path: STARTUP_IMAGE, session_id: sid })
@@ -814,6 +819,7 @@ export function createGatewayEventHandler(ctx: GatewayEventHandlerContext): (ev:
 
         patchOverlayState({
           approval: {
+            requestId: ev.payload.request_id,
             allowPermanent,
             choices: ev.payload.choices,
             command: String(ev.payload.command ?? ''),
@@ -825,6 +831,16 @@ export function createGatewayEventHandler(ctx: GatewayEventHandlerContext): (ev:
 
         return
       }
+      case 'run.progress':
+        patchUiState({runProgress: ev.payload.text})
+        return
+
+      case 'approval.expire':
+        if (getOverlayState().approval?.requestId === ev.payload.request_id) {
+          patchOverlayState({ approval: null })
+          setStatus('approval cancelled or expired')
+        }
+        return
 
       case 'sudo.request':
         patchOverlayState({ sudo: { requestId: ev.payload.request_id } })
@@ -954,7 +970,7 @@ export function createGatewayEventHandler(ctx: GatewayEventHandlerContext): (ev:
           ev.payload,
           c => ({
             durationSeconds: ev.payload.duration_seconds ?? c.durationSeconds,
-            status: normalizeSubagentStatus(ev.payload.status, 'completed'),
+            status: normalizeSubagentStatus(ev.payload.status, 'unknown'),
             summary: ev.payload.summary || ev.payload.text || c.summary
           }),
           { createIfMissing: false }

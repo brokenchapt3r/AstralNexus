@@ -197,6 +197,7 @@ export function FloatingOverlays({
       {overlay.modelPicker && (
         <FloatBox color={theme.color.border}>
           <ModelPicker
+            allowPersistGlobal={false}
             gw={gw}
             initialRefresh={typeof overlay.modelPicker === 'object' && overlay.modelPicker.refresh === true}
             onCancel={() => patchOverlayState({ modelPicker: false })}

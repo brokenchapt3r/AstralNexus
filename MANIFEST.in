@@ -1,0 +1,5 @@
+recursive-include src/AstralNexus/skills *
+recursive-exclude src/AstralNexus/skills __pycache__/* *.pyc .astralnexus_skill_manifest.json
+recursive-include src/AstralNexus/dashboard *.html
+recursive-include src/AstralNexus/contracts *.json
+include src/AstralNexus/LICENSE

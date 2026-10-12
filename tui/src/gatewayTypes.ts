@@ -1,4 +1,4 @@
-import type { UsageModelData } from '@astralnexus/shared/billing'
+import type { UsageModelData } from './legacyBillingTypes.js'
 
 import type { SessionInfo, SlashCategory, SubagentStatus, Usage } from './types.js'
 
@@ -47,7 +47,7 @@ export interface SlashExecResponse {
 
 // ── Terminal billing (Phase 2b) ──────────────────────────────────────
 
-// Wire shapes now live in @astralnexus/shared for reuse by TypeScript clients.
+// Imported presentation compatibility only; the Gateway rejects billing RPCs.
 export type {
   BillingAutoReload,
   BillingCardInfo,
@@ -63,7 +63,7 @@ export type {
   SubscriptionUpgradeResponse,
   UsageBarData,
   UsageModelData
-} from '@astralnexus/shared/billing'
+} from './legacyBillingTypes.js'
 
 export type CommandDispatchResponse =
   | { output?: string; type: 'exec' | 'plugin' }
@@ -112,6 +112,7 @@ export interface ConfigVoiceConfig {
 
 export interface ConfigFullResponse {
   config?: {
+    capabilities?: SessionInfo['capabilities']
     display?: ConfigDisplayConfig
     voice?: ConfigVoiceConfig
     paste_collapse_threshold?: number
@@ -151,6 +152,7 @@ export interface SessionCreateResponse {
 }
 
 export interface SessionResumeResponse {
+  spawn_trees?: (SpawnTreeLoadResponse & {snapshot_id: string})[]
   inflight?: null | SessionInflightTurn
   info?: SessionInfo
   message_count?: number
@@ -188,6 +190,7 @@ export interface SessionInflightTurn {
 }
 
 export interface SessionActivateResponse {
+  spawn_trees?: (SpawnTreeLoadResponse & {snapshot_id: string})[]
   inflight?: null | SessionInflightTurn
   info?: SessionInfo
   message_count?: number
@@ -492,6 +495,7 @@ export interface SubagentEventPayload {
 // ── Delegation control RPCs ──────────────────────────────────────────
 
 export interface DelegationStatusResponse {
+  node_control_available?: boolean
   active?: {
     depth?: number
     goal?: string
@@ -539,7 +543,14 @@ export interface SpawnTreeLoadResponse {
   subagents?: unknown[]
 }
 
-export type GatewayEvent =
+export interface UxEvent {
+  version: number; event_id: string; event_type: string; session_id: string | null
+  run_id: string | null; node_id: string | null; execution_id: string | null; tool_call_id: string | null
+  phase: string; summary: string; status: string; recorded_at: string; actions: Record<string, unknown>[]
+}
+export type GatewayEvent = GatewayPayloadEvent & {ux?: UxEvent}
+type GatewayPayloadEvent =
+  | { type: 'run.progress'; session_id?: string; payload: {text: string; phase: string; run_dir: string} }
   | { payload?: { skin?: GatewaySkin }; session_id?: string; type: 'gateway.ready' }
   | { payload?: GatewaySkin; session_id?: string; type: 'skin.changed' }
   | { payload: SessionInfo; session_id?: string; type: 'session.info' }
@@ -636,6 +647,7 @@ export type GatewayEvent =
   | {
       payload: {
         allow_permanent?: boolean
+        request_id?: string
         choices?: string[]
         command: string
         description: string
@@ -644,6 +656,7 @@ export type GatewayEvent =
       session_id?: string
       type: 'approval.request'
     }
+  | { payload: { request_id: string }; session_id?: string; type: 'approval.expire' }
   | { payload: { request_id: string }; session_id?: string; type: 'sudo.request' }
   | { payload: { env_var: string; prompt: string; request_id: string }; session_id?: string; type: 'secret.request' }
   | { payload: { request_id: string }; session_id?: string; type: 'secret.expire' | 'sudo.expire' }

@@ -62,6 +62,7 @@ const STATUS_RANK: Record<Status, number> = {
   failed: 0,
   interrupted: 1,
   timeout: 1,
+  unknown: 2,
   running: 2,
   queued: 3,
   completed: 4
@@ -94,6 +95,7 @@ const STATUS_GLYPH: Record<Status, { color: (t: Theme) => string; glyph: string 
   interrupted: { color: t => t.color.warn, glyph: '■' },
   failed: { color: t => t.color.error, glyph: '✗' },
   timeout: { color: t => t.color.warn, glyph: '⌛' },
+  unknown: { color: t => t.color.warn, glyph: '?' },
   error: { color: t => t.color.error, glyph: '⚠' }
 }
 
@@ -693,6 +695,8 @@ export function AgentsOverlay({ gw, initialHistoryIndex = 0, onClose, t }: Agent
   const guardLive = (action: () => void) => {
     if (replayMode) {
       setFlash('replay mode — controls disabled')
+    } else if (!delegation.nodeControlAvailable) {
+      setFlash('当前运行仅支持整体协作式中断，请使用 Ctrl-C')
     } else {
       action()
     }
@@ -881,7 +885,8 @@ export function AgentsOverlay({ gw, initialHistoryIndex = 0, onClose, t }: Agent
 
   const controlsHint = replayMode
     ? ' · controls locked'
-    : ` · x kill · X subtree · p ${delegation.paused ? 'resume' : 'pause'}`
+    : delegation.nodeControlAvailable ? ` · x kill · X subtree · p ${delegation.paused ? 'resume' : 'pause'}`
+    : ' · Ctrl-C 停止整个运行'
 
   // ── Rendering ──────────────────────────────────────────────────────
 

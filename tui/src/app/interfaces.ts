@@ -263,6 +263,7 @@ export interface SubscriptionOverlayState {
 }
 
 export interface OverlayState {
+  inspection: 'plan' | 'evidence' | 'delivery' | 'changes' | null
   agents: boolean
   agentsInitialHistoryIndex: number
   approval: ApprovalReq | null
@@ -294,6 +295,7 @@ export interface TranscriptRow {
 }
 
 export interface UiState {
+  runProgress?: string
   bgTasks: Set<string>
   busy: boolean
   busyInputMode: BusyInputMode
